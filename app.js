@@ -1,16 +1,20 @@
+// Imports
 const express = require("express");
-const cors = require("cors");
+const cors = require("cors"); // Cors middleware
 
+// Init app
 const app = express();
+
+// Store port number in a variable
 const port = process.env.PORT || 5000;
 
-app.use(express.json());
+// Init Middleware
+app.use(express.json({ extended: false }));
 app.use(cors());
-app.use(express.urlencoded({ extended: false }));
 
 // Define Routes
 app.use('/api/users', require('./routes/users'));
 app.use('/api/auth', require('./routes/auth'));
 
 // Listen to port
-app.listen(port, () => console.log(`Listen on port ${port}`));
+app.listen(port, () => console.log(`Listening on port ${port}`));

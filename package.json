@@ -8,7 +8,8 @@
         "server": "nodemon app.js",
         "client": "npm start --prefix client",
         "client-install": "cd client && npm install",
-        "dev": "concurrently \"npm run server\" \"npm run client\""
+        "dev": "concurrently \"npm run server\" \"npm run client\"",
+        "install-all": "concurrently \"npm install\" \"npm run client-install\""
     },
     "author": "",
     "license": "ISC",

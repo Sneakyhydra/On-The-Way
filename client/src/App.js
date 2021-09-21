@@ -3,11 +3,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 
 import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 import NotFound from "./pages/NotFound";
 
 import Navbar from "./components/layout/Navbar";
+
+import AuthState from "./context/auth/AuthState";
 
 import "materialize-css/dist/css/materialize.min.css";
 import M from "materialize-css/dist/js/materialize.min.js";
@@ -39,49 +41,51 @@ const App = () => {
   }, [scrollState]);
 
   return (
-    <Router>
-      <Switch>
-        <Route exact path='/'>
-          <Fragment>
+    <AuthState>
+      <Router>
+        <Switch>
+          <Route exact path='/'>
+            <Fragment>
+              <div
+                style={{
+                  backgroundImage: `url(${background})`,
+                  height: "720px",
+                  backgroundSize: "cover",
+                  fontFamily: "Lucida Sans, sans-serif",
+                }}
+              >
+                <Navbar scrollState={scrollState} isAuth={isAuth} />
+                <Home />
+              </div>
+            </Fragment>
+          </Route>
+
+          <Route exact path='/login'>
             <div
               style={{
-                backgroundImage: `url(${background})`,
-                height: "720px",
-                backgroundSize: "cover",
                 fontFamily: "Lucida Sans, sans-serif",
               }}
             >
-              <Navbar scrollState={scrollState} isAuth={isAuth} />
-              <Home />
+              <Login />
             </div>
-          </Fragment>
-        </Route>
+          </Route>
 
-        <Route path='/login'>
-          <div
-            style={{
-              fontFamily: "Lucida Sans, sans-serif",
-            }}
-          >
-            <Login />
-          </div>
-        </Route>
+          <Route exact path='/register'>
+            <div
+              style={{
+                fontFamily: "Lucida Sans, sans-serif",
+              }}
+            >
+              <Register />
+            </div>
+          </Route>
 
-        <Route path='/register'>
-          <div
-            style={{
-              fontFamily: "Lucida Sans, sans-serif",
-            }}
-          >
-            <Register />
-          </div>
-        </Route>
-
-        <Route path='*'>
-          <NotFound />
-        </Route>
-      </Switch>
-    </Router>
+          <Route path='*'>
+            <NotFound />
+          </Route>
+        </Switch>
+      </Router>
+    </AuthState>
   );
 };
 

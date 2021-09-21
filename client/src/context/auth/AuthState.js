@@ -15,6 +15,7 @@ import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
 
 const AuthState = (props) => {
+  // Set initial state
   const initialState = {
     token: localStorage.getItem("token"),
     isAuthenticated: false,
@@ -23,6 +24,7 @@ const AuthState = (props) => {
     error: null,
   };
 
+  // Init Reducer
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   // Load User
@@ -32,16 +34,20 @@ const AuthState = (props) => {
     }
 
     try {
+      // Make a get request at localhost:5000/api/auth
       const res = await axios.get("/api/auth");
 
+      // Dispatch the action to reducer for USER_LOADED
       dispatch({ type: USER_LOADED, payload: res.data });
     } catch (err) {
+      // Dispatch the action to reducer for AUTH_ERROR
       dispatch({ type: AUTH_ERROR });
     }
   };
 
   // Register User
   const register = async (formData) => {
+    // Set header of the input data
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -49,15 +55,19 @@ const AuthState = (props) => {
     };
 
     try {
+      // Make a post request at localhost:5000/api/users
       const res = await axios.post("api/users", formData, config);
 
+      // Dispatch the action to reducer for REGISTER_SUCCESS
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data,
       });
 
+      // Load the user after successful registration
       loadUser();
     } catch (err) {
+      // Dispatch the action to reducer for REGISTER_FAIL
       dispatch({
         type: REGISTER_FAIL,
         payload: err.response.data.msg,
@@ -77,6 +87,7 @@ const AuthState = (props) => {
 
   // Clear Errors
   const clearErrors = () => {
+    // Dispatch the action to reducer for CLEAR_ERRORS
     dispatch({
       type: CLEAR_ERRORS,
     });
@@ -84,6 +95,7 @@ const AuthState = (props) => {
 
   return (
     <AuthContext.Provider
+      // Provide these values to all components wrapped in AuthContext
       value={{
         token: state.token,
         isAuthenticated: state.isAuthenticated,

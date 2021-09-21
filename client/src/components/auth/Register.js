@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import AlertContext from "../../context/alert/alertContext";
 import AuthContext from "../../context/auth/authContext";
 import { useHistory } from "react-router";
+import M from "materialize-css/dist/js/materialize.min.js";
 
 const Register = () => {
   const alertContext = useContext(AlertContext);
@@ -33,7 +34,11 @@ const Register = () => {
 
   const { username, password, password2 } = user;
 
-  const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = (e) => {
+    M.updateTextFields();
+
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();

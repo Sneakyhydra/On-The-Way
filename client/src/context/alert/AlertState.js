@@ -11,17 +11,22 @@ const AlertState = (props) => {
 
   // Set Alert
   const setAlert = (msg, type, timeout = 5000) => {
+    // Create id of alert
     const id = uuid();
+
+    // Dispatch the action to reducer for SET_ALERT
     dispatch({
       type: SET_ALERT,
       payload: { msg, type, id },
     });
 
+    // Dispatch the action to reducer for REMOVE_ALERT after a given timeout
     setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), timeout);
   };
 
   return (
     <AlertContext.Provider
+      // Provide these values to all components wrapped in AlertContext
       value={{
         alerts: state,
         setAlert,

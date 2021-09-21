@@ -8,11 +8,11 @@ const app = express();
 // Store port number in a variable
 const port = process.env.PORT || 5000;
 
-// Init Middleware
+// Init middleware
 app.use(express.json({ extended: false }));
 app.use(cors());
 
-// Define Routes
+// Define routes
 app.use('/api/users', require('./routes/users'));
 app.use('/api/auth', require('./routes/auth'));
 

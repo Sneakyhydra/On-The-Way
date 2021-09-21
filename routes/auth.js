@@ -2,7 +2,7 @@
 const express = require("express");
 const bcrypt = require("bcryptjs"); // For hashing password
 const jwt = require("jsonwebtoken"); // For authorization
-const config = require("config"); // For GLobal variables
+const config = require("config"); // For global variables
 const mysql = require("mysql2"); // To connect to the database
 const auth = require("../middleware/auth"); // Middleware
 const { check, validationResult } = require("express-validator"); // To check and validate the inputs
@@ -25,16 +25,21 @@ const promisePool = pool.promise();
 // @desc    Get logged in user
 // @access  Private
 router.get("/", auth, async(req, res) => {
+    // Get user_id and user_name from database
     const [rows] = await promisePool.query(
         `SELECT user_id, user_name from users WHERE user_id='${req.user_id}'`
     );
 
+    // Extract user_id and user_name from rows
     const { user_id, user_name } = rows[0];
 
+    // Create user object
     const user = {
         user_id,
         user_name,
     };
+
+    // Send user object to the client
     res.json(user);
 });
 
@@ -43,8 +48,8 @@ router.get("/", auth, async(req, res) => {
 // @access  Public
 router.post(
     "/", [
-        check("user_name", "name is required").notEmpty(), // Check Username
-        check("user_password", "Password is required").exists(), // Check Password
+        check("user_name", "name is required").notEmpty(), // Check username
+        check("user_password", "Password is required").exists(), // Check password
     ],
     async(req, res) => {
         // Check if there are errors
@@ -58,6 +63,7 @@ router.post(
         const userName = req.body.user_name;
         const password = req.body.user_password;
 
+        // Check if the user exists
         const [existence] = await promisePool.query(
             "SELECT EXISTS(SELECT * from users WHERE user_name= ? ) 'EXISTS' FROM dual", [userName]
         );
@@ -67,6 +73,7 @@ router.post(
             // User doesn't exist
             return res.status(400).json({ msg: "Invalid Credentials" });
         } else {
+            // Get user details from database
             const [rows] = await promisePool.query(
                 `SELECT * from users WHERE user_name='${userName}'`
             );
@@ -95,7 +102,7 @@ router.post(
                     (err, token) => {
                         if (err) throw err;
 
-                        // Send the token to the user
+                        // Send token to the client
                         res.json({ token });
                     }
                 );

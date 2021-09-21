@@ -1,37 +1,47 @@
 import { useEffect, useState, Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import axios from "axios";
 
+// Pages
 import Home from "./components/pages/Home";
 import Dashboard from "./components/pages/Dashboard";
-import Login from "./components/auth/Login";
-import Register from "./components/auth/Register";
 import NotFound from "./components/pages/NotFound";
 
+// Auth routes
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+
+// Layout components
 import Navbar from "./components/layout/Navbar";
 import Alerts from "./components/layout/Alerts";
 
+// States
 import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alert/AlertState";
 
+// Global variable for axios
 import setAuthToken from "./utils/setAuthToken";
 
+// CSS
 import "materialize-css/dist/css/materialize.min.css";
-import M from "materialize-css/dist/js/materialize.min.js";
 import "./App.css";
 
+// Images
 import background from "./images/Background1.jpeg";
 
+// Initialize token everytime the app is rendered
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
 const App = () => {
+  // Set scroll state
   const [scrollState, setScrollState] = useState("top");
-  const [isAuth, setIsAuth] = useState(false);
 
+  // Check the amount of pixels scrolled
   useEffect(() => {
     let listener = null;
+
+    // Set the value of scroll
     listener = document.addEventListener("scroll", (e) => {
       var scrolled = document.scrollingElement.scrollTop;
       if (scrolled >= 40) {
@@ -45,6 +55,7 @@ const App = () => {
       }
     });
     return () => {
+      // Remove Listener after getting the value
       document.removeEventListener("scroll", listener);
     };
   }, [scrollState]);
@@ -65,7 +76,7 @@ const App = () => {
                     fontFamily: "Lucida Sans, sans-serif",
                   }}
                 >
-                  <Navbar scrollState={scrollState} isAuth={isAuth} />
+                  <Navbar scrollState={scrollState} />
                   <Home />
                 </div>
               </Fragment>

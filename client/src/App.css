@@ -1,0 +1,125 @@
+nav {
+    height: 80px;
+    line-height: 80px;
+}
+
+.transparentBG {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.whiteBG {
+    background-color: white;
+}
+
+.logo {
+    width: 64px;
+    background-color: white;
+    border: 2px solid grey;
+    border-radius: 40px;
+    margin-left: 3em;
+    margin-top: 0.55rem;
+    padding: 3px;
+}
+
+.title {
+    padding-left: 1rem;
+    margin-top: 1.5rem;
+    color: black;
+    font-weight: bold;
+}
+
+.navlink {
+    width: 100px;
+    text-align: center;
+}
+
+.login {
+    background-color: rgba(0, 0, 0, 0);
+    color: #400279;
+    transition-duration: 0.08s;
+}
+
+.login:visited {
+    color: #400279;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.login:hover {
+    color: white;
+    background-color: #400279;
+}
+
+.login:active {
+    color: white;
+    background-color: #400279;
+}
+
+.login:focus {
+    background-color: rgba(0, 0, 0, 0);
+    color: #400279;
+}
+
+.register {
+    background: linear-gradient(to left, #0575e6, #021b79);
+    transition-duration: 0.08s;
+    border-radius: 0.5rem;
+    width: 18em;
+    height: 3.5em;
+    line-height: 3.5em;
+    margin-top: 3em;
+}
+
+.register:hover {
+    opacity: 0.7;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+#loginBtn {
+    margin-right: 3em;
+}
+
+.mtop {
+    margin-top: 0.5rem;
+}
+
+.desc {
+    text-align: center;
+    background: linear-gradient( 180deg, rgba(254, 243, 195, 1) 0, rgba(255, 255, 255, 1) 100%);
+    padding: 50px 0;
+    margin-bottom: 40px;
+    display: flex;
+    outline: 0 !important;
+    justify-content: space-evenly;
+    margin-top: 10em;
+}
+
+.center {
+    text-align: center;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.help {
+    margin: 0 10em;
+    margin-top: 23em;
+    text-align: center;
+    outline: 0 !important;
+}
+
+.helptitle {
+    text-align: center;
+    color: #171717;
+    font-size: 35px;
+    margin-bottom: 40px;
+    font-weight: 300;
+    font-family: "Open Sans", sans-serif;
+}
+
+.img-container {
+    margin: 1em;
+}

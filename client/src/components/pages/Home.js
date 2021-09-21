@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 
-import privateImg from "../images/private.png";
-import clockImg from "../images/247.png";
-import anonymousImg from "../images/anonymous.png";
-import help1 from "../images/1.svg";
-import help2 from "../images/2.svg";
-import help3 from "../images/3.svg";
-import background2 from "../images/background2.png";
+import privateImg from "../../images/private.png";
+import clockImg from "../../images/247.png";
+import anonymousImg from "../../images/anonymous.png";
+import help1 from "../../images/1.svg";
+import help2 from "../../images/2.svg";
+import help3 from "../../images/3.svg";
+import background2 from "../../images/background2.png";
 
 const Home = () => {
   return (

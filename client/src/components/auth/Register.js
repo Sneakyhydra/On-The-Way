@@ -1,6 +1,30 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import AlertContext from "../../context/alert/alertContext";
+import AuthContext from "../../context/auth/authContext";
+import { useHistory } from "react-router";
 
 const Register = () => {
+  const alertContext = useContext(AlertContext);
+  const authContext = useContext(AuthContext);
+
+  const { setAlert } = alertContext;
+
+  const { register, error, clearErrors, isAuthenticated } = authContext;
+
+  const history = useHistory();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      history.push("/dashboard");
+    }
+
+    if (error === "User already exists") {
+      setAlert(error, "danger");
+      clearErrors();
+    }
+    // eslint-disable-next-line
+  }, [error, isAuthenticated]);
+
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -13,7 +37,17 @@ const Register = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("Register submit");
+
+    if (username === "" || password === "" || password2 === "") {
+      setAlert("Please enter all fields", "danger");
+    } else if (password !== password2) {
+      setAlert("Passwords do not match", "danger");
+    } else {
+      register({
+        user_name: username,
+        user_password: password,
+      });
+    }
   };
 
   return (
@@ -47,6 +81,7 @@ const Register = () => {
                 className='validate'
                 value={password}
                 onChange={onChange}
+                minLength='3'
                 required
               />
               <label htmlFor='password'>Password</label>
@@ -58,6 +93,7 @@ const Register = () => {
               <input
                 id='password2'
                 name='password2'
+                minLength='3'
                 type='password'
                 className='validate'
                 value={password2}

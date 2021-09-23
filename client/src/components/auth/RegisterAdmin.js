@@ -4,53 +4,72 @@ import AuthContext from "../../context/auth/authContext";
 import { useHistory } from "react-router";
 import M from "materialize-css/dist/js/materialize.min.js";
 
-const Register = () => {
+const RegisterAdmin = () => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
   const { setAlert } = alertContext;
 
-  const { register, error, clearErrors, isAuthenticated } = authContext;
+  const { regAdmin, error, clearErrors, isAuthenticated } = authContext;
 
   const history = useHistory();
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.push("/dashboard");
+      history.push("/");
     }
 
     if (error === "User already exists") {
       setAlert(error, "danger");
-      clearErrors();
+    } else if (error === "role is not valid") {
+      setAlert(error, "danger");
+    } else if (error === "Gender is not valid") {
+      setAlert(error, "danger");
     }
+
+    clearErrors();
     // eslint-disable-next-line
   }, [error, isAuthenticated]);
 
-  const [user, setUser] = useState({
-    username: "",
+  const [admin, setAdmin] = useState({
+    email: "",
     password: "",
     password2: "",
+    username: "",
+    gender: "",
+    phone: "",
   });
 
-  const { username, password, password2 } = user;
+  const { email, password, password2, username, gender, phone } = admin;
 
   const onChange = (e) => {
     M.updateTextFields();
 
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setAdmin({ ...admin, [e.target.name]: e.target.value });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (username === "" || password === "" || password2 === "") {
+    if (
+      email === "" ||
+      password === "" ||
+      password2 === "" ||
+      username === "" ||
+      gender === "" ||
+      phone === ""
+    ) {
       setAlert("Please enter all fields", "danger");
     } else if (password !== password2) {
       setAlert("Passwords do not match", "danger");
     } else {
-      register({
-        user_name: username,
+      regAdmin({
+        user_email: email,
         user_password: password,
+        role: "admin",
+        admin_name: username,
+        admin_gender: gender,
+        admin_phone: phone,
       });
     }
   };
@@ -58,7 +77,7 @@ const Register = () => {
   return (
     <div className='center'>
       <div className='row'>
-        <h4>Register</h4>
+        <h4>Register as an Admin</h4>
       </div>
       <div className='row'>
         <form className='col s12' onSubmit={onSubmit}>
@@ -73,7 +92,52 @@ const Register = () => {
                 onChange={onChange}
                 required
               />
-              <label htmlFor='username'>Username</label>
+              <label htmlFor='username'>Name</label>
+            </div>
+          </div>
+
+          <div className='row' style={{ width: "300px", margin: "auto" }}>
+            <div className='input-field col s12'>
+              <input
+                id='email'
+                name='email'
+                type='text'
+                className='validate'
+                value={email}
+                onChange={onChange}
+                required
+              />
+              <label htmlFor='email'>Email</label>
+            </div>
+          </div>
+
+          <div className='row' style={{ width: "300px", margin: "auto" }}>
+            <div className='input-field col s12'>
+              <input
+                id='gender'
+                name='gender'
+                type='text'
+                className='validate'
+                value={gender}
+                onChange={onChange}
+                required
+              />
+              <label htmlFor='gender'>Gender</label>
+            </div>
+          </div>
+
+          <div className='row' style={{ width: "300px", margin: "auto" }}>
+            <div className='input-field col s12'>
+              <input
+                id='phone'
+                name='phone'
+                type='text'
+                className='validate'
+                value={phone}
+                onChange={onChange}
+                required
+              />
+              <label htmlFor='phone'>Mobile Number</label>
             </div>
           </div>
 
@@ -125,4 +189,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterAdmin;

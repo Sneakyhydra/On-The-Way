@@ -1,18 +1,55 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import AlertContext from "../../context/alert/alertContext";
+import AuthContext from "../../context/auth/authContext";
+import { useHistory } from "react-router";
+import M from "materialize-css/dist/js/materialize.min.js";
 
 const Login = () => {
+  const alertContext = useContext(AlertContext);
+  const authContext = useContext(AuthContext);
+
+  const { setAlert } = alertContext;
+
+  const { login, error, clearErrors, isAuthenticated } = authContext;
+
+  const history = useHistory();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      history.push("/");
+    }
+
+    if (error === "Invalid Credentials") {
+      setAlert(error, "danger");
+    }
+
+    clearErrors();
+    // eslint-disable-next-line
+  }, [error, isAuthenticated]);
+
   const [user, setUser] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
-  const { username, password } = user;
+  const { email, password } = user;
 
-  const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = (e) => {
+    M.updateTextFields();
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("Login submit");
+
+    if (email === "" || password === "") {
+      setAlert("Please enter all fields", "danger");
+    } else {
+      login({
+        user_email: email,
+        user_password: password,
+      });
+    }
   };
 
   return (
@@ -25,15 +62,15 @@ const Login = () => {
           <div className='row' style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <input
-                id='username'
-                name='username'
+                id='email'
+                name='email'
                 type='text'
                 className='validate'
-                value={username}
+                value={email}
                 onChange={onChange}
                 required
               />
-              <label htmlFor='username'>Username</label>
+              <label htmlFor='email'>Email</label>
             </div>
           </div>
 

@@ -8,7 +8,42 @@ import help2 from "../../images/2.svg";
 import help3 from "../../images/3.svg";
 import background2 from "../../images/background2.png";
 
+import AuthContext from "../../context/auth/authContext";
+import { Fragment, useContext } from "react";
+
 const Home = () => {
+  const authContext = useContext(AuthContext);
+
+  const { isAuthenticated } = authContext;
+
+  const authBtns = (
+    <Fragment>
+      <NavLink
+        className='waves-effect waves-light btn regcounsellor z-depth-1'
+        to='/dashboard'
+      >
+        Dashboard
+      </NavLink>
+    </Fragment>
+  );
+
+  const guestBtns = (
+    <Fragment>
+      <NavLink
+        className='waves-effect waves-light btn regstudent z-depth-1'
+        to='/regstudent'
+      >
+        Chat Now
+      </NavLink>
+      <NavLink
+        className='waves-effect waves-light btn regcounsellor z-depth-1'
+        to='/regcounsellor'
+      >
+        Be a member
+      </NavLink>
+    </Fragment>
+  );
+
   return (
     <div>
       <div style={{ marginLeft: "6.5em", marginTop: "8em" }}>
@@ -22,12 +57,7 @@ const Home = () => {
           right here, right now.
         </p>
 
-        <NavLink
-          className='waves-effect waves-light btn register z-depth-0'
-          to='/register'
-        >
-          Chat Now
-        </NavLink>
+        {isAuthenticated ? authBtns : guestBtns}
       </div>
 
       <div

@@ -59,17 +59,32 @@ nav {
     color: #400279;
 }
 
-.register {
+.regstudent {
     background: linear-gradient(to left, #0575e6, #021b79);
     transition-duration: 0.08s;
     border-radius: 0.5rem;
     width: 18em;
     height: 3.5em;
     line-height: 3.5em;
-    margin-top: 3em;
+    margin-top: 5em;
 }
 
-.register:hover {
+.regstudent:hover {
+    opacity: 0.7;
+}
+
+.regcounsellor {
+    background: linear-gradient(to right, #00bf72, #a8eb12);
+    transition-duration: 0.08s;
+    border-radius: 0.5rem;
+    width: 18em;
+    height: 3.5em;
+    line-height: 3.5em;
+    margin-top: 5em;
+    margin-left: 1.5em;
+}
+
+.regcounsellor:hover {
     opacity: 0.7;
 }
 

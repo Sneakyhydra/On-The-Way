@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2021 at 04:07 PM
+-- Generation Time: Sep 23, 2021 at 03:45 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -28,9 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admins` (
+  `id` bigint(20) NOT NULL,
   `admin_id` bigint(20) NOT NULL,
   `admin_name` varchar(255) NOT NULL,
-  `admin_email` varchar(255) NOT NULL
+  `admin_gender` enum('Male','Female','Other') NOT NULL,
+  `admin_phone` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -58,6 +60,14 @@ CREATE TABLE `categories` (
   `category` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`cat_id`, `category`) VALUES
+(1, 'academics'),
+(2, 'stress');
+
 -- --------------------------------------------------------
 
 --
@@ -65,11 +75,11 @@ CREATE TABLE `categories` (
 --
 
 CREATE TABLE `counsellors` (
+  `id` bigint(20) NOT NULL,
   `coun_id` bigint(20) NOT NULL,
   `coun_name` varchar(255) NOT NULL,
-  `coun_email` varchar(255) NOT NULL,
   `coun_gender` enum('Male','Female','Other') NOT NULL,
-  `coun_phone` int(15) NOT NULL,
+  `coun_phone` varchar(30) NOT NULL,
   `coun_type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -109,7 +119,7 @@ CREATE TABLE `logins` (
   `user_id` bigint(20) NOT NULL,
   `user_email` varchar(255) NOT NULL,
   `user_password` varchar(255) NOT NULL,
-  `role` enum('admin','counsellor','student') NOT NULL
+  `role` enum('counsellor','student','admin') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -169,14 +179,14 @@ CREATE TABLE `response_list` (
 --
 
 CREATE TABLE `students` (
+  `id` bigint(20) NOT NULL,
   `stud_id` bigint(20) NOT NULL,
   `stud_name` varchar(255) NOT NULL,
-  `stud_email` varchar(255) NOT NULL,
   `roll_no` varchar(30) NOT NULL,
   `stud_gender` enum('Male','Female','Other') NOT NULL,
-  `stud_phone` int(15) NOT NULL,
-  `stud_dept` varchar(100) NOT NULL,
-  `stud_branch` varchar(100) NOT NULL
+  `stud_phone` varchar(30) NOT NULL,
+  `stud_dept` enum('B.Tech','M.Tech','B.Des','M.Des','P.hd') NOT NULL,
+  `stud_branch` enum('CSE','ECE','Des','ME','NS') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -198,7 +208,8 @@ CREATE TABLE `stud_feedback` (
 -- Indexes for table `admins`
 --
 ALTER TABLE `admins`
-  ADD KEY `fk_admin_id_admin` (`admin_id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_admin_id_admins` (`admin_id`);
 
 --
 -- Indexes for table `answers`
@@ -218,6 +229,7 @@ ALTER TABLE `categories`
 -- Indexes for table `counsellors`
 --
 ALTER TABLE `counsellors`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_coun_id_coun` (`coun_id`) USING BTREE,
   ADD KEY `fk_coun_type_coun` (`coun_type`) USING BTREE;
 
@@ -278,6 +290,7 @@ ALTER TABLE `response_list`
 -- Indexes for table `students`
 --
 ALTER TABLE `students`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_stud_id_stud` (`stud_id`) USING BTREE;
 
 --
@@ -291,6 +304,12 @@ ALTER TABLE `stud_feedback`
 --
 
 --
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
@@ -300,7 +319,13 @@ ALTER TABLE `answers`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `cat_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `cat_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `counsellors`
+--
+ALTER TABLE `counsellors`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `counsel_req`
@@ -333,6 +358,12 @@ ALTER TABLE `response`
   MODIFY `res_id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `students`
+--
+ALTER TABLE `students`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -340,8 +371,7 @@ ALTER TABLE `response`
 -- Constraints for table `admins`
 --
 ALTER TABLE `admins`
-  ADD CONSTRAINT `fk_admin_id` FOREIGN KEY (`admin_id`) REFERENCES `logins` (`user_id`),
-  ADD CONSTRAINT `fk_admin_id_admin` FOREIGN KEY (`admin_id`) REFERENCES `logins` (`user_id`);
+  ADD CONSTRAINT `fk_admin_id_admins` FOREIGN KEY (`admin_id`) REFERENCES `logins` (`user_id`);
 
 --
 -- Constraints for table `answers`

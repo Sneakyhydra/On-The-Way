@@ -8,7 +8,9 @@ import NotFound from "./components/pages/NotFound";
 
 // Auth routes
 import Login from "./components/auth/Login";
-import Register from "./components/auth/Register";
+import RegisterStudent from "./components/auth/RegisterStudent";
+import RegisterCounsellor from "./components/auth/RegisterCounsellor";
+import RegisterAdmin from "./components/auth/RegisterAdmin";
 
 // Layout components
 import Navbar from "./components/layout/Navbar";
@@ -21,12 +23,15 @@ import AlertState from "./context/alert/AlertState";
 // Global variable for axios
 import setAuthToken from "./utils/setAuthToken";
 
+import PrivateRoute from "./components/routing/PrivateRoute";
+
 // CSS
 import "materialize-css/dist/css/materialize.min.css";
 import "./App.css";
 
 // Images
 import background from "./images/Background1.jpeg";
+import M from "materialize-css/dist/js/materialize.min.js";
 
 // Initialize token everytime the app is rendered
 if (localStorage.token) {
@@ -36,6 +41,10 @@ if (localStorage.token) {
 const App = () => {
   // Set scroll state
   const [scrollState, setScrollState] = useState("top");
+
+  useEffect(() => {
+    M.AutoInit();
+  }, []);
 
   // Check the amount of pixels scrolled
   useEffect(() => {
@@ -92,23 +101,35 @@ const App = () => {
               </div>
             </Route>
 
-            <Route exact path='/register'>
+            <Route exact path='/regstudent'>
               <div
                 style={{
                   fontFamily: "Lucida Sans, sans-serif",
                 }}
               >
-                <Register />
+                <RegisterStudent />
               </div>
             </Route>
 
-            <Route exact path='/dashboard'>
+            <Route exact path='/regcounsellor'>
               <div
                 style={{
                   fontFamily: "Lucida Sans, sans-serif",
                 }}
               >
-                <Dashboard />
+                <RegisterCounsellor />
+              </div>
+            </Route>
+
+            <PrivateRoute exact path='/dashboard' component={Dashboard} />
+
+            <Route exact path='/ad123'>
+              <div
+                style={{
+                  fontFamily: "Lucida Sans, sans-serif",
+                }}
+              >
+                <RegisterAdmin />
               </div>
             </Route>
 

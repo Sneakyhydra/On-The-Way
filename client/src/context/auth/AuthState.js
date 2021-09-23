@@ -19,7 +19,7 @@ const AuthState = (props) => {
   const initialState = {
     token: localStorage.getItem("token"),
     isAuthenticated: false,
-    loading: false,
+    loading: true,
     user: null,
     error: null,
   };
@@ -45,8 +45,26 @@ const AuthState = (props) => {
     }
   };
 
-  // Register User
-  const register = async (formData) => {
+  // Load Admin
+  const loadAdmin = async () => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+
+    try {
+      // Make a get request at localhost:5000/api/auth
+      const res = await axios.get("/api/auth/admin1234");
+
+      // Dispatch the action to reducer for USER_LOADED
+      dispatch({ type: USER_LOADED, payload: res.data });
+    } catch (err) {
+      // Dispatch the action to reducer for AUTH_ERROR
+      dispatch({ type: AUTH_ERROR });
+    }
+  };
+
+  // Register Student
+  const regStudent = async (formData) => {
     // Set header of the input data
     const config = {
       headers: {
@@ -56,7 +74,7 @@ const AuthState = (props) => {
 
     try {
       // Make a post request at localhost:5000/api/users
-      const res = await axios.post("api/users", formData, config);
+      const res = await axios.post("api/users/student", formData, config);
 
       // Dispatch the action to reducer for REGISTER_SUCCESS
       dispatch({
@@ -75,14 +93,130 @@ const AuthState = (props) => {
     }
   };
 
+  // Register Counsellor
+  const regCounsellor = async (formData) => {
+    // Set header of the input data
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      // Make a post request at localhost:5000/api/users
+      const res = await axios.post("api/users/counsellor", formData, config);
+
+      // Dispatch the action to reducer for REGISTER_SUCCESS
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data,
+      });
+
+      // Load the user after successful registration
+      loadUser();
+    } catch (err) {
+      // Dispatch the action to reducer for REGISTER_FAIL
+      dispatch({
+        type: REGISTER_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
+  // Register Admin
+  const regAdmin = async (formData) => {
+    // Set header of the input data
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      // Make a post request at localhost:5000/api/users
+      const res = await axios.post("api/users/admin1234", formData, config);
+
+      // Dispatch the action to reducer for REGISTER_SUCCESS
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data,
+      });
+
+      // Load the user after successful registration
+      loadAdmin();
+    } catch (err) {
+      // Dispatch the action to reducer for REGISTER_FAIL
+      dispatch({
+        type: REGISTER_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
   // Login User
-  const login = () => {
-    console.log("login");
+  const login = async (formData) => {
+    // Set header of the input data
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      // Make a post request at localhost:5000/api/auth
+      const res = await axios.post("api/auth", formData, config);
+
+      // Dispatch the action to reducer for LOGIN_SUCCESS
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data,
+      });
+
+      // Load the user after successful login
+      loadUser();
+    } catch (err) {
+      // Dispatch the action to reducer for LOGIN_FAIL
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
+  // Login Admin
+  const loginAdmin = async (formData) => {
+    // Set header of the input data
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      // Make a post request at localhost:5000/api/auth/admin1234
+      const res = await axios.post("api/auth", formData, config);
+
+      // Dispatch the action to reducer for LOGIN_SUCCESS
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data,
+      });
+
+      // Load the user after successful login
+      loadAdmin();
+    } catch (err) {
+      // Dispatch the action to reducer for LOGIN_FAIL
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
   };
 
   // Logout
   const logout = () => {
-    console.log("logout");
+    setAuthToken();
+    dispatch({ type: LOGOUT });
   };
 
   // Clear Errors
@@ -102,11 +236,15 @@ const AuthState = (props) => {
         loading: state.loading,
         user: state.user,
         error: state.error,
-        register,
+        regStudent,
+        regCounsellor,
         login,
         loadUser,
         logout,
         clearErrors,
+        loginAdmin,
+        regAdmin,
+        loadAdmin,
       }}
     >
       {props.children}

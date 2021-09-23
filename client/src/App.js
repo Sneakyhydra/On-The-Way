@@ -53,7 +53,7 @@ const App = () => {
     // Set the value of scroll
     listener = document.addEventListener("scroll", (e) => {
       var scrolled = document.scrollingElement.scrollTop;
-      if (scrolled >= 40) {
+      if (scrolled >= 45) {
         if (scrollState !== "amir") {
           setScrollState("amir");
         }

@@ -150,7 +150,7 @@ const RegisterAdmin = () => {
                 className='validate'
                 value={password}
                 onChange={onChange}
-                minLength='3'
+                minLength='6'
                 required
               />
               <label htmlFor='password'>Password</label>
@@ -162,7 +162,7 @@ const RegisterAdmin = () => {
               <input
                 id='password2'
                 name='password2'
-                minLength='3'
+                minLength='6'
                 type='password'
                 className='validate'
                 value={password2}

@@ -25,7 +25,7 @@ const RegisterStudent = () => {
       setAlert(error, "danger");
     } else if (error === "Gender is not valid") {
       setAlert(error, "danger");
-    } else if (error === "Programme/dept is not valid") {
+    } else if (error === "Programme(dept) is not valid") {
       setAlert(error, "danger");
     } else if (error === "Branch is not valid") {
       setAlert(error, "danger");

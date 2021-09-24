@@ -8,7 +8,7 @@
 
 ::-webkit-scrollbar-thumb {
     background-color: #2bc592;
-    background-image: -webkit-linear-gradient( 45deg, rgba(255, 255, 255, 0.35) 20%, transparent 20%, transparent 40%, rgba(255, 255, 255, 0.35) 40%, rgba(255, 255, 255, 0.35) 60%, transparent 60%, transparent 80%, rgba(255, 255, 255, 0.35) 80%);
+    background-image: -webkit-linear-gradient( 150deg, rgba(255, 255, 255, 0.35) 20%, transparent 20%, transparent 40%, rgba(255, 255, 255, 0.35) 40%, rgba(255, 255, 255, 0.35) 60%, transparent 60%, transparent 80%, rgba(255, 255, 255, 0.35) 80%);
     border-radius: 20px;
     background-clip: content-box;
 }

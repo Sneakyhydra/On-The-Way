@@ -1,15 +1,19 @@
+// Imports
 import { Fragment, useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../images/logo.png";
 import PropTypes from "prop-types";
 import AuthContext from "../../context/auth/authContext";
-import { Dropdown, Divider, Button } from "react-materialize";
+import { Dropdown, Divider, Button, Icon } from "react-materialize";
 
 const Navbar = ({ scrollState }) => {
   const authContext = useContext(AuthContext);
 
+  // Load user if token exists
   useEffect(() => {
-    authContext.loadUser();
+    if (localStorage.token) {
+      authContext.loadUser();
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -71,8 +75,16 @@ const Navbar = ({ scrollState }) => {
       >
         <NavLink to='/dashboard'>Dashboard</NavLink>
         <Divider />
-        <a href='#!' onClick={onLogout} style={{ color: "red" }}>
-          Logout
+        <a
+          href='#!'
+          onClick={onLogout}
+          style={{
+            color: "red",
+            display: "inline-flex",
+            width: "100%",
+          }}
+        >
+          <span>Logout</span> <Icon>exit_to_app</Icon>
         </a>
       </Dropdown>
     </Fragment>
@@ -126,6 +138,7 @@ const Navbar = ({ scrollState }) => {
   );
 };
 
+// Set proptypes
 Navbar.propTypes = {
   scrollState: PropTypes.string.isRequired,
 };

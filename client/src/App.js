@@ -1,3 +1,4 @@
+// Imports
 import { useEffect, useState, Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -12,6 +13,9 @@ import RegisterStudent from "./components/auth/RegisterStudent";
 import RegisterCounsellor from "./components/auth/RegisterCounsellor";
 import RegisterAdmin from "./components/auth/RegisterAdmin";
 
+// Routing
+import PrivateRoute from "./components/routing/PrivateRoute";
+
 // Layout components
 import Navbar from "./components/layout/Navbar";
 import Alerts from "./components/layout/Alerts";
@@ -20,10 +24,8 @@ import Alerts from "./components/layout/Alerts";
 import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alert/AlertState";
 
-// Global variable for axios
+// Global header for axios
 import setAuthToken from "./utils/setAuthToken";
-
-import PrivateRoute from "./components/routing/PrivateRoute";
 
 // CSS
 import "materialize-css/dist/css/materialize.min.css";
@@ -42,6 +44,7 @@ const App = () => {
   // Set scroll state
   const [scrollState, setScrollState] = useState("top");
 
+  // Init Materialize JS
   useEffect(() => {
     M.AutoInit();
   }, []);
@@ -75,6 +78,7 @@ const App = () => {
         <Router>
           <Alerts />
           <Switch>
+            {/* Home page */}
             <Route exact path='/'>
               <Fragment>
                 <div
@@ -91,6 +95,7 @@ const App = () => {
               </Fragment>
             </Route>
 
+            {/* Login page */}
             <Route exact path='/login'>
               <div
                 style={{
@@ -101,6 +106,7 @@ const App = () => {
               </div>
             </Route>
 
+            {/* Register student page */}
             <Route exact path='/regstudent'>
               <div
                 style={{
@@ -111,6 +117,7 @@ const App = () => {
               </div>
             </Route>
 
+            {/* Register counsellor page */}
             <Route exact path='/regcounsellor'>
               <div
                 style={{
@@ -121,8 +128,10 @@ const App = () => {
               </div>
             </Route>
 
+            {/* Dashboard */}
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
 
+            {/* Register admin page */}
             <Route exact path='/ad123'>
               <div
                 style={{
@@ -133,6 +142,7 @@ const App = () => {
               </div>
             </Route>
 
+            {/* Not found */}
             <Route path='*'>
               <NotFound />
             </Route>

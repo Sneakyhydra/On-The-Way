@@ -1,6 +1,6 @@
 // Imports
 const express = require("express");
-const mysql = require("mysql2"); // To connect with database
+const mysql = require("mysql2"); // To connect with DB
 const bcrypt = require("bcryptjs"); // For hashing password
 const jwt = require("jsonwebtoken"); // For authorization
 const config = require("config"); // For global variables
@@ -89,7 +89,7 @@ router.post(
             stud_branch !== "CSE" &&
             stud_branch !== "ECE" &&
             stud_branch !== "Des" &&
-            stud_branch !== "MECH" &&
+            stud_branch !== "ME" &&
             stud_branch !== "NS"
         ) {
             return res.status(400).json({ msg: "Branch is not valid" });
@@ -109,7 +109,7 @@ router.post(
             const salt = await bcrypt.genSalt(10);
             user_password = await bcrypt.hash(user_password, salt);
 
-            // Add user to the database
+            // Add user to the DB
             const [insertUser] = await promisePool.query(
                 `INSERT INTO logins (user_email, user_password, role) VALUES ("${user_email}", "${user_password}", "${role}")`
             );
@@ -124,11 +124,11 @@ router.post(
                 `SELECT user_id from logins WHERE user_email='${user_email}'`
             );
 
-            const user_id = rows[0].user_id;
             // Store user id in payload for token
+            const user_id = rows[0].user_id;
             payload.id = user_id;
 
-            // Add student info
+            // Add student details in the DB
             const [insertStudent] = await promisePool.query(
                 `INSERT INTO students (stud_id, stud_name, roll_no, stud_gender, stud_phone, stud_dept, stud_branch) VALUES (${user_id},"${stud_name}", "${roll_no}", "${stud_gender}", "${stud_phone}", "${stud_dept}", "${stud_branch}")`
             );
@@ -199,7 +199,7 @@ router.post(
             return res.status(400).json({ msg: "Gender is not valid" });
         }
 
-        // Get all types
+        // Get all types from DB
         const [typeRows] = await promisePool.query(
             `SELECT category from categories`
         );
@@ -233,7 +233,7 @@ router.post(
             const salt = await bcrypt.genSalt(10);
             user_password = await bcrypt.hash(user_password, salt);
 
-            // Add user to the database
+            // Add user to the DB
             const [insertUser] = await promisePool.query(
                 `INSERT INTO logins (user_email, user_password, role) VALUES ("${user_email}", "${user_password}", "${role}")`
             );
@@ -248,11 +248,11 @@ router.post(
                 `SELECT user_id from logins WHERE user_email='${user_email}'`
             );
 
-            const user_id = rows[0].user_id;
             // Store user id in payload for token
+            const user_id = rows[0].user_id;
             payload.id = user_id;
 
-            // Add counsellor info
+            // Add counsellor details in the DB
             const [insertCounsellor] = await promisePool.query(
                 `INSERT INTO counsellors (coun_id, coun_name, coun_gender, coun_phone, coun_type) VALUES (${user_id},"${coun_name}", "${coun_gender}", "${coun_phone}", "${coun_type}")`
             );
@@ -335,7 +335,7 @@ router.post(
             const salt = await bcrypt.genSalt(10);
             user_password = await bcrypt.hash(user_password, salt);
 
-            // Add user to the database
+            // Add user to the DB
             const [insertUser] = await promisePool.query(
                 `INSERT INTO logins (user_email, user_password, role) VALUES ("${user_email}", "${user_password}", "${role}")`
             );
@@ -350,11 +350,11 @@ router.post(
                 `SELECT user_id from logins WHERE user_email='${user_email}'`
             );
 
-            const user_id = rows[0].user_id;
             // Store user id in payload for token
+            const user_id = rows[0].user_id;
             payload.id = user_id;
 
-            // Add admin info
+            // Add admin details in the DB
             const [insertAdmin] = await promisePool.query(
                 `INSERT INTO admins (admin_id, admin_name, admin_gender, admin_phone) VALUES (${user_id},"${admin_name}", "${admin_gender}", "${admin_phone}")`
             );

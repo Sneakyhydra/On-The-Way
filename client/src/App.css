@@ -1,3 +1,5 @@
+/* Navbar Effects */
+
 nav {
     height: 80px;
     line-height: 80px;
@@ -11,6 +13,13 @@ nav {
     background-color: white;
 }
 
+.mtop {
+    margin-top: 0.5rem;
+}
+
+
+/* Logo */
+
 .logo {
     width: 64px;
     background-color: white;
@@ -20,6 +29,9 @@ nav {
     margin-top: 0.55rem;
     padding: 3px;
 }
+
+
+/* Title */
 
 .title {
     padding-left: 1rem;
@@ -32,6 +44,9 @@ nav {
     width: 100px;
     text-align: center;
 }
+
+
+/* Login Button Effects */
 
 .login {
     background-color: rgba(0, 0, 0, 0);
@@ -59,6 +74,9 @@ nav {
     color: #400279;
 }
 
+
+/* Chat now button */
+
 .regstudent {
     background: linear-gradient(to left, #0575e6, #021b79);
     transition-duration: 0.08s;
@@ -72,6 +90,9 @@ nav {
 .regstudent:hover {
     opacity: 0.7;
 }
+
+
+/* Be a member button */
 
 .regcounsellor {
     background: linear-gradient(to right, #00bf72, #a8eb12);
@@ -94,10 +115,6 @@ nav {
 
 #loginBtn {
     margin-right: 3em;
-}
-
-.mtop {
-    margin-top: 0.5rem;
 }
 
 .desc {

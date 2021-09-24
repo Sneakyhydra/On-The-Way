@@ -1,5 +1,9 @@
+// Imports
+import { Fragment, useContext } from "react";
 import { NavLink } from "react-router-dom";
+import AuthContext from "../../context/auth/authContext";
 
+// Import images
 import privateImg from "../../images/private.png";
 import clockImg from "../../images/247.png";
 import anonymousImg from "../../images/anonymous.png";
@@ -8,14 +12,11 @@ import help2 from "../../images/2.svg";
 import help3 from "../../images/3.svg";
 import background2 from "../../images/background2.png";
 
-import AuthContext from "../../context/auth/authContext";
-import { Fragment, useContext } from "react";
-
 const Home = () => {
   const authContext = useContext(AuthContext);
-
   const { isAuthenticated } = authContext;
 
+  // Elements to be displayed to a logged in user
   const authBtns = (
     <Fragment>
       <NavLink
@@ -27,6 +28,7 @@ const Home = () => {
     </Fragment>
   );
 
+  // Elements to be displayed to a guest
   const guestBtns = (
     <Fragment>
       <NavLink

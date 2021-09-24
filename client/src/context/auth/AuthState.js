@@ -1,3 +1,4 @@
+// Imports
 import { useReducer } from "react";
 import AuthContext from "./authContext";
 import authReducer from "./authReducer";
@@ -45,24 +46,6 @@ const AuthState = (props) => {
     }
   };
 
-  // Load Admin
-  const loadAdmin = async () => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
-
-    try {
-      // Make a get request at localhost:5000/api/auth
-      const res = await axios.get("/api/auth/admin1234");
-
-      // Dispatch the action to reducer for USER_LOADED
-      dispatch({ type: USER_LOADED, payload: res.data });
-    } catch (err) {
-      // Dispatch the action to reducer for AUTH_ERROR
-      dispatch({ type: AUTH_ERROR });
-    }
-  };
-
   // Register Student
   const regStudent = async (formData) => {
     // Set header of the input data
@@ -73,7 +56,7 @@ const AuthState = (props) => {
     };
 
     try {
-      // Make a post request at localhost:5000/api/users
+      // Make a post request at localhost:5000/api/users/student
       const res = await axios.post("api/users/student", formData, config);
 
       // Dispatch the action to reducer for REGISTER_SUCCESS
@@ -103,7 +86,7 @@ const AuthState = (props) => {
     };
 
     try {
-      // Make a post request at localhost:5000/api/users
+      // Make a post request at localhost:5000/api/users/counsellor
       const res = await axios.post("api/users/counsellor", formData, config);
 
       // Dispatch the action to reducer for REGISTER_SUCCESS
@@ -133,7 +116,7 @@ const AuthState = (props) => {
     };
 
     try {
-      // Make a post request at localhost:5000/api/users
+      // Make a post request at localhost:5000/api/users/admin1234
       const res = await axios.post("api/users/admin1234", formData, config);
 
       // Dispatch the action to reducer for REGISTER_SUCCESS
@@ -143,7 +126,7 @@ const AuthState = (props) => {
       });
 
       // Load the user after successful registration
-      loadAdmin();
+      loadUser();
     } catch (err) {
       // Dispatch the action to reducer for REGISTER_FAIL
       dispatch({
@@ -183,39 +166,12 @@ const AuthState = (props) => {
     }
   };
 
-  // Login Admin
-  const loginAdmin = async (formData) => {
-    // Set header of the input data
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    try {
-      // Make a post request at localhost:5000/api/auth/admin1234
-      const res = await axios.post("api/auth", formData, config);
-
-      // Dispatch the action to reducer for LOGIN_SUCCESS
-      dispatch({
-        type: LOGIN_SUCCESS,
-        payload: res.data,
-      });
-
-      // Load the user after successful login
-      loadAdmin();
-    } catch (err) {
-      // Dispatch the action to reducer for LOGIN_FAIL
-      dispatch({
-        type: LOGIN_FAIL,
-        payload: err.response.data.msg,
-      });
-    }
-  };
-
   // Logout
   const logout = () => {
+    // Delete the token
     setAuthToken();
+
+    // Dispatch the action to reducer for LOGOUT
     dispatch({ type: LOGOUT });
   };
 
@@ -229,7 +185,7 @@ const AuthState = (props) => {
 
   return (
     <AuthContext.Provider
-      // Provide these values to all components wrapped in AuthContext
+      // Provide these values to all components wrapped in AuthContext in App.js
       value={{
         token: state.token,
         isAuthenticated: state.isAuthenticated,
@@ -242,9 +198,7 @@ const AuthState = (props) => {
         loadUser,
         logout,
         clearErrors,
-        loginAdmin,
         regAdmin,
-        loadAdmin,
       }}
     >
       {props.children}

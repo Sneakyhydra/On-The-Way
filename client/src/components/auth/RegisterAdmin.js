@@ -15,6 +15,12 @@ const RegisterAdmin = () => {
   const history = useHistory();
 
   useEffect(() => {
+    M.AutoInit();
+    M.updateTextFields();
+    //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
     if (isAuthenticated) {
       history.push("/");
     }
@@ -113,16 +119,15 @@ const RegisterAdmin = () => {
 
           <div className='row' style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
-              <input
-                id='gender'
-                name='gender'
-                type='text'
-                className='validate'
-                value={gender}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='gender'>Gender</label>
+              <select name='gender' value={gender} onChange={onChange}>
+                <option value='' defaultValue>
+                  Choose your option
+                </option>
+                <option value='Male'>Male</option>
+                <option value='Female'>Female</option>
+                <option value='Other'>Other</option>
+              </select>
+              <label>Gender</label>
             </div>
           </div>
 
@@ -135,9 +140,12 @@ const RegisterAdmin = () => {
                 className='validate'
                 value={phone}
                 onChange={onChange}
+                placeholder='+91'
                 required
               />
-              <label htmlFor='phone'>Mobile Number</label>
+              <label htmlFor='phone' className='active'>
+                Mobile Number
+              </label>
             </div>
           </div>
 

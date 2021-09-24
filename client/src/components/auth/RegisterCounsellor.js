@@ -15,6 +15,12 @@ const RegisterCounsellor = () => {
   const history = useHistory();
 
   useEffect(() => {
+    M.AutoInit();
+    M.updateTextFields();
+    //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
     if (isAuthenticated) {
       history.push("/");
     }
@@ -46,10 +52,10 @@ const RegisterCounsellor = () => {
   const { email, password, password2, username, gender, phone, type } =
     counsellor;
 
-  const onChange = (e) => {
+  const onChange = async (e) => {
     M.updateTextFields();
 
-    setCounsellor({ ...counsellor, [e.target.name]: e.target.value });
+    await setCounsellor({ ...counsellor, [e.target.name]: e.target.value });
   };
 
   const onSubmit = (e) => {
@@ -119,16 +125,15 @@ const RegisterCounsellor = () => {
 
           <div className='row' style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
-              <input
-                id='gender'
-                name='gender'
-                type='text'
-                className='validate'
-                value={gender}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='gender'>Gender</label>
+              <select name='gender' value={gender} onChange={onChange}>
+                <option value='' defaultValue>
+                  Choose your option
+                </option>
+                <option value='Male'>Male</option>
+                <option value='Female'>Female</option>
+                <option value='Other'>Other</option>
+              </select>
+              <label>Gender</label>
             </div>
           </div>
 
@@ -141,24 +146,25 @@ const RegisterCounsellor = () => {
                 className='validate'
                 value={phone}
                 onChange={onChange}
+                placeholder='+91'
                 required
               />
-              <label htmlFor='phone'>Mobile Number</label>
+              <label htmlFor='phone' className='active'>
+                Mobile Number
+              </label>
             </div>
           </div>
 
           <div className='row' style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
-              <input
-                id='type'
-                name='type'
-                type='text'
-                className='validate'
-                value={type}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='type'>Counselling Type</label>
+              <select name='type' value={type} onChange={onChange}>
+                <option value='' defaultValue>
+                  Choose your option
+                </option>
+                <option value='academics'>Academic</option>
+                <option value='stress'>Stress</option>
+              </select>
+              <label>Counselling Type</label>
             </div>
           </div>
 

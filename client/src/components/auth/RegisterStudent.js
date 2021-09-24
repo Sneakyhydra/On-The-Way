@@ -15,6 +15,12 @@ const RegisterStudent = () => {
   const history = useHistory();
 
   useEffect(() => {
+    M.AutoInit();
+    M.updateTextFields();
+    //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
     if (isAuthenticated) {
       history.push("/");
     }
@@ -59,10 +65,10 @@ const RegisterStudent = () => {
     branch,
   } = student;
 
-  const onChange = (e) => {
+  const onChange = async (e) => {
     M.updateTextFields();
 
-    setStudent({ ...student, [e.target.name]: e.target.value });
+    await setStudent({ ...student, [e.target.name]: e.target.value });
   };
 
   const onSubmit = (e) => {
@@ -151,16 +157,15 @@ const RegisterStudent = () => {
 
           <div className='row' style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
-              <input
-                id='gender'
-                name='gender'
-                type='text'
-                className='validate'
-                value={gender}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='gender'>Gender</label>
+              <select name='gender' value={gender} onChange={onChange}>
+                <option value='' defaultValue>
+                  Choose your option
+                </option>
+                <option value='Male'>Male</option>
+                <option value='Female'>Female</option>
+                <option value='Other'>Other</option>
+              </select>
+              <label>Gender</label>
             </div>
           </div>
 
@@ -173,39 +178,48 @@ const RegisterStudent = () => {
                 className='validate'
                 value={phone}
                 onChange={onChange}
+                placeholder='+91'
                 required
               />
-              <label htmlFor='phone'>Mobile Number</label>
+              <label htmlFor='phone' className='active'>
+                Mobile Number
+              </label>
             </div>
           </div>
 
           <div className='row' style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
-              <input
-                id='dept'
-                name='dept'
-                type='text'
-                className='validate'
-                value={dept}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='dept'>Programme</label>
+              <select name='dept' value={dept} onChange={onChange}>
+                <option value='' defaultValue>
+                  Choose your option
+                </option>
+                <option value='B.Tech'>B.Tech</option>
+                <option value='M.Tech'>M.Tech</option>
+                <option value='B.Des'>B.Des</option>
+                <option value='M.Des'>M.Des</option>
+                <option value='P.hd'>P.hd</option>
+              </select>
+              <label>Programme</label>
             </div>
           </div>
 
           <div className='row' style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
-              <input
-                id='branch'
-                name='branch'
-                type='text'
-                className='validate'
-                value={branch}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='branch'>Branch</label>
+              <select name='branch' value={branch} onChange={onChange}>
+                <option value='' defaultValue>
+                  Choose your option
+                </option>
+                <option value='CSE'>
+                  Computer Science and Engineering&#40;CSE&#41;
+                </option>
+                <option value='ECE'>
+                  Electronics and Communication Engineering&#40;ECE&#41;
+                </option>
+                <option value='Des'>Design&#40;Des&#41;</option>
+                <option value='ME'>Mechanical Engineering&#40;ME&#41;</option>
+                <option value='NS'>Natural Sciences&#40;NS&#41;</option>
+              </select>
+              <label>Branch</label>
             </div>
           </div>
 

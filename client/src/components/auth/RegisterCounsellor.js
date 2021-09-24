@@ -126,7 +126,7 @@ const RegisterCounsellor = () => {
           <div className='row' style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <select name='gender' value={gender} onChange={onChange}>
-                <option value='' defaultValue>
+                <option value='' defaultValue disabled>
                   Choose your option
                 </option>
                 <option value='Male'>Male</option>
@@ -158,7 +158,7 @@ const RegisterCounsellor = () => {
           <div className='row' style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <select name='type' value={type} onChange={onChange}>
-                <option value='' defaultValue>
+                <option value='' defaultValue disabled>
                   Choose your option
                 </option>
                 <option value='academics'>Academic</option>

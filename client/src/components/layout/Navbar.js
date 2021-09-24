@@ -50,7 +50,7 @@ const Navbar = ({ scrollState }) => {
           constrainWidth: true,
           container: null,
           coverTrigger: true,
-          hover: true,
+          hover: false,
           inDuration: 150,
           onCloseEnd: null,
           onCloseStart: null,
@@ -59,18 +59,14 @@ const Navbar = ({ scrollState }) => {
           outDuration: 250,
         }}
         trigger={
-          <Button
-            node='button'
-            style={{
-              borderRadius: "1em",
-              fontWeight: "bolder",
-              fontSize: "15px",
-              marginRight: "4.5em",
-              minWidth: "110px",
-            }}
+          <a
+            href='#!'
+            className='waves-effect waves-light btn'
+            style={{ borderRadius: "2em", marginRight: "4em" }}
           >
             {name}
-          </Button>
+            <Icon right>arrow_drop_down</Icon>
+          </a>
         }
       >
         <NavLink to='/dashboard'>Dashboard</NavLink>

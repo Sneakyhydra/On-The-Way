@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../../images/logo.png";
 import PropTypes from "prop-types";
 import AuthContext from "../../context/auth/authContext";
-import { Dropdown, Divider, Button, Icon } from "react-materialize";
+import { Dropdown, Divider, Icon } from "react-materialize";
 
 const Navbar = ({ scrollState }) => {
   const authContext = useContext(AuthContext);
@@ -43,15 +43,16 @@ const Navbar = ({ scrollState }) => {
     <Fragment>
       <Dropdown
         id='Dropdown_1'
+        style={{ borderRadius: "8px" }}
         options={{
           alignment: "left",
           autoTrigger: true,
           closeOnClick: true,
           constrainWidth: true,
           container: null,
-          coverTrigger: true,
-          hover: false,
-          inDuration: 150,
+          coverTrigger: false,
+          hover: true,
+          inDuration: 100,
           onCloseEnd: null,
           onCloseStart: null,
           onOpenEnd: null,
@@ -62,7 +63,7 @@ const Navbar = ({ scrollState }) => {
           <a
             href='#!'
             className='waves-effect waves-light btn'
-            style={{ borderRadius: "2em", marginRight: "4em" }}
+            style={{ borderRadius: "10px", marginRight: "4em" }}
           >
             {name}
             <Icon right>arrow_drop_down</Icon>
@@ -70,7 +71,6 @@ const Navbar = ({ scrollState }) => {
         }
       >
         <NavLink to='/dashboard'>Dashboard</NavLink>
-        <Divider />
         <a
           href='#!'
           onClick={onLogout}

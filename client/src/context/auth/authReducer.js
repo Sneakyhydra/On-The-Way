@@ -7,6 +7,9 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS,
+  EDIT_FAIL,
+  EDIT_SUCCESS,
+  SET_KEY,
 } from "../types";
 
 // Change state according to the type of action
@@ -22,6 +25,7 @@ const authReducer = (state, action) => {
 
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
+    case EDIT_SUCCESS:
       localStorage.setItem("token", action.payload.token);
 
       return {
@@ -46,10 +50,22 @@ const authReducer = (state, action) => {
         error: action.payload,
       };
 
+    case EDIT_FAIL:
+      return {
+        ...state,
+        error: action.payload,
+      };
+
     case CLEAR_ERRORS:
       return {
         ...state,
         error: null,
+      };
+
+    case SET_KEY:
+      return {
+        ...state,
+        key: action.payload,
       };
 
     default:

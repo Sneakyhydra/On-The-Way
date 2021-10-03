@@ -1,18 +1,15 @@
 import { useState, useContext, useEffect } from "react";
-import AlertContext from "../../context/alert/alertContext";
-import AuthContext from "../../context/auth/authContext";
-import { useHistory } from "react-router";
+import AlertContext from "../../../context/alert/alertContext";
+import AuthContext from "../../../context/auth/authContext";
 import M from "materialize-css/dist/js/materialize.min.js";
 
-const RegisterStudent = () => {
+const EditStudent = ({ user }) => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
   const { setAlert } = alertContext;
 
-  const { regStudent, error, clearErrors, isAuthenticated } = authContext;
-
-  const history = useHistory();
+  const { editStudent, error, clearErrors } = authContext;
 
   useEffect(() => {
     M.AutoInit();
@@ -20,55 +17,32 @@ const RegisterStudent = () => {
     //eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      history.push("/");
-    }
-
-    if (error === "User already exists") {
-      setAlert(error, "danger");
-    } else if (error === "Role is not valid") {
-      setAlert(error, "danger");
-    } else if (error === "Gender is not valid") {
-      setAlert(error, "danger");
-    } else if (error === "Programme(dept) is not valid") {
-      setAlert(error, "danger");
-    } else if (error === "Branch is not valid") {
-      setAlert(error, "danger");
-    }
-
-    clearErrors();
-    // eslint-disable-next-line
-  }, [error, isAuthenticated]);
+  const {
+    stud_name,
+    user_email,
+    stud_phone,
+    stud_gender,
+    roll_no,
+    stud_dept,
+    stud_branch,
+  } = user;
 
   const [student, setStudent] = useState({
-    email: "",
-    password: "",
-    password2: "",
-    username: "",
-    rollno: "",
-    gender: "",
-    phone: "",
-    dept: "",
-    branch: "",
+    email: user_email,
+    username: stud_name,
+    gender: stud_gender,
+    phone: stud_phone,
+    roll: roll_no,
+    dept: stud_dept,
+    branch: stud_branch,
   });
 
-  const {
-    email,
-    password,
-    password2,
-    username,
-    rollno,
-    gender,
-    phone,
-    dept,
-    branch,
-  } = student;
+  const { email, username, gender, phone, roll, dept, branch } = student;
 
-  const onChange = async (e) => {
+  const onChange = (e) => {
     M.updateTextFields();
 
-    await setStudent({ ...student, [e.target.name]: e.target.value });
+    setStudent({ ...student, [e.target.name]: e.target.value });
   };
 
   const onSubmit = (e) => {
@@ -76,27 +50,22 @@ const RegisterStudent = () => {
 
     if (
       email === "" ||
-      password === "" ||
-      password2 === "" ||
       username === "" ||
-      rollno === "" ||
       gender === "" ||
       phone === "" ||
-      dept === "" ||
-      branch === ""
+      roll_no === "" ||
+      branch === "" ||
+      dept === ""
     ) {
       setAlert("Please enter all fields", "danger");
-    } else if (password !== password2) {
-      setAlert("Passwords do not match", "danger");
     } else {
-      regStudent({
+      editStudent({
         user_email: email,
-        user_password: password,
         role: "student",
         stud_name: username,
-        roll_no: rollno,
         stud_gender: gender,
         stud_phone: phone,
+        roll_no: roll,
         stud_dept: dept,
         stud_branch: branch,
       });
@@ -104,13 +73,27 @@ const RegisterStudent = () => {
   };
 
   return (
-    <div className='center'>
-      <div className='row mt-5'>
-        <h4>Register as a Student</h4>
-      </div>
+    <div className='container rounded bg-white mt-3 mb-5'>
       <div className='row'>
-        <form className='col s12' onSubmit={onSubmit}>
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+        <div className='col-md-3 border-right'>
+          <div className='d-flex flex-column align-items-center text-center p-3 py-5'>
+            <img
+              className='rounded-circle mt-0'
+              width='150px'
+              alt='Profile'
+              src='https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg'
+            />
+            <span className='font-weight-bold'>{stud_name}</span>
+            <span className='text-black-50'>{user_email}</span>
+            <span> </span>
+          </div>
+        </div>
+
+        <form className='col-md-6' onSubmit={onSubmit}>
+          <div
+            className='row'
+            style={{ width: "300px", margin: "auto", marginTop: "4.5em" }}
+          >
             <div className='input-field col s12'>
               <input
                 id='username'
@@ -147,7 +130,7 @@ const RegisterStudent = () => {
                 name='rollno'
                 type='text'
                 className='validate'
-                value={rollno}
+                value={roll}
                 onChange={onChange}
                 required
               />
@@ -223,47 +206,17 @@ const RegisterStudent = () => {
             </div>
           </div>
 
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <input
-                id='password'
-                name='password'
-                type='password'
-                className='validate'
-                value={password}
-                onChange={onChange}
-                minLength='3'
-                required
-              />
-              <label htmlFor='password'>Password</label>
-            </div>
-          </div>
-
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <input
-                id='password2'
-                name='password2'
-                minLength='3'
-                type='password'
-                className='validate'
-                value={password2}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='password2'>Confirm Password</label>
-            </div>
-          </div>
-
           <div className='row'>
             <button
               className='btn waves-effect waves-light'
               type='submit'
               value='Register'
-              style={{ marginTop: "2em", borderRadius: "2em", width: "10em" }}
+              style={{ marginTop: "2em", borderRadius: "2em", width: "13em" }}
             >
-              Register
-              <i className='material-icons right'>send</i>
+              Save Profile
+              <i className='material-icons right' style={{ marginLeft: "0px" }}>
+                check
+              </i>
             </button>
           </div>
         </form>
@@ -272,4 +225,4 @@ const RegisterStudent = () => {
   );
 };
 
-export default RegisterStudent;
+export default EditStudent;

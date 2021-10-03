@@ -127,6 +127,8 @@ nav {
 
 .btn {
     cursor: pointer;
+    width: 20em;
+    margin: auto;
 }
 
 #loginBtn {
@@ -170,4 +172,24 @@ nav {
 
 .img-container {
     margin: 1em;
+}
+
+.nav-item>.active {
+    background-color: #2bc592 !important;
+    z-index: 1;
+}
+
+.nav-link:hover {
+    color: #2bc592;
+}
+
+.nav-pills .nav-link {
+    border-radius: 0.4rem;
+}
+
+.nav-link {
+    min-width: 7.5em;
+    color: #0a9164;
+    font-weight: 600;
+    font-size: 1.15rem;
 }

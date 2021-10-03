@@ -17,7 +17,7 @@ import RegisterAdmin from "./components/auth/RegisterAdmin";
 import PrivateRoute from "./components/routing/PrivateRoute";
 
 // Layout components
-import Navbar from "./components/layout/Navbar";
+import HomeNavbar from "./components/layout/HomeNavbar";
 import Alerts from "./components/layout/Alerts";
 
 // States
@@ -89,7 +89,7 @@ const App = () => {
                     fontFamily: "Lucida Sans, sans-serif",
                   }}
                 >
-                  <Navbar scrollState={scrollState} />
+                  <HomeNavbar scrollState={scrollState} />
                   <Home />
                 </div>
               </Fragment>

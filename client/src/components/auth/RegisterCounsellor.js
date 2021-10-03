@@ -88,7 +88,7 @@ const RegisterCounsellor = () => {
 
   return (
     <div className='center'>
-      <div className='row'>
+      <div className='row mt-5'>
         <h4>Register as a Counsellor</h4>
       </div>
       <div className='row'>
@@ -205,6 +205,7 @@ const RegisterCounsellor = () => {
               className='btn waves-effect waves-light'
               type='submit'
               value='Register'
+              style={{ marginTop: "2em", borderRadius: "2em", width: "10em" }}
             >
               Register
               <i className='material-icons right'>send</i>

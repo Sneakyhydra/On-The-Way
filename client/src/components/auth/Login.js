@@ -17,7 +17,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.push("/");
+      history.replace("/dashboard");
     }
 
     if (error === "Invalid Credentials") {
@@ -53,9 +53,13 @@ const Login = () => {
     }
   };
 
+  if (localStorage.token) {
+    authContext.loadUser();
+  }
+
   return (
     <div className='center'>
-      <div className='row'>
+      <div className='row mt-5'>
         <h4>Login</h4>
       </div>
       <div className='row'>
@@ -95,6 +99,7 @@ const Login = () => {
               className='btn waves-effect waves-light'
               type='submit'
               value='Login'
+              style={{ borderRadius: "2em", marginTop: "2em", width: "10em" }}
             >
               Login
               <i className='material-icons right'>send</i>

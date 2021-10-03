@@ -1,5 +1,5 @@
 // Imports
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 
@@ -14,7 +14,12 @@ import background2 from "../../images/background2.png";
 
 const Home = () => {
   const authContext = useContext(AuthContext);
-  const { isAuthenticated } = authContext;
+  const { isAuthenticated, setKey } = authContext;
+
+  useEffect(() => {
+    setKey("history");
+    // eslint-disable-next-line
+  }, []);
 
   // Elements to be displayed to a logged in user
   const authBtns = (
@@ -22,6 +27,7 @@ const Home = () => {
       <NavLink
         className='waves-effect waves-light btn regcounsellor z-depth-1'
         to='/dashboard'
+        style={{ marginRight: "2em", marginTop: "3em" }}
       >
         Dashboard
       </NavLink>
@@ -34,12 +40,14 @@ const Home = () => {
       <NavLink
         className='waves-effect waves-light btn regstudent z-depth-1'
         to='/regstudent'
+        style={{ marginRight: "2em", marginTop: "3em" }}
       >
         Chat Now
       </NavLink>
       <NavLink
         className='waves-effect waves-light btn regcounsellor z-depth-1'
         to='/regcounsellor'
+        style={{ marginRight: "2em", marginTop: "3em" }}
       >
         Be a member
       </NavLink>

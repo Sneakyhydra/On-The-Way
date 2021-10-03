@@ -1,18 +1,19 @@
 import { useState, useContext, useEffect } from "react";
-import AlertContext from "../../context/alert/alertContext";
-import AuthContext from "../../context/auth/authContext";
-import { useHistory } from "react-router";
+import AlertContext from "../../../context/alert/alertContext";
+import AuthContext from "../../../context/auth/authContext";
 import M from "materialize-css/dist/js/materialize.min.js";
 
-const RegisterAdmin = () => {
+const jwt = require("jsonwebtoken"); // To verify token
+
+const EditAdmin = ({ user, setEdit }) => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
   const { setAlert } = alertContext;
 
-  const { regAdmin, error, clearErrors, isAuthenticated } = authContext;
+  const { editAdmin, error, clearErrors, login } = authContext;
 
-  const history = useHistory();
+  const token = localStorage.token;
 
   useEffect(() => {
     M.AutoInit();
@@ -20,33 +21,22 @@ const RegisterAdmin = () => {
     //eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      history.push("/");
-    }
-
-    if (error === "User already exists") {
-      setAlert(error, "danger");
-    } else if (error === "role is not valid") {
-      setAlert(error, "danger");
-    } else if (error === "Gender is not valid") {
-      setAlert(error, "danger");
-    }
-
-    clearErrors();
-    // eslint-disable-next-line
-  }, [error, isAuthenticated]);
+  const { admin_name, user_email, admin_phone, admin_gender, user_id } = user;
 
   const [admin, setAdmin] = useState({
-    email: "",
+    email: user_email,
+    username: admin_name,
+    gender: admin_gender,
+    phone: admin_phone,
     password: "",
-    password2: "",
-    username: "",
-    gender: "",
-    phone: "",
+    id: user_id,
   });
 
-  const { email, password, password2, username, gender, phone } = admin;
+  const { email, username, gender, phone, password, id } = admin;
+
+  const onCancel = () => {
+    setEdit(false);
+  };
 
   const onChange = (e) => {
     M.updateTextFields();
@@ -54,40 +44,51 @@ const RegisterAdmin = () => {
     setAdmin({ ...admin, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      email === "" ||
-      password === "" ||
-      password2 === "" ||
-      username === "" ||
-      gender === "" ||
-      phone === ""
-    ) {
+    if (email === "" || username === "" || gender === "" || phone === "") {
       setAlert("Please enter all fields", "danger");
-    } else if (password !== password2) {
-      setAlert("Passwords do not match", "danger");
     } else {
-      regAdmin({
+      const a = await editAdmin({
         user_email: email,
-        user_password: password,
         role: "admin",
         admin_name: username,
         admin_gender: gender,
         admin_phone: phone,
+        admin_id: id,
+        user_password: password,
+      });
+
+      await login({
+        user_email: email,
+        user_password: password,
       });
     }
   };
 
   return (
-    <div className='center'>
-      <div className='row mt-5'>
-        <h4>Register as an Admin</h4>
-      </div>
+    <div className='container rounded bg-white mt-3 mb-0'>
       <div className='row'>
-        <form className='col s12' onSubmit={onSubmit}>
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+        <div className='col-md-3 border-right'>
+          <div className='d-flex flex-column align-items-center text-center p-3 py-5'>
+            <img
+              className='rounded-circle mt-0'
+              width='150px'
+              alt='Profile'
+              src='https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg'
+            />
+            <span className='font-weight-bold'>{admin_name}</span>
+            <span className='text-black-50'>{user_email}</span>
+            <span> </span>
+          </div>
+        </div>
+
+        <form className='col-md-6' onSubmit={onSubmit}>
+          <div
+            className='row'
+            style={{ width: "300px", margin: "auto", marginTop: "4.5em" }}
+          >
             <div className='input-field col s12'>
               <input
                 id='username'
@@ -163,22 +164,9 @@ const RegisterAdmin = () => {
               />
               <label htmlFor='password'>Password</label>
             </div>
-          </div>
-
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <input
-                id='password2'
-                name='password2'
-                minLength='6'
-                type='password'
-                className='validate'
-                value={password2}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='password2'>Confirm Password</label>
-            </div>
+            <span style={{ color: "red" }}>
+              Enter your password or a new one
+            </span>
           </div>
 
           <div className='row'>
@@ -186,10 +174,24 @@ const RegisterAdmin = () => {
               className='btn waves-effect waves-light'
               type='submit'
               value='Register'
-              style={{ marginTop: "2em", borderRadius: "2em", width: "10em" }}
+              style={{ marginTop: "2em", borderRadius: "2em", width: "13em" }}
             >
-              Register
-              <i className='material-icons right'>send</i>
+              Save Profile
+              <i className='material-icons right' style={{ marginLeft: "0px" }}>
+                check
+              </i>
+            </button>
+
+            <button
+              className='btn waves-effect waves-light'
+              value='Cancel'
+              onClick={onCancel}
+              style={{ marginTop: "2em", borderRadius: "2em", width: "13em" }}
+            >
+              Cancel
+              <i className='material-icons right' style={{ marginLeft: "0px" }}>
+                clear
+              </i>
             </button>
           </div>
         </form>
@@ -198,4 +200,4 @@ const RegisterAdmin = () => {
   );
 };
 
-export default RegisterAdmin;
+export default EditAdmin;

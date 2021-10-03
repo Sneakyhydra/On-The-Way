@@ -1,12 +1,11 @@
 // Imports
 import { Fragment, useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import logo from "../../images/logo.png";
-import PropTypes from "prop-types";
 import AuthContext from "../../context/auth/authContext";
-import { Dropdown, Divider, Icon } from "react-materialize";
+import { Dropdown, Icon } from "react-materialize";
+import M from "materialize-css/dist/js/materialize.min.js";
 
-const Navbar = ({ scrollState }) => {
+const DashNavbar = () => {
   const authContext = useContext(AuthContext);
 
   // Load user if token exists
@@ -14,6 +13,8 @@ const Navbar = ({ scrollState }) => {
     if (localStorage.token) {
       authContext.loadUser();
     }
+    M.AutoInit();
+    M.updateTextFields();
     // eslint-disable-next-line
   }, []);
 
@@ -42,7 +43,7 @@ const Navbar = ({ scrollState }) => {
   const authLinks = (
     <Fragment>
       <Dropdown
-        id='Dropdown_1'
+        id='Dropdown_2'
         style={{ borderRadius: "8px" }}
         options={{
           alignment: "left",
@@ -63,7 +64,12 @@ const Navbar = ({ scrollState }) => {
           <a
             href='#!'
             className='waves-effect waves-light btn'
-            style={{ borderRadius: "10px", marginRight: "4em" }}
+            style={{
+              borderRadius: "10px",
+              marginRight: "4.75em",
+              minWidth: "120px",
+              width: "auto",
+            }}
           >
             {name}
             <Icon right>arrow_drop_down</Icon>
@@ -71,8 +77,8 @@ const Navbar = ({ scrollState }) => {
         }
       >
         <NavLink to='/dashboard'>Dashboard</NavLink>
-        <a
-          href='#!'
+        <NavLink
+          to='/'
           onClick={onLogout}
           style={{
             color: "red",
@@ -81,7 +87,7 @@ const Navbar = ({ scrollState }) => {
           }}
         >
           <span>Logout</span> <Icon>exit_to_app</Icon>
-        </a>
+        </NavLink>
       </Dropdown>
     </Fragment>
   );
@@ -107,22 +113,12 @@ const Navbar = ({ scrollState }) => {
     </Fragment>
   );
 
-  let depth = "z-depth-0";
-  let scrolled = false;
-  if (scrollState === "amir") {
-    depth = "z-depth-1";
-    scrolled = true;
-  }
-
   return (
     <div className='navbar-fixed'>
-      <nav
-        className={`${depth} ${scrolled ? "whiteBG" : "transparentBG mtop"}`}
-      >
+      <nav className='z-depth-1' style={{ backgroundColor: "whitesmoke" }}>
         <div className='nav-wrapper'>
           <div style={{ display: "inline-flex" }}>
-            <img src={logo} alt='Logo' className='logo' />
-            <h4 className='title'>On The Way</h4>
+            <h4 className='title'>Dashboard</h4>
           </div>
 
           <ul className='right' style={{ display: "inline-block" }}>
@@ -134,9 +130,4 @@ const Navbar = ({ scrollState }) => {
   );
 };
 
-// Set proptypes
-Navbar.propTypes = {
-  scrollState: PropTypes.string.isRequired,
-};
-
-export default Navbar;
+export default DashNavbar;

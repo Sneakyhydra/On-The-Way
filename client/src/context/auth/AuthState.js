@@ -11,6 +11,9 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS,
+  EDIT_SUCCESS,
+  EDIT_FAIL,
+  SET_KEY,
 } from "../types";
 import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
@@ -23,6 +26,7 @@ const AuthState = (props) => {
     loading: true,
     user: null,
     error: null,
+    key: "history",
   };
 
   // Init Reducer
@@ -136,6 +140,35 @@ const AuthState = (props) => {
     }
   };
 
+  // Edit Admin
+  const editAdmin = async (formData) => {
+    // Set header of the input data
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      // Make a put request at localhost:5000/api/editUsers/admin1234
+      const res = await axios.put("api/editUsers/admin1234", formData, config);
+
+      // Dispatch the action to reducer for REGISTER_SUCCESS
+      dispatch({
+        type: EDIT_SUCCESS,
+        payload: res.data,
+      });
+
+      // Load the user after successful edit
+      loadUser();
+    } catch (err) {
+      // Dispatch the action to reducer for EDIT_FAIL
+      dispatch({
+        type: EDIT_FAIL,
+      });
+    }
+  };
+
   // Login User
   const login = async (formData) => {
     // Set header of the input data
@@ -183,6 +216,13 @@ const AuthState = (props) => {
     });
   };
 
+  const setKey = (k) => {
+    dispatch({
+      type: SET_KEY,
+      payload: k,
+    });
+  };
+
   return (
     <AuthContext.Provider
       // Provide these values to all components wrapped in AuthContext in App.js
@@ -192,6 +232,7 @@ const AuthState = (props) => {
         loading: state.loading,
         user: state.user,
         error: state.error,
+        key: state.key,
         regStudent,
         regCounsellor,
         login,
@@ -199,6 +240,8 @@ const AuthState = (props) => {
         logout,
         clearErrors,
         regAdmin,
+        editAdmin,
+        setKey,
       }}
     >
       {props.children}

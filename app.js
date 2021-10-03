@@ -14,6 +14,7 @@ app.use(cors());
 
 // Define routes
 app.use('/api/users', require('./routes/users'));
+app.use('/api/editUsers', require('./routes/editUsers'));
 app.use('/api/auth', require('./routes/auth'));
 
 // Listen to port

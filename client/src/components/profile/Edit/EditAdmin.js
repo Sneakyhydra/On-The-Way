@@ -3,17 +3,13 @@ import AlertContext from "../../../context/alert/alertContext";
 import AuthContext from "../../../context/auth/authContext";
 import M from "materialize-css/dist/js/materialize.min.js";
 
-const jwt = require("jsonwebtoken"); // To verify token
-
 const EditAdmin = ({ user, setEdit }) => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
   const { setAlert } = alertContext;
 
-  const { editAdmin, error, clearErrors, login } = authContext;
-
-  const token = localStorage.token;
+  const { editAdmin, login } = authContext;
 
   useEffect(() => {
     M.AutoInit();
@@ -50,6 +46,7 @@ const EditAdmin = ({ user, setEdit }) => {
     if (email === "" || username === "" || gender === "" || phone === "") {
       setAlert("Please enter all fields", "danger");
     } else {
+      // eslint-disable-next-line
       const a = await editAdmin({
         user_email: email,
         role: "admin",

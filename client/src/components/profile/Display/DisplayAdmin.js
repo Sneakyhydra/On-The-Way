@@ -1,21 +1,12 @@
-import { useContext, useEffect, useState } from "react";
-import AlertContext from "../../../context/alert/alertContext";
-import AuthContext from "../../../context/auth/authContext";
+import { useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 
 const DisplayAdmin = ({ user, setEdit }) => {
-  const alertContext = useContext(AlertContext);
-  const authContext = useContext(AuthContext);
-
   useEffect(() => {
     M.AutoInit();
     M.updateTextFields();
     //eslint-disable-next-line
   }, []);
-
-  const { setAlert } = alertContext;
-
-  const { error, clearErrors } = authContext;
 
   const { admin_name, user_email, admin_phone, admin_gender } = user;
 

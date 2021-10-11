@@ -9,7 +9,7 @@ const EditCounsellor = ({ user }) => {
 
   const { setAlert } = alertContext;
 
-  const { editCounsellor, error, clearErrors } = authContext;
+  const { editCounsellor } = authContext;
 
   useEffect(() => {
     M.AutoInit();

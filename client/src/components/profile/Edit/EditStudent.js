@@ -9,7 +9,7 @@ const EditStudent = ({ user }) => {
 
   const { setAlert } = alertContext;
 
-  const { editStudent, error, clearErrors } = authContext;
+  const { editStudent } = authContext;
 
   useEffect(() => {
     M.AutoInit();

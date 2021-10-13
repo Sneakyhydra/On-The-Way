@@ -104,7 +104,22 @@ const Home = () => {
             </div>
           </div>
         </div>
+        <div className="rowtxt">
+          <div className="txt1">
+            <h1>1</h1><h3>Connect with your Expert</h3>
+            <h5>Chat anonymously with a YourDOST expert who's here to help you and not judge you.</h5>
+          </div>
+          <div className="txt1">
+          <h1>2</h1><h3>Discuss your Concerns</h3>
+            <h5>Open up to your Expert in a space where you get the guidance you need, and your concerns get the attention they deserve.</h5>
+          </div>
+          <div className="txt1">
+          <h1>3</h1><h3>Unleash a Better You</h3>
+            <h5>With 24X7 support from our experts, bid goodbye to your old self and be on your way to becoming a better you.</h5>
+          </div>
+        </div>
       </div>
+        
 
       <div className='desc'>
         <div className='col l3 s6'>
@@ -124,6 +139,66 @@ const Home = () => {
             <img src={clockImg} alt='247' />
           </div>
           <p>24X7 ROUND THE CLOCK SUPPORT</p>
+        </div>
+      </div>
+      <div className="support">
+          <div className="txt">
+            <div className="icon" id="i1"></div>
+            <div className="innertxt">Online Chat Sessions</div>
+            <div className="innertxt2">Chat anonymously with an expert of your choice. This service is available to you anytime, anywhere.</div>
+          </div>
+          <div className="txt">
+            <div className="icon" id="i2"></div>
+            <div className="innertxt">Online Chat Sessions</div>
+            <div className="innertxt2">Chat anonymously with an expert of your choice. This service is available to you anytime, anywhere.</div></div>
+          <div className="txt">
+            <div className="icon" id="i3"></div>
+            <div className="innertxt">Online Chat Sessions</div>
+            <div className="innertxt2">Chat anonymously with an expert of your choice. This service is available to you anytime, anywhere.</div></div>
+      </div>
+      <div className="footerborder">
+        <div className="p1"></div>
+        <div className="p2"></div>
+        <div className="p3"></div>
+        <div className="p4"></div>
+      </div>
+      <div className="footer">
+        <div className="counselling">
+          <h4> <a href="#"> COUNSELLING</a></h4>
+          <h6> <a href="#">Career/Academic</a> </h6>
+          <h6> <a href="#">Friends&Family</a> </h6>
+          <h6> <a href="#">Self Improvement</a> </h6>
+          <a id="lasta" href="#">Category Index</a> 
+        </div>
+        <div className="aboutus">
+        
+          <h4> <a href="#"> ABOUT US</a></h4>
+          <h6> <a href="#">Testimonials</a> </h6>
+          <h6> <a href="#">Team</a> </h6>
+          <h6> <a href="#">Terms of Servicet</a> </h6>
+          <h6> <a href="#">Partners</a> </h6>
+          <a id="lasta" href="#">Care Plan FAQs</a> 
+        
+        </div>
+        <div className="innertxt">
+          <h4> <a href="#">About YourDost</a> </h4>
+          <h3>At YourDOST, we provide an online counseling and emotional support platform designed to foster mental wellness. It anonymously connects you with the right expert from our panel consisting of psychologists, psychotherapists, counselors, life coaches and career coaches, who understand you and guide you through completely confidential individual sessions.</h3>
+          <h5>Meanwhile, know more about: <a href="">Anxiety</a> | <a href="">Counselling</a> | <a href="">Stress</a> | <a href="">Depression</a>  | <a href="">Addiction</a> </h5>
+        </div>
+        <div className="rgtbtn">
+          <div className="icon"></div>
+          <h3>Become an Expert</h3>
+          <h4>Listen to others & be their friend in need</h4>
+          <button>BECOME AN EXPERT</button>
+        </div>
+        <div className="follow">
+          <h4> <a href="#"> FOLLOW US</a></h4>
+          <div className="icons">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M22.162 5.656a8.384 8.384 0 0 1-2.402.658A4.196 4.196 0 0 0 21.6 4c-.82.488-1.719.83-2.656 1.015a4.182 4.182 0 0 0-7.126 3.814 11.874 11.874 0 0 1-8.62-4.37 4.168 4.168 0 0 0-.566 2.103c0 1.45.738 2.731 1.86 3.481a4.168 4.168 0 0 1-1.894-.523v.052a4.185 4.185 0 0 0 3.355 4.101 4.21 4.21 0 0 1-1.89.072A4.185 4.185 0 0 0 7.97 16.65a8.394 8.394 0 0 1-6.191 1.732 11.83 11.83 0 0 0 6.41 1.88c7.693 0 11.9-6.373 11.9-11.9 0-.18-.005-.362-.013-.54a8.496 8.496 0 0 0 2.087-2.165z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 0 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21.543 6.498C22 8.28 22 12 22 12s0 3.72-.457 5.502c-.254.985-.997 1.76-1.938 2.022C17.896 20 12 20 12 20s-5.893 0-7.605-.476c-.945-.266-1.687-1.04-1.938-2.022C2 15.72 2 12 2 12s0-3.72.457-5.502c.254-.985.997-1.76 1.938-2.022C6.107 4 12 4 12 4s5.896 0 7.605.476c.945.266 1.687 1.04 1.938 2.022zM10 15.5l6-3.5-6-3.5v7z"/></svg>
+          </div>
         </div>
       </div>
     </div>

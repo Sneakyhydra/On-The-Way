@@ -193,3 +193,273 @@ nav {
     font-weight: 600;
     font-size: 1.15rem;
 }
+.rowtxt{
+    margin-top: 25px;
+   min-height: 35vh;
+    width: 100%;
+    /* background-color: #00bf72; */
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+}
+.help{
+    /* background-color: grey; */
+    position: relative;
+}
+.rowtxt .txt1{
+    margin: 0%;
+    padding: 0%;
+    position: relative;
+    padding-left: 30px;
+    padding-right: 30px;
+    height: 35vh;
+    width: 30%;
+    /* background-color: #0575e6; */
+}
+
+.rowtxt .txt1 h1{
+    font-size: 80px;
+    margin: 0%;
+    padding: 0%;
+    position: absolute;
+    top: 0%;
+    color: grey;
+}
+.rowtxt .txt1 h3{
+    text-align:start;
+    line-height: 30px;
+    font-weight: 500;
+    font-size: 23px;
+    /* box-sizing: border-box; */
+    /* background-color: #a8eb12; */
+    width: 50%;
+    margin: 0%;
+    padding: 0%;
+    top: 7%;
+    left: 30%;
+    position: absolute;
+    
+}
+.rowtxt .txt1 h5{
+    
+    margin-top: 30px;
+    line-height: 30px;
+    text-align:start;
+    position: absolute;
+    top: 30%;
+    font-size: 13px;
+}
+.desc{
+    position: absolute;
+    width: 100%;
+    top: 183%;
+}
+.support{
+    box-shadow:  0 0 5px 5px #83838a;
+        position: absolute;
+        height: 33%;
+        width: 85%;
+        background-color: #414242;
+        left: 8%;
+        top: 253%;
+        border-radius: 15px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+}
+.support .txt{
+    
+    position: relative;
+    padding: 30px;
+    height: 100%;
+    width: 33.25%;
+    background-color: rgb(255, 255, 255);
+}
+.support .innertxt{
+    font-size: 18px;
+    color: #302664;
+    font-weight: 600;
+    position: absolute;
+    left: 33%;
+}
+.support .innertxt2{
+position: absolute;
+left: 33%;
+top: 30%;
+width: 50%;
+}
+.support .icon{
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    /* background-color: brown; */
+   
+    background-size: cover;
+}
+#i1{
+    background-image: url('./images/icon1.svg');
+}
+#i2{
+    background-image: url('./images/icon2.svg');
+}
+#i3{
+    background-image: url('./images/icon3.svg');
+}
+.footerborder{
+    position: absolute;
+    top: 300%;
+    height: 12px;
+    width: 100%;
+    background-color: brown;
+    display: flex;
+}
+.p1{
+    height: 100%;
+    width: 25%;
+    background-color: #F6B717;
+}
+.p2{
+    height: 100%;
+    width: 25%;
+    background-color: #F3914C;
+}
+.p3{
+    height: 100%;
+    width: 25%;
+    background-color: #A39DD6;
+}
+.p4{
+    height: 100%;
+    width: 25%;
+    background-color: #FDE7A0;
+}
+.footer{
+    position: absolute;
+    top: 301.8%;
+    min-height: 90vh;
+    width: 100%;
+    background-color: #302056;
+    padding-left: 60px;
+    padding-top: 30px;
+    
+}
+.counselling{
+    left: 7%;
+    box-sizing: border-box;
+    padding: 0%;
+    position: absolute;
+    color: white;
+    margin: 0%;
+}
+.footer h4 a{
+    text-decoration: none;
+    color: white;
+    margin: 0%;
+    font-size: 15px;
+    font-weight: 600;
+}
+.footer h6{
+    color: yellow;
+    font-size: 13px;
+}
+.footer h6 a{
+    text-decoration: none;
+    color: white;
+}
+.footer a{
+    color: #F7A344;
+    font-size: 13px;
+    text-decoration: underline;
+}
+.aboutus{
+    margin: 0%;
+    position: absolute;
+    left: 25%;
+    box-sizing: border-box;
+    padding: 0%;
+    position: absolute;
+    color: white;
+}
+.footer .innertxt{
+    left: 7%;
+    position: absolute;
+    bottom: 2%;
+    height: 40vh;
+    width: 45%;
+    /* background-color: violet; */
+}
+.footer .innertxt h4 a{
+    position: absolute;
+    top: 0%;
+
+}
+.footer .innertxt h3{
+    position: absolute;
+    top: 7%;
+    font-size: 13px;
+    color: white;
+    line-height: 30px;
+}
+.footer .innertxt h5{
+    font-size: 16px;
+    color: white;
+    position: absolute;
+    bottom: 3%;
+}
+.rgtbtn{
+    /* background-color: yellow; */
+    /* display: flex; */
+    width: 30%;
+    position: absolute;
+    right: 7%;
+    top: 50%;
+    color: white;
+}
+.rgtbtn h3{
+    position: absolute;
+    top: 2%;
+    margin: 0%;
+    left: 35%;
+    font-size: 20px;
+
+}
+.rgtbtn h4{
+    position: absolute;
+    top: 30%;
+    margin: 0%;
+    left: 35%;
+    font-size: 13px;
+}
+.rgtbtn .icon{
+    /* position: absolute; */
+    height: 100px;
+    width: 100px;
+    background-image: url(./images/footericon.svg);
+    background-size: cover;
+}
+.rgtbtn button{
+width: 100%;
+height: 8vh;
+border-radius: 8px;
+background-color: #CE7B4F;
+border: 0px;
+color:#302056;
+font-weight: 500;
+}
+.follow{
+    position: absolute;
+    left: 63%;
+}
+
+.follow .icons svg{
+margin-right:0px;    
+}
+.follow .icons{
+    display: flex;
+    justify-content: space-between;
+    padding: 0%;
+    width: 140%;
+    position: absolute;
+    left: -10%;
+    /* background-color: yellow; */
+}

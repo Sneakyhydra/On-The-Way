@@ -104,13 +104,14 @@ const RegisterStudent = () => {
   };
 
   return (
-    <div className='center'>
+    <div className='center' id="sbg">
+     <div className="box"> 
       <div className='row mt-5'>
         <h4>Register as a Student</h4>
       </div>
       <div className='row'>
         <form className='col s12' onSubmit={onSubmit}>
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+          <div className='row' id="rname" style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <input
                 id='username'
@@ -125,7 +126,7 @@ const RegisterStudent = () => {
             </div>
           </div>
 
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+          <div className='row' id="remail" style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <input
                 id='email'
@@ -140,7 +141,7 @@ const RegisterStudent = () => {
             </div>
           </div>
 
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+          <div className='row' id="rroll" style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <input
                 id='rollno'
@@ -155,7 +156,7 @@ const RegisterStudent = () => {
             </div>
           </div>
 
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+          <div className='row' id="rgender" style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <select name='gender' value={gender} onChange={onChange}>
                 <option value='' defaultValue disabled>
@@ -169,7 +170,7 @@ const RegisterStudent = () => {
             </div>
           </div>
 
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+          <div className='row' id="rno" style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <input
                 id='phone'
@@ -187,7 +188,7 @@ const RegisterStudent = () => {
             </div>
           </div>
 
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+          <div className='row' id="rprog" style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <select name='dept' value={dept} onChange={onChange}>
                 <option value='' defaultValue disabled>
@@ -203,7 +204,7 @@ const RegisterStudent = () => {
             </div>
           </div>
 
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+          <div className='row' id="rbranch" style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <select name='branch' value={branch} onChange={onChange}>
                 <option value='' defaultValue disabled>
@@ -223,7 +224,7 @@ const RegisterStudent = () => {
             </div>
           </div>
 
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+          <div className='row' id="rpass" style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <input
                 id='password'
@@ -239,7 +240,7 @@ const RegisterStudent = () => {
             </div>
           </div>
 
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+          <div className='row' id="rcpass" style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <input
                 id='password2'
@@ -258,6 +259,7 @@ const RegisterStudent = () => {
           <div className='row'>
             <button
               className='btn waves-effect waves-light'
+              id="rbtn"
               type='submit'
               value='Register'
               style={{ marginTop: "2em", borderRadius: "2em", width: "10em" }}
@@ -267,6 +269,7 @@ const RegisterStudent = () => {
             </button>
           </div>
         </form>
+      </div>
       </div>
     </div>
   );

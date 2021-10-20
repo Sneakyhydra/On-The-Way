@@ -58,10 +58,16 @@ const Login = () => {
   }
 
   return (
-    <div className='center'>
+    <div className='center' id="fcenter">
+      <div id="shade"></div>
+      <div id="card">
+       <div id="updiv">
       <div className='row mt-5'>
         <h4>Login</h4>
       </div>
+      
+      </div>
+      
       <div className='row'>
         <form className='col s12' onSubmit={onSubmit}>
           <div className='row' style={{ width: "300px", margin: "auto" }}>
@@ -106,6 +112,7 @@ const Login = () => {
             </button>
           </div>
         </form>
+      </div>
       </div>
     </div>
   );

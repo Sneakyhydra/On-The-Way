@@ -463,3 +463,234 @@ margin-right:0px;
     left: -10%;
     /* background-color: yellow; */
 }
+#fcenter{
+    margin: 0%;
+    padding: 0%;
+    /* background-color: yellow; */
+    background-image: url(./images/login2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 197.4vh;
+    position: absolute;
+}
+#card{
+    background-color: white;
+    border-radius: 15px;
+    height: 73vh;
+    width: 65vh;
+    position: absolute;
+    left: 15vh;
+    top: 50%;
+    transform: translate(0,-50%);    
+    padding-top: 0%;
+    overflow: hidden;
+    box-shadow: 5px 5px 10px #535353;
+}
+#updiv{
+
+    padding: 25px;
+    margin-bottom: 30px;
+    /* position: absolute; */
+    color: white;
+    height: 20%;
+    background-color: #021b79;
+}
+.row.mt-5{
+    margin: 0%!important;
+}
+#shade{
+    height: 100vh;
+    width: 50vh;
+    background-color: black;
+    opacity: 0.3;
+}
+
+.box{
+    
+    background-color: white;
+    margin: 0%;
+    position: absolute;
+    height: 86%;
+    width: 65%;
+    top: 8%;
+    left: 15%;
+    border-radius: 15px;
+}
+.box .row.mt-5 h4{
+    
+    position: absolute;
+    left: -22%;
+    /* width: auto; */
+    top: 5%;
+}
+#rname{
+    position: absolute;
+    left: 7%;
+    top: 14%;
+}
+#remail{
+    position: absolute;
+    left: 7%;
+    top: 27%;
+}
+#rroll{
+    position: absolute;
+    left: 7%;
+    top: 40%;
+}
+#rgender{
+    position: absolute;
+    left: 7%;
+    top: 53%;
+}
+#rno{
+    position: absolute;
+    left: 7%;
+    top: 66%;
+}
+#rprog{
+    position: absolute;
+    left: 50%;
+    top: 14%;
+}
+#rbranch{
+    position: absolute;
+    left: 50%;
+    top: 27%;
+}
+#rpass{
+    position: absolute;
+    left: 50%;
+    top: 40%;
+}
+#rcpass{
+    position: absolute;
+    left: 50%;
+    top: 53%;
+}
+#rbtn{
+    top: 80%;
+    margin-top: 2em;
+    border-radius: 2em;
+    width: 10em;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0%);
+}
+#sbg{
+    height: 100vh;
+    background: linear-gradient( 180deg, #71B5E0, #43274E 100%);
+}
+
+
+
+.box .row.mt-5 h4{
+    
+    position: absolute;
+    left: -22%;
+    /* width: auto; */
+    top: 5%;
+}
+#cname{
+    position: absolute;
+    left: 7%;
+    top: 14%;
+}
+#cemail{
+    position: absolute;
+    left: 7%;
+    top: 27%;
+}
+#cgender{
+    position: absolute;
+    left: 7%;
+    top: 40%;
+}
+#cno{
+    position: absolute;
+    left: 7%;
+    top: 53%;
+}
+#ctype{
+    position: absolute;
+    left: 50%;
+    top: 14%;
+}
+#cpass{
+    position: absolute;
+    left: 50%;
+    top: 27%;
+}
+#ccpass{
+    position: absolute;
+    left: 50%;
+    top: 40%;
+}
+#cbtn{
+    top: 80%;
+    margin-top: 2em;
+    border-radius: 2em;
+    width: 10em;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0%);
+}
+#cbg{
+    height: 100vh;
+    background: linear-gradient( 180deg, #71B5E0, #43274E 100%);
+}
+
+
+
+.box .row.mt-5 h4{
+    
+    position: absolute;
+    left: -22%;
+    /* width: auto; */
+    top: 5%;
+}
+#aname{
+    position: absolute;
+    left: 7%;
+    top: 14%;
+}
+#aemail{
+    position: absolute;
+    left: 7%;
+    top: 27%;
+}
+#agender{
+    position: absolute;
+    left: 7%;
+    top: 40%;
+}
+#ano{
+    position: absolute;
+    left: 7%;
+    top: 53%;
+}
+#apass{
+    position: absolute;
+    left: 50%;
+    top: 14%;
+}
+#acpass{
+    position: absolute;
+    left: 50%;
+    top: 27%;
+}
+
+#abtn{
+    top: 80%;
+    margin-top: 2em;
+    border-radius: 2em;
+    width: 10em;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0%);
+}
+#abg{
+    height: 100vh;
+    background: linear-gradient( 180deg, #71B5E0, #43274E 100%);
+}

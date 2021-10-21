@@ -87,13 +87,14 @@ const RegisterCounsellor = () => {
   };
 
   return (
-    <div className='center'>
+    <div className='center' id="cbg">
+      <div className="box">
       <div className='row mt-5'>
         <h4>Register as a Counsellor</h4>
       </div>
       <div className='row'>
         <form className='col s12' onSubmit={onSubmit}>
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+          <div className='row' id="cname" style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <input
                 id='username'
@@ -108,7 +109,7 @@ const RegisterCounsellor = () => {
             </div>
           </div>
 
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+          <div className='row' id="cemail" style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <input
                 id='email'
@@ -123,7 +124,7 @@ const RegisterCounsellor = () => {
             </div>
           </div>
 
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+          <div className='row' id="cgender" style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <select name='gender' value={gender} onChange={onChange}>
                 <option value='' defaultValue disabled>
@@ -137,7 +138,7 @@ const RegisterCounsellor = () => {
             </div>
           </div>
 
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+          <div className='row' id="cno" style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <input
                 id='phone'
@@ -155,7 +156,7 @@ const RegisterCounsellor = () => {
             </div>
           </div>
 
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+          <div className='row' id="ctype" style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <select name='type' value={type} onChange={onChange}>
                 <option value='' defaultValue disabled>
@@ -168,7 +169,7 @@ const RegisterCounsellor = () => {
             </div>
           </div>
 
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+          <div className='row' id="cpass" style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <input
                 id='password'
@@ -184,7 +185,7 @@ const RegisterCounsellor = () => {
             </div>
           </div>
 
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+          <div className='row' id="ccpass" style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <input
                 id='password2'
@@ -203,6 +204,7 @@ const RegisterCounsellor = () => {
           <div className='row'>
             <button
               className='btn waves-effect waves-light'
+              id="cbtn"
               type='submit'
               value='Register'
               style={{ marginTop: "2em", borderRadius: "2em", width: "10em" }}
@@ -212,6 +214,7 @@ const RegisterCounsellor = () => {
             </button>
           </div>
         </form>
+      </div>
       </div>
     </div>
   );

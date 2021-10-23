@@ -11,3 +11,7 @@ export const REMOVE_ALERT = "REMOVE_ALERT";
 export const EDIT_SUCCESS = "EDIT_SUCCESS";
 export const EDIT_FAIL = "EDIT_FAIL";
 export const SET_KEY = "SET_KEY";
+export const QUES_LOAD_SUCCESS = "QUES_LOAD_SUCCESS";
+export const QUES_LOAD_FAIL = "QUES_LOAD_FAIL";
+export const PENDING_SUCCESS = "PENDING_SUCCESS";
+export const PENDING_FAIL = "PENDING_FAIL";

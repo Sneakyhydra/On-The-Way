@@ -26,7 +26,7 @@ const AuthState = (props) => {
     loading: true,
     user: null,
     error: null,
-    key: "history",
+    key: "profile",
   };
 
   // Init Reducer

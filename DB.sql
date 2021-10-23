@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2021 at 03:45 PM
+-- Generation Time: Oct 21, 2021 at 09:01 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -28,12 +28,18 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admins` (
-  `id` bigint(20) NOT NULL,
   `admin_id` bigint(20) NOT NULL,
   `admin_name` varchar(255) NOT NULL,
   `admin_gender` enum('Male','Female','Other') NOT NULL,
   `admin_phone` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`admin_id`, `admin_name`, `admin_gender`, `admin_phone`) VALUES
+(1, 'Developer', 'Male', '1234567890');
 
 -- --------------------------------------------------------
 
@@ -52,36 +58,25 @@ CREATE TABLE `answers` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
---
-
-CREATE TABLE `categories` (
-  `cat_id` bigint(20) NOT NULL,
-  `category` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `categories`
---
-
-INSERT INTO `categories` (`cat_id`, `category`) VALUES
-(1, 'academics'),
-(2, 'stress');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `counsellors`
 --
 
 CREATE TABLE `counsellors` (
-  `id` bigint(20) NOT NULL,
   `coun_id` bigint(20) NOT NULL,
   `coun_name` varchar(255) NOT NULL,
   `coun_gender` enum('Male','Female','Other') NOT NULL,
   `coun_phone` varchar(30) NOT NULL,
-  `coun_type` varchar(255) NOT NULL
+  `coun_email` varchar(255) NOT NULL,
+  `coun_dept` varchar(255) NOT NULL,
+  `coun_status` enum('Approved','Pending') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `counsellors`
+--
+
+INSERT INTO `counsellors` (`coun_id`, `coun_name`, `coun_gender`, `coun_phone`, `coun_email`, `coun_dept`, `coun_status`) VALUES
+(3, 'Vansh kumar sharma', 'Male', '0123456789', '', '', 'Approved');
 
 -- --------------------------------------------------------
 
@@ -94,7 +89,6 @@ CREATE TABLE `counsel_req` (
   `stud_id` bigint(20) NOT NULL,
   `coun_id` bigint(20) NOT NULL,
   `res_id` bigint(20) NOT NULL,
-  `coun_type` varchar(255) NOT NULL,
   `req_desc` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -122,6 +116,16 @@ CREATE TABLE `logins` (
   `role` enum('counsellor','student','admin') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `logins`
+--
+
+INSERT INTO `logins` (`user_id`, `user_email`, `user_password`, `role`) VALUES
+(1, 'dev123@gmail.com', '$2a$10$xY/IcxI1Wl5wscELiY1Kw.4ZPPrZybdIVqb0oafiLtaM3o.g2YTkC', 'admin'),
+(2, 'abc123@gmail.com', '$2a$10$9Q365rP9IkNArWEh2kEEyeAmd1XuKoe1MOlUDbeRIvkmnRdXA8MFS', 'student'),
+(3, 'vansh123@gmail.com', '$2a$10$mlA8UIgj62OTQGVZ8m181.tH0Z8mRWC28y3r4gJJ/rYspBDWAFq/W', 'counsellor'),
+(4, 'siddhart123@gmail.com', '$2a$10$NA.zDvHn3mIWukhJO3OR8.dhRF4tv1aTYtw4LREPxXEa9s8TrXX4e', 'student');
+
 -- --------------------------------------------------------
 
 --
@@ -130,21 +134,8 @@ CREATE TABLE `logins` (
 
 CREATE TABLE `questions` (
   `ques_id` bigint(20) NOT NULL,
-  `quiz_id` bigint(20) NOT NULL,
-  `ques_no` int(11) NOT NULL,
-  `ques_desc` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `quizes`
---
-
-CREATE TABLE `quizes` (
-  `quiz_id` bigint(20) NOT NULL,
-  `quiz_name` varchar(255) NOT NULL,
-  `quiz_type` varchar(255) NOT NULL
+  `ques_desc` varchar(255) NOT NULL,
+  `ques_no` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -155,7 +146,6 @@ CREATE TABLE `quizes` (
 
 CREATE TABLE `response` (
   `res_id` bigint(20) NOT NULL,
-  `quiz_id` bigint(20) NOT NULL,
   `stud_id` bigint(20) NOT NULL,
   `res_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -179,7 +169,6 @@ CREATE TABLE `response_list` (
 --
 
 CREATE TABLE `students` (
-  `id` bigint(20) NOT NULL,
   `stud_id` bigint(20) NOT NULL,
   `stud_name` varchar(255) NOT NULL,
   `roll_no` varchar(30) NOT NULL,
@@ -188,6 +177,14 @@ CREATE TABLE `students` (
   `stud_dept` enum('B.Tech','M.Tech','B.Des','M.Des','P.hd') NOT NULL,
   `stud_branch` enum('CSE','ECE','Des','ME','NS') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `students`
+--
+
+INSERT INTO `students` (`stud_id`, `stud_name`, `roll_no`, `stud_gender`, `stud_phone`, `stud_dept`, `stud_branch`) VALUES
+(1, 'Sparsh kumar', '20bcs2xx', 'Male', '1234567890', 'B.Tech', 'CSE'),
+(2, 'siddharth', '20bcsxxx', 'Male', '0987612345', 'B.Tech', 'CSE');
 
 -- --------------------------------------------------------
 
@@ -208,8 +205,7 @@ CREATE TABLE `stud_feedback` (
 -- Indexes for table `admins`
 --
 ALTER TABLE `admins`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_admin_id_admins` (`admin_id`);
+  ADD PRIMARY KEY (`admin_id`) USING BTREE;
 
 --
 -- Indexes for table `answers`
@@ -219,29 +215,19 @@ ALTER TABLE `answers`
   ADD KEY `fk_ques_id_ans` (`ques_id`) USING BTREE;
 
 --
--- Indexes for table `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`cat_id`),
-  ADD UNIQUE KEY `category` (`category`);
-
---
 -- Indexes for table `counsellors`
 --
 ALTER TABLE `counsellors`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_coun_id_coun` (`coun_id`) USING BTREE,
-  ADD KEY `fk_coun_type_coun` (`coun_type`) USING BTREE;
+  ADD PRIMARY KEY (`coun_id`) USING BTREE;
 
 --
 -- Indexes for table `counsel_req`
 --
 ALTER TABLE `counsel_req`
   ADD PRIMARY KEY (`req_id`),
-  ADD KEY `fk_stud_id_req` (`stud_id`),
   ADD KEY `fk_coun_id_req` (`coun_id`),
   ADD KEY `fk_res_id_req` (`res_id`),
-  ADD KEY `fk_coun_type_req` (`coun_type`);
+  ADD KEY `fk_stud_id_req` (`stud_id`);
 
 --
 -- Indexes for table `coun_feedback`
@@ -260,23 +246,14 @@ ALTER TABLE `logins`
 -- Indexes for table `questions`
 --
 ALTER TABLE `questions`
-  ADD PRIMARY KEY (`ques_id`),
-  ADD KEY `fk_quiz_id_ques` (`quiz_id`) USING BTREE;
-
---
--- Indexes for table `quizes`
---
-ALTER TABLE `quizes`
-  ADD PRIMARY KEY (`quiz_id`),
-  ADD KEY `fk_quiz_type_quiz` (`quiz_type`) USING BTREE;
+  ADD PRIMARY KEY (`ques_id`);
 
 --
 -- Indexes for table `response`
 --
 ALTER TABLE `response`
   ADD PRIMARY KEY (`res_id`),
-  ADD KEY `fk_stud_id_res` (`stud_id`),
-  ADD KEY `fk_quiz_id_res` (`quiz_id`);
+  ADD KEY `fk_stud_id_res` (`stud_id`);
 
 --
 -- Indexes for table `response_list`
@@ -290,42 +267,23 @@ ALTER TABLE `response_list`
 -- Indexes for table `students`
 --
 ALTER TABLE `students`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_stud_id_stud` (`stud_id`) USING BTREE;
+  ADD PRIMARY KEY (`stud_id`) USING BTREE;
 
 --
 -- Indexes for table `stud_feedback`
 --
 ALTER TABLE `stud_feedback`
-  ADD KEY `fk_stud_id_feed` (`stud_id`);
+  ADD KEY `stud_id_feedback` (`stud_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `admins`
---
-ALTER TABLE `admins`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
   MODIFY `ans_id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `categories`
---
-ALTER TABLE `categories`
-  MODIFY `cat_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `counsellors`
---
-ALTER TABLE `counsellors`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `counsel_req`
@@ -337,19 +295,13 @@ ALTER TABLE `counsel_req`
 -- AUTO_INCREMENT for table `logins`
 --
 ALTER TABLE `logins`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
   MODIFY `ques_id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `quizes`
---
-ALTER TABLE `quizes`
-  MODIFY `quiz_id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `response`
@@ -361,7 +313,7 @@ ALTER TABLE `response`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `stud_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -383,15 +335,13 @@ ALTER TABLE `answers`
 -- Constraints for table `counsellors`
 --
 ALTER TABLE `counsellors`
-  ADD CONSTRAINT `fk_coun_id` FOREIGN KEY (`coun_id`) REFERENCES `logins` (`user_id`),
-  ADD CONSTRAINT `fk_coun_type` FOREIGN KEY (`coun_type`) REFERENCES `categories` (`category`);
+  ADD CONSTRAINT `fk_coun_id` FOREIGN KEY (`coun_id`) REFERENCES `logins` (`user_id`);
 
 --
 -- Constraints for table `counsel_req`
 --
 ALTER TABLE `counsel_req`
   ADD CONSTRAINT `fk_coun_id_req` FOREIGN KEY (`coun_id`) REFERENCES `counsellors` (`coun_id`),
-  ADD CONSTRAINT `fk_coun_type_req` FOREIGN KEY (`coun_type`) REFERENCES `categories` (`category`),
   ADD CONSTRAINT `fk_res_id_req` FOREIGN KEY (`res_id`) REFERENCES `response` (`res_id`),
   ADD CONSTRAINT `fk_stud_id_req` FOREIGN KEY (`stud_id`) REFERENCES `students` (`stud_id`);
 
@@ -402,22 +352,9 @@ ALTER TABLE `coun_feedback`
   ADD CONSTRAINT `fk_coun_id_feed` FOREIGN KEY (`coun_id`) REFERENCES `counsellors` (`coun_id`);
 
 --
--- Constraints for table `questions`
---
-ALTER TABLE `questions`
-  ADD CONSTRAINT `fk_quiz_id` FOREIGN KEY (`quiz_id`) REFERENCES `quizes` (`quiz_id`);
-
---
--- Constraints for table `quizes`
---
-ALTER TABLE `quizes`
-  ADD CONSTRAINT `fk_quiz_type` FOREIGN KEY (`quiz_type`) REFERENCES `categories` (`category`);
-
---
 -- Constraints for table `response`
 --
 ALTER TABLE `response`
-  ADD CONSTRAINT `fk_quiz_id_res` FOREIGN KEY (`quiz_id`) REFERENCES `quizes` (`quiz_id`),
   ADD CONSTRAINT `fk_stud_id_res` FOREIGN KEY (`stud_id`) REFERENCES `students` (`stud_id`);
 
 --
@@ -432,13 +369,13 @@ ALTER TABLE `response_list`
 -- Constraints for table `students`
 --
 ALTER TABLE `students`
-  ADD CONSTRAINT `fk_stud_id` FOREIGN KEY (`stud_id`) REFERENCES `logins` (`user_id`);
+  ADD CONSTRAINT `fk_stud_id_students` FOREIGN KEY (`stud_id`) REFERENCES `logins` (`user_id`);
 
 --
 -- Constraints for table `stud_feedback`
 --
 ALTER TABLE `stud_feedback`
-  ADD CONSTRAINT `fk_stud_id_feed` FOREIGN KEY (`stud_id`) REFERENCES `students` (`stud_id`);
+  ADD CONSTRAINT `stud_id_feedback` FOREIGN KEY (`stud_id`) REFERENCES `students` (`stud_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

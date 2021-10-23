@@ -3,13 +3,13 @@ import AlertContext from "../../../context/alert/alertContext";
 import AuthContext from "../../../context/auth/authContext";
 import M from "materialize-css/dist/js/materialize.min.js";
 
-const EditCounsellor = ({ user }) => {
+const EditCounsellor = ({ user, setEdit }) => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
   const { setAlert } = alertContext;
 
-  const { editCounsellor } = authContext;
+  const { editCounsellor, login } = authContext;
 
   useEffect(() => {
     M.AutoInit();
@@ -17,17 +17,28 @@ const EditCounsellor = ({ user }) => {
     //eslint-disable-next-line
   }, []);
 
-  const { coun_name, user_email, coun_phone, coun_gender, coun_type } = user;
+  const {
+    coun_name,
+    user_email,
+    coun_phone,
+    coun_gender,
+    coun_dept,
+    coun_status,
+    user_id,
+  } = user;
 
   const [counsellor, setCounsellor] = useState({
     email: user_email,
     username: coun_name,
     gender: coun_gender,
     phone: coun_phone,
-    type: coun_type,
+    dept: coun_dept,
+    status: coun_status,
+    id: user_id,
+    password: "",
   });
 
-  const { email, username, gender, phone, type } = counsellor;
+  const { email, username, gender, phone, dept, id, password } = counsellor;
 
   const onChange = (e) => {
     M.updateTextFields();
@@ -35,7 +46,7 @@ const EditCounsellor = ({ user }) => {
     setCounsellor({ ...counsellor, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     if (
@@ -43,19 +54,31 @@ const EditCounsellor = ({ user }) => {
       username === "" ||
       gender === "" ||
       phone === "" ||
-      type === ""
+      dept === ""
     ) {
       setAlert("Please enter all fields", "danger");
     } else {
-      editCounsellor({
+      // eslint-disable-next-line
+      const a = await editCounsellor({
         user_email: email,
         role: "counsellor",
-        stud_name: username,
-        stud_gender: gender,
-        stud_phone: phone,
-        coun_type: type,
+        coun_name: username,
+        coun_gender: gender,
+        coun_phone: phone,
+        coun_id: id,
+        user_password: password,
+        coun_dept: dept,
+      });
+
+      await login({
+        user_email: email,
+        user_password: password,
       });
     }
+  };
+
+  const onCancel = () => {
+    setEdit(false);
   };
 
   return (
@@ -71,6 +94,16 @@ const EditCounsellor = ({ user }) => {
             />
             <span className='font-weight-bold'>{coun_name}</span>
             <span className='text-black-50'>{user_email}</span>
+            <span
+              className='font-weight-bold'
+              style={
+                coun_status === "Pending"
+                  ? { color: "red" }
+                  : { color: "green" }
+              }
+            >
+              {coun_status}
+            </span>
             <span> </span>
           </div>
         </div>
@@ -140,15 +173,37 @@ const EditCounsellor = ({ user }) => {
 
           <div className='row' style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
-              <select name='type' value={type} onChange={onChange}>
+              <select name='dept' value={dept} onChange={onChange}>
                 <option value='' defaultValue disabled>
                   Choose your option
                 </option>
-                <option value='academics'>Academic</option>
-                <option value='stress'>Stress</option>
+                <option value='B.Tech'>B.Tech</option>
+                <option value='M.Tech'>M.Tech</option>
+                <option value='B.Des'>B.Des</option>
+                <option value='M.Des'>M.Des</option>
+                <option value='P.hd'>P.hd</option>
               </select>
-              <label>Counselling Type</label>
+              <label>Programme</label>
             </div>
+          </div>
+
+          <div className='row' style={{ width: "300px", margin: "auto" }}>
+            <div className='input-field col s12'>
+              <input
+                id='password'
+                name='password'
+                type='password'
+                className='validate'
+                value={password}
+                onChange={onChange}
+                minLength='3'
+                required
+              />
+              <label htmlFor='password'>Password</label>
+            </div>
+            <span style={{ color: "red" }}>
+              Enter your password or a new one
+            </span>
           </div>
 
           <div className='row'>
@@ -161,6 +216,18 @@ const EditCounsellor = ({ user }) => {
               Save Profile
               <i className='material-icons right' style={{ marginLeft: "0px" }}>
                 check
+              </i>
+            </button>
+
+            <button
+              className='btn waves-effect waves-light'
+              value='Cancel'
+              onClick={onCancel}
+              style={{ marginTop: "2em", borderRadius: "2em", width: "13em" }}
+            >
+              Cancel
+              <i className='material-icons right' style={{ marginLeft: "0px" }}>
+                clear
               </i>
             </button>
           </div>

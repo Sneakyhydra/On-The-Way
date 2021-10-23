@@ -164,7 +164,8 @@ router.post(
         check("coun_name", "Name is required").notEmpty(), // Check the name
         check("coun_gender", "Gender is required").notEmpty(), // Check the gender
         check("coun_phone", "Phone is required").notEmpty(), // Check the phone
-        check("coun_type", "Type is required").notEmpty(), // Check the type
+        check("coun_dept", "Dept is required").notEmpty(), // Check the type
+        check("coun_status", "Status not provided").notEmpty(),
     ],
     async(req, res) => {
         // Check for errors
@@ -182,7 +183,8 @@ router.post(
             coun_name,
             coun_gender,
             coun_phone,
-            coun_type,
+            coun_dept,
+            coun_status
         } = req.body;
 
         // Check role
@@ -199,24 +201,15 @@ router.post(
             return res.status(400).json({ msg: "Gender is not valid" });
         }
 
-        // Get all types from DB
-        const [typeRows] = await promisePool.query(
-            `SELECT category from categories`
-        );
-
-        // Check types
-        const types = [];
-        let found = false;
-        for (let i = 0; i < typeRows.length; i++) {
-            types[i] = typeRows[i].category;
-            if (coun_type === types[i]) {
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
-            return res.status(400).json({ msg: "Counselling type is not valid" });
+        // Check dept
+        if (
+            coun_dept !== "B.Tech" &&
+            coun_dept !== "M.Tech" &&
+            coun_dept !== "B.Des" &&
+            coun_dept !== "M.Des" &&
+            coun_dept !== "P.hd"
+        ) {
+            return res.status(400).json({ msg: "Programme(dept) is not valid" });
         }
 
         // Check if user exists
@@ -254,7 +247,7 @@ router.post(
 
             // Add counsellor details in the DB
             const [insertCounsellor] = await promisePool.query(
-                `INSERT INTO counsellors (coun_id, coun_name, coun_gender, coun_phone, coun_type) VALUES (${user_id},"${coun_name}", "${coun_gender}", "${coun_phone}", "${coun_type}")`
+                `INSERT INTO counsellors (coun_id, coun_name, coun_gender, coun_phone, coun_dept, coun_status) VALUES (${user_id},"${coun_name}", "${coun_gender}", "${coun_phone}", "${coun_dept}", "${coun_status}")`
             );
 
             // Create token

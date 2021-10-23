@@ -22,7 +22,7 @@ const RegisterStudent = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.push("/");
+      history.replace("/dashboard");
     }
 
     if (error === "User already exists") {
@@ -104,172 +104,208 @@ const RegisterStudent = () => {
   };
 
   return (
-    <div className='center' id="sbg">
-     <div className="box"> 
-      <div className='row mt-5'>
-        <h4>Register as a Student</h4>
-      </div>
-      <div className='row'>
-        <form className='col s12' onSubmit={onSubmit}>
-          <div className='row' id="rname" style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <input
-                id='username'
-                name='username'
-                type='text'
-                className='validate'
-                value={username}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='username'>Name</label>
-            </div>
-          </div>
-
-          <div className='row' id="remail" style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <input
-                id='email'
-                name='email'
-                type='text'
-                className='validate'
-                value={email}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='email'>Email</label>
-            </div>
-          </div>
-
-          <div className='row' id="rroll" style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <input
-                id='rollno'
-                name='rollno'
-                type='text'
-                className='validate'
-                value={rollno}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='rollno'>Roll Number</label>
-            </div>
-          </div>
-
-          <div className='row' id="rgender" style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <select name='gender' value={gender} onChange={onChange}>
-                <option value='' defaultValue disabled>
-                  Choose your option
-                </option>
-                <option value='Male'>Male</option>
-                <option value='Female'>Female</option>
-                <option value='Other'>Other</option>
-              </select>
-              <label>Gender</label>
-            </div>
-          </div>
-
-          <div className='row' id="rno" style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <input
-                id='phone'
-                name='phone'
-                type='text'
-                className='validate'
-                value={phone}
-                onChange={onChange}
-                placeholder='+91'
-                required
-              />
-              <label htmlFor='phone' className='active'>
-                Mobile Number
-              </label>
-            </div>
-          </div>
-
-          <div className='row' id="rprog" style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <select name='dept' value={dept} onChange={onChange}>
-                <option value='' defaultValue disabled>
-                  Choose your option
-                </option>
-                <option value='B.Tech'>B.Tech</option>
-                <option value='M.Tech'>M.Tech</option>
-                <option value='B.Des'>B.Des</option>
-                <option value='M.Des'>M.Des</option>
-                <option value='P.hd'>P.hd</option>
-              </select>
-              <label>Programme</label>
-            </div>
-          </div>
-
-          <div className='row' id="rbranch" style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <select name='branch' value={branch} onChange={onChange}>
-                <option value='' defaultValue disabled>
-                  Choose your option
-                </option>
-                <option value='CSE'>
-                  Computer Science and Engineering&#40;CSE&#41;
-                </option>
-                <option value='ECE'>
-                  Electronics and Communication Engineering&#40;ECE&#41;
-                </option>
-                <option value='Des'>Design&#40;Des&#41;</option>
-                <option value='ME'>Mechanical Engineering&#40;ME&#41;</option>
-                <option value='NS'>Natural Sciences&#40;NS&#41;</option>
-              </select>
-              <label>Branch</label>
-            </div>
-          </div>
-
-          <div className='row' id="rpass" style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <input
-                id='password'
-                name='password'
-                type='password'
-                className='validate'
-                value={password}
-                onChange={onChange}
-                minLength='3'
-                required
-              />
-              <label htmlFor='password'>Password</label>
-            </div>
-          </div>
-
-          <div className='row' id="rcpass" style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <input
-                id='password2'
-                name='password2'
-                minLength='3'
-                type='password'
-                className='validate'
-                value={password2}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='password2'>Confirm Password</label>
-            </div>
-          </div>
-
-          <div className='row'>
-            <button
-              className='btn waves-effect waves-light'
-              id="rbtn"
-              type='submit'
-              value='Register'
-              style={{ marginTop: "2em", borderRadius: "2em", width: "10em" }}
+    <div className='center' id='sbg'>
+      <div className='box'>
+        <div className='row mt-5'>
+          <h4>Register as a Student</h4>
+        </div>
+        <div className='row'>
+          <form className='col s12' onSubmit={onSubmit}>
+            <div
+              className='row'
+              id='rname'
+              style={{ width: "300px", margin: "auto" }}
             >
-              Register
-              <i className='material-icons right'>send</i>
-            </button>
-          </div>
-        </form>
-      </div>
+              <div className='input-field col s12'>
+                <input
+                  id='username'
+                  name='username'
+                  type='text'
+                  className='validate'
+                  value={username}
+                  onChange={onChange}
+                  required
+                />
+                <label htmlFor='username'>Name</label>
+              </div>
+            </div>
+
+            <div
+              className='row'
+              id='remail'
+              style={{ width: "300px", margin: "auto" }}
+            >
+              <div className='input-field col s12'>
+                <input
+                  id='email'
+                  name='email'
+                  type='text'
+                  className='validate'
+                  value={email}
+                  onChange={onChange}
+                  required
+                />
+                <label htmlFor='email'>Email</label>
+              </div>
+            </div>
+
+            <div
+              className='row'
+              id='rroll'
+              style={{ width: "300px", margin: "auto" }}
+            >
+              <div className='input-field col s12'>
+                <input
+                  id='rollno'
+                  name='rollno'
+                  type='text'
+                  className='validate'
+                  value={rollno}
+                  onChange={onChange}
+                  required
+                />
+                <label htmlFor='rollno'>Roll Number</label>
+              </div>
+            </div>
+
+            <div
+              className='row'
+              id='rgender'
+              style={{ width: "300px", margin: "auto" }}
+            >
+              <div className='input-field col s12'>
+                <select name='gender' value={gender} onChange={onChange}>
+                  <option value='' defaultValue disabled>
+                    Choose your option
+                  </option>
+                  <option value='Male'>Male</option>
+                  <option value='Female'>Female</option>
+                  <option value='Other'>Other</option>
+                </select>
+                <label>Gender</label>
+              </div>
+            </div>
+
+            <div
+              className='row'
+              id='rno'
+              style={{ width: "300px", margin: "auto" }}
+            >
+              <div className='input-field col s12'>
+                <input
+                  id='phone'
+                  name='phone'
+                  type='text'
+                  className='validate'
+                  value={phone}
+                  onChange={onChange}
+                  placeholder='+91'
+                  required
+                />
+                <label htmlFor='phone' className='active'>
+                  Mobile Number
+                </label>
+              </div>
+            </div>
+
+            <div
+              className='row'
+              id='rprog'
+              style={{ width: "300px", margin: "auto" }}
+            >
+              <div className='input-field col s12'>
+                <select name='dept' value={dept} onChange={onChange}>
+                  <option value='' defaultValue disabled>
+                    Choose your option
+                  </option>
+                  <option value='B.Tech'>B.Tech</option>
+                  <option value='M.Tech'>M.Tech</option>
+                  <option value='B.Des'>B.Des</option>
+                  <option value='M.Des'>M.Des</option>
+                  <option value='P.hd'>P.hd</option>
+                </select>
+                <label>Programme</label>
+              </div>
+            </div>
+
+            <div
+              className='row'
+              id='rbranch'
+              style={{ width: "300px", margin: "auto" }}
+            >
+              <div className='input-field col s12'>
+                <select name='branch' value={branch} onChange={onChange}>
+                  <option value='' defaultValue disabled>
+                    Choose your option
+                  </option>
+                  <option value='CSE'>
+                    Computer Science and Engineering&#40;CSE&#41;
+                  </option>
+                  <option value='ECE'>
+                    Electronics and Communication Engineering&#40;ECE&#41;
+                  </option>
+                  <option value='Des'>Design&#40;Des&#41;</option>
+                  <option value='ME'>Mechanical Engineering&#40;ME&#41;</option>
+                  <option value='NS'>Natural Sciences&#40;NS&#41;</option>
+                </select>
+                <label>Branch</label>
+              </div>
+            </div>
+
+            <div
+              className='row'
+              id='rpass'
+              style={{ width: "300px", margin: "auto" }}
+            >
+              <div className='input-field col s12'>
+                <input
+                  id='password'
+                  name='password'
+                  type='password'
+                  className='validate'
+                  value={password}
+                  onChange={onChange}
+                  minLength='3'
+                  required
+                />
+                <label htmlFor='password'>Password</label>
+              </div>
+            </div>
+
+            <div
+              className='row'
+              id='rcpass'
+              style={{ width: "300px", margin: "auto" }}
+            >
+              <div className='input-field col s12'>
+                <input
+                  id='password2'
+                  name='password2'
+                  minLength='3'
+                  type='password'
+                  className='validate'
+                  value={password2}
+                  onChange={onChange}
+                  required
+                />
+                <label htmlFor='password2'>Confirm Password</label>
+              </div>
+            </div>
+
+            <div className='row'>
+              <button
+                className='btn waves-effect waves-light'
+                id='rbtn'
+                type='submit'
+                value='Register'
+                style={{ marginTop: "2em", borderRadius: "2em", width: "10em" }}
+              >
+                Register
+                <i className='material-icons right'>send</i>
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

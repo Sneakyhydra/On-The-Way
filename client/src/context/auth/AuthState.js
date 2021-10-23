@@ -153,7 +153,65 @@ const AuthState = (props) => {
       // Make a put request at localhost:5000/api/editUsers/admin1234
       const res = await axios.put("api/editUsers/admin1234", formData, config);
 
-      // Dispatch the action to reducer for REGISTER_SUCCESS
+      // Dispatch the action to reducer for EDIT_SUCCESS
+      dispatch({
+        type: EDIT_SUCCESS,
+        payload: res.data,
+      });
+
+      // Load the user after successful edit
+      loadUser();
+    } catch (err) {
+      // Dispatch the action to reducer for EDIT_FAIL
+      dispatch({
+        type: EDIT_FAIL,
+      });
+    }
+  };
+
+  // Edit Counsellor
+  const editCounsellor = async (formData) => {
+    // Set header of the input data
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      // Make a put request at localhost:5000/api/editUsers/counsellor
+      const res = await axios.put("api/editUsers/counsellor", formData, config);
+
+      // Dispatch the action to reducer for EDIT_SUCCESS
+      dispatch({
+        type: EDIT_SUCCESS,
+        payload: res.data,
+      });
+
+      // Load the user after successful edit
+      loadUser();
+    } catch (err) {
+      // Dispatch the action to reducer for EDIT_FAIL
+      dispatch({
+        type: EDIT_FAIL,
+      });
+    }
+  };
+
+  // Edit Student
+  const editStudent = async (formData) => {
+    // Set header of the input data
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      // Make a put request at localhost:5000/api/editUsers/student
+      const res = await axios.put("api/editUsers/student", formData, config);
+
+      // Dispatch the action to reducer for EDIT_SUCCESS
       dispatch({
         type: EDIT_SUCCESS,
         payload: res.data,
@@ -242,6 +300,8 @@ const AuthState = (props) => {
         regAdmin,
         editAdmin,
         setKey,
+        editCounsellor,
+        editStudent,
       }}
     >
       {props.children}

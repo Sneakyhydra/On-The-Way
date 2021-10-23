@@ -46,11 +46,11 @@ router.get("/", auth, async(req, res) => {
     if (role === "counsellor") {
         // Get counsellor details from the DB
         const [rows] = await promisePool.query(
-            `SELECT coun_name, coun_gender, coun_phone, coun_type from counsellors WHERE coun_id='${user_id}'`
+            `SELECT coun_name, coun_gender, coun_phone, coun_dept, coun_status from counsellors WHERE coun_id='${user_id}'`
         );
 
         // Extract the details in variables
-        const { coun_name, coun_gender, coun_phone, coun_type } = rows[0];
+        const { coun_name, coun_gender, coun_phone, coun_dept, coun_status } = rows[0];
 
         // Store the details in the user object
         user = {
@@ -58,7 +58,8 @@ router.get("/", auth, async(req, res) => {
             coun_name,
             coun_gender,
             coun_phone,
-            coun_type,
+            coun_dept,
+            coun_status
         };
     } else if (role === "student") {
         // Get student details from the DB

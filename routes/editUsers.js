@@ -53,7 +53,7 @@ router.put(
             admin_name,
             admin_gender,
             admin_phone,
-            admin_id
+            admin_id,
         } = req.body;
 
         const user = {
@@ -62,8 +62,8 @@ router.put(
             role,
             admin_name,
             admin_gender,
-            admin_phone
-        }
+            admin_phone,
+        };
 
         // Check role
         if (role !== "admin") {
@@ -90,6 +90,207 @@ router.put(
 
             const [update2] = await promisePool.query(
                 `UPDATE admins SET admin_name='${admin_name}', admin_gender='${admin_gender}', admin_phone='${admin_phone}' WHERE admin_id=${admin_id}`
+            );
+        } catch (err) {
+            throw err;
+        }
+
+        res.send(user);
+    }
+);
+
+// @route   PUT api/editUsers/counsellor
+// @desc    Edit counsellor
+// @access  Private
+router.put(
+    "/counsellor", [
+        check("user_email", "email is required").isEmail(), // Check the email
+        check(
+            "user_password",
+            "Please enter a password with 3 or more characters"
+        ).isLength({ min: 3 }), // Check the password
+        check("role", "Role is required").notEmpty(), // Check the role
+        check("coun_name", "Name is required").notEmpty(), // Check the name
+        check("coun_gender", "Gender is required").notEmpty(), // Check the gender
+        check("coun_phone", "Phone is required").notEmpty(), // Check the phone
+        check("coun_id", "ID is required").notEmpty(), // Check the phone
+        check("coun_dept", "Dept is required").notEmpty(), // Check the dept
+    ],
+    async(req, res) => {
+        // Check for errors
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            // Return the errors
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        // Extract info from the body
+        let {
+            user_email,
+            user_password,
+            role,
+            coun_name,
+            coun_gender,
+            coun_phone,
+            coun_id,
+            coun_dept,
+        } = req.body;
+
+        const user = {
+            user_email,
+            user_password,
+            role,
+            coun_name,
+            coun_gender,
+            coun_phone,
+            coun_dept,
+        };
+
+        // Check role
+        if (role !== "counsellor") {
+            return res.status(400).json({ msg: "Role is not valid" });
+        }
+
+        // Check gender
+        if (
+            coun_gender !== "Male" &&
+            coun_gender !== "Female" &&
+            coun_gender !== "Other"
+        ) {
+            return res.status(400).json({ msg: "Gender is not valid" });
+        }
+
+        // Check dept
+        if (
+            coun_dept !== "B.Tech" &&
+            coun_dept !== "M.Tech" &&
+            coun_dept !== "B.Des" &&
+            coun_dept !== "M.Des" &&
+            coun_dept !== "P.hd"
+        ) {
+            return res.status(400).json({ msg: "Programme(dept) is not valid" });
+        }
+
+        // Encrypt Password
+        const salt = await bcrypt.genSalt(10);
+        user_password = await bcrypt.hash(user_password, salt);
+
+        try {
+            const [update] = await promisePool.query(
+                `UPDATE logins SET user_email='${user_email}', user_password='${user_password}' WHERE user_id=${coun_id}`
+            );
+
+            const [update2] = await promisePool.query(
+                `UPDATE counsellors SET coun_name='${coun_name}', coun_gender='${coun_gender}', coun_phone='${coun_phone}', coun_dept='${coun_dept}' WHERE coun_id=${coun_id}`
+            );
+        } catch (err) {
+            throw err;
+        }
+
+        res.send(user);
+    }
+);
+
+// @route   PUT api/editUsers/student
+// @desc    Edit student
+// @access  Private
+router.put(
+    "/student", [
+        check("user_email", "email is required").isEmail(), // Check the email
+        check(
+            "user_password",
+            "Please enter a password with 3 or more characters"
+        ).isLength({ min: 3 }), // Check the password
+        check("role", "Role is required").notEmpty(), // Check the role
+        check("stud_name", "Name is required").notEmpty(), // Check the name
+        check("stud_gender", "Gender is required").notEmpty(), // Check the gender
+        check("stud_phone", "Phone is required").notEmpty(), // Check the phone
+        check("stud_id", "ID is required").notEmpty(), // Check the phone
+        check("stud_dept", "Dept is required").notEmpty(), // Check the dept
+        check("roll_no", "Roll no is required").notEmpty(), // Check the roll no
+        check("stud_branch", "Branch is required").notEmpty(), // Check the branch
+    ],
+    async(req, res) => {
+        // Check for errors
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            // Return the errors
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        // Extract info from the body
+        let {
+            user_email,
+            user_password,
+            role,
+            stud_name,
+            roll_no,
+            stud_gender,
+            stud_phone,
+            stud_dept,
+            stud_branch,
+            stud_id,
+        } = req.body;
+
+        const user = {
+            user_email,
+            user_password,
+            role,
+            stud_name,
+            stud_gender,
+            stud_phone,
+            stud_dept,
+            stud_branch,
+            roll_no
+        };
+
+        // Check role
+        if (role !== "student") {
+            return res.status(400).json({ msg: "Role is not valid" });
+        }
+
+        // Check gender
+        if (
+            stud_gender !== "Male" &&
+            stud_gender !== "Female" &&
+            stud_gender !== "Other"
+        ) {
+            return res.status(400).json({ msg: "Gender is not valid" });
+        }
+
+        // Check dept
+        if (
+            stud_dept !== "B.Tech" &&
+            stud_dept !== "M.Tech" &&
+            stud_dept !== "B.Des" &&
+            stud_dept !== "M.Des" &&
+            stud_dept !== "P.hd"
+        ) {
+            return res.status(400).json({ msg: "Programme(dept) is not valid" });
+        }
+
+        // Check branch
+        if (
+            stud_branch !== "CSE" &&
+            stud_branch !== "ECE" &&
+            stud_branch !== "Des" &&
+            stud_branch !== "ME" &&
+            stud_branch !== "NS"
+        ) {
+            return res.status(400).json({ msg: "Branch is not valid" });
+        }
+
+        // Encrypt Password
+        const salt = await bcrypt.genSalt(10);
+        user_password = await bcrypt.hash(user_password, salt);
+
+        try {
+            const [update] = await promisePool.query(
+                `UPDATE logins SET user_email='${user_email}', user_password='${user_password}' WHERE user_id=${stud_id}`
+            );
+
+            const [update2] = await promisePool.query(
+                `UPDATE students SET stud_name='${stud_name}', stud_gender='${stud_gender}', stud_phone='${stud_phone}', stud_dept='${stud_dept}', stud_branch='${stud_branch}', roll_no='${roll_no}' WHERE stud_id=${stud_id}`
             );
         } catch (err) {
             throw err;

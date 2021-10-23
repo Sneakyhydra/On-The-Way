@@ -22,7 +22,7 @@ const RegisterAdmin = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.push("/");
+      history.replace("/dashboard");
     }
 
     if (error === "User already exists") {
@@ -81,120 +81,144 @@ const RegisterAdmin = () => {
   };
 
   return (
-    <div className='center' id="abg">
-      <div className="box">
-      <div className='row mt-5'>
-        <h4>Register as an Admin</h4>
-      </div>
-      <div className='row'>
-        <form className='col s12' onSubmit={onSubmit}>
-          <div className='row' id="aname" style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <input
-                id='username'
-                name='username'
-                type='text'
-                className='validate'
-                value={username}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='username'>Name</label>
-            </div>
-          </div>
-
-          <div className='row' id="aemail" style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <input
-                id='email'
-                name='email'
-                type='text'
-                className='validate'
-                value={email}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='email'>Email</label>
-            </div>
-          </div>
-
-          <div className='row' id="agender" style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <select name='gender' value={gender} onChange={onChange}>
-                <option value='' defaultValue disabled>
-                  Choose your option
-                </option>
-                <option value='Male'>Male</option>
-                <option value='Female'>Female</option>
-                <option value='Other'>Other</option>
-              </select>
-              <label>Gender</label>
-            </div>
-          </div>
-
-          <div className='row' id="ano" style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <input
-                id='phone'
-                name='phone'
-                type='text'
-                className='validate'
-                value={phone}
-                onChange={onChange}
-                placeholder='+91'
-                required
-              />
-              <label htmlFor='phone' className='active'>
-                Mobile Number
-              </label>
-            </div>
-          </div>
-
-          <div className='row' id="apass" style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <input
-                id='password'
-                name='password'
-                type='password'
-                className='validate'
-                value={password}
-                onChange={onChange}
-                minLength='6'
-                required
-              />
-              <label htmlFor='password'>Password</label>
-            </div>
-          </div>
-
-          <div className='row' id="acpass" style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <input
-                id='password2'
-                name='password2'
-                minLength='6'
-                type='password'
-                className='validate'
-                value={password2}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='password2'>Confirm Password</label>
-            </div>
-          </div>
-
-          <div className='row' id="abtn">
-            <button
-              className='btn waves-effect waves-light'
-              type='submit'
-              value='Register'
-              style={{ marginTop: "2em", borderRadius: "2em", width: "10em" }}
+    <div className='center' id='abg'>
+      <div className='box'>
+        <div className='row mt-5'>
+          <h4>Register as an Admin</h4>
+        </div>
+        <div className='row'>
+          <form className='col s12' onSubmit={onSubmit}>
+            <div
+              className='row'
+              id='aname'
+              style={{ width: "300px", margin: "auto" }}
             >
-              Register
-              <i className='material-icons right'>send</i>
-            </button>
-          </div>
-        </form>
-      </div>
+              <div className='input-field col s12'>
+                <input
+                  id='username'
+                  name='username'
+                  type='text'
+                  className='validate'
+                  value={username}
+                  onChange={onChange}
+                  required
+                />
+                <label htmlFor='username'>Name</label>
+              </div>
+            </div>
+
+            <div
+              className='row'
+              id='aemail'
+              style={{ width: "300px", margin: "auto" }}
+            >
+              <div className='input-field col s12'>
+                <input
+                  id='email'
+                  name='email'
+                  type='text'
+                  className='validate'
+                  value={email}
+                  onChange={onChange}
+                  required
+                />
+                <label htmlFor='email'>Email</label>
+              </div>
+            </div>
+
+            <div
+              className='row'
+              id='agender'
+              style={{ width: "300px", margin: "auto" }}
+            >
+              <div className='input-field col s12'>
+                <select name='gender' value={gender} onChange={onChange}>
+                  <option value='' defaultValue disabled>
+                    Choose your option
+                  </option>
+                  <option value='Male'>Male</option>
+                  <option value='Female'>Female</option>
+                  <option value='Other'>Other</option>
+                </select>
+                <label>Gender</label>
+              </div>
+            </div>
+
+            <div
+              className='row'
+              id='ano'
+              style={{ width: "300px", margin: "auto" }}
+            >
+              <div className='input-field col s12'>
+                <input
+                  id='phone'
+                  name='phone'
+                  type='text'
+                  className='validate'
+                  value={phone}
+                  onChange={onChange}
+                  placeholder='+91'
+                  required
+                />
+                <label htmlFor='phone' className='active'>
+                  Mobile Number
+                </label>
+              </div>
+            </div>
+
+            <div
+              className='row'
+              id='apass'
+              style={{ width: "300px", margin: "auto" }}
+            >
+              <div className='input-field col s12'>
+                <input
+                  id='password'
+                  name='password'
+                  type='password'
+                  className='validate'
+                  value={password}
+                  onChange={onChange}
+                  minLength='6'
+                  required
+                />
+                <label htmlFor='password'>Password</label>
+              </div>
+            </div>
+
+            <div
+              className='row'
+              id='acpass'
+              style={{ width: "300px", margin: "auto" }}
+            >
+              <div className='input-field col s12'>
+                <input
+                  id='password2'
+                  name='password2'
+                  minLength='6'
+                  type='password'
+                  className='validate'
+                  value={password2}
+                  onChange={onChange}
+                  required
+                />
+                <label htmlFor='password2'>Confirm Password</label>
+              </div>
+            </div>
+
+            <div className='row' id='abtn'>
+              <button
+                className='btn waves-effect waves-light'
+                type='submit'
+                value='Register'
+                style={{ marginTop: "2em", borderRadius: "2em", width: "10em" }}
+              >
+                Register
+                <i className='material-icons right'>send</i>
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

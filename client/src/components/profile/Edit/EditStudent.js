@@ -3,13 +3,13 @@ import AlertContext from "../../../context/alert/alertContext";
 import AuthContext from "../../../context/auth/authContext";
 import M from "materialize-css/dist/js/materialize.min.js";
 
-const EditStudent = ({ user }) => {
+const EditStudent = ({ user, setEdit }) => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
   const { setAlert } = alertContext;
 
-  const { editStudent } = authContext;
+  const { editStudent, login } = authContext;
 
   useEffect(() => {
     M.AutoInit();
@@ -22,9 +22,10 @@ const EditStudent = ({ user }) => {
     user_email,
     stud_phone,
     stud_gender,
-    roll_no,
     stud_dept,
     stud_branch,
+    roll_no,
+    user_id,
   } = user;
 
   const [student, setStudent] = useState({
@@ -32,12 +33,15 @@ const EditStudent = ({ user }) => {
     username: stud_name,
     gender: stud_gender,
     phone: stud_phone,
-    roll: roll_no,
     dept: stud_dept,
     branch: stud_branch,
+    rollno: roll_no,
+    id: user_id,
+    password: "",
   });
 
-  const { email, username, gender, phone, roll, dept, branch } = student;
+  const { email, username, gender, phone, dept, branch, id, password, rollno } =
+    student;
 
   const onChange = (e) => {
     M.updateTextFields();
@@ -45,7 +49,7 @@ const EditStudent = ({ user }) => {
     setStudent({ ...student, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     if (
@@ -53,23 +57,35 @@ const EditStudent = ({ user }) => {
       username === "" ||
       gender === "" ||
       phone === "" ||
-      roll_no === "" ||
+      dept === "" ||
       branch === "" ||
-      dept === ""
+      rollno === ""
     ) {
       setAlert("Please enter all fields", "danger");
     } else {
-      editStudent({
+      // eslint-disable-next-line
+      const a = await editStudent({
         user_email: email,
         role: "student",
         stud_name: username,
         stud_gender: gender,
         stud_phone: phone,
-        roll_no: roll,
+        stud_id: id,
+        user_password: password,
         stud_dept: dept,
         stud_branch: branch,
+        roll_no: rollno,
+      });
+
+      await login({
+        user_email: email,
+        user_password: password,
       });
     }
+  };
+
+  const onCancel = () => {
+    setEdit(false);
   };
 
   return (
@@ -90,10 +106,7 @@ const EditStudent = ({ user }) => {
         </div>
 
         <form className='col-md-6' onSubmit={onSubmit}>
-          <div
-            className='row'
-            style={{ width: "300px", margin: "auto", marginTop: "4.5em" }}
-          >
+          <div className='row' style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
               <input
                 id='username'
@@ -125,21 +138,6 @@ const EditStudent = ({ user }) => {
 
           <div className='row' style={{ width: "300px", margin: "auto" }}>
             <div className='input-field col s12'>
-              <input
-                id='rollno'
-                name='rollno'
-                type='text'
-                className='validate'
-                value={roll}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='rollno'>Roll Number</label>
-            </div>
-          </div>
-
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
               <select name='gender' value={gender} onChange={onChange}>
                 <option value='' defaultValue disabled>
                   Choose your option
@@ -149,6 +147,20 @@ const EditStudent = ({ user }) => {
                 <option value='Other'>Other</option>
               </select>
               <label>Gender</label>
+            </div>
+          </div>
+
+          <div className='row' style={{ width: "300px", margin: "auto" }}>
+            <div className='input-field col s12'>
+              <input
+                id='rollno'
+                name='rollno'
+                type='text'
+                className='validate'
+                value={rollno}
+                onChange={onChange}
+              />
+              <label htmlFor='rollno'>Roll Number</label>
             </div>
           </div>
 
@@ -206,6 +218,25 @@ const EditStudent = ({ user }) => {
             </div>
           </div>
 
+          <div className='row' style={{ width: "300px", margin: "auto" }}>
+            <div className='input-field col s12'>
+              <input
+                id='password'
+                name='password'
+                type='password'
+                className='validate'
+                value={password}
+                onChange={onChange}
+                minLength='3'
+                required
+              />
+              <label htmlFor='password'>Password</label>
+            </div>
+            <span style={{ color: "red" }}>
+              Enter your password or a new one
+            </span>
+          </div>
+
           <div className='row'>
             <button
               className='btn waves-effect waves-light'
@@ -216,6 +247,18 @@ const EditStudent = ({ user }) => {
               Save Profile
               <i className='material-icons right' style={{ marginLeft: "0px" }}>
                 check
+              </i>
+            </button>
+
+            <button
+              className='btn waves-effect waves-light'
+              value='Cancel'
+              onClick={onCancel}
+              style={{ marginTop: "2em", borderRadius: "2em", width: "13em" }}
+            >
+              Cancel
+              <i className='material-icons right' style={{ marginLeft: "0px" }}>
+                clear
               </i>
             </button>
           </div>

@@ -3,6 +3,7 @@ import AuthContext from "../../../context/auth/authContext";
 import EditAdmin from "./EditAdmin";
 import EditStudent from "./EditStudent";
 import EditCounsellor from "./EditCounsellor";
+import Preloader from "../../layout/Preloader";
 
 const EditProfile = () => {
   const authContext = useContext(AuthContext);
@@ -21,10 +22,10 @@ const EditProfile = () => {
   const user = authContext.user;
 
   if (loading) {
-    return "loading";
+    return <Preloader />;
   }
   if (!user) {
-    return "loading";
+    return <Preloader />;
   }
 
   const { role } = user;

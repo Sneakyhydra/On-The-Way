@@ -1,13 +1,15 @@
 // Imports
-import { Fragment, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/auth/authContext";
 import DashNavbar from "../layout/DashNavbar";
 import { Tab, Tabs } from "react-bootstrap";
 import ProfileTab from "../tabs/ProfileTab";
-import HistoryTab from "../tabs/HistoryTab";
 
 import Pending from "../tabs/Admin/Pending";
 
+import StudentInfo from "../tabs/Counsellor/StudentInfo";
+
+import Preloader from "../layout/Preloader";
 import M from "materialize-css/dist/js/materialize.min.js";
 
 const Dashboard = () => {
@@ -25,10 +27,10 @@ const Dashboard = () => {
     // eslint-disable-next-line
   }, []);
   if (loading) {
-    return "loading";
+    return <Preloader />;
   }
   if (!user) {
-    return "loading";
+    return <Preloader />;
   }
 
   const { role } = user;
@@ -51,17 +53,46 @@ const Dashboard = () => {
     allTabs = (
       <Tabs
         activeKey={key}
-        className='mb-3'
+        className='mb-3 z-depth-1'
         onSelect={(k) => setKey(k)}
-        style={{ marginTop: "1.1rem" }}
+        style={{
+          marginTop: "1.1rem",
+          boxShadow:
+            "0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%)",
+        }}
         variant='pills'
       >
-        <Tab eventKey='profile' title='Profile'>
+        <Tab eventKey='profile' title='Profile' className='z-depth-0'>
           <ProfileTab />
         </Tab>
-        <Tab eventKey='pending' title='Pending'>
+        <Tab eventKey='pending' title='Pending' className='z-depth-0'>
           <Pending />
         </Tab>
+      </Tabs>
+    );
+  } else if (role === "counsellor") {
+    allTabs = (
+      <Tabs
+        activeKey={key}
+        className='mb-3 z-depth-1'
+        onSelect={(k) => setKey(k)}
+        style={{
+          marginTop: "1.1rem",
+          boxShadow:
+            "0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%)",
+        }}
+        variant='pills'
+      >
+        <Tab eventKey='profile' title='Profile' className='z-depth-0'>
+          <ProfileTab />
+        </Tab>
+        {user.coun_status === "Approved" ? (
+          <Tab eventKey='studentInfo' title='Students' className='z-depth-0'>
+            <StudentInfo />
+          </Tab>
+        ) : (
+          ""
+        )}
       </Tabs>
     );
   }

@@ -6,6 +6,7 @@ import DisplayCounsellor from "./DisplayCounsellor";
 import EditAdmin from "../Edit/EditAdmin";
 import EditStudent from "../Edit/EditStudent";
 import EditCounsellor from "../Edit/EditCounsellor";
+import Preloader from "../../layout/Preloader";
 
 const DisplayProfile = () => {
   const authContext = useContext(AuthContext);
@@ -25,10 +26,10 @@ const DisplayProfile = () => {
   const user = authContext.user;
 
   if (loading) {
-    return "loading";
+    return <Preloader />;
   }
   if (!user) {
-    return "loading";
+    return <Preloader />;
   }
 
   const { role } = user;

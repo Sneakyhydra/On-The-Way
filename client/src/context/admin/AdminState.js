@@ -8,6 +8,10 @@ import {
   CLEAR_ERRORS,
   PENDING_SUCCESS,
   PENDING_FAIL,
+  APPROVE_SUCCESS,
+  APPROVE_FAIL,
+  REJECT_SUCCESS,
+  REJECT_FAIL,
 } from "../types";
 import axios from "axios";
 
@@ -23,7 +27,7 @@ const AdminState = (props) => {
   // Init Reducer
   const [state, dispatch] = useReducer(adminReducer, initialState);
 
-  // Load Questions
+  // Load Pending
   const loadPending = async () => {
     try {
       // Make a get request at localhost:5000/api/admin/pending
@@ -38,6 +42,64 @@ const AdminState = (props) => {
       // Dispatch the action to reducer for REGISTER_FAIL
       dispatch({
         type: PENDING_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
+  // Approve Counsellor
+  const approveCoun = async (counid) => {
+    // Set header of the input data
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const appr = {
+        id: counid,
+        type: "Approved",
+      };
+      await axios.put("api/admin/pending", appr, config);
+
+      dispatch({
+        type: APPROVE_SUCCESS,
+      });
+
+      loadPending();
+    } catch (err) {
+      dispatch({
+        type: APPROVE_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
+  // Reject Counsellor
+  const rejectCoun = async (counid) => {
+    // Set header of the input data
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const reject = {
+        id: counid,
+        type: "Rejected",
+      };
+      await axios.put("api/admin/pending", reject, config);
+
+      dispatch({
+        type: REJECT_SUCCESS,
+      });
+
+      loadPending();
+    } catch (err) {
+      dispatch({
+        type: REJECT_FAIL,
         payload: err.response.data.msg,
       });
     }
@@ -61,6 +123,8 @@ const AdminState = (props) => {
         pending: state.pending,
         clearErrors,
         loadPending,
+        approveCoun,
+        rejectCoun,
       }}
     >
       {props.children}

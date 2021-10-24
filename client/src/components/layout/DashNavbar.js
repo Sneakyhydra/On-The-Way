@@ -115,7 +115,7 @@ const DashNavbar = () => {
 
   return (
     <div className='navbar-fixed'>
-      <nav className='z-depth-1' style={{ backgroundColor: "whitesmoke" }}>
+      <nav className='z-depth-0' style={{ backgroundColor: "white" }}>
         <div className='nav-wrapper'>
           <div style={{ display: "inline-flex" }}>
             <h4 className='title'>Dashboard</h4>

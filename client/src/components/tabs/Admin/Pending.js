@@ -37,7 +37,9 @@ const Pending = () => {
       }}
     >
       {pending.map((item) => {
-        return <CustomCard user={item} setAlert={setAlert} />;
+        return (
+          <CustomCard key={item.coun_id} user={item} setAlert={setAlert} />
+        );
       })}
     </div>
   );

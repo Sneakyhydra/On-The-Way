@@ -25,6 +25,7 @@ const CustomCard = ({ user, setAlert }) => {
           actions={[
             <a
               href='#!'
+              key='1'
               className='waves-effect waves-light btn'
               style={{
                 borderRadius: "10px",
@@ -39,6 +40,7 @@ const CustomCard = ({ user, setAlert }) => {
             </a>,
             <a
               href='#!'
+              key='2'
               className='waves-effect waves-light btn'
               style={{
                 borderRadius: "10px",

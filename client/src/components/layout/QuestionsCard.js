@@ -1,6 +1,7 @@
 import M from "materialize-css/dist/js/materialize.min.js";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AnswersCard from "./AnswersCard";
+import { Card, Row, Col, Icon } from "react-materialize";
 
 const QuestionsCard = ({
   editedQues,
@@ -50,23 +51,36 @@ const QuestionsCard = ({
 
   return (
     <div>
-      <input type='number' name='quesNo' value={quesNo} onChange={changeQues} />
-      <input
-        type='text'
-        name='quesDesc'
-        value={quesDesc}
-        onChange={changeQues}
-      />
-      {answers.map((item) => {
-        return (
-          <AnswersCard
-            key={item.ans_id}
-            answer={item}
-            setAlert={setAlert}
-            editedAns={editedAns}
-          />
-        );
-      })}
+      <Row style={{ margin: "0" }}>
+        <Col m={6} s={12} style={{ width: "200px" }}>
+          <Card
+            actions={[]}
+            className='z-depth-1'
+            closeIcon={<Icon>close</Icon>}
+            revealIcon={<Icon>more_vert</Icon>}
+            textClassName='black-text'
+            title={quesNo.toString()}
+          >
+            <input
+              type='text'
+              name='quesDesc'
+              value={quesDesc}
+              onChange={changeQues}
+            />
+
+            {answers.map((item) => {
+              return (
+                <AnswersCard
+                  key={item.ans_id}
+                  answer={item}
+                  setAlert={setAlert}
+                  editedAns={editedAns}
+                />
+              );
+            })}
+          </Card>
+        </Col>
+      </Row>
     </div>
   );
 };

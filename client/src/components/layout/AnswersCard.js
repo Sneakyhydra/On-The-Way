@@ -1,5 +1,5 @@
 import M from "materialize-css/dist/js/materialize.min.js";
-import { Fragment, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const AnswersCard = ({ setAlert, answer, options, setOptions, editedAns }) => {
   const { ans_id, ans_no, ans_desc, response } = answer;

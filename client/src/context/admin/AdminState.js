@@ -14,6 +14,8 @@ import {
   REJECT_FAIL,
   ANS_LOAD_SUCCESS,
   ANS_LOAD_FAIL,
+  QUIZ_UPDATE_SUCCESS,
+  QUIZ_UPDATE_FAIL,
 } from "../types";
 import axios from "axios";
 
@@ -146,6 +148,31 @@ const AdminState = (props) => {
     }
   };
 
+  const updateQuiz = async (formData) => {
+    // Set header of the input data
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      await axios.put("api/admin/quiz", formData, config);
+
+      dispatch({
+        type: QUIZ_UPDATE_SUCCESS,
+      });
+
+      await loadQues();
+      await loadAns();
+    } catch (err) {
+      dispatch({
+        type: QUIZ_UPDATE_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => {
     // Dispatch the action to reducer for CLEAR_ERRORS
@@ -169,6 +196,7 @@ const AdminState = (props) => {
         rejectCoun,
         loadQues,
         loadAns,
+        updateQuiz,
       }}
     >
       {props.children}

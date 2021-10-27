@@ -10,8 +10,10 @@ const Questions = () => {
   const alertContext = useContext(AlertContext);
   const [loading, setLoading] = useState(true);
 
-  const { questions, loadQues, answers, loadAns } = adminContext;
+  const { questions, loadQues, answers, loadAns, updateQuiz, error } =
+    adminContext;
   const { setAlert } = alertContext;
+  const [ansForUpdate, setAnsForUpdate] = useState(0);
 
   // Load the user when dashboard is rendered
   useEffect(() => {
@@ -20,6 +22,10 @@ const Questions = () => {
     setLoading(false);
     M.AutoInit();
     M.updateTextFields();
+
+    if (error) {
+      setAlert(error, "danger");
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -51,9 +57,33 @@ const Questions = () => {
   editedQues = [...questions];
   editedAns = [...answers];
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const editedQuiz = {
+      questions: editedQues,
+      answers: editedAns,
+    };
+
+    updateQuiz(editedQuiz);
+    setAlert("Quiz Updated", "success");
+  };
+
   return (
-    <form className='col s6'>
-      {questions.map((item) => {
+    <form
+      className='col s12'
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        marginTop: "5em",
+        marginBottom: "5em",
+        width: "1000px",
+        marginLeft: "auto",
+        marginRight: "auto",
+      }}
+      onSubmit={onSubmit}
+    >
+      {editedQues.map((item) => {
         return (
           <QuestionsCard
             editedQues={editedQues}
@@ -61,12 +91,17 @@ const Questions = () => {
             key={item.ques_id}
             question={item}
             setAlert={setAlert}
-            answers={answers.filter((ans) => {
+            ansForUpdate={ansForUpdate}
+            setAnsForUpdate={setAnsForUpdate}
+            answers={editedAns.filter((ans) => {
               return ans.ques_id === item.ques_id;
             })}
           />
         );
       })}
+      <button type='submit' className='waves-effect waves-light btn'>
+        Save
+      </button>
     </form>
   );
 };

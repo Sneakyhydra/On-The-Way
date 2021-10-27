@@ -769,6 +769,14 @@ nav {
     border-radius: 0 0 20px 20px;
 }
 
-.card-action {
+.answer>.card-action {
     margin: auto;
+}
+
+.question {
+    background-color: white;
+}
+
+.answer {
+    background-color: white;
 }

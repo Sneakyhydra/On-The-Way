@@ -34,6 +34,7 @@ const Pending = () => {
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "flex-start",
+        marginTop: "5em",
       }}
     >
       {pending.map((item) => {

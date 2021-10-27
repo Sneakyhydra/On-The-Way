@@ -41,7 +41,15 @@ const Dashboard = () => {
       activeKey={key}
       className='mb-3'
       onSelect={(k) => setKey(k)}
-      style={{ marginTop: "1.1rem" }}
+      style={{
+        marginTop: "1.1rem",
+        position: "fixed",
+        zIndex: "100",
+        backgroundColor: "white",
+        width: "100%",
+        boxShadow:
+          "0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%)",
+      }}
       variant='pills'
     >
       <Tab eventKey='profile' title='Profile'>
@@ -57,9 +65,13 @@ const Dashboard = () => {
         className='mb-3 z-depth-1'
         onSelect={(k) => setKey(k)}
         style={{
-          marginTop: "1.1rem",
+          marginTop: "1rem",
           boxShadow:
             "0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%)",
+          position: "fixed",
+          zIndex: "100",
+          backgroundColor: "white",
+          width: "100%",
         }}
         variant='pills'
       >
@@ -84,6 +96,10 @@ const Dashboard = () => {
           marginTop: "1.1rem",
           boxShadow:
             "0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%)",
+          position: "fixed",
+          zIndex: "100",
+          backgroundColor: "white",
+          width: "100%",
         }}
         variant='pills'
       >

@@ -6,6 +6,7 @@ import { Tab, Tabs } from "react-bootstrap";
 import ProfileTab from "../tabs/ProfileTab";
 
 import Pending from "../tabs/Admin/Pending";
+import Questions from "../tabs/Admin/Questions";
 
 import StudentInfo from "../tabs/Counsellor/StudentInfo";
 
@@ -67,6 +68,9 @@ const Dashboard = () => {
         </Tab>
         <Tab eventKey='pending' title='Pending' className='z-depth-0'>
           <Pending />
+        </Tab>
+        <Tab eventKey='questions' title='Questions' className='z-depth-0'>
+          <Questions />
         </Tab>
       </Tabs>
     );

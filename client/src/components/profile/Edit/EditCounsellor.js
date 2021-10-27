@@ -98,8 +98,10 @@ const EditCounsellor = ({ user, setEdit }) => {
               className='font-weight-bold'
               style={
                 coun_status === "Pending"
-                  ? { color: "red" }
-                  : { color: "green" }
+                  ? { color: "orange", fontWeight: "600" }
+                  : coun_status === "Approved"
+                  ? { color: "green", fontWeight: "600" }
+                  : { color: "red", fontWeight: "600" }
               }
             >
               {coun_status}
@@ -109,7 +111,10 @@ const EditCounsellor = ({ user, setEdit }) => {
         </div>
 
         <form className='col-md-6' onSubmit={onSubmit}>
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
+          <div
+            className='row'
+            style={{ width: "300px", margin: "auto", marginTop: "4em" }}
+          >
             <div className='input-field col s12'>
               <input
                 id='username'

@@ -19,3 +19,5 @@ export const APPROVE_SUCCESS = "APPROVE_SUCCESS";
 export const APPROVE_FAIL = "APPROVE_FAIL";
 export const REJECT_SUCCESS = "REJECT_SUCCESS";
 export const REJECT_FAIL = "REJECT_FAIL";
+export const ANS_LOAD_SUCCESS = "ANS_LOAD_SUCCESS";
+export const ANS_LOAD_FAIL = "ANS_LOAD_FAIL";

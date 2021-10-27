@@ -66,4 +66,54 @@ router.put("/pending", auth, async(req, res) => {
     }
 });
 
+// @route   GET api/admin/questions
+// @desc    Get all questions
+// @access  Private
+router.get("/questions", auth, async(req, res) => {
+    const user_id = req.user_id;
+
+    // Get user_email and role from DB
+    const [rows] = await promisePool.query(
+        `SELECT role from logins WHERE user_id='${user_id}'`
+    );
+
+    // Extract user_email and role from rows
+    const { role } = rows[0];
+
+    if (role === "admin") {
+        // Get admin details from the DB
+        const [rows] = await promisePool.query(
+            `SELECT * from questions`
+        );
+        res.json(rows)
+    } else {
+        res.status(401).json({ msg: "Only admins can access this portal" })
+    }
+});
+
+// @route   GET api/admin/answers
+// @desc    Get all answers
+// @access  Private
+router.get("/answers", auth, async(req, res) => {
+    const user_id = req.user_id;
+
+    // Get user_email and role from DB
+    const [rows] = await promisePool.query(
+        `SELECT role from logins WHERE user_id='${user_id}'`
+    );
+
+    // Extract user_email and role from rows
+    const { role } = rows[0];
+
+    if (role === "admin") {
+        // Get admin details from the DB
+        const [rows] = await promisePool.query(
+            `SELECT * from answers`
+        );
+        res.json(rows)
+    } else {
+        res.status(401).json({ msg: "Only admins can access this portal" })
+    }
+});
+
 module.exports = router;

@@ -12,6 +12,8 @@ import {
   APPROVE_FAIL,
   REJECT_SUCCESS,
   REJECT_FAIL,
+  ANS_LOAD_SUCCESS,
+  ANS_LOAD_FAIL,
 } from "../types";
 import axios from "axios";
 
@@ -20,8 +22,9 @@ const AdminState = (props) => {
   const initialState = {
     loading: true,
     error: null,
-    questions: [],
+    questions: null,
     pending: null,
+    answers: null,
   };
 
   // Init Reducer
@@ -105,6 +108,44 @@ const AdminState = (props) => {
     }
   };
 
+  const loadQues = async () => {
+    try {
+      // Make a get request at localhost:5000/api/admin/questions
+      const res = await axios.get("api/admin/questions");
+
+      // Dispatch the action to reducer for REGISTER_SUCCESS
+      dispatch({
+        type: QUES_LOAD_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      // Dispatch the action to reducer for REGISTER_FAIL
+      dispatch({
+        type: QUES_LOAD_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
+  const loadAns = async () => {
+    try {
+      // Make a get request at localhost:5000/api/admin/questions
+      const res = await axios.get("api/admin/answers");
+
+      // Dispatch the action to reducer for REGISTER_SUCCESS
+      dispatch({
+        type: ANS_LOAD_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      // Dispatch the action to reducer for REGISTER_FAIL
+      dispatch({
+        type: ANS_LOAD_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => {
     // Dispatch the action to reducer for CLEAR_ERRORS
@@ -121,10 +162,13 @@ const AdminState = (props) => {
         error: state.error,
         questions: state.questions,
         pending: state.pending,
+        answers: state.answers,
         clearErrors,
         loadPending,
         approveCoun,
         rejectCoun,
+        loadQues,
+        loadAns,
       }}
     >
       {props.children}

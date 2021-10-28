@@ -10,15 +10,14 @@ const Questions = () => {
   const alertContext = useContext(AlertContext);
   const [loading, setLoading] = useState(true);
 
-  const { questions, loadQues, answers, loadAns, updateQuiz, error } =
-    adminContext;
+  const { quesAns, loadQuesAns, updateQuiz, error } = adminContext;
   const { setAlert } = alertContext;
-  const [ansForUpdate, setAnsForUpdate] = useState(0);
+
+  const [cntChanges, setCntChanges] = useState(0);
 
   // Load the user when dashboard is rendered
   useEffect(() => {
-    loadQues();
-    loadAns();
+    loadQuesAns();
     setLoading(false);
     M.AutoInit();
     M.updateTextFields();
@@ -29,42 +28,28 @@ const Questions = () => {
     // eslint-disable-next-line
   }, []);
 
-  let editedQues = [];
-  let editedAns = [];
+  useEffect(() => {
+    setLoading(false);
+    M.AutoInit();
+    M.updateTextFields();
+  }, [cntChanges]);
 
   if (loading) {
     return <Preloader />;
   }
-  if (!questions) {
-    return <Preloader />;
-  }
-  if (!answers) {
+  if (quesAns.length === 0) {
     return <Preloader />;
   }
 
-  const compare = (a, b) => {
-    if (a.ques_no < b.ques_no) {
-      return -1;
-    }
-    if (a.ques_no > b.ques_no) {
-      return 1;
-    }
-    return 0;
-  };
-
-  questions.sort(compare);
-
-  editedQues = [...questions];
-  editedAns = [...answers];
+  let editedQuesAns = [...quesAns];
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const editedQuiz = {
-      questions: editedQues,
-      answers: editedAns,
-    };
 
-    updateQuiz(editedQuiz);
+    console.log(editedQuesAns);
+    updateQuiz({
+      quesAns: editedQuesAns,
+    });
     setAlert("Quiz Updated", "success");
   };
 
@@ -73,33 +58,46 @@ const Questions = () => {
       className='col s12'
       style={{
         display: "flex",
-        flexWrap: "wrap",
+        flexWrap: "nowrap",
         justifyContent: "center",
-        marginTop: "5em",
-        marginBottom: "5em",
-        width: "1000px",
+        alignItems: "center",
+        flexDirection: "column",
+        marginTop: "3.5em",
+        width: "100%",
+        height: "100%",
         marginLeft: "auto",
         marginRight: "auto",
+        backgroundColor: "#2bc592",
       }}
       onSubmit={onSubmit}
     >
-      {editedQues.map((item) => {
+      {editedQuesAns.map((item, idx) => {
         return (
           <QuestionsCard
-            editedQues={editedQues}
-            editedAns={editedAns}
+            editedQuesAns={editedQuesAns}
             key={item.ques_id}
             question={item}
             setAlert={setAlert}
-            ansForUpdate={ansForUpdate}
-            setAnsForUpdate={setAnsForUpdate}
-            answers={editedAns.filter((ans) => {
-              return ans.ques_id === item.ques_id;
-            })}
+            cntChanges={cntChanges}
+            setCntChanges={setCntChanges}
+            idx={idx}
           />
         );
       })}
-      <button type='submit' className='waves-effect waves-light btn'>
+      <button
+        type='submit'
+        className='waves-effect waves-light btn save-quiz'
+        style={{
+          borderRadius: "2em",
+          width: "10em",
+          border: "2px solid #400279",
+          fontWeight: "bolder",
+          fontSize: "18px",
+          margin: "2em 0",
+          lineHeight: "18px",
+          textTransform: "capitalize",
+        }}
+      >
         Save
       </button>
     </form>

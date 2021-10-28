@@ -3,8 +3,6 @@ import { useReducer } from "react";
 import AdminContext from "./adminContext";
 import adminReducer from "./adminReducer";
 import {
-  QUES_LOAD_SUCCESS,
-  QUES_LOAD_FAIL,
   CLEAR_ERRORS,
   PENDING_SUCCESS,
   PENDING_FAIL,
@@ -12,8 +10,8 @@ import {
   APPROVE_FAIL,
   REJECT_SUCCESS,
   REJECT_FAIL,
-  ANS_LOAD_SUCCESS,
-  ANS_LOAD_FAIL,
+  QUIZ_LOAD_SUCCESS,
+  QUIZ_LOAD_FAIL,
   QUIZ_UPDATE_SUCCESS,
   QUIZ_UPDATE_FAIL,
 } from "../types";
@@ -24,9 +22,8 @@ const AdminState = (props) => {
   const initialState = {
     loading: true,
     error: null,
-    questions: null,
+    quesAns: [],
     pending: null,
-    answers: null,
   };
 
   // Init Reducer
@@ -110,39 +107,20 @@ const AdminState = (props) => {
     }
   };
 
-  const loadQues = async () => {
+  const loadQuesAns = async () => {
     try {
-      // Make a get request at localhost:5000/api/admin/questions
-      const res = await axios.get("api/admin/questions");
+      // Make a get request at localhost:5000/api/admin/quesans
+      const res = await axios.get("api/admin/quesans");
 
       // Dispatch the action to reducer for REGISTER_SUCCESS
       dispatch({
-        type: QUES_LOAD_SUCCESS,
+        type: QUIZ_LOAD_SUCCESS,
         payload: res.data,
       });
     } catch (err) {
       // Dispatch the action to reducer for REGISTER_FAIL
       dispatch({
-        type: QUES_LOAD_FAIL,
-        payload: err.response.data.msg,
-      });
-    }
-  };
-
-  const loadAns = async () => {
-    try {
-      // Make a get request at localhost:5000/api/admin/questions
-      const res = await axios.get("api/admin/answers");
-
-      // Dispatch the action to reducer for REGISTER_SUCCESS
-      dispatch({
-        type: ANS_LOAD_SUCCESS,
-        payload: res.data,
-      });
-    } catch (err) {
-      // Dispatch the action to reducer for REGISTER_FAIL
-      dispatch({
-        type: ANS_LOAD_FAIL,
+        type: QUIZ_LOAD_FAIL,
         payload: err.response.data.msg,
       });
     }
@@ -163,8 +141,7 @@ const AdminState = (props) => {
         type: QUIZ_UPDATE_SUCCESS,
       });
 
-      await loadQues();
-      await loadAns();
+      await loadQuesAns();
     } catch (err) {
       dispatch({
         type: QUIZ_UPDATE_FAIL,
@@ -187,15 +164,13 @@ const AdminState = (props) => {
       value={{
         loading: state.loading,
         error: state.error,
-        questions: state.questions,
+        quesAns: state.quesAns,
         pending: state.pending,
-        answers: state.answers,
         clearErrors,
         loadPending,
         approveCoun,
         rejectCoun,
-        loadQues,
-        loadAns,
+        loadQuesAns,
         updateQuiz,
       }}
     >

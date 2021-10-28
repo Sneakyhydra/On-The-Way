@@ -1,6 +1,4 @@
 import {
-  QUES_LOAD_SUCCESS,
-  QUES_LOAD_FAIL,
   CLEAR_ERRORS,
   PENDING_SUCCESS,
   PENDING_FAIL,
@@ -8,8 +6,8 @@ import {
   APPROVE_FAIL,
   REJECT_SUCCESS,
   REJECT_FAIL,
-  ANS_LOAD_SUCCESS,
-  ANS_LOAD_FAIL,
+  QUIZ_LOAD_SUCCESS,
+  QUIZ_LOAD_FAIL,
   QUIZ_UPDATE_SUCCESS,
   QUIZ_UPDATE_FAIL,
 } from "../types";
@@ -24,33 +22,18 @@ const adminReducer = (state, action) => {
         pending: action.payload,
       };
 
-    case QUES_LOAD_SUCCESS:
+    case QUIZ_LOAD_SUCCESS:
       return {
         ...state,
         loading: false,
-        questions: action.payload,
+        quesAns: action.payload,
       };
 
-    case QUES_LOAD_FAIL:
+    case QUIZ_LOAD_FAIL:
       return {
         ...state,
         loading: false,
-        questions: null,
-        error: action.payload,
-      };
-
-    case ANS_LOAD_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        answers: action.payload,
-      };
-
-    case ANS_LOAD_FAIL:
-      return {
-        ...state,
-        loading: false,
-        answers: null,
+        quesAns: [],
         error: action.payload,
       };
 

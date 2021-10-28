@@ -116,6 +116,75 @@ router.get("/answers", auth, async(req, res) => {
     }
 });
 
+// @route   GET api/admin/quesans
+// @desc    Get all questions and answers
+// @access  Private
+router.get("/quesans", auth, async(req, res) => {
+    const user_id = req.user_id;
+
+    // Get user_email and role from DB
+    const [rows] = await promisePool.query(
+        `SELECT role from logins WHERE user_id='${user_id}'`
+    );
+
+    // Extract user_email and role from rows
+    const { role } = rows[0];
+
+    if (role === "admin") {
+        // Get admin details from the DB
+        const [ques] = await promisePool.query(
+            `SELECT * from questions`
+        );
+
+        const [ans] = await promisePool.query(
+            `SELECT * from answers`
+        );
+
+        let quesAns = [];
+        let quesItem = {
+            ques_id: null,
+            ques_desc: null,
+            ques_no: null,
+            answers: []
+        }
+        let ansItem = {
+            ans_id: null,
+            ans_no: null,
+            ans_desc: null,
+            response: null
+        }
+
+        for (let i = 0; i < ques.length; i++) {
+            quesItem = {
+                ques_id: ques[i].ques_id,
+                ques_desc: ques[i].ques_desc,
+                ques_no: ques[i].ques_no,
+                answers: []
+            }
+
+            for (let j = 0; j < ans.length; j++) {
+                if (ans[j].ques_id === ques[i].ques_id) {
+                    ansItem = {
+                        ans_id: ans[j].ans_id,
+                        ans_no: ans[j].ans_no,
+                        ans_desc: ans[j].ans_desc,
+                        response: ans[j].response,
+                    }
+
+                    quesItem.answers.push(ansItem)
+                }
+            }
+
+            quesAns.push(quesItem);
+        }
+
+        res.send(quesAns)
+
+    } else {
+        res.status(401).json({ msg: "Only admins can access this portal" })
+    }
+});
+
 // @route   PUT api/admin/quiz
 // @desc    Edit quiz
 // @access  Private
@@ -151,22 +220,13 @@ router.put("/quiz", auth, async(req, res) => {
     };
 
     if (role === "admin") {
-        let questions = req.body.questions;
-        let answers = req.body.answers;
+        let quesAns = req.body.quesAns;
 
-        let finalAns = []
-        questions.sort(compareQues);
+        let final = []
+        quesAns.sort(compareQues);
 
-        for (let i = 0; i < questions.length; i++) {
-            let choices = []
-            for (let j = 0; j < answers.length; j++) {
-                if (questions[i].ques_id === answers[j].ques_id) {
-                    choices.push(answers[j])
-                }
-            }
-
-            choices.sort(compareAns);
-            finalAns.push(...choices);
+        for (let i = 0; i < quesAns.length; i++) {
+            quesAns[i].answers.sort(compareAns)
         }
 
         try {
@@ -178,12 +238,11 @@ router.put("/quiz", auth, async(req, res) => {
             const [resAns] = await promisePool.query(resetAnswersSQL);
             const [empQues] = await promisePool.query(emptyQuestionsSQL);
 
-            for (let i = 0; i < questions.length; i++) {
-                const [upQues] = await promisePool.query(`INSERT INTO questions (ques_no, ques_desc, ques_id) VALUES (${questions[i].ques_no}, "${questions[i].ques_desc}", ${questions[i].ques_id})`);
-            }
-
-            for (let i = 0; i < finalAns.length; i++) {
-                const [upAns] = await promisePool.query(`INSERT INTO answers (ques_id, ans_no, ans_desc, response) VALUES (${finalAns[i].ques_id}, ${finalAns[i].ans_no}, "${finalAns[i].ans_desc}", "${finalAns[i].response}")`);
+            for (let i = 0; i < quesAns.length; i++) {
+                await promisePool.query(`INSERT INTO questions (ques_no, ques_desc, ques_id) VALUES (${quesAns[i].ques_no}, "${quesAns[i].ques_desc}", ${quesAns[i].ques_id})`);
+                for (let j = 0; j < quesAns[i].answers.length; j++) {
+                    await promisePool.query(`INSERT INTO answers (ques_id, ans_no, ans_desc, response) VALUES (${quesAns[i].ques_id}, ${quesAns[i].answers[j].ans_no}, "${quesAns[i].answers[j].ans_desc}", "${quesAns[i].answers[j].response}")`);
+                }
             }
 
             res.send("Quiz Updated");

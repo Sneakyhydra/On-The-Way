@@ -4,155 +4,56 @@ import AnswersCard from "./AnswersCard";
 import { Card, Row, Col, Icon } from "react-materialize";
 
 const QuestionsCard = ({
-  editedQues,
-  editedAns,
+  editedQuesAns,
   question,
   setAlert,
-  answers,
-  ansForUpdate,
-  setAnsForUpdate,
+  cntChanges,
+  setCntChanges,
+  idx,
 }) => {
-  const { ques_desc, ques_no, ques_id } = question;
-
+  const { ques_no, ques_desc, ques_id } = question;
   const [ques, setQues] = useState({
+    quesId: ques_id,
     quesNo: ques_no,
     quesDesc: ques_desc,
   });
-
-  const [sQAns, setSQAns] = useState(answers);
-
-  const compare = (a, b) => {
-    if (a.ans_no < b.ans_no) {
-      return -1;
-    }
-    if (a.ans_no > b.ans_no) {
-      return 1;
-    }
-    return 0;
-  };
-
-  const { quesNo, quesDesc } = ques;
+  const { quesId, quesNo, quesDesc } = ques;
 
   const changeQues = (e) => {
     M.updateTextFields();
 
     setQues({ ...ques, [e.target.name]: e.target.value });
+
+    editedQuesAns[idx] = {
+      ...editedQuesAns[idx],
+      [e.target.name]: e.target.value,
+    };
+
+    setCntChanges(cntChanges + 1);
   };
 
   useEffect(() => {
     M.updateTextFields();
     M.AutoInit();
-    answers.sort(compare);
-    setSQAns(answers);
-  }, [sQAns, answers]);
+  }, []);
 
   useEffect(() => {
-    for (let i = 0; i < editedQues.length; i++) {
-      if (editedQues[i].ques_id === ques_id) {
-        editedQues[i].ques_desc = quesDesc;
-        editedQues[i].ques_no = parseInt(quesNo);
-        break;
-      }
-    }
+    editedQuesAns[idx].ques_desc = quesDesc;
+    editedQuesAns[idx].ques_no = parseInt(quesNo);
+
+    console.log(editedQuesAns[idx]);
     //eslint-disable-next-line
   }, [ques]);
 
-  const ansLength = answers.length;
-  const quesLength = editedQues.length;
-
-  const moveUp = () => {
-    if (quesNo === 1) {
-      console.log("do nothing");
-    } else {
-      let idx1, idx2;
-
-      for (let i = 0; i < editedQues.length; i++) {
-        if (editedQues[i].ques_no === ques_no) {
-          idx1 = i;
-        }
-        if (editedQues[i].ques_no === ques_no - 1) {
-          idx2 = i;
-        }
-      }
-
-      [editedQues[idx1].ques_id, editedQues[idx2].ques_id] = [
-        editedQues[idx2].ques_id,
-        editedQues[idx1].ques_id,
-      ];
-
-      console.log(editedQues);
-
-      setAnsForUpdate(ansForUpdate + 1);
-    }
-  };
-  const moveDown = () => {
-    if (quesNo === editedQues.length) {
-      console.log("do nothing");
-    } else {
-      let idx1, idx2;
-
-      for (let i = 0; i < editedQues.length; i++) {
-        if (editedQues[i].ques_no === ques_no) {
-          idx1 = i;
-        }
-        if (editedQues[i].ques_no === ques_no + 1) {
-          idx2 = i;
-        }
-      }
-
-      [editedQues[idx1].ques_id, editedQues[idx2].ques_id] = [
-        editedQues[idx2].ques_id,
-        editedQues[idx1].ques_id,
-      ];
-
-      // [editedQues[idx1].ques_no, editedQues[idx2].ques_no] = [
-      //   editedQues[idx2].ques_no,
-      //   editedQues[idx1].ques_no,
-      // ];
-
-      console.log(editedQues);
-
-      setAnsForUpdate(ansForUpdate + 1);
-    }
-  };
+  const totalQues = editedQuesAns.length;
+  const totalAns = editedQuesAns[idx].answers.length;
 
   return (
     <div>
       <Row style={{ margin: "0" }}>
         <Col m={6} s={12} style={{ width: "1000px" }}>
           <Card
-            actions={[
-              <a
-                href='#!'
-                key='1'
-                className='waves-effect waves-light btn'
-                style={{
-                  borderRadius: "10px",
-                  minWidth: "120px",
-                  width: "auto",
-                  backgroundColor: quesNo === 1 ? "grey" : "#2BC592",
-                  marginRight: "15px",
-                }}
-                onClick={moveUp}
-              >
-                <Icon>arrow_upward</Icon>
-              </a>,
-              <a
-                href='#!'
-                key='2'
-                className='waves-effect waves-light btn'
-                style={{
-                  borderRadius: "10px",
-                  minWidth: "120px",
-                  width: "auto",
-                  backgroundColor: quesNo === quesLength ? "grey" : "#2BC592",
-                  marginLeft: "15px",
-                }}
-                onClick={moveDown}
-              >
-                <Icon>arrow_downward</Icon>
-              </a>,
-            ]}
+            actions={[]}
             className='z-depth-1 question'
             closeIcon={<Icon>close</Icon>}
             revealIcon={<Icon>more_vert</Icon>}
@@ -170,18 +71,20 @@ const QuestionsCard = ({
               <label htmlFor='description'>Description</label>
             </div>
 
-            {answers.map((item) => {
+            {editedQuesAns[idx].answers.map((item, aidx) => {
               return (
                 <AnswersCard
                   key={item.ans_id}
                   answer={item}
                   setAlert={setAlert}
-                  editedAns={editedAns}
-                  totalAns={ansLength}
-                  sQAns={sQAns}
-                  setSQAns={setSQAns}
-                  ansForUpdate={ansForUpdate}
-                  setAnsForUpdate={setAnsForUpdate}
+                  editedQuesAns={editedQuesAns}
+                  cntChanges={cntChanges}
+                  setCntChanges={setCntChanges}
+                  aidx={aidx}
+                  idx={idx}
+                  totalAns={totalAns}
+                  ques={ques}
+                  setQues={setQues}
                 />
               );
             })}

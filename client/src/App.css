@@ -769,14 +769,36 @@ nav {
     border-radius: 0 0 20px 20px;
 }
 
-.answer>.card-action {
-    margin: auto;
-}
-
 .question {
     background-color: white;
 }
 
 .answer {
+    background-color: whitesmoke;
+}
+
+.save-quiz {
+    background-color: #400279;
+    color: white;
+    transition-duration: 0.08s;
+}
+
+.save-quiz:visited {
+    color: white;
+    background-color: #400279;
+}
+
+.save-quiz:hover {
+    color: #400279;
     background-color: white;
+}
+
+.save-quiz:active {
+    color: #400279;
+    background-color: white;
+}
+
+.save-quiz:focus {
+    background-color: #400279;
+    color: white;
 }

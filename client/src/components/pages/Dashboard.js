@@ -13,6 +13,7 @@ import Rejected from "../tabs/Admin/Rejected";
 
 import StudentInfo from "../tabs/Counsellor/StudentInfo";
 import Quiz from "../tabs/Counsellor/Quiz";
+import Chat from "../tabs/Counsellor/Chat";
 
 import Preloader from "../layout/Preloader";
 import M from "materialize-css/dist/js/materialize.min.js";
@@ -142,6 +143,13 @@ const Dashboard = () => {
         {user.coun_status === "Approved" ? (
           <Tab eventKey='quiz' title='Quiz' className='z-depth-0'>
             <Quiz />
+          </Tab>
+        ) : (
+          ""
+        )}
+        {user.coun_status === "Approved" ? (
+          <Tab eventKey='chat' title='Chat' className='z-depth-0'>
+            <Chat />
           </Tab>
         ) : (
           ""

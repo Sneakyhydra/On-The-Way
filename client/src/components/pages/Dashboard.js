@@ -94,8 +94,10 @@ const Dashboard = () => {
               position: "fixed",
               zIndex: "100",
               backgroundColor: "white",
-              width: "auto",
-              marginLeft: "11em",
+              width: "480px",
+              marginLeft: "10.5em",
+              borderBottomLeftRadius: "10px",
+              borderBottomRightRadius: "10px",
             }}
             variant='pills'
           >

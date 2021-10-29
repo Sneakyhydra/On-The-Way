@@ -16,7 +16,7 @@ const CounState = (props) => {
   const initialState = {
     loading: true,
     error: null,
-    quesAns: [],
+    quesAns: null,
     students: null,
   };
 

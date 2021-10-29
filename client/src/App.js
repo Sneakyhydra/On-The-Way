@@ -24,6 +24,7 @@ import Alerts from "./components/layout/Alerts";
 import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alert/AlertState";
 import AdminState from "./context/admin/AdminState";
+import CounState from "./context/counsellor/CounState";
 
 // Global header for axios
 import setAuthToken from "./utils/setAuthToken";
@@ -77,79 +78,81 @@ const App = () => {
     <AuthState>
       <AlertState>
         <AdminState>
-          <Router>
-            <Alerts />
-            <Switch>
-              {/* Home page */}
-              <Route exact path='/'>
-                <Fragment>
+          <CounState>
+            <Router>
+              <Alerts />
+              <Switch>
+                {/* Home page */}
+                <Route exact path='/'>
+                  <Fragment>
+                    <div
+                      style={{
+                        backgroundImage: `url(${background})`,
+                        height: "720px",
+                        backgroundSize: "cover",
+                        fontFamily: "Lucida Sans, sans-serif",
+                      }}
+                    >
+                      <HomeNavbar scrollState={scrollState} />
+                      <Home />
+                    </div>
+                  </Fragment>
+                </Route>
+
+                {/* Login page */}
+                <Route exact path='/login'>
                   <div
                     style={{
-                      backgroundImage: `url(${background})`,
-                      height: "720px",
-                      backgroundSize: "cover",
                       fontFamily: "Lucida Sans, sans-serif",
                     }}
                   >
-                    <HomeNavbar scrollState={scrollState} />
-                    <Home />
+                    <Login />
                   </div>
-                </Fragment>
-              </Route>
+                </Route>
 
-              {/* Login page */}
-              <Route exact path='/login'>
-                <div
-                  style={{
-                    fontFamily: "Lucida Sans, sans-serif",
-                  }}
-                >
-                  <Login />
-                </div>
-              </Route>
+                {/* Register student page */}
+                <Route exact path='/regstudent'>
+                  <div
+                    style={{
+                      fontFamily: "Lucida Sans, sans-serif",
+                    }}
+                  >
+                    <RegisterStudent />
+                  </div>
+                </Route>
 
-              {/* Register student page */}
-              <Route exact path='/regstudent'>
-                <div
-                  style={{
-                    fontFamily: "Lucida Sans, sans-serif",
-                  }}
-                >
-                  <RegisterStudent />
-                </div>
-              </Route>
+                {/* Register counsellor page */}
+                <Route exact path='/regcounsellor'>
+                  <div
+                    style={{
+                      fontFamily: "Lucida Sans, sans-serif",
+                    }}
+                  >
+                    <RegisterCounsellor />
+                  </div>
+                </Route>
 
-              {/* Register counsellor page */}
-              <Route exact path='/regcounsellor'>
-                <div
-                  style={{
-                    fontFamily: "Lucida Sans, sans-serif",
-                  }}
-                >
-                  <RegisterCounsellor />
-                </div>
-              </Route>
+                {/* Dashboard */}
+                <PrivateRoute exact path='/dashboard' component={Dashboard} />
 
-              {/* Dashboard */}
-              <PrivateRoute exact path='/dashboard' component={Dashboard} />
+                {/* Register admin page */}
+                <Route exact path='/ad123'>
+                  <div
+                    style={{
+                      fontFamily: "Lucida Sans, sans-serif",
+                    }}
+                  >
+                    <RegisterAdmin />
+                  </div>
+                </Route>
 
-              {/* Register admin page */}
-              <Route exact path='/ad123'>
-                <div
-                  style={{
-                    fontFamily: "Lucida Sans, sans-serif",
-                  }}
-                >
-                  <RegisterAdmin />
-                </div>
-              </Route>
-
-              {/* Not found */}
-              <Route path='*'>
-                <NotFound />
-              </Route>
-            </Switch>
-          </Router>
+                {/* Not found */}
+                <Route path='*'>
+                  <NotFound />
+                </Route>
+              </Switch>
+            </Router>
+          </CounState>
         </AdminState>
       </AlertState>
     </AuthState>

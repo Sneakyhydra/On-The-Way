@@ -12,6 +12,7 @@ import Students from "../tabs/Admin/Students";
 import Rejected from "../tabs/Admin/Rejected";
 
 import StudentInfo from "../tabs/Counsellor/StudentInfo";
+import Quiz from "../tabs/Counsellor/Quiz";
 
 import Preloader from "../layout/Preloader";
 import M from "materialize-css/dist/js/materialize.min.js";
@@ -41,15 +42,15 @@ const Dashboard = () => {
 
   let allTabs = (
     <Tabs
-      className='mb-3'
+      className='mb-3 z-depth-1'
       style={{
-        marginTop: "1.1rem",
+        marginTop: "1rem",
+        boxShadow:
+          "0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%)",
         position: "fixed",
         zIndex: "100",
         backgroundColor: "white",
         width: "100%",
-        boxShadow:
-          "0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%)",
       }}
       variant='pills'
     >
@@ -118,7 +119,7 @@ const Dashboard = () => {
       <Tabs
         className='mb-3 z-depth-1'
         style={{
-          marginTop: "1.1rem",
+          marginTop: "1rem",
           boxShadow:
             "0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%)",
           position: "fixed",
@@ -134,6 +135,13 @@ const Dashboard = () => {
         {user.coun_status === "Approved" ? (
           <Tab eventKey='studentInfo' title='Students' className='z-depth-0'>
             <StudentInfo />
+          </Tab>
+        ) : (
+          ""
+        )}
+        {user.coun_status === "Approved" ? (
+          <Tab eventKey='quiz' title='Quiz' className='z-depth-0'>
+            <Quiz />
           </Tab>
         ) : (
           ""

@@ -20,7 +20,7 @@ const counReducer = (state, action) => {
       return {
         ...state,
         loading: false,
-        quesAns: [],
+        quesAns: null,
         error: action.payload,
       };
 

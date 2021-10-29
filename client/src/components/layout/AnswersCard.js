@@ -3,14 +3,12 @@ import { useEffect, useState } from "react";
 import { Card, Row, Col, Icon } from "react-materialize";
 
 const AnswersCard = ({
-  setAlert,
   answer,
   editedQuesAns,
   setCntChanges,
   cntChanges,
   aidx,
   idx,
-  totalAns,
   ques,
   setQues,
 }) => {
@@ -21,7 +19,7 @@ const AnswersCard = ({
     ansDesc: ans_desc,
     resp: response,
   });
-  const { ansId, ansNo, ansDesc, resp } = ans;
+  const { ansNo, ansDesc, resp } = ans;
 
   const changeAns = (e) => {
     M.updateTextFields();

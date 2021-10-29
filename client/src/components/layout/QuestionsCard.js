@@ -6,7 +6,6 @@ import { Card, Row, Col, Icon } from "react-materialize";
 const QuestionsCard = ({
   editedQuesAns,
   question,
-  setAlert,
   cntChanges,
   setCntChanges,
   idx,
@@ -17,7 +16,7 @@ const QuestionsCard = ({
     quesNo: ques_no,
     quesDesc: ques_desc,
   });
-  const { quesId, quesNo, quesDesc } = ques;
+  const { quesNo, quesDesc } = ques;
 
   const changeQues = (e) => {
     M.updateTextFields();
@@ -44,9 +43,6 @@ const QuestionsCard = ({
     console.log(editedQuesAns[idx]);
     //eslint-disable-next-line
   }, [ques]);
-
-  const totalQues = editedQuesAns.length;
-  const totalAns = editedQuesAns[idx].answers.length;
 
   return (
     <div>
@@ -76,13 +72,11 @@ const QuestionsCard = ({
                 <AnswersCard
                   key={item.ans_id}
                   answer={item}
-                  setAlert={setAlert}
                   editedQuesAns={editedQuesAns}
                   cntChanges={cntChanges}
                   setCntChanges={setCntChanges}
                   aidx={aidx}
                   idx={idx}
-                  totalAns={totalAns}
                   ques={ques}
                   setQues={setQues}
                 />

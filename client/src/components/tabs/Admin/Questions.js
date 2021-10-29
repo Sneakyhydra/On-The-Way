@@ -77,7 +77,6 @@ const Questions = () => {
             editedQuesAns={editedQuesAns}
             key={item.ques_id}
             question={item}
-            setAlert={setAlert}
             cntChanges={cntChanges}
             setCntChanges={setCntChanges}
             idx={idx}

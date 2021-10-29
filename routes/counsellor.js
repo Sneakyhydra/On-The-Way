@@ -1,5 +1,5 @@
 // Imports
-const express = require("express"); // To create server
+const express = require("express"); // To create router
 const mysql = require("mysql2"); // To connect to the DB
 const auth = require("../middleware/auth"); // Middleware
 
@@ -19,7 +19,7 @@ const promisePool = pool.promise();
 
 // Endpoints
 
-// @route   GET api/admin/students
+// @route   GET api/counsellor/students
 // @desc    Get all students
 // @access  Private
 router.get("/students", auth, async(req, res) => {
@@ -54,7 +54,7 @@ router.get("/students", auth, async(req, res) => {
     }
 });
 
-// @route   GET api/admin/quesans
+// @route   GET api/counsellor/quesans
 // @desc    Get all questions and answers
 // @access  Private
 router.get("/quesans", auth, async(req, res) => {

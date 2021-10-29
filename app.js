@@ -1,5 +1,5 @@
 // Imports
-const express = require("express");
+const express = require("express"); // To create server
 const cors = require("cors"); // Cors middleware
 
 // Init app

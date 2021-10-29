@@ -1,5 +1,5 @@
 // Imports
-const express = require("express"); // To create server
+const express = require("express"); // To create router
 const bcrypt = require("bcryptjs"); // For encrypting password
 const jwt = require("jsonwebtoken"); // For authorization
 const config = require("config"); // For global variables
@@ -122,7 +122,7 @@ router.get("/", auth, async(req, res) => {
 });
 
 // @route   POST api/auth
-// @desc    Auth user and get token
+// @desc    Authorize user and get token
 // @access  Public
 router.post(
     "/", [

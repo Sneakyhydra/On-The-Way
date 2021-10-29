@@ -1,5 +1,5 @@
 // Imports
-const express = require("express"); // To create server
+const express = require("express"); // To create router
 const mysql = require("mysql2"); // To connect to the DB
 const auth = require("../middleware/auth"); // Middleware
 
@@ -166,13 +166,13 @@ router.put("/quiz", auth, async(req, res) => {
             const emptyQuestionsSQL = "DELETE FROM questions WHERE ques_id > 0;";
 
             // Empty the answers table
-            const [empAns] = await promisePool.query(emptyAnswersSQL);
+            await promisePool.query(emptyAnswersSQL);
 
             // Reset auto increment in answers table
-            const [resAns] = await promisePool.query(resetAnswersSQL);
+            await promisePool.query(resetAnswersSQL);
 
             // Empty the questions table
-            const [empQues] = await promisePool.query(emptyQuestionsSQL);
+            await promisePool.query(emptyQuestionsSQL);
 
             // Loop through all questions
             for (let i = 0; i < quesAns.length; i++) {
@@ -252,7 +252,7 @@ router.put("/pending", auth, async(req, res) => {
         // Check if the user is admin
         if (role === "admin") {
             // Update coun_status of counsellor with coun_id=req.body.id
-            const [rows] = await promisePool.query(
+            await promisePool.query(
                 `UPDATE counsellors SET coun_status='${req.body.type}' WHERE coun_id=${req.body.id}`
             );
 
@@ -304,7 +304,7 @@ router.get("/rejected", auth, async(req, res) => {
 });
 
 // @route   GET api/admin/approved
-// @desc    Get all approved counsellors
+// @desc    Get approved counsellors
 // @access  Private
 router.get("/approved", auth, async(req, res) => {
     // Extract user id from req

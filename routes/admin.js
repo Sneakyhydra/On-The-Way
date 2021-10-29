@@ -48,7 +48,7 @@ router.get("/quesans", auth, async(req, res) => {
                 `SELECT * from answers`
             );
 
-            // Init array to be sent to the frontend
+            // Init array to be sent to the client
             let quesAns = [];
 
             // Element of quesAns
@@ -97,7 +97,7 @@ router.get("/quesans", auth, async(req, res) => {
                 quesAns.push(quesItem);
             }
 
-            // Send data to the frontend
+            // Send data to the client
             res.send(quesAns);
         } else {
             // Unauthorized
@@ -221,7 +221,7 @@ router.get("/pending", auth, async(req, res) => {
                 `SELECT * from counsellors WHERE coun_status="Pending"`
             );
 
-            // Send data to the frontend
+            // Send data to the client
             res.json(rows);
         } else {
             // Unauthorized
@@ -291,7 +291,7 @@ router.get("/rejected", auth, async(req, res) => {
                 `SELECT * from counsellors WHERE coun_status="Rejected"`
             );
 
-            // Send data to the frontend
+            // Send data to the client
             res.json(rows);
         } else {
             // Unauthorized
@@ -326,7 +326,7 @@ router.get("/approved", auth, async(req, res) => {
                 `SELECT * from counsellors WHERE coun_status="Approved"`
             );
 
-            // Send data to the frontend
+            // Send data to the client
             res.json(rows);
         } else {
             // Unauthorized
@@ -361,7 +361,7 @@ router.get("/students", auth, async(req, res) => {
                 `SELECT * from students`
             );
 
-            // Send data to the frontend
+            // Send data to the client
             res.json(rows);
         } else {
             // Unauthorized

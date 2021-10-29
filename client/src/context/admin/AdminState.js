@@ -204,7 +204,7 @@ const AdminState = (props) => {
   const loadCounsellors = async () => {
     try {
       // Make a get request at localhost:5000/api/admin/quesans
-      const res = await axios.get("api/admin/counsellors");
+      const res = await axios.get("api/admin/approved");
 
       // Dispatch the action to reducer for REGISTER_SUCCESS
       dispatch({

@@ -234,10 +234,10 @@ const Home = () => {
         <div className='innertxt'>
           <h4>
             {" "}
-            <a href='#!'>About YourDost</a>{" "}
+            <a href='#!'>About On The Way</a>{" "}
           </h4>
           <h3>
-            At YourDOST, we provide an online counseling and emotional support
+            At On The Way, we provide an online counseling and emotional support
             platform designed to foster mental wellness. It anonymously connects
             you with the right expert from our panel consisting of
             psychologists, psychotherapists, counselors, life coaches and career
@@ -254,7 +254,12 @@ const Home = () => {
           <div className='icon'></div>
           <h3>Become an Expert</h3>
           <h4>Listen to others & be their friend in need</h4>
-          <button>BECOME AN EXPERT</button>
+          <NavLink
+            className='waves-effect waves-light btn expert z-depth-1'
+            to='/regcounsellor'
+          >
+            BECOME AN EXPERT
+          </NavLink>
         </div>
         <div className='follow'>
           <h4>

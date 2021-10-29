@@ -20,7 +20,7 @@ const Dashboard = () => {
   const authContext = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
 
-  const { key, setKey, user } = authContext;
+  const { user } = authContext;
 
   // Load the user when dashboard is rendered
   useEffect(() => {
@@ -41,9 +41,7 @@ const Dashboard = () => {
 
   let allTabs = (
     <Tabs
-      activeKey={key}
       className='mb-3'
-      onSelect={(k) => setKey(k)}
       style={{
         marginTop: "1.1rem",
         position: "fixed",
@@ -64,9 +62,7 @@ const Dashboard = () => {
   if (role === "admin") {
     allTabs = (
       <Tabs
-        activeKey={key}
         className='mb-3 z-depth-1'
-        onSelect={(k) => setKey(k)}
         style={{
           marginTop: "1rem",
           boxShadow:
@@ -120,9 +116,7 @@ const Dashboard = () => {
   } else if (role === "counsellor") {
     allTabs = (
       <Tabs
-        activeKey={key}
         className='mb-3 z-depth-1'
-        onSelect={(k) => setKey(k)}
         style={{
           marginTop: "1.1rem",
           boxShadow:

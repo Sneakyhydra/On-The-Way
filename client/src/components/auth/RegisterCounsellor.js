@@ -89,6 +89,10 @@ const RegisterCounsellor = () => {
     }
   };
 
+  if (localStorage.token) {
+    authContext.loadUser();
+  }
+
   return (
     <div className='center' id='cbg'>
       <div className='box'>

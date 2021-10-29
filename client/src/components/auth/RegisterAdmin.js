@@ -80,6 +80,10 @@ const RegisterAdmin = () => {
     }
   };
 
+  if (localStorage.token) {
+    authContext.loadUser();
+  }
+
   return (
     <div className='center' id='abg'>
       <div className='box'>

@@ -103,6 +103,10 @@ const RegisterStudent = () => {
     }
   };
 
+  if (localStorage.token) {
+    authContext.loadUser();
+  }
+
   return (
     <div className='center' id='sbg'>
       <div className='box'>

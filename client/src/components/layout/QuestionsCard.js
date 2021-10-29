@@ -47,7 +47,7 @@ const QuestionsCard = ({
   return (
     <div>
       <Row style={{ margin: "0" }}>
-        <Col m={6} s={12} style={{ width: "1000px" }}>
+        <Col m={6} s={12} style={{ width: "40vw" }}>
           <Card
             actions={[]}
             className='z-depth-1 question'

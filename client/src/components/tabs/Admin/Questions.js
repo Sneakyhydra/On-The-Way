@@ -57,32 +57,37 @@ const Questions = () => {
     <form
       className='col s12'
       style={{
-        display: "flex",
-        flexWrap: "nowrap",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
         marginTop: "3.5em",
         width: "100%",
         height: "100%",
         marginLeft: "auto",
         marginRight: "auto",
         backgroundColor: "#2bc592",
+        textAlign: "center",
       }}
       onSubmit={onSubmit}
     >
-      {editedQuesAns.map((item, idx) => {
-        return (
-          <QuestionsCard
-            editedQuesAns={editedQuesAns}
-            key={item.ques_id}
-            question={item}
-            cntChanges={cntChanges}
-            setCntChanges={setCntChanges}
-            idx={idx}
-          />
-        );
-      })}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-around",
+          alignItems: "flex-start",
+        }}
+      >
+        {editedQuesAns.map((item, idx) => {
+          return (
+            <QuestionsCard
+              editedQuesAns={editedQuesAns}
+              key={item.ques_id}
+              question={item}
+              cntChanges={cntChanges}
+              setCntChanges={setCntChanges}
+              idx={idx}
+            />
+          );
+        })}
+      </div>
       <button
         type='submit'
         className='waves-effect waves-light btn save-quiz'

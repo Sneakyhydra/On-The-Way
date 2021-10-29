@@ -1,21 +1,18 @@
 import { useEffect, useContext, useState } from "react";
 import AdminContext from "../../../context/admin/adminContext";
 import M from "materialize-css/dist/js/materialize.min.js";
-import CustomCard from "../../layout/CustomCard";
-import AlertContext from "../../../context/alert/alertContext";
+import StudCard from "../../layout/StudCard";
 import Preloader from "../../layout/Preloader";
 
-const Pending = () => {
+const Students = () => {
   const adminContext = useContext(AdminContext);
-  const alertContext = useContext(AlertContext);
   const [loading, setLoading] = useState(true);
 
-  const { pending, loadPending } = adminContext;
-  const { setAlert } = alertContext;
+  const { students, loadStudents } = adminContext;
 
   // Load the user when dashboard is rendered
   useEffect(() => {
-    loadPending();
+    loadStudents();
     setLoading(false);
     M.AutoInit();
     M.updateTextFields();
@@ -24,7 +21,7 @@ const Pending = () => {
   if (loading) {
     return <Preloader />;
   }
-  if (!pending) {
+  if (!students) {
     return <Preloader />;
   }
 
@@ -34,16 +31,14 @@ const Pending = () => {
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "flex-start",
-        marginTop: "3.52em",
+        marginTop: "5em",
       }}
     >
-      {pending.map((item) => {
-        return (
-          <CustomCard key={item.coun_id} user={item} setAlert={setAlert} />
-        );
+      {students.map((item) => {
+        return <StudCard key={item.stud_id} user={item} />;
       })}
     </div>
   );
 };
 
-export default Pending;
+export default Students;

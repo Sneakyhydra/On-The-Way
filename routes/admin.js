@@ -256,4 +256,79 @@ router.put("/quiz", auth, async(req, res) => {
 
 });
 
+// @route   GET api/admin/counsellors
+// @desc    Get all approved counsellors
+// @access  Private
+router.get("/counsellors", auth, async(req, res) => {
+    const user_id = req.user_id;
+
+    // Get user_email and role from DB
+    const [rows] = await promisePool.query(
+        `SELECT role from logins WHERE user_id='${user_id}'`
+    );
+
+    // Extract user_email and role from rows
+    const { role } = rows[0];
+
+    if (role === "admin") {
+        // Get admin details from the DB
+        const [rows] = await promisePool.query(
+            `SELECT * from counsellors WHERE coun_status="Approved"`
+        );
+        res.json(rows)
+    } else {
+        res.status(401).json({ msg: "Only admins can access this portal" })
+    }
+});
+
+// @route   GET api/admin/students
+// @desc    Get all students
+// @access  Private
+router.get("/students", auth, async(req, res) => {
+    const user_id = req.user_id;
+
+    // Get user_email and role from DB
+    const [rows] = await promisePool.query(
+        `SELECT role from logins WHERE user_id='${user_id}'`
+    );
+
+    // Extract user_email and role from rows
+    const { role } = rows[0];
+
+    if (role === "admin") {
+        // Get admin details from the DB
+        const [rows] = await promisePool.query(
+            `SELECT * from students`
+        );
+        res.json(rows)
+    } else {
+        res.status(401).json({ msg: "Only admins can access this portal" })
+    }
+});
+
+// @route   GET api/admin/rejected
+// @desc    Get rejected counsellors
+// @access  Private
+router.get("/rejected", auth, async(req, res) => {
+    const user_id = req.user_id;
+
+    // Get user_email and role from DB
+    const [rows] = await promisePool.query(
+        `SELECT role from logins WHERE user_id='${user_id}'`
+    );
+
+    // Extract user_email and role from rows
+    const { role } = rows[0];
+
+    if (role === "admin") {
+        // Get admin details from the DB
+        const [rows] = await promisePool.query(
+            `SELECT * from counsellors WHERE coun_status="Rejected"`
+        );
+        res.json(rows)
+    } else {
+        res.status(401).json({ msg: "Only admins can access this portal" })
+    }
+});
+
 module.exports = router;

@@ -14,6 +14,12 @@ import {
   QUIZ_LOAD_FAIL,
   QUIZ_UPDATE_SUCCESS,
   QUIZ_UPDATE_FAIL,
+  STUD_LOAD_SUCCESS,
+  STUD_LOAD_FAIL,
+  COUN_LOAD_SUCCESS,
+  COUN_LOAD_FAIL,
+  REJECTED_SUCCESS,
+  REJECTED_FAIL,
 } from "../types";
 import axios from "axios";
 
@@ -24,6 +30,9 @@ const AdminState = (props) => {
     error: null,
     quesAns: [],
     pending: null,
+    students: null,
+    counsellors: null,
+    rejected: null,
   };
 
   // Init Reducer
@@ -44,6 +53,25 @@ const AdminState = (props) => {
       // Dispatch the action to reducer for REGISTER_FAIL
       dispatch({
         type: PENDING_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
+  const loadRejected = async () => {
+    try {
+      // Make a get request at localhost:5000/api/admin/pending
+      const res = await axios.get("api/admin/rejected");
+
+      // Dispatch the action to reducer for REGISTER_SUCCESS
+      dispatch({
+        type: REJECTED_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      // Dispatch the action to reducer for REGISTER_FAIL
+      dispatch({
+        type: REJECTED_FAIL,
         payload: err.response.data.msg,
       });
     }
@@ -70,6 +98,8 @@ const AdminState = (props) => {
       });
 
       loadPending();
+      loadCounsellors();
+      loadRejected();
     } catch (err) {
       dispatch({
         type: APPROVE_FAIL,
@@ -99,6 +129,8 @@ const AdminState = (props) => {
       });
 
       loadPending();
+      loadCounsellors();
+      loadRejected();
     } catch (err) {
       dispatch({
         type: REJECT_FAIL,
@@ -150,6 +182,44 @@ const AdminState = (props) => {
     }
   };
 
+  const loadStudents = async () => {
+    try {
+      // Make a get request at localhost:5000/api/admin/quesans
+      const res = await axios.get("api/admin/students");
+
+      // Dispatch the action to reducer for REGISTER_SUCCESS
+      dispatch({
+        type: STUD_LOAD_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      // Dispatch the action to reducer for REGISTER_FAIL
+      dispatch({
+        type: STUD_LOAD_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
+  const loadCounsellors = async () => {
+    try {
+      // Make a get request at localhost:5000/api/admin/quesans
+      const res = await axios.get("api/admin/counsellors");
+
+      // Dispatch the action to reducer for REGISTER_SUCCESS
+      dispatch({
+        type: COUN_LOAD_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      // Dispatch the action to reducer for REGISTER_FAIL
+      dispatch({
+        type: COUN_LOAD_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => {
     // Dispatch the action to reducer for CLEAR_ERRORS
@@ -166,12 +236,18 @@ const AdminState = (props) => {
         error: state.error,
         quesAns: state.quesAns,
         pending: state.pending,
+        students: state.students,
+        counsellors: state.counsellors,
+        rejected: state.rejected,
         clearErrors,
         loadPending,
         approveCoun,
         rejectCoun,
         loadQuesAns,
         updateQuiz,
+        loadStudents,
+        loadCounsellors,
+        loadRejected,
       }}
     >
       {props.children}

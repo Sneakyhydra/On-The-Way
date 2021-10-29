@@ -2,20 +2,15 @@ import { Fragment, useContext } from "react";
 import { Card, Row, Col, Icon } from "react-materialize";
 import AdminContext from "../../context/admin/adminContext";
 
-const CustomCard = ({ user, setAlert }) => {
+const RejectedCard = ({ user, setAlert }) => {
   const { coun_name, coun_gender, coun_phone, coun_dept, coun_id } = user;
   const adminContext = useContext(AdminContext);
 
-  const { approveCoun, rejectCoun } = adminContext;
+  const { approveCoun } = adminContext;
 
   const approve = () => {
     approveCoun(coun_id);
     setAlert("Approved", "success");
-  };
-
-  const reject = () => {
-    rejectCoun(coun_id);
-    setAlert("Rejected", "danger");
   };
 
   return (
@@ -39,21 +34,6 @@ const CustomCard = ({ user, setAlert }) => {
               >
                 <Icon>check</Icon>
               </a>,
-              <a
-                href='#!'
-                key='2'
-                className='waves-effect waves-light btn'
-                style={{
-                  borderRadius: "10px",
-                  minWidth: "120px",
-                  width: "auto",
-                  backgroundColor: "#BA3F1D",
-                  marginLeft: "15px",
-                }}
-                onClick={reject}
-              >
-                <Icon>clear</Icon>
-              </a>,
             ]}
             className='z-depth-1'
             closeIcon={<Icon>close</Icon>}
@@ -75,4 +55,4 @@ const CustomCard = ({ user, setAlert }) => {
   );
 };
 
-export default CustomCard;
+export default RejectedCard;

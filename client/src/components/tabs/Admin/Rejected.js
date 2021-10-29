@@ -1,21 +1,21 @@
 import { useEffect, useContext, useState } from "react";
 import AdminContext from "../../../context/admin/adminContext";
 import M from "materialize-css/dist/js/materialize.min.js";
-import CustomCard from "../../layout/CustomCard";
+import RejectedCard from "../../layout/RejectedCard";
 import AlertContext from "../../../context/alert/alertContext";
 import Preloader from "../../layout/Preloader";
 
-const Pending = () => {
+const Rejected = () => {
   const adminContext = useContext(AdminContext);
   const alertContext = useContext(AlertContext);
   const [loading, setLoading] = useState(true);
 
-  const { pending, loadPending } = adminContext;
+  const { rejected, loadRejected } = adminContext;
   const { setAlert } = alertContext;
 
   // Load the user when dashboard is rendered
   useEffect(() => {
-    loadPending();
+    loadRejected();
     setLoading(false);
     M.AutoInit();
     M.updateTextFields();
@@ -24,7 +24,7 @@ const Pending = () => {
   if (loading) {
     return <Preloader />;
   }
-  if (!pending) {
+  if (!rejected) {
     return <Preloader />;
   }
 
@@ -37,13 +37,13 @@ const Pending = () => {
         marginTop: "3.52em",
       }}
     >
-      {pending.map((item) => {
+      {rejected.map((item) => {
         return (
-          <CustomCard key={item.coun_id} user={item} setAlert={setAlert} />
+          <RejectedCard key={item.coun_id} user={item} setAlert={setAlert} />
         );
       })}
     </div>
   );
 };
 
-export default Pending;
+export default Rejected;

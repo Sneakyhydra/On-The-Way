@@ -813,6 +813,13 @@ nav {
 }
 
 textarea {
-    min-height: 25px !important;
+    min-height: 5em !important;
+    height: 5em !important;
+    margin: 0;
+}
+
+textarea:disabled {
+    min-height: 5em !important;
+    height: 5em !important;
     margin: 0;
 }

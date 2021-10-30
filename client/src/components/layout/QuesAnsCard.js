@@ -12,8 +12,8 @@ const QuesAnsCard = ({ answer }) => {
 
   return (
     <div>
-      <Row style={{ margin: "0" }}>
-        <Col m={6} s={12} style={{ width: "1000px", padding: "0" }}>
+      <Row style={{ margin: "auto", width: "55vw", padding: "0" }}>
+        <Col m={6} s={12} style={{ width: "55vw", padding: "0" }}>
           <Card
             actions={[]}
             className='z-depth-1 answer'

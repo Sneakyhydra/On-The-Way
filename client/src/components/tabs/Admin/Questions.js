@@ -37,7 +37,7 @@ const Questions = () => {
   if (loading) {
     return <Preloader />;
   }
-  if (quesAns.length === 0) {
+  if (!quesAns) {
     return <Preloader />;
   }
 

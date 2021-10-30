@@ -14,7 +14,11 @@ const QuizQuesCard = ({ question, quesAns, idx }) => {
   return (
     <div>
       <Row style={{ margin: "0" }}>
-        <Col m={6} s={12} style={{ width: "40vw" }}>
+        <Col
+          m={6}
+          s={12}
+          style={{ width: "70vw", textAlign: "center", margin: "0" }}
+        >
           <Card
             actions={[]}
             className='z-depth-1 question'

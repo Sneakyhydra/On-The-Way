@@ -1,6 +1,6 @@
 import M from "materialize-css/dist/js/materialize.min.js";
 import { useEffect, useState } from "react";
-import { Card, Row, Col, Icon } from "react-materialize";
+import { Card, Row, Col, Icon, Textarea } from "react-materialize";
 
 const AnswersCard = ({
   answer,
@@ -22,6 +22,7 @@ const AnswersCard = ({
   const { ansNo, ansDesc, resp } = ans;
 
   const changeAns = (e) => {
+    M.AutoInit();
     M.updateTextFields();
 
     setAns({ ...ans, [e.target.name]: e.target.value });
@@ -48,48 +49,50 @@ const AnswersCard = ({
     });
     setCntChanges(cntChanges + 1);
 
-    console.log(editedQuesAns[idx]);
-    console.log(editedQuesAns[idx].answers[aidx]);
+    M.AutoInit();
+    M.updateTextFields();
     //eslint-disable-next-line
   }, [ans]);
 
   return (
-    <div>
-      <Row style={{ margin: "0" }}>
-        <Col m={6} s={12} style={{ width: "1000px", padding: "0" }}>
-          <Card
-            actions={[]}
-            className='z-depth-1 answer'
-            closeIcon={<Icon>close</Icon>}
-            revealIcon={<Icon>more_vert</Icon>}
-            textClassName='black-text'
-            title={"Answer " + ansNo.toString()}
-          >
-            <div className='input-field'>
-              <textarea
-                name='ansDesc'
-                id={ansNo.toString() + "1"}
-                className='materialize-textarea'
-                value={ansDesc}
-                onChange={changeAns}
-              />
-              <label htmlFor={ansNo.toString() + "1"}>Option</label>
-            </div>
+    <Row style={{ margin: "auto", width: "55vw", padding: "0" }}>
+      <Col m={6} s={12} style={{ width: "55vw", padding: "0" }}>
+        <Card
+          actions={[]}
+          className='z-depth-1 answer'
+          closeIcon={<Icon>close</Icon>}
+          revealIcon={<Icon>more_vert</Icon>}
+          textClassName='black-text'
+          title={"Answer " + ansNo.toString()}
+        >
+          <Row>
+            <Textarea
+              name='ansDesc'
+              id={ansNo.toString() + "1"}
+              value={ansDesc}
+              defaultValue={ansDesc}
+              onChange={changeAns}
+              label='Option'
+              data-length={500}
+              placeholder='Option'
+            />
+          </Row>
 
-            <div className='input-field'>
-              <textarea
-                name='resp'
-                id={ansNo.toString() + "2"}
-                className='materialize-textarea'
-                value={resp}
-                onChange={changeAns}
-              />
-              <label htmlFor={ansNo.toString() + "2"}>Response</label>
-            </div>
-          </Card>
-        </Col>
-      </Row>
-    </div>
+          <Row>
+            <Textarea
+              name='resp'
+              id={ansNo.toString() + "2"}
+              value={resp}
+              defaultValue={resp}
+              onChange={changeAns}
+              label='Response'
+              data-length={500}
+              placeholder='Response'
+            />
+          </Row>
+        </Card>
+      </Col>
+    </Row>
   );
 };
 

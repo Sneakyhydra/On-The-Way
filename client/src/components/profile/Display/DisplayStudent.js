@@ -16,7 +16,13 @@ const DisplayStudent = ({ user, setEdit }) => {
     stud_dept,
     stud_branch,
     roll_no,
+    cpi,
   } = user;
+
+  let CPI = cpi;
+  if (!cpi) {
+    CPI = "Not Found";
+  }
 
   const onEdit = () => {
     setEdit(true);
@@ -35,6 +41,7 @@ const DisplayStudent = ({ user, setEdit }) => {
             />
             <span className='font-weight-bold'>{stud_name}</span>
             <span className='text-black-50'>{user_email}</span>
+            <span className='text-black-50'>CPI: {CPI}</span>
             <span> </span>
           </div>
         </div>

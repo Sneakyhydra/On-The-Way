@@ -70,9 +70,10 @@ const Questions = () => {
       <div
         style={{
           display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-around",
-          alignItems: "flex-start",
+          flexWrap: "nowrap",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         {editedQuesAns.map((item, idx) => {

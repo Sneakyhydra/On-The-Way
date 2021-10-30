@@ -9,7 +9,14 @@ const StudCard = ({ user }) => {
     stud_dept,
     stud_branch,
     roll_no,
+    cpi,
   } = user;
+
+  let CPI = cpi;
+
+  if (!cpi) {
+    CPI = "Not found";
+  }
 
   return (
     <Row style={{ margin: "0" }}>
@@ -32,6 +39,8 @@ const StudCard = ({ user }) => {
             {stud_gender}
             <br />
             {stud_phone}
+            <br />
+            Cpi: {CPI}
           </Fragment>
         </Card>
       </Col>

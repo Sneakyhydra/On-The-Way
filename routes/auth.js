@@ -6,6 +6,7 @@ const config = require("config"); // For global variables
 const mysql = require("mysql2"); // To connect to the DB
 const auth = require("../middleware/auth"); // Middleware
 const { check, validationResult } = require("express-validator"); // To check and validate the inputs
+const readXlsxFile = require('read-excel-file/node');
 
 // Init router
 const router = express.Router();
@@ -65,6 +66,8 @@ router.get("/", auth, async(req, res) => {
                 coun_dept,
                 coun_status
             };
+            // Send user object to the client
+            res.json(user);
         } else if (role === "student") {
             // Get student details from the DB
             const [rows] = await promisePool.query(
@@ -90,7 +93,22 @@ router.get("/", auth, async(req, res) => {
                 stud_phone,
                 stud_dept,
                 stud_branch,
+                cpi: null
             };
+
+            readXlsxFile('./CPI_sheet.xlsx').then((cpis) => {
+                // `rows` is an array of rows
+                // each row being an array of cells.
+
+                for (let j = 0; j < cpis.length; j++) {
+                    if (user.roll_no.toLowerCase() === cpis[j][0].toLowerCase()) {
+                        user.cpi = cpis[j][2];
+                        break;
+                    }
+                }
+                // Send data to the client
+                res.json(user);
+            });
         } else if (role === "admin") {
             // Get admin details from the DB
             const [rows] = await promisePool.query(
@@ -111,10 +129,9 @@ router.get("/", auth, async(req, res) => {
                 admin_gender,
                 admin_phone
             };
+            // Send user object to the client
+            res.json(user);
         }
-
-        // Send user object to the client
-        res.json(user);
     } catch (err) {
         // Catch errors
         throw err;

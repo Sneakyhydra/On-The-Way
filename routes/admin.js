@@ -2,6 +2,7 @@
 const express = require("express"); // To create router
 const mysql = require("mysql2"); // To connect to the DB
 const auth = require("../middleware/auth"); // Middleware
+const readXlsxFile = require('read-excel-file/node');
 
 // Init router
 const router = express.Router();
@@ -361,8 +362,34 @@ router.get("/students", auth, async(req, res) => {
                 `SELECT * from students`
             );
 
-            // Send data to the client
-            res.json(rows);
+            let students = [];
+            readXlsxFile('./CPI_sheet.xlsx').then((cpis) => {
+                // `rows` is an array of rows
+                // each row being an array of cells.
+                for (let i = 0; i < rows.length; i++) {
+                    let student = {
+                        stud_id: rows[i].stud_id,
+                        stud_name: rows[i].stud_name,
+                        roll_no: rows[i].roll_no,
+                        stud_gender: rows[i].stud_gender,
+                        stud_phone: rows[i].stud_phone,
+                        stud_dept: rows[i].stud_dept,
+                        stud_branch: rows[i].stud_branch,
+                        cpi: null
+                    };
+
+                    for (let j = 0; j < cpis.length; j++) {
+                        if (student.roll_no.toLowerCase() === cpis[j][0].toLowerCase()) {
+                            student.cpi = cpis[j][2];
+                            break;
+                        }
+                    }
+
+                    students.push(student);
+                }
+                // Send data to the client
+                res.json(students);
+            });
         } else {
             // Unauthorized
             res.status(401).json({ msg: "Only admins can access this portal" });

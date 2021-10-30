@@ -4,6 +4,7 @@ const mysql = require("mysql2"); // To connect with DB
 const bcrypt = require("bcryptjs"); // For encrypting password
 const auth = require("../middleware/auth"); // Middleware
 const { check, validationResult } = require("express-validator"); // To check and validate the inputs
+const readXlsxFile = require('read-excel-file/node');
 
 // Init router
 const router = express.Router();
@@ -289,7 +290,7 @@ router.put(
                 } = req.body;
 
                 // Create user object
-                const user = {
+                let user = {
                     user_email,
                     user_password,
                     role,
@@ -298,7 +299,8 @@ router.put(
                     stud_phone,
                     stud_dept,
                     stud_branch,
-                    roll_no
+                    roll_no,
+                    cpi: null,
                 };
 
                 // Check id
@@ -361,8 +363,19 @@ router.put(
                     throw err;
                 }
 
-                // Send updated details to the client
-                res.send(user);
+                readXlsxFile('./CPI_sheet.xlsx').then((cpis) => {
+                    // `rows` is an array of rows
+                    // each row being an array of cells.
+
+                    for (let j = 0; j < cpis.length; j++) {
+                        if (user.roll_no.toLowerCase() === cpis[j][0].toLowerCase()) {
+                            user.cpi = cpis[j][2];
+                            break;
+                        }
+                    }
+                    // Send data to the client
+                    res.json(user);
+                });
             } else {
                 // Unauthorized
                 res.status(401).json({ msg: "Only students can access this portal" });

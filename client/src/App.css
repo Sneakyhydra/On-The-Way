@@ -811,3 +811,8 @@ nav {
     background-color: #400279;
     color: white;
 }
+
+textarea {
+    min-height: 25px !important;
+    margin: 0;
+}

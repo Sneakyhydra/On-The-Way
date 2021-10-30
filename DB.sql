@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2021 at 09:01 PM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.9
+-- Generation Time: Oct 30, 2021 at 05:34 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,7 +39,10 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`admin_id`, `admin_name`, `admin_gender`, `admin_phone`) VALUES
-(1, 'Developer', 'Male', '1234567890');
+(3, 'Developer', 'Male', '1234567890'),
+(7, 'aasdgaksf', 'Other', '123214'),
+(10, 'Manu', 'Male', '1234567890'),
+(13, 'C', 'Female', '564564846351');
 
 -- --------------------------------------------------------
 
@@ -51,9 +54,35 @@ CREATE TABLE `answers` (
   `ans_id` bigint(20) NOT NULL,
   `ques_id` bigint(20) NOT NULL,
   `ans_no` int(11) NOT NULL,
-  `ans_desc` varchar(255) NOT NULL,
-  `response` varchar(255) NOT NULL
+  `ans_desc` varchar(500) NOT NULL,
+  `response` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `answers`
+--
+
+INSERT INTO `answers` (`ans_id`, `ques_id`, `ans_no`, `ans_desc`, `response`) VALUES
+(1, 1, 1, 'I focus mostly on academics and keep other activities at bare minimum.', 'You are doing well in academics but you should also explore other fields by participating in sports and educational events.'),
+(2, 1, 2, 'I devote balanced time for studies and for other extra-curricular activities.', 'You are managing your time efficiently, keep that up.'),
+(3, 1, 3, 'I spend most of my time on entertainment and study just before deadline.', 'Try removing distractions like social media apps and games from your mobile, it will give you more time to study.'),
+(4, 1, 4, 'I am addicted to playing games, watching movies and social media and can’t focus on academics.', 'You are doing high dopamine producing activities which makes you addicted to them, you should stop doing these activities for about 21 days, it will bring your dopamine levels back to normal then you will be able to focus on studies.'),
+(5, 2, 1, 'I am an extrovert having many friends and actively participate in social events.', 'You actively participate in social events which is very good, try not to involve yourself with bad company and maintain healthy relations.'),
+(6, 2, 2, 'I make friends easily and participate in social events only when necessary.', 'You have a balanced social status and good communication skills. Keep it up and you will have no problem with your peers.'),
+(7, 2, 3, 'I am a bit shy but I try to make friends.', 'It’s good that you are trying to socialize, work on improving your communication skills and confidence and you will be fine. '),
+(8, 2, 4, 'I am an introvert and I mostly stay indoors either studying or playing games.', 'You should go outside and socialize a little more. Participating in events and meeting new people also improves your overall personality.'),
+(9, 3, 1, 'I feel happy and relaxed as I keep my work up to date.', 'You are managing your work and assignments excellently. It will lead to a good mental health and you will enjoy your life in all aspects.'),
+(10, 3, 2, 'I sometimes feel anxious and nervous as I manage to finish my pending work just before deadline.', 'Try putting more time in understanding the concepts clearly so that you can finish your academic work in less time thus improving your mental health. Also develop a habit of prioritizing your assignments and doing them before any other activity.'),
+(11, 3, 3, 'I am mostly in stress and pressure because I can’t keep up with the assignments given.', 'Try putting more time in understanding the concepts clearly so that you can finish your academic work in less time thus improving your mental health. Also develop a habit of prioritizing your assignments and doing them before any other activity.'),
+(12, 3, 4, 'I feel very troubled and depressed because my work keeps piling up.', 'You have a habit of procrastination that’s why your work keeps piling up. Keep your phone away from yourself whenever you receive an assignment and prioritize completing it first.'),
+(13, 4, 1, 'I plan to do a job in a good core company.', 'So you plan to find a job in a good company, then you must focus on keeping your grades up and highly develop your skills in the field of your work.'),
+(14, 4, 2, 'I am planning to go for higher studies after completing bachelors’ degree.', 'So you are planning to go for higher studies after bachelor’s degree, then you should focus on keeping your grades up while parallelly studying for the entrance exam of the field you wish to study in master’s degree.'),
+(15, 4, 3, 'I am planning to build my own startup.', 'If you are planning to build your own startup, you should master your field of expertise and find a group of like-minded people to have a solid foundation for your own company. Also making connections with people already in the same business will help you'),
+(16, 4, 4, 'I am planning to try for a government job', 'If you wish to go for a government job then you should start studying for that job parallelly with your college academics. Start as early as possible to make sure you clear the exam and land the desired job.'),
+(17, 5, 1, 'My friend circle has really good, helpful, fun and like-minded people who supports me whenever I need them.', 'a'),
+(18, 5, 2, 'B', 'b'),
+(19, 5, 3, 'C', 'c'),
+(20, 5, 4, 'D', 'd');
 
 -- --------------------------------------------------------
 
@@ -66,17 +95,20 @@ CREATE TABLE `counsellors` (
   `coun_name` varchar(255) NOT NULL,
   `coun_gender` enum('Male','Female','Other') NOT NULL,
   `coun_phone` varchar(30) NOT NULL,
-  `coun_email` varchar(255) NOT NULL,
-  `coun_dept` varchar(255) NOT NULL,
-  `coun_status` enum('Approved','Pending') NOT NULL
+  `coun_dept` enum('B.Tech','M.Tech','B.Des','M.Des','P.hd') NOT NULL,
+  `coun_status` enum('Approved','Pending','Rejected') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `counsellors`
 --
 
-INSERT INTO `counsellors` (`coun_id`, `coun_name`, `coun_gender`, `coun_phone`, `coun_email`, `coun_dept`, `coun_status`) VALUES
-(3, 'Vansh kumar sharma', 'Male', '0123456789', '', '', 'Approved');
+INSERT INTO `counsellors` (`coun_id`, `coun_name`, `coun_gender`, `coun_phone`, `coun_dept`, `coun_status`) VALUES
+(2, 'Abc', 'Female', '1234567890', 'M.Tech', 'Approved'),
+(4, 'askfhkj', 'Male', '123123', 'M.Des', 'Rejected'),
+(6, 'ajfhakj', 'Female', '1241', 'M.Tech', 'Rejected'),
+(9, 'Manu', 'Male', '1234567890', 'B.Tech', 'Approved'),
+(12, 'B', 'Male', '4643413232', 'M.Des', 'Approved');
 
 -- --------------------------------------------------------
 
@@ -121,10 +153,19 @@ CREATE TABLE `logins` (
 --
 
 INSERT INTO `logins` (`user_id`, `user_email`, `user_password`, `role`) VALUES
-(1, 'dev123@gmail.com', '$2a$10$xY/IcxI1Wl5wscELiY1Kw.4ZPPrZybdIVqb0oafiLtaM3o.g2YTkC', 'admin'),
-(2, 'abc123@gmail.com', '$2a$10$9Q365rP9IkNArWEh2kEEyeAmd1XuKoe1MOlUDbeRIvkmnRdXA8MFS', 'student'),
-(3, 'vansh123@gmail.com', '$2a$10$mlA8UIgj62OTQGVZ8m181.tH0Z8mRWC28y3r4gJJ/rYspBDWAFq/W', 'counsellor'),
-(4, 'siddhart123@gmail.com', '$2a$10$NA.zDvHn3mIWukhJO3OR8.dhRF4tv1aTYtw4LREPxXEa9s8TrXX4e', 'student');
+(1, 'dhruvrishishwar2@gmail.com', '$2a$10$cc7yBuZQOS56aXbPwe0gEeE/hGKYK1jbVbm/Uxh9bhvS24DMjBmAy', 'student'),
+(2, 'abc@gmail.com', '$2a$10$7yNoPWBNM39EmntpKU2hxehe7pX4moIl3xgo2S1FOKYJD0QdaA.3G', 'counsellor'),
+(3, 'dev@gmail.com', '$2a$10$QPmRWe5bSMQ/yPamIw89he.o.jrDVCe9pXV3.2rl.tyQ/q1XqECGa', 'admin'),
+(4, 'akdlfh@gmail.com', '$2a$10$V2dx.wPE7ec0kYjMmTrQU.hcu95/cek1SMxOUZ0M6m5UEhLidC2Wm', 'counsellor'),
+(5, 'kdsfk@gmail.com', '$2a$10$BssCQ.oes9vGXlh3eipNfe/yx7GLLbys/.QQtjI9B5hsVZV7QVAJi', 'student'),
+(6, 'jdkfha@gmail.com', '$2a$10$DJwTh0oVJR3.tKMr9cQ5henfNYGrBszJPnNeWUSUlTxgbCamG2C4a', 'counsellor'),
+(7, 'jdafhlj@gmail.com', '$2a$10$ZfURstiOyM7IeaCR76XWSeJR8BbtsLAk.EusOwl93EqQvJKkan0EW', 'admin'),
+(8, 'dhruvrishishwar@gmail.com', '$2a$10$j/ohYEwWy/ra.rhP0DHWZe9lMh9.JW3SKfUgFwM5Gw8ep2Ob.sASm', 'student'),
+(9, 'rishishwarmanu1@gmail.com', '$2a$10$f.QcnmiiOkFQbirX/97eY.qmZCOezqx0peEWRvYnro24RVgEzZDXu', 'counsellor'),
+(10, 'rishishwarmanu21@gmail.com', '$2a$10$syjQI5eW5I2S0i5JRB8Yf.LP.0SHzPLR/O0cxxT/V6eL.tOCefNCa', 'admin'),
+(11, 'a@mail.com', '$2a$10$I3VymQse5iHAVUo3b6RRE.f4M01tgut9k87Xj6uyxjTrsbhDZ2xUO', 'student'),
+(12, 'b@mail.com', '$2a$10$BLqMaeBO8HTN/7CD8TMBFu86nwRigciYi.I..YWdKI4krdg4q7gLG', 'counsellor'),
+(13, 'c@mail.com', '$2a$10$EimHAc6ZQjL8tWgqnFE11eTv5rFGzDBlT31pLmvA8zrIb95fYHtie', 'admin');
 
 -- --------------------------------------------------------
 
@@ -134,9 +175,20 @@ INSERT INTO `logins` (`user_id`, `user_email`, `user_password`, `role`) VALUES
 
 CREATE TABLE `questions` (
   `ques_id` bigint(20) NOT NULL,
-  `ques_desc` varchar(255) NOT NULL,
+  `ques_desc` varchar(500) NOT NULL,
   `ques_no` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`ques_id`, `ques_desc`, `ques_no`) VALUES
+(1, 'How good is your time management with respect to academics and other activities?', 1),
+(2, 'How much do you socialize with people around you?', 2),
+(3, 'How would you describe your mental state with respect to academics?', 3),
+(4, 'What are your plans after completing Bachelor’s degree?', 4),
+(5, 'How would you describe your friend circle?', 5);
 
 -- --------------------------------------------------------
 
@@ -183,8 +235,10 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`stud_id`, `stud_name`, `roll_no`, `stud_gender`, `stud_phone`, `stud_dept`, `stud_branch`) VALUES
-(1, 'Sparsh kumar', '20bcs2xx', 'Male', '1234567890', 'B.Tech', 'CSE'),
-(2, 'siddharth', '20bcsxxx', 'Male', '0987612345', 'B.Tech', 'CSE');
+(1, 'Dhruv Rishishwar', '20BCS002', 'Male', '6268086918', 'B.Tech', 'CSE'),
+(5, 'dsjfahfjl', 'dakfhkj', 'Male', '12345', 'B.Tech', 'CSE'),
+(8, 'Dhruv', '20bcs075', 'Male', '6268086918', 'B.Tech', 'CSE'),
+(11, 'A', 'sdjfisdajfo', 'Other', '995356581231', 'M.Des', 'CSE');
 
 -- --------------------------------------------------------
 
@@ -283,7 +337,7 @@ ALTER TABLE `stud_feedback`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `ans_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ans_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `counsel_req`
@@ -295,13 +349,13 @@ ALTER TABLE `counsel_req`
 -- AUTO_INCREMENT for table `logins`
 --
 ALTER TABLE `logins`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `ques_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ques_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `response`
@@ -313,7 +367,7 @@ ALTER TABLE `response`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `stud_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `stud_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables

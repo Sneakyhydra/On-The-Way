@@ -5,7 +5,7 @@ import QuizQuesCard from "../../layout/QuizQuesCard";
 import AlertContext from "../../../context/alert/alertContext";
 import Preloader from "../../layout/Preloader";
 
-const Questions = () => {
+const Quiz = () => {
   const counContext = useContext(CounContext);
   const alertContext = useContext(AlertContext);
   const [loading, setLoading] = useState(true);
@@ -69,4 +69,4 @@ const Questions = () => {
   );
 };
 
-export default Questions;
+export default Quiz;

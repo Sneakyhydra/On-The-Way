@@ -97,8 +97,29 @@ router.get("/", auth, async(req, res) => {
                 stud_phone,
                 stud_dept,
                 stud_branch,
-                cpi: null
+                cpi: null,
+                response: null,
             };
+
+            const [respID] = await promisePool.query(
+                `SELECT res_id FROM response WHERE stud_id=${user_id}`
+            );
+            const res_id = respID[respID.length - 1].res_id;
+
+            const [resps] = await promisePool.query(
+                `SELECT ans_id FROM response_list WHERE res_id=${res_id}`
+            );
+
+            let finalResp = "";
+
+            for (let i = 0; i < resps.length; i++) {
+                const [temp] = await promisePool.query(
+                    `SELECT response FROM answers WHERE ans_id=${resps[i].ans_id}`
+                );
+                finalResp = finalResp + " " + temp[0].response;
+            }
+
+            user.response = finalResp;
 
             readXlsxFile('./CPI_sheet.xlsx').then((cpis) => {
                 // `rows` is an array of rows
@@ -111,7 +132,7 @@ router.get("/", auth, async(req, res) => {
                     }
                 }
                 // Send data to the client
-                res.json(user);
+                res.send(user);
             });
         } else if (role === "admin") {
             // Get admin details from the DB

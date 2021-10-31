@@ -15,6 +15,8 @@ import StudentInfo from "../tabs/Counsellor/StudentInfo";
 import Quiz from "../tabs/Counsellor/Quiz";
 import Chat from "../tabs/Counsellor/Chat";
 
+import StudQuiz from "../tabs/Student/Quiz";
+
 import Preloader from "../layout/Preloader";
 import M from "materialize-css/dist/js/materialize.min.js";
 
@@ -154,6 +156,29 @@ const Dashboard = () => {
         ) : (
           ""
         )}
+      </Tabs>
+    );
+  } else if (role === "student") {
+    allTabs = (
+      <Tabs
+        className='mb-3 z-depth-1'
+        style={{
+          marginTop: "1rem",
+          boxShadow:
+            "0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%)",
+          position: "fixed",
+          zIndex: "100",
+          backgroundColor: "white",
+          width: "100%",
+        }}
+        variant='pills'
+      >
+        <Tab eventKey='profile' title='Profile' className='z-depth-0'>
+          <ProfileTab />
+        </Tab>
+        <Tab eventKey='studquiz' title='Quiz' className='z-depth-0'>
+          <StudQuiz />
+        </Tab>
       </Tabs>
     );
   }

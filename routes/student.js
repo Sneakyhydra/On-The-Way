@@ -3,6 +3,7 @@ const express = require("express"); // To create router
 const mysql = require("mysql2"); // To connect to the DB
 const auth = require("../middleware/auth"); // Middleware
 const readXlsxFile = require('read-excel-file/node');
+const { check, validationResult } = require("express-validator"); // To check and validate the inputs
 
 // Init router
 const router = express.Router();
@@ -22,6 +23,7 @@ const promisePool = pool.promise();
 /**
  * Get all questions and answersw without responses
  * Get all approved counsellors
+ * Submit quiz
  */
 
 // @route   GET api/student/quesans
@@ -145,5 +147,58 @@ router.get("/counsellors", auth, async(req, res) => {
         throw err;
     }
 });
+
+// @route   POST api/student/submitQuiz
+// @desc    Submit quiz
+// @access  Public
+router.post(
+    "/submitQuiz", [auth,
+        check("quesAns", "Question answer is required").exists(), // Check quesAns
+    ],
+    async(req, res) => {
+        // Extract user id from req
+        const user_id = req.user_id;
+
+        try {
+            // Get role of the user from DB
+            const [rows] = await promisePool.query(
+                `SELECT role from logins WHERE user_id='${user_id}'`
+            );
+
+            // Extract role from rows
+            const { role } = rows[0];
+
+            // Check if the user is student
+            if (role === "student") {
+                const quesAns = req.body.quesAns;
+                const stud_id = req.body.stud_id;
+                const res_date = req.body.date.toString();
+
+                await promisePool.query(
+                    `INSERT INTO response (stud_id, res_date) VALUES (${stud_id}, "${res_date}")`
+                );
+
+                const [resp] = await promisePool.query(
+                    `SELECT res_id FROM response WHERE res_date="${res_date}"`
+                );
+                res_id = resp[0].res_id;
+
+                for (var ques in quesAns) {
+                    await promisePool.query(
+                        `INSERT INTO response_list (res_id, ques_id, ans_id) VALUES (${res_id}, ${parseInt( ques )}, ${quesAns[ques]})`
+                    );
+                }
+
+                res.send("Submitted Successfully");
+            } else {
+                // Unauthorized
+                res.status(401).json({ msg: "Only students can access this portal" });
+            }
+        } catch (err) {
+            // Catch errors
+            throw err;
+        }
+    }
+);
 
 module.exports = router;

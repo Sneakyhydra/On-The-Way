@@ -17,6 +17,7 @@ const DisplayStudent = ({ user, setEdit }) => {
     stud_branch,
     roll_no,
     cpi,
+    response,
   } = user;
 
   let CPI = cpi;
@@ -29,7 +30,10 @@ const DisplayStudent = ({ user, setEdit }) => {
   };
 
   return (
-    <div className='container rounded bg-white mt-3 mb-5'>
+    <div
+      className='container rounded bg-white mt-3 mb-5'
+      style={{ width: "100%" }}
+    >
       <div className='row'>
         <div className='col-md-3 border-right'>
           <div className='d-flex flex-column align-items-center text-center p-3 py-5'>
@@ -46,7 +50,7 @@ const DisplayStudent = ({ user, setEdit }) => {
           </div>
         </div>
 
-        <div className='col-md-6'>
+        <div className='col-md-5'>
           <div
             className='row'
             style={{ width: "300px", margin: "auto", marginTop: "4.5em" }}
@@ -169,6 +173,20 @@ const DisplayStudent = ({ user, setEdit }) => {
             >
               Edit Profile
             </button>
+          </div>
+        </div>
+
+        <div class='col-md-4'>
+          <div class='p-3 py-5'>
+            <div
+              class='d-flex justify-content-between align-items-center experience'
+              style={{ flexDirection: "column" }}
+            >
+              <h5>Response from last quiz</h5>
+              <br />
+              <p>{response}</p>
+            </div>
+            <br />
           </div>
         </div>
       </div>

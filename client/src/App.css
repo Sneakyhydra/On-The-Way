@@ -104,7 +104,7 @@ nav {
 }
 
 .regstudent:hover {
-    opacity: 0.7;
+    opacity: 0.85;
 }
 
 
@@ -122,7 +122,7 @@ nav {
 }
 
 .regcounsellor:hover {
-    opacity: 0.7;
+    opacity: 0.85;
 }
 
 .btn {
@@ -818,4 +818,9 @@ nav {
 
 .grow:hover {
     transform: scale(1.025);
+}
+
+.greyOnHover:hover {
+    opacity: 0.95;
+    background-color: rgb(246, 250, 253);
 }

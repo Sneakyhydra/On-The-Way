@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { Card, Row, Col, Icon } from "react-materialize";
 
 const CounFeedCard = ({ feed }) => {

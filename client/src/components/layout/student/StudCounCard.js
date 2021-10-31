@@ -1,10 +1,8 @@
-import { Fragment, useContext } from "react";
+import { Fragment } from "react";
 import { Card, Row, Col, Icon } from "react-materialize";
-import StudContext from "../../../context/student/studContext";
 
 const StudCounCard = ({ user, setAlert }) => {
-  const { coun_name, coun_gender, coun_phone, coun_dept, coun_id } = user;
-  const studContext = useContext(StudContext);
+  const { coun_name, coun_gender, coun_phone, coun_dept } = user;
 
   return (
     <div style={{ marginTop: "5rem" }}>

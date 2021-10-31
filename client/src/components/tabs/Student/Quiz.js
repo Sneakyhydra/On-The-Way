@@ -31,10 +31,6 @@ const StudQuiz = () => {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    console.log(quiz);
-  }, [quiz]);
-
   if (loading) {
     return <Preloader />;
   }

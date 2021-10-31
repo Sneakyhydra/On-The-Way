@@ -176,15 +176,30 @@ const DisplayStudent = ({ user, setEdit }) => {
           </div>
         </div>
 
-        <div class='col-md-4'>
-          <div class='p-3 py-5'>
+        <div className='col-md-4'>
+          <div className='p-3 py-5'>
             <div
-              class='d-flex justify-content-between align-items-center experience'
+              className='d-flex justify-content-between align-items-center experience'
               style={{ flexDirection: "column" }}
             >
-              <h5>Response from last quiz</h5>
+              {response.length > 0 ? (
+                <h5>Response from last quiz</h5>
+              ) : (
+                "Take the quiz for a personal response"
+              )}
               <br />
-              <p>{response}</p>
+              <ul>
+                {response.length > 0
+                  ? response.map((item, idx) => {
+                      return (
+                        <div key={idx}>
+                          <li>{item}</li>
+                          <br />
+                        </div>
+                      );
+                    })
+                  : ""}
+              </ul>
             </div>
             <br />
           </div>

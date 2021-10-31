@@ -101,24 +101,27 @@ router.get("/", auth, async(req, res) => {
                 response: null,
             };
 
+            let finalResp = [];
+
             const [respID] = await promisePool.query(
                 `SELECT res_id FROM response WHERE stud_id=${user_id}`
             );
-            const res_id = respID[respID.length - 1].res_id;
+            if (respID.length > 0) {
+                const res_id = respID[respID.length - 1].res_id;
 
-            const [resps] = await promisePool.query(
-                `SELECT ans_id FROM response_list WHERE res_id=${res_id}`
-            );
-
-            let finalResp = "";
-
-            for (let i = 0; i < resps.length; i++) {
-                const [temp] = await promisePool.query(
-                    `SELECT response FROM answers WHERE ans_id=${resps[i].ans_id}`
+                const [resps] = await promisePool.query(
+                    `SELECT ans_id FROM response_list WHERE res_id=${res_id}`
                 );
-                finalResp = finalResp + " " + temp[0].response;
-            }
 
+                for (let i = 0; i < resps.length; i++) {
+                    const [temp] = await promisePool.query(
+                        `SELECT response FROM answers WHERE ans_id=${resps[i].ans_id}`
+                    );
+                    if (temp.length > 0) {
+                        finalResp.push(temp[0].response);
+                    }
+                }
+            }
             user.response = finalResp;
 
             readXlsxFile('./CPI_sheet.xlsx').then((cpis) => {

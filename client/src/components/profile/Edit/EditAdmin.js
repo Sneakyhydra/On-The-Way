@@ -40,11 +40,23 @@ const EditAdmin = ({ user, setEdit }) => {
     setAdmin({ ...admin, [e.target.name]: e.target.value });
   };
 
+  const validateEmail = (mail) => {
+    // eslint-disable-next-line
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+      return true;
+    }
+    return false;
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
     if (email === "" || username === "" || gender === "" || phone === "") {
       setAlert("Please enter all fields", "danger");
+    } else if (!validateEmail(email)) {
+      setAlert("Email not valid", "danger");
+    } else if (phone.length !== 10) {
+      setAlert("Phone number should have 10 digits", "danger");
     } else {
       // eslint-disable-next-line
       const a = await editAdmin({
@@ -134,7 +146,7 @@ const EditAdmin = ({ user, setEdit }) => {
               <input
                 id='phone'
                 name='phone'
-                type='text'
+                type='number'
                 className='validate'
                 value={phone}
                 onChange={onChange}

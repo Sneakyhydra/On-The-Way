@@ -46,6 +46,14 @@ const EditCounsellor = ({ user, setEdit }) => {
     setCounsellor({ ...counsellor, [e.target.name]: e.target.value });
   };
 
+  const validateEmail = (mail) => {
+    // eslint-disable-next-line
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+      return true;
+    }
+    return false;
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -57,6 +65,10 @@ const EditCounsellor = ({ user, setEdit }) => {
       dept === ""
     ) {
       setAlert("Please enter all fields", "danger");
+    } else if (!validateEmail(email)) {
+      setAlert("Email not valid", "danger");
+    } else if (phone.length !== 10) {
+      setAlert("Phone number should have 10 digits", "danger");
     } else {
       // eslint-disable-next-line
       const a = await editCounsellor({
@@ -113,7 +125,7 @@ const EditCounsellor = ({ user, setEdit }) => {
         <form className='col-md-6' onSubmit={onSubmit}>
           <div
             className='row'
-            style={{ width: "300px", margin: "auto", marginTop: "4em" }}
+            style={{ width: "300px", margin: "auto", marginTop: "4.5em" }}
           >
             <div className='input-field col s12'>
               <input
@@ -163,7 +175,7 @@ const EditCounsellor = ({ user, setEdit }) => {
               <input
                 id='phone'
                 name='phone'
-                type='text'
+                type='number'
                 className='validate'
                 value={phone}
                 onChange={onChange}

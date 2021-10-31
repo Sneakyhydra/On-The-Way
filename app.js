@@ -18,6 +18,7 @@ app.use('/api/editUsers', require('./routes/editUsers'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/counsellor', require('./routes/counsellor'));
+app.use('/api/student', require('./routes/student'));
 
 // Listen to port
 app.listen(port, () => console.log(`Listening on port ${port}`));

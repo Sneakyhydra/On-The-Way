@@ -58,61 +58,60 @@ const Login = () => {
   }
 
   return (
-    <div className='center' id="fcenter">
-      <div id="shade"></div>
-      <div id="card">
-       <div id="updiv">
-      <div className='row mt-5'>
-        <h4>Login</h4>
-      </div>
-      
-      </div>
-      
-      <div className='row'>
-        <form className='col s12' onSubmit={onSubmit}>
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <input
-                id='email'
-                name='email'
-                type='text'
-                className='validate'
-                value={email}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='email'>Email</label>
-            </div>
+    <div className='center' id='fcenter'>
+      <div id='shade'></div>
+      <div id='card'>
+        <div id='updiv'>
+          <div className='row mt-5'>
+            <h4>Login</h4>
           </div>
+        </div>
 
-          <div className='row' style={{ width: "300px", margin: "auto" }}>
-            <div className='input-field col s12'>
-              <input
-                id='password'
-                name='password'
-                type='password'
-                className='validate'
-                value={password}
-                onChange={onChange}
-                required
-              />
-              <label htmlFor='password'>Password</label>
+        <div className='row'>
+          <form className='col s12' onSubmit={onSubmit}>
+            <div className='row' style={{ width: "300px", margin: "auto" }}>
+              <div className='input-field col s12'>
+                <input
+                  id='email'
+                  name='email'
+                  type='text'
+                  className='validate'
+                  value={email}
+                  onChange={onChange}
+                  required
+                />
+                <label htmlFor='email'>Email</label>
+              </div>
             </div>
-          </div>
 
-          <div className='row'>
-            <button
-              className='btn waves-effect waves-light'
-              type='submit'
-              value='Login'
-              style={{ borderRadius: "2em", marginTop: "2em", width: "10em" }}
-            >
-              Login
-              <i className='material-icons right'>send</i>
-            </button>
-          </div>
-        </form>
-      </div>
+            <div className='row' style={{ width: "300px", margin: "auto" }}>
+              <div className='input-field col s12'>
+                <input
+                  id='password'
+                  name='password'
+                  type='password'
+                  className='validate'
+                  value={password}
+                  onChange={onChange}
+                  required
+                />
+                <label htmlFor='password'>Password</label>
+              </div>
+            </div>
+
+            <div className='row'>
+              <button
+                className='btn waves-effect waves-light'
+                type='submit'
+                value='Login'
+                style={{ borderRadius: "2em", marginTop: "2em", width: "10em" }}
+              >
+                Login
+                <i className='material-icons right'>send</i>
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

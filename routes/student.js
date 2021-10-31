@@ -201,4 +201,42 @@ router.post(
     }
 );
 
+// @route   POST api/student/submitFeed
+// @desc    Submit feedback for students
+// @access  Private
+router.post(
+    "/submitFeed", auth,
+    async(req, res) => {
+        // Extract user id from req
+        const user_id = req.user_id;
+
+        try {
+            // Get role of the user from DB
+            const [rows] = await promisePool.query(
+                `SELECT role from logins WHERE user_id='${user_id}'`
+            );
+
+            // Extract role from rows
+            const { role } = rows[0];
+
+            // Check if the user is counsellor
+            if (role === "student") {
+                // Insert feedback in DB
+                await promisePool.query(
+                    `INSERT INTO stud_feedback (stud_id, feed_desc) VALUES (${user_id}, "${req.body.desc}")`
+                );
+
+                // Send data to the client
+                res.send("Submitted Successfully");
+            } else {
+                // Unauthorized
+                res.status(401).json({ msg: "Only students can access this portal" });
+            }
+        } catch (err) {
+            // Catch errors
+            throw err;
+        }
+    }
+);
+
 module.exports = router;

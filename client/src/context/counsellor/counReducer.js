@@ -4,6 +4,8 @@ import {
   QUIZ_LOAD_FAIL,
   STUD_LOAD_SUCCESS,
   STUD_LOAD_FAIL,
+  FEED_SUCCESS,
+  FEED_FAIL,
 } from "../types";
 
 // Change state according to the type of action
@@ -36,6 +38,19 @@ const counReducer = (state, action) => {
         ...state,
         loading: false,
         students: null,
+        error: action.payload,
+      };
+
+    case FEED_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case FEED_FAIL:
+      return {
+        ...state,
+        loading: false,
         error: action.payload,
       };
 

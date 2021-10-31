@@ -14,10 +14,12 @@ import Rejected from "../tabs/Admin/Rejected";
 import StudentInfo from "../tabs/Counsellor/StudentInfo";
 import Quiz from "../tabs/Counsellor/Quiz";
 import CounChat from "../tabs/Counsellor/CounChat";
+import CounFeed from "../tabs/Counsellor/CounFeed";
 
 import StudQuiz from "../tabs/Student/StudQuiz";
 import StudCoun from "../tabs/Student/StudCoun";
 import StudChat from "../tabs/Student/StudChat";
+import StudFeed from "../tabs/Student/StudFeed";
 
 import Preloader from "../layout/Preloader";
 import M from "materialize-css/dist/js/materialize.min.js";
@@ -158,6 +160,13 @@ const Dashboard = () => {
         ) : (
           ""
         )}
+        {user.coun_status === "Approved" ? (
+          <Tab eventKey='feed' title='Feedback' className='z-depth-0'>
+            <CounFeed />
+          </Tab>
+        ) : (
+          ""
+        )}
       </Tabs>
     );
   } else if (role === "student") {
@@ -186,6 +195,9 @@ const Dashboard = () => {
         </Tab>
         <Tab eventKey='studchat' title='Chat' className='z-depth-0'>
           <StudChat />
+        </Tab>
+        <Tab eventKey='studfeed' title='Feedback' className='z-depth-0'>
+          <StudFeed />
         </Tab>
       </Tabs>
     );

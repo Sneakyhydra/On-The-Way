@@ -8,6 +8,8 @@ import {
   STUD_LOAD_SUCCESS,
   STUD_LOAD_FAIL,
   CLEAR_ERRORS,
+  FEED_SUCCESS,
+  FEED_FAIL,
 } from "../types";
 import axios from "axios";
 
@@ -61,6 +63,32 @@ const CounState = (props) => {
     }
   };
 
+  // Submit Feedback
+  const submitFeed = async (formData) => {
+    // Set header of the input data
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      // Make a post request at localhost:5000/api/users/student
+      await axios.post("api/counsellor/submitFeed", formData, config);
+
+      // Dispatch the action to reducer for REGISTER_SUCCESS
+      dispatch({
+        type: FEED_SUCCESS,
+      });
+    } catch (err) {
+      // Dispatch the action to reducer for REGISTER_FAIL
+      dispatch({
+        type: FEED_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => {
     // Dispatch the action to reducer for CLEAR_ERRORS
@@ -80,6 +108,7 @@ const CounState = (props) => {
         clearErrors,
         loadQuesAns,
         loadStudents,
+        submitFeed,
       }}
     >
       {props.children}

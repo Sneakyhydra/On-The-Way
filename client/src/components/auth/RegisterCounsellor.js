@@ -59,6 +59,14 @@ const RegisterCounsellor = () => {
     await setCounsellor({ ...counsellor, [e.target.name]: e.target.value });
   };
 
+  const validateEmail = (mail) => {
+    // eslint-disable-next-line
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+      return true;
+    }
+    return false;
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -73,6 +81,10 @@ const RegisterCounsellor = () => {
       status === ""
     ) {
       setAlert("Please enter all fields", "danger");
+    } else if (!validateEmail(email)) {
+      setAlert("Email not valid", "danger");
+    } else if (phone.length !== 10) {
+      setAlert("Phone number should have 10 digits", "danger");
     } else if (password !== password2) {
       setAlert("Passwords do not match", "danger");
     } else {
@@ -166,7 +178,7 @@ const RegisterCounsellor = () => {
                 <input
                   id='phone'
                   name='phone'
-                  type='text'
+                  type='number'
                   className='validate'
                   value={phone}
                   onChange={onChange}

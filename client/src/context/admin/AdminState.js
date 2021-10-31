@@ -20,6 +20,10 @@ import {
   COUN_LOAD_FAIL,
   REJECTED_SUCCESS,
   REJECTED_FAIL,
+  COUN_FEED_SUCCESS,
+  COUN_FEED_FAIL,
+  STUD_FEED_SUCCESS,
+  STUD_FEED_FAIL,
 } from "../types";
 import axios from "axios";
 
@@ -28,11 +32,13 @@ const AdminState = (props) => {
   const initialState = {
     loading: true,
     error: null,
-    quesAns: [],
+    quesAns: null,
     pending: null,
     students: null,
     counsellors: null,
     rejected: null,
+    counfeed: null,
+    studfeed: null,
   };
 
   // Init Reducer
@@ -220,6 +226,38 @@ const AdminState = (props) => {
     }
   };
 
+  const loadCounFeed = async () => {
+    try {
+      const res = await axios.get("api/admin/counfeed");
+
+      dispatch({
+        type: COUN_FEED_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: COUN_FEED_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
+  const loadStudFeed = async () => {
+    try {
+      const res = await axios.get("api/admin/studfeed");
+
+      dispatch({
+        type: STUD_FEED_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: STUD_FEED_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => {
     // Dispatch the action to reducer for CLEAR_ERRORS
@@ -239,6 +277,8 @@ const AdminState = (props) => {
         students: state.students,
         counsellors: state.counsellors,
         rejected: state.rejected,
+        counfeed: state.counfeed,
+        studfeed: state.studfeed,
         clearErrors,
         loadPending,
         approveCoun,
@@ -248,6 +288,8 @@ const AdminState = (props) => {
         loadStudents,
         loadCounsellors,
         loadRejected,
+        loadCounFeed,
+        loadStudFeed,
       }}
     >
       {props.children}

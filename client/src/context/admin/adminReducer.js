@@ -16,6 +16,10 @@ import {
   COUN_LOAD_FAIL,
   REJECTED_SUCCESS,
   REJECTED_FAIL,
+  COUN_FEED_SUCCESS,
+  COUN_FEED_FAIL,
+  STUD_FEED_SUCCESS,
+  STUD_FEED_FAIL,
 } from "../types";
 
 // Change state according to the type of action
@@ -46,7 +50,7 @@ const adminReducer = (state, action) => {
       return {
         ...state,
         loading: false,
-        quesAns: [],
+        quesAns: null,
         error: action.payload,
       };
 
@@ -118,6 +122,36 @@ const adminReducer = (state, action) => {
         ...state,
         loading: false,
         counsellors: null,
+        error: action.payload,
+      };
+
+    case COUN_FEED_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        counfeed: action.payload,
+      };
+
+    case COUN_FEED_FAIL:
+      return {
+        ...state,
+        loading: false,
+        counfeed: null,
+        error: action.payload,
+      };
+
+    case STUD_FEED_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        studfeed: action.payload,
+      };
+
+    case STUD_FEED_FAIL:
+      return {
+        ...state,
+        loading: false,
+        studfeed: null,
         error: action.payload,
       };
 

@@ -27,6 +27,7 @@ const promisePool = pool.promise();
  * Get rejected counsellors
  * Get approved counsellors
  * Get all students
+ * Get feedback
  */
 
 // @route   GET api/admin/quesans
@@ -406,6 +407,119 @@ router.get("/students", auth, async(req, res) => {
                 // Send data to the client
                 res.json(students);
             });
+        } else {
+            // Unauthorized
+            res.status(401).json({ msg: "Only admins can access this portal" });
+        }
+    } catch (err) {
+        // Catch errors
+        throw err;
+    }
+});
+
+// @route   GET api/admin/counfeed
+// @desc    Get counsellor feedbacks
+// @access  Private
+router.get("/counfeed", auth, async(req, res) => {
+    // Extract user id from req
+    const user_id = req.user_id;
+
+    try {
+        // Get role of the user from DB
+        const [rows] = await promisePool.query(
+            `SELECT role from logins WHERE user_id='${user_id}'`
+        );
+
+        // Extract role from rows
+        const { role } = rows[0];
+
+        // Check if the user is admin
+        if (role === "admin") {
+            // Get counsellors with coun_status=Pending from the DB
+            const [rows] = await promisePool.query(
+                `SELECT * from coun_feedback`
+            );
+
+            // Get all counsellors
+            const [rows1] = await promisePool.query(
+                `SELECT * from counsellors`
+            );
+
+            let finalFeed = [];
+            for (let i = 0; i < rows.length; i++) {
+                let temp = {
+                    coun_id: rows[i].coun_id,
+                    feed_id: rows[i].feed_id,
+                    feed_desc: rows[i].feed_desc,
+                    coun_name: null
+                };
+                for (let j = 0; j < rows1.length; i++) {
+                    if (rows1[j].coun_id === rows[i].coun_id) {
+                        temp.coun_name = rows1[j].coun_name;
+                        break;
+                    }
+                }
+                finalFeed.push(temp);
+            }
+
+            // Send data to the client
+            res.json(finalFeed);
+        } else {
+            // Unauthorized
+            res.status(401).json({ msg: "Only admins can access this portal" });
+        }
+    } catch (err) {
+        // Catch errors
+        throw err;
+    }
+});
+
+// @route   GET api/admin/studfeed
+// @desc    Get student feedbacks
+// @access  Private
+router.get("/studfeed", auth, async(req, res) => {
+    // Extract user id from req
+    const user_id = req.user_id;
+
+    try {
+        // Get role of the user from DB
+        const [rows] = await promisePool.query(
+            `SELECT role from logins WHERE user_id='${user_id}'`
+        );
+
+        // Extract role from rows
+        const { role } = rows[0];
+
+        // Check if the user is admin
+        if (role === "admin") {
+            // Get counsellors with coun_status=Pending from the DB
+            const [rows] = await promisePool.query(
+                `SELECT * from stud_feedback`
+            );
+            // Get all students
+            const [rows1] = await promisePool.query(
+                `SELECT * from students`
+            );
+
+            let finalFeed = [];
+            for (let i = 0; i < rows.length; i++) {
+                let temp = {
+                    stud_id: rows[i].stud_id,
+                    feed_id: rows[i].feed_id,
+                    feed_desc: rows[i].feed_desc,
+                    stud_name: null
+                };
+                for (let j = 0; j < rows1.length; i++) {
+                    if (rows1[j].stud_id === rows[i].stud_id) {
+                        temp.stud_name = rows1[j].stud_name;
+                        break;
+                    }
+                }
+                finalFeed.push(temp);
+            }
+
+            // Send data to the client
+            res.json(finalFeed);
         } else {
             // Unauthorized
             res.status(401).json({ msg: "Only admins can access this portal" });

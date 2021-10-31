@@ -10,6 +10,8 @@ import Questions from "../tabs/Admin/Questions";
 import Counsellors from "../tabs/Admin/Counsellors";
 import Students from "../tabs/Admin/Students";
 import Rejected from "../tabs/Admin/Rejected";
+import AdminCounFeed from "../tabs/Admin/AdminCounFeed";
+import AdminStudFeed from "../tabs/Admin/AdminStudFeed";
 
 import StudentInfo from "../tabs/Counsellor/StudentInfo";
 import Quiz from "../tabs/Counsellor/Quiz";
@@ -99,7 +101,7 @@ const Dashboard = () => {
               zIndex: "100",
               backgroundColor: "white",
               width: "480px",
-              marginLeft: "10.5em",
+              marginLeft: "157.5px",
               borderBottomLeftRadius: "10px",
               borderBottomRightRadius: "10px",
             }}
@@ -118,6 +120,32 @@ const Dashboard = () => {
         </Tab>
         <Tab eventKey='students' title='Students' className='z-depth-0'>
           <Students />
+        </Tab>
+        <Tab eventKey='feedback' title='Feedback' className='z-depth-0'>
+          <Tabs
+            className='mb-3 z-depth-1'
+            style={{
+              marginTop: "0rem",
+              boxShadow:
+                "0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%)",
+              position: "fixed",
+              zIndex: "100",
+              backgroundColor: "white",
+              width: "322px",
+              marginLeft: "553px",
+              borderBottomLeftRadius: "10px",
+              borderBottomRightRadius: "10px",
+              flexWrap: "nowrap",
+            }}
+            variant='pills'
+          >
+            <Tab eventKey='counfeed' title='Counsellors' className='z-depth-0'>
+              <AdminCounFeed />
+            </Tab>
+            <Tab eventKey='studfeed' title='Students' className='z-depth-0'>
+              <AdminStudFeed />
+            </Tab>
+          </Tabs>
         </Tab>
       </Tabs>
     );

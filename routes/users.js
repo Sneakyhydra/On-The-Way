@@ -21,6 +21,11 @@ const pool = mysql.createPool({
 const promisePool = pool.promise();
 
 // Endpoints
+/** 
+ * Register admin
+ * Register counsellor
+ * Register student
+ */
 
 // @route   POST api/users/admin1234
 // @desc    Register an admin

@@ -23,6 +23,10 @@ const pool = mysql.createPool({
 const promisePool = pool.promise();
 
 // Endpoints
+/**
+ * Get logged in user
+ * Login
+ */
 
 // @route   GET api/auth
 // @desc    Get logged in user

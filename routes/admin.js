@@ -19,6 +19,15 @@ const pool = mysql.createPool({
 const promisePool = pool.promise();
 
 // Endpoints
+/**
+ * Get all questions and answers
+ * Edit quiz
+ * Get pending counsellors
+ * Approve or Reject a counsellor
+ * Get rejected counsellors
+ * Get approved counsellors
+ * Get all students
+ */
 
 // @route   GET api/admin/quesans
 // @desc    Get all questions and answers
@@ -362,11 +371,14 @@ router.get("/students", auth, async(req, res) => {
                 `SELECT * from students`
             );
 
+            // Init students array
             let students = [];
+
+            // Read CPI_sheet.xlsx
             readXlsxFile('./CPI_sheet.xlsx').then((cpis) => {
-                // `rows` is an array of rows
-                // each row being an array of cells.
+                // Loop through all students
                 for (let i = 0; i < rows.length; i++) {
+                    // Init student object
                     let student = {
                         stud_id: rows[i].stud_id,
                         stud_name: rows[i].stud_name,
@@ -378,13 +390,17 @@ router.get("/students", auth, async(req, res) => {
                         cpi: null
                     };
 
+                    // Loop through all rows in excel sheet
                     for (let j = 0; j < cpis.length; j++) {
+                        // Check if roll no is same
                         if (student.roll_no.toLowerCase() === cpis[j][0].toLowerCase()) {
+                            // Add cpi to the student object
                             student.cpi = cpis[j][2];
                             break;
                         }
                     }
 
+                    // Append student object to students array
                     students.push(student);
                 }
                 // Send data to the client

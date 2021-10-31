@@ -21,6 +21,11 @@ const pool = mysql.createPool({
 const promisePool = pool.promise();
 
 // Endpoints
+/**
+ * Edit admin
+ * Edit counsellor
+ * Edit student
+ */
 
 // @route   PUT api/editUsers/admin1234
 // @desc    Edit admin
@@ -363,12 +368,13 @@ router.put(
                     throw err;
                 }
 
+                // Read CPI_sheet.xlsx
                 readXlsxFile('./CPI_sheet.xlsx').then((cpis) => {
-                    // `rows` is an array of rows
-                    // each row being an array of cells.
-
+                    // Loop through all rows in excel sheet
                     for (let j = 0; j < cpis.length; j++) {
+                        // Check if roll no is same
                         if (user.roll_no.toLowerCase() === cpis[j][0].toLowerCase()) {
+                            // Add cpi to the user object
                             user.cpi = cpis[j][2];
                             break;
                         }

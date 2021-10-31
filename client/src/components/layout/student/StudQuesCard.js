@@ -24,10 +24,14 @@ const StudQuesCard = ({ quesAns, question, idx, quiz, setQuiz }) => {
       <Col
         m={6}
         s={12}
-        style={{ width: "70vw", textAlign: "center", margin: "0" }}
+        style={{
+          width: "70vw",
+          textAlign: "center",
+          margin: "0",
+          marginTop: "3rem",
+        }}
       >
         <Card
-          actions={[]}
           className='z-depth-1 question'
           closeIcon={<Icon>close</Icon>}
           revealIcon={<Icon>more_vert</Icon>}
@@ -52,7 +56,7 @@ const StudQuesCard = ({ quesAns, question, idx, quiz, setQuiz }) => {
                       onChange={onChange}
                       required
                     />
-                    <span>{item.ans_desc}</span>
+                    <span style={{ color: "black" }}>{item.ans_desc}</span>
                   </label>
                 </p>
               );

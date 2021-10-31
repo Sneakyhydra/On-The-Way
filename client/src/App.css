@@ -812,14 +812,10 @@ nav {
     color: white;
 }
 
-textarea {
-    min-height: 5em !important;
-    height: 5em !important;
-    margin: 0;
+.grow {
+    transition: all 0.15s ease-in-out;
 }
 
-textarea:disabled {
-    min-height: 5em !important;
-    height: 5em !important;
-    margin: 0;
+.grow:hover {
+    transform: scale(1.025);
 }

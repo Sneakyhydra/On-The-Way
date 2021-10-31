@@ -11,42 +11,46 @@ const QuesAnsCard = ({ answer }) => {
   }, []);
 
   return (
-    <div>
-      <Row style={{ margin: "auto", width: "55vw", padding: "0" }}>
-        <Col m={6} s={12} style={{ width: "55vw", padding: "0" }}>
-          <Card
-            actions={[]}
-            className='z-depth-1 answer'
-            closeIcon={<Icon>close</Icon>}
-            revealIcon={<Icon>more_vert</Icon>}
-            textClassName='black-text'
-            title={"Answer " + ans_no.toString()}
-          >
-            <div className='input-field'>
-              <textarea
-                name='ans_desc'
-                id={ans_no.toString() + "1"}
-                className='materialize-textarea'
-                value={ans_desc}
-                disabled
-              />
-              <label htmlFor={ans_no.toString() + "1"}>Option</label>
-            </div>
+    <Row
+      style={{
+        margin: "auto",
+        width: "55vw",
+        padding: "0",
+        textAlign: "left",
+      }}
+    >
+      <Col m={6} s={12} style={{ width: "55vw", padding: "0" }}>
+        <Card
+          className='z-depth-1 answer'
+          closeIcon={<Icon>close</Icon>}
+          revealIcon={<Icon>more_vert</Icon>}
+          textClassName='black-text'
+          title={"Answer " + ans_no.toString()}
+        >
+          <div>
+            <label
+              htmlFor={ans_no.toString() + "1"}
+              style={{ fontSize: "16px", color: "grey" }}
+            >
+              Option
+            </label>
+            <p id={ans_no.toString() + "1"}>{ans_desc}</p>
+          </div>
 
-            <div className='input-field'>
-              <textarea
-                name='resp'
-                id={ans_no.toString() + "2"}
-                className='materialize-textarea'
-                value={response}
-                disabled
-              />
-              <label htmlFor={ans_no.toString() + "2"}>Response</label>
-            </div>
-          </Card>
-        </Col>
-      </Row>
-    </div>
+          <br />
+
+          <div>
+            <label
+              htmlFor={ans_no.toString() + "2"}
+              style={{ fontSize: "16px", color: "grey" }}
+            >
+              Response
+            </label>
+            <p id={ans_no.toString() + "2"}>{response}</p>
+          </div>
+        </Card>
+      </Col>
+    </Row>
   );
 };
 

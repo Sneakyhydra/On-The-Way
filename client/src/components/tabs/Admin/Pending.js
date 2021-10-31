@@ -37,11 +37,20 @@ const Pending = () => {
         marginTop: "3.52em",
       }}
     >
-      {pending.map((item) => {
-        return (
-          <CustomCard key={item.coun_id} user={item} setAlert={setAlert} />
-        );
-      })}
+      <div
+        style={{
+          marginTop: "3.5em",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "flex-start",
+        }}
+      >
+        {pending.map((item) => {
+          return (
+            <CustomCard key={item.coun_id} user={item} setAlert={setAlert} />
+          );
+        })}
+      </div>
     </div>
   );
 };

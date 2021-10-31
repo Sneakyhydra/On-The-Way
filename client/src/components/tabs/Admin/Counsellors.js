@@ -37,9 +37,20 @@ const Counsellors = () => {
         marginTop: "3.52em",
       }}
     >
-      {counsellors.map((item) => {
-        return <CounCard key={item.coun_id} user={item} setAlert={setAlert} />;
-      })}
+      <div
+        style={{
+          marginTop: "3.5em",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "flex-start",
+        }}
+      >
+        {counsellors.map((item) => {
+          return (
+            <CounCard key={item.coun_id} user={item} setAlert={setAlert} />
+          );
+        })}
+      </div>
     </div>
   );
 };

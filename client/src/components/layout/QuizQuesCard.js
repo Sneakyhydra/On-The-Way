@@ -12,39 +12,32 @@ const QuizQuesCard = ({ question, quesAns, idx }) => {
   }, []);
 
   return (
-    <div>
-      <Row style={{ margin: "0" }}>
-        <Col
-          m={6}
-          s={12}
-          style={{ width: "70vw", textAlign: "center", margin: "0" }}
+    <Row style={{ margin: "0" }}>
+      <Col
+        m={6}
+        s={12}
+        style={{
+          width: "70vw",
+          textAlign: "center",
+          margin: "0",
+          marginTop: "3rem",
+        }}
+      >
+        <Card
+          className='z-depth-1 question'
+          closeIcon={<Icon>close</Icon>}
+          revealIcon={<Icon>more_vert</Icon>}
+          textClassName='black-text'
+          title={"Question " + ques_no.toString()}
         >
-          <Card
-            actions={[]}
-            className='z-depth-1 question'
-            closeIcon={<Icon>close</Icon>}
-            revealIcon={<Icon>more_vert</Icon>}
-            textClassName='black-text'
-            title={"Question " + ques_no.toString()}
-          >
-            <div className='input-field'>
-              <textarea
-                name='ques_desc'
-                id='description'
-                className='materialize-textarea'
-                value={ques_desc}
-                disabled
-              />
-              <label htmlFor='description'>Description</label>
-            </div>
+          <h6>{ques_desc}</h6>
 
-            {quesAns[idx].answers.map((item) => {
-              return <QuesAnsCard key={item.ans_id} answer={item} />;
-            })}
-          </Card>
-        </Col>
-      </Row>
-    </div>
+          {quesAns[idx].answers.map((item) => {
+            return <QuesAnsCard key={item.ans_id} answer={item} />;
+          })}
+        </Card>
+      </Col>
+    </Row>
   );
 };
 

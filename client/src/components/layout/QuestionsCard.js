@@ -54,7 +54,6 @@ const QuestionsCard = ({
         style={{ width: "70vw", textAlign: "center", margin: "0" }}
       >
         <Card
-          actions={[]}
           className='z-depth-1 question'
           closeIcon={<Icon>close</Icon>}
           revealIcon={<Icon>more_vert</Icon>}

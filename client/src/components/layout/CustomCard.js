@@ -19,59 +19,57 @@ const CustomCard = ({ user, setAlert }) => {
   };
 
   return (
-    <div style={{ marginTop: "5rem" }}>
-      <Row style={{ margin: "0" }}>
-        <Col m={6} s={12} style={{ width: "400px" }}>
-          <Card
-            actions={[
-              <a
-                href='#!'
-                key='1'
-                className='waves-effect waves-light btn'
-                style={{
-                  borderRadius: "10px",
-                  minWidth: "120px",
-                  width: "auto",
-                  backgroundColor: "#2BC592",
-                  marginRight: "15px",
-                }}
-                onClick={approve}
-              >
-                <Icon>check</Icon>
-              </a>,
-              <a
-                href='#!'
-                key='2'
-                className='waves-effect waves-light btn'
-                style={{
-                  borderRadius: "10px",
-                  minWidth: "120px",
-                  width: "auto",
-                  backgroundColor: "#BA3F1D",
-                  marginLeft: "15px",
-                }}
-                onClick={reject}
-              >
-                <Icon>clear</Icon>
-              </a>,
-            ]}
-            className='z-depth-1'
-            closeIcon={<Icon>close</Icon>}
-            revealIcon={<Icon>more_vert</Icon>}
-            textClassName='white-text'
-            title={coun_name}
-          >
-            <Fragment>
-              <strong>{coun_dept}</strong>
-              <br />
-              {coun_gender}
-              <br />
-              {coun_phone}
-            </Fragment>
-          </Card>
-        </Col>
-      </Row>
-    </div>
+    <Row style={{ margin: "0" }}>
+      <Col m={6} s={12} style={{ width: "400px" }}>
+        <Card
+          actions={[
+            <a
+              href='#!'
+              key='1'
+              className='waves-effect waves-light btn'
+              style={{
+                borderRadius: "10px",
+                minWidth: "120px",
+                width: "auto",
+                backgroundColor: "#2BC592",
+                marginRight: "15px",
+              }}
+              onClick={approve}
+            >
+              <Icon>check</Icon>
+            </a>,
+            <a
+              href='#!'
+              key='2'
+              className='waves-effect waves-light btn'
+              style={{
+                borderRadius: "10px",
+                minWidth: "120px",
+                width: "auto",
+                backgroundColor: "#BA3F1D",
+                marginLeft: "15px",
+              }}
+              onClick={reject}
+            >
+              <Icon>clear</Icon>
+            </a>,
+          ]}
+          className='z-depth-1 grow'
+          closeIcon={<Icon>close</Icon>}
+          revealIcon={<Icon>more_vert</Icon>}
+          textClassName='white-text'
+          title={coun_name}
+        >
+          <Fragment>
+            <strong>{coun_dept}</strong>
+            <br />
+            {coun_gender}
+            <br />
+            {coun_phone}
+          </Fragment>
+        </Card>
+      </Col>
+    </Row>
   );
 };
 

@@ -10,8 +10,6 @@ import {
   COUN_LOAD_FAIL,
   QUIZ_SUBMIT_SUCCESS,
   QUIZ_SUBMIT_FAIL,
-  RESPONSE_LOAD_SUCCESS,
-  RESPONSE_LOAD_FAIL,
 } from "../types";
 import axios from "axios";
 
@@ -22,7 +20,6 @@ const StudState = (props) => {
     error: null,
     quesAns: [],
     counsellors: null,
-    response: null,
   };
 
   // Init Reducer
@@ -61,22 +58,6 @@ const StudState = (props) => {
       // Dispatch the action to reducer for REGISTER_FAIL
       dispatch({
         type: COUN_LOAD_FAIL,
-        payload: err.response.data.msg,
-      });
-    }
-  };
-
-  const loadResponse = async () => {
-    try {
-      const res = await axios.get("api/student/response");
-
-      dispatch({
-        type: RESPONSE_LOAD_SUCCESS,
-        payload: res.data,
-      });
-    } catch (err) {
-      dispatch({
-        type: RESPONSE_LOAD_FAIL,
         payload: err.response.data.msg,
       });
     }
@@ -126,7 +107,6 @@ const StudState = (props) => {
         loadQuesAns,
         loadCounsellors,
         submitQuiz,
-        loadResponse,
       }}
     >
       {props.children}

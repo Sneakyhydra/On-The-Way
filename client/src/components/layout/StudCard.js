@@ -22,8 +22,7 @@ const StudCard = ({ user }) => {
     <Row style={{ margin: "0" }}>
       <Col m={6} s={12} style={{ width: "400px" }}>
         <Card
-          actions={[]}
-          className='z-depth-1'
+          className='z-depth-1 grow'
           closeIcon={<Icon>close</Icon>}
           revealIcon={<Icon>more_vert</Icon>}
           textClassName='white-text'

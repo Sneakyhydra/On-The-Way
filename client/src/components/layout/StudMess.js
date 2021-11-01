@@ -12,13 +12,6 @@ const StudMess = ({ messages, setAlert, active }) => {
   const { user } = authContext;
   const [currMess, setCurrMess] = useState("");
 
-  const scrollToBottom = () => {
-    const elem = document.getElementById("messagesEndStud");
-    if (elem) {
-      elem.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   let temp = [];
   useEffect(() => {
     M.AutoInit();
@@ -40,13 +33,16 @@ const StudMess = ({ messages, setAlert, active }) => {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messToShow]);
-
   const onChange = (e) => {
     M.updateTextFields();
     setCurrMess(e.target.value);
+  };
+
+  const scrollToBottom = () => {
+    const elem = document.getElementById("messagesEndStud");
+    if (elem) {
+      elem.scrollIntoView({ behavior: "auto" });
+    }
   };
 
   const send = () => {
@@ -88,6 +84,7 @@ const StudMess = ({ messages, setAlert, active }) => {
     setMessToShow(temp);
 
     sendMessage(messToSend);
+    setTimeout(scrollToBottom, 10);
   };
 
   const sendOnEnter = (event) => {
@@ -130,6 +127,7 @@ const StudMess = ({ messages, setAlert, active }) => {
       setMessToShow(temp);
 
       sendMessage(messToSend);
+      setTimeout(scrollToBottom, 10);
     }
   };
 
@@ -156,6 +154,9 @@ const StudMess = ({ messages, setAlert, active }) => {
           padding: "1.5rem",
         }}
       >
+        {messToShow.length === 0
+          ? "Be the first to start the conversation!!!"
+          : ""}
         {messToShow.map((mess) => {
           return (
             <div

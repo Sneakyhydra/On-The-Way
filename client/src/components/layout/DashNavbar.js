@@ -2,7 +2,7 @@
 import { Fragment, useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
-import { Dropdown, Icon } from "react-materialize";
+import { Icon } from "react-materialize";
 import M from "materialize-css/dist/js/materialize.min.js";
 
 const DashNavbar = () => {
@@ -18,23 +18,7 @@ const DashNavbar = () => {
     // eslint-disable-next-line
   }, []);
 
-  const { isAuthenticated, logout, user } = authContext;
-
-  let role = "guest";
-
-  if (user) {
-    role = user.role;
-  }
-
-  let name = "Guest";
-
-  if (role === "student") {
-    name = user.stud_name;
-  } else if (role === "counsellor") {
-    name = user.coun_name;
-  } else if (role === "admin") {
-    name = user.admin_name;
-  }
+  const { isAuthenticated, logout } = authContext;
 
   const onLogout = () => {
     logout();
@@ -42,53 +26,22 @@ const DashNavbar = () => {
 
   const authLinks = (
     <Fragment>
-      <Dropdown
-        id='Dropdown_2'
-        style={{ borderRadius: "8px" }}
-        options={{
-          alignment: "left",
-          autoTrigger: true,
-          closeOnClick: true,
-          constrainWidth: true,
-          container: null,
-          coverTrigger: false,
-          hover: true,
-          inDuration: 100,
-          onCloseEnd: null,
-          onCloseStart: null,
-          onOpenEnd: null,
-          onOpenStart: null,
-          outDuration: 250,
+      <NavLink
+        className='waves-effect waves-light btn z-depth-0'
+        to='/'
+        onClick={onLogout}
+        style={{
+          color: "red",
+          display: "inline-flex",
+          width: "100%",
+          background: "transparent",
+          marginRight: "4.5em",
+          marginTop: "1.5em",
+          fontSize: "15px",
         }}
-        trigger={
-          <a
-            href='#!'
-            className='waves-effect waves-light btn'
-            style={{
-              borderRadius: "10px",
-              marginRight: "4.75em",
-              minWidth: "120px",
-              width: "auto",
-            }}
-          >
-            {name}
-            <Icon right>arrow_drop_down</Icon>
-          </a>
-        }
       >
-        <NavLink to='/dashboard'>Dashboard</NavLink>
-        <NavLink
-          to='/'
-          onClick={onLogout}
-          style={{
-            color: "red",
-            display: "inline-flex",
-            width: "100%",
-          }}
-        >
-          <span>Logout</span> <Icon>exit_to_app</Icon>
-        </NavLink>
-      </Dropdown>
+        <span>Logout</span> <Icon>exit_to_app</Icon>
+      </NavLink>
     </Fragment>
   );
 

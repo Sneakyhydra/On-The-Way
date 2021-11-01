@@ -8,8 +8,16 @@ const CounUsers = ({ users, setAlert, setActive, active }) => {
     // eslint-disable-next-line
   }, [clickedOn]);
 
+  const scrollToBottom = () => {
+    const elem = document.getElementById("messagesEndCoun");
+    if (elem) {
+      elem.scrollIntoView({ behavior: "auto" });
+    }
+  };
+
   const onClick = (id) => {
     setClickedOn(id);
+    setTimeout(scrollToBottom, 10);
   };
 
   return (

@@ -10,6 +10,10 @@ import {
   CLEAR_ERRORS,
   FEED_SUCCESS,
   FEED_FAIL,
+  MESSAGE_SEND_SUCCESS,
+  MESSAGE_SEND_FAIL,
+  MESSAGE_LOAD_SUCCESS,
+  MESSAGE_LOAD_FAIL,
 } from "../types";
 import axios from "axios";
 
@@ -20,6 +24,7 @@ const CounState = (props) => {
     error: null,
     quesAns: null,
     students: null,
+    messages: null,
   };
 
   // Init Reducer
@@ -89,6 +94,44 @@ const CounState = (props) => {
     }
   };
 
+  const loadMessages = async () => {
+    try {
+      const res = await axios.get("api/counsellor/message");
+
+      dispatch({
+        type: MESSAGE_LOAD_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: MESSAGE_LOAD_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
+  const sendMessage = async (formData) => {
+    // Set header of the input data
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      await axios.post("api/counsellor/message", formData, config);
+
+      dispatch({
+        type: MESSAGE_SEND_SUCCESS,
+      });
+    } catch (err) {
+      dispatch({
+        type: MESSAGE_SEND_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => {
     // Dispatch the action to reducer for CLEAR_ERRORS
@@ -105,10 +148,13 @@ const CounState = (props) => {
         error: state.error,
         quesAns: state.quesAns,
         students: state.students,
+        messages: state.messages,
         clearErrors,
         loadQuesAns,
         loadStudents,
         submitFeed,
+        loadMessages,
+        sendMessage,
       }}
     >
       {props.children}

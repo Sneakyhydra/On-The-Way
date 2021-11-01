@@ -219,4 +219,80 @@ router.post(
     }
 );
 
+// @route   POST api/counsellor/message
+// @desc    Messaging for counsellors
+// @access  Private
+router.post(
+    "/message", auth,
+    async(req, res) => {
+        // Extract user id from req
+        const user_id = req.user_id;
+
+        try {
+            // Get role of the user from DB
+            const [rows] = await promisePool.query(
+                `SELECT role from logins WHERE user_id='${user_id}'`
+            );
+
+            // Extract role from rows
+            const { role } = rows[0];
+
+            // Check if the user is counsellor
+            if (role === "counsellor") {
+                // Insert message in DB
+                await promisePool.query(
+                    `INSERT INTO messages (stud_id, coun_id, from_role, mess_desc, mess_date) VALUES (${req.body.stud_id}, ${user_id}, "${role}", "${req.body.mess_desc}", "${req.body.mess_date}")`
+                );
+
+                // Send data to the client
+                res.send("Sent Successfully");
+            } else {
+                // Unauthorized
+                res.status(401).json({ msg: "Only counsellors can access this portal" });
+            }
+        } catch (err) {
+            // Catch errors
+            throw err;
+        }
+    }
+);
+
+// @route   GET api/counsellor/message
+// @desc    Messaging for counsellors
+// @access  Private
+router.get(
+    "/message", auth,
+    async(req, res) => {
+        // Extract user id from req
+        const user_id = req.user_id;
+
+        try {
+            // Get role of the user from DB
+            const [rows] = await promisePool.query(
+                `SELECT role from logins WHERE user_id='${user_id}'`
+            );
+
+            // Extract role from rows
+            const { role } = rows[0];
+
+            // Check if the user is counsellor
+            if (role === "counsellor") {
+                // Get messages from DB
+                const [messages] = await promisePool.query(
+                    `SELECT * FROM messages WHERE coun_id=${user_id}`
+                );
+
+                // Send data to the client
+                res.send(messages);
+            } else {
+                // Unauthorized
+                res.status(401).json({ msg: "Only counsellors can access this portal" });
+            }
+        } catch (err) {
+            // Catch errors
+            throw err;
+        }
+    }
+);
+
 module.exports = router;

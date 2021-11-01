@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2021 at 05:34 PM
+-- Generation Time: Nov 01, 2021 at 06:25 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -42,7 +42,8 @@ INSERT INTO `admins` (`admin_id`, `admin_name`, `admin_gender`, `admin_phone`) V
 (3, 'Developer', 'Male', '1234567890'),
 (7, 'aasdgaksf', 'Other', '123214'),
 (10, 'Manu', 'Male', '1234567890'),
-(13, 'C', 'Female', '564564846351');
+(13, 'C', 'Female', '564564846351'),
+(18, 'safskl', 'Male', '1234567890');
 
 -- --------------------------------------------------------
 
@@ -79,10 +80,11 @@ INSERT INTO `answers` (`ans_id`, `ques_id`, `ans_no`, `ans_desc`, `response`) VA
 (14, 4, 2, 'I am planning to go for higher studies after completing bachelors’ degree.', 'So you are planning to go for higher studies after bachelor’s degree, then you should focus on keeping your grades up while parallelly studying for the entrance exam of the field you wish to study in master’s degree.'),
 (15, 4, 3, 'I am planning to build my own startup.', 'If you are planning to build your own startup, you should master your field of expertise and find a group of like-minded people to have a solid foundation for your own company. Also making connections with people already in the same business will help you'),
 (16, 4, 4, 'I am planning to try for a government job', 'If you wish to go for a government job then you should start studying for that job parallelly with your college academics. Start as early as possible to make sure you clear the exam and land the desired job.'),
-(17, 5, 1, 'My friend circle has really good, helpful, fun and like-minded people who supports me whenever I need them.', 'a'),
-(18, 5, 2, 'B', 'b'),
-(19, 5, 3, 'C', 'c'),
-(20, 5, 4, 'D', 'd');
+(17, 4, 5, 'I have not decided yet, I am still exploring more options.', 'Its ok if you have not yet decided your plans for your future, exploring yourself and your interests is an important phase of your life in which no one should rush. Find your passion and follow it with all you’ve got.'),
+(18, 5, 1, 'My friend circle has really good, helpful, fun and like-minded people who supports me whenever I need them.', 'a'),
+(19, 5, 2, 'B', 'b'),
+(20, 5, 3, 'C', 'c'),
+(21, 5, 4, 'D', 'd');
 
 -- --------------------------------------------------------
 
@@ -105,24 +107,11 @@ CREATE TABLE `counsellors` (
 
 INSERT INTO `counsellors` (`coun_id`, `coun_name`, `coun_gender`, `coun_phone`, `coun_dept`, `coun_status`) VALUES
 (2, 'Abc', 'Female', '1234567890', 'M.Tech', 'Approved'),
-(4, 'askfhkj', 'Male', '123123', 'M.Des', 'Rejected'),
+(4, 'askfhkj', 'Male', '123123', 'M.Des', 'Approved'),
 (6, 'ajfhakj', 'Female', '1241', 'M.Tech', 'Rejected'),
 (9, 'Manu', 'Male', '1234567890', 'B.Tech', 'Approved'),
-(12, 'B', 'Male', '4643413232', 'M.Des', 'Approved');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `counsel_req`
---
-
-CREATE TABLE `counsel_req` (
-  `req_id` bigint(20) NOT NULL,
-  `stud_id` bigint(20) NOT NULL,
-  `coun_id` bigint(20) NOT NULL,
-  `res_id` bigint(20) NOT NULL,
-  `req_desc` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(12, 'B', 'Male', '4643413232', 'M.Des', 'Rejected'),
+(17, 'asdafajl', 'Other', '1234567890', 'M.Des', 'Rejected');
 
 -- --------------------------------------------------------
 
@@ -131,9 +120,20 @@ CREATE TABLE `counsel_req` (
 --
 
 CREATE TABLE `coun_feedback` (
+  `feed_id` bigint(20) NOT NULL,
   `coun_id` bigint(20) NOT NULL,
   `feed_desc` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `coun_feedback`
+--
+
+INSERT INTO `coun_feedback` (`feed_id`, `coun_id`, `feed_desc`) VALUES
+(1, 2, 'hello'),
+(2, 2, 'hi'),
+(3, 2, 'done'),
+(4, 2, 'abc');
 
 -- --------------------------------------------------------
 
@@ -163,9 +163,50 @@ INSERT INTO `logins` (`user_id`, `user_email`, `user_password`, `role`) VALUES
 (8, 'dhruvrishishwar@gmail.com', '$2a$10$j/ohYEwWy/ra.rhP0DHWZe9lMh9.JW3SKfUgFwM5Gw8ep2Ob.sASm', 'student'),
 (9, 'rishishwarmanu1@gmail.com', '$2a$10$f.QcnmiiOkFQbirX/97eY.qmZCOezqx0peEWRvYnro24RVgEzZDXu', 'counsellor'),
 (10, 'rishishwarmanu21@gmail.com', '$2a$10$syjQI5eW5I2S0i5JRB8Yf.LP.0SHzPLR/O0cxxT/V6eL.tOCefNCa', 'admin'),
-(11, 'a@mail.com', '$2a$10$I3VymQse5iHAVUo3b6RRE.f4M01tgut9k87Xj6uyxjTrsbhDZ2xUO', 'student'),
 (12, 'b@mail.com', '$2a$10$BLqMaeBO8HTN/7CD8TMBFu86nwRigciYi.I..YWdKI4krdg4q7gLG', 'counsellor'),
-(13, 'c@mail.com', '$2a$10$EimHAc6ZQjL8tWgqnFE11eTv5rFGzDBlT31pLmvA8zrIb95fYHtie', 'admin');
+(13, 'c@mail.com', '$2a$10$EimHAc6ZQjL8tWgqnFE11eTv5rFGzDBlT31pLmvA8zrIb95fYHtie', 'admin'),
+(14, 'dhruv@gmail.com', '$2a$10$yWEG3oHPVwmB/K.iREh54OpbCqaAtaYajMA03BDZTUQPDUQyzn6pu', 'student'),
+(15, 'a@mail.com', '$2a$10$smK.BUeRx/DpyzSRHugkd.HMOcbMj1hDVeYkaDs9340.GOLq3FxEG', 'student'),
+(16, 'akfjbasj@mail.com', '$2a$10$M3MTUlMb5WGVDfZZiSE5AOVdDAGYu28uSQogHAr6.C85KOp6P/rvS', 'student'),
+(17, 'anfaljsfn@mail.com', '$2a$10$uzEDmIvS9LlvddFtWXzbfeWkqXGH0.YfCTEaw6mESDqlcNU0lPU6.', 'counsellor'),
+(18, 'lafnasjl@mail.com', '$2a$10$v0s1VLL.7nk9CkQI4PdtZu26iz53AqUVbFIewZB9wUKjS2Qt/8iMa', 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `mess_id` bigint(20) NOT NULL,
+  `stud_id` bigint(20) NOT NULL,
+  `coun_id` bigint(20) NOT NULL,
+  `from_role` enum('student','counsellor') NOT NULL,
+  `mess_desc` varchar(300) NOT NULL,
+  `mess_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`mess_id`, `stud_id`, `coun_id`, `from_role`, `mess_desc`, `mess_date`) VALUES
+(4, 1, 2, 'student', 'I am dhruv', '2021-11-01 07:56:27'),
+(5, 1, 2, 'student', 'hi', '2021-11-01 07:56:27'),
+(6, 1, 2, 'student', 'hi', '2021-11-01 07:56:27'),
+(9, 1, 2, 'counsellor', 'hi', '2021-11-01 07:56:29'),
+(10, 1, 2, 'student', 'first', '2021-11-01 16:57:42'),
+(11, 1, 2, 'student', 'hello', '2021-11-01 16:58:06'),
+(12, 1, 2, 'student', 'are u there?', '2021-11-01 16:58:11'),
+(13, 1, 2, 'student', 'ams', '2021-11-01 16:58:34'),
+(14, 1, 9, 'student', 'hi', '2021-11-01 17:02:28'),
+(15, 1, 4, 'student', 'hello', '2021-11-01 17:02:39'),
+(16, 1, 2, 'student', 'helo', '2021-11-01 17:03:01'),
+(17, 1, 9, 'student', 'hi', '2021-11-01 17:03:13'),
+(18, 1, 2, 'student', 'abc', '2021-11-01 17:03:26'),
+(19, 1, 4, 'student', 'abc', '2021-11-01 17:03:30'),
+(20, 1, 9, 'student', 'abc', '2021-11-01 17:03:34'),
+(21, 1, 2, 'counsellor', 'hi dhruv', '2021-11-01 17:20:43');
 
 -- --------------------------------------------------------
 
@@ -202,6 +243,13 @@ CREATE TABLE `response` (
   `res_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `response`
+--
+
+INSERT INTO `response` (`res_id`, `stud_id`, `res_date`) VALUES
+(11, 1, '2021-10-31 14:20:06');
+
 -- --------------------------------------------------------
 
 --
@@ -209,10 +257,22 @@ CREATE TABLE `response` (
 --
 
 CREATE TABLE `response_list` (
+  `rl_id` bigint(20) NOT NULL,
   `res_id` bigint(20) NOT NULL,
   `ques_id` bigint(20) NOT NULL,
   `ans_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `response_list`
+--
+
+INSERT INTO `response_list` (`rl_id`, `res_id`, `ques_id`, `ans_id`) VALUES
+(51, 11, 1, 1),
+(52, 11, 2, 6),
+(53, 11, 3, 11),
+(54, 11, 4, 17),
+(55, 11, 5, 18);
 
 -- --------------------------------------------------------
 
@@ -238,7 +298,9 @@ INSERT INTO `students` (`stud_id`, `stud_name`, `roll_no`, `stud_gender`, `stud_
 (1, 'Dhruv Rishishwar', '20BCS002', 'Male', '6268086918', 'B.Tech', 'CSE'),
 (5, 'dsjfahfjl', 'dakfhkj', 'Male', '12345', 'B.Tech', 'CSE'),
 (8, 'Dhruv', '20bcs075', 'Male', '6268086918', 'B.Tech', 'CSE'),
-(11, 'A', 'sdjfisdajfo', 'Other', '995356581231', 'M.Des', 'CSE');
+(14, 'sadajhfl', 'sjkhasfjl', 'Other', '0987654321', 'B.Tech', 'ECE'),
+(15, 'a', 'jafnaslfsal', 'Other', '1234567890', 'M.Tech', 'ECE'),
+(16, 'sdafjdbfk', 'aksdjnfsk', 'Female', '1123123123', 'B.Tech', 'ECE');
 
 -- --------------------------------------------------------
 
@@ -247,9 +309,18 @@ INSERT INTO `students` (`stud_id`, `stud_name`, `roll_no`, `stud_gender`, `stud_
 --
 
 CREATE TABLE `stud_feedback` (
+  `feed_id` bigint(20) NOT NULL,
   `stud_id` bigint(20) NOT NULL,
   `feed_desc` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `stud_feedback`
+--
+
+INSERT INTO `stud_feedback` (`feed_id`, `stud_id`, `feed_desc`) VALUES
+(1, 1, 'hello'),
+(2, 1, 'release chat soon');
 
 --
 -- Indexes for dumped tables
@@ -275,18 +346,10 @@ ALTER TABLE `counsellors`
   ADD PRIMARY KEY (`coun_id`) USING BTREE;
 
 --
--- Indexes for table `counsel_req`
---
-ALTER TABLE `counsel_req`
-  ADD PRIMARY KEY (`req_id`),
-  ADD KEY `fk_coun_id_req` (`coun_id`),
-  ADD KEY `fk_res_id_req` (`res_id`),
-  ADD KEY `fk_stud_id_req` (`stud_id`);
-
---
 -- Indexes for table `coun_feedback`
 --
 ALTER TABLE `coun_feedback`
+  ADD PRIMARY KEY (`feed_id`),
   ADD KEY `fk_coun_id_feed` (`coun_id`);
 
 --
@@ -295,6 +358,14 @@ ALTER TABLE `coun_feedback`
 ALTER TABLE `logins`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `user_email` (`user_email`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`mess_id`),
+  ADD KEY `stud_id` (`stud_id`),
+  ADD KEY `coun_id` (`coun_id`);
 
 --
 -- Indexes for table `questions`
@@ -313,6 +384,7 @@ ALTER TABLE `response`
 -- Indexes for table `response_list`
 --
 ALTER TABLE `response_list`
+  ADD PRIMARY KEY (`rl_id`),
   ADD KEY `fk_res_id_reslist` (`res_id`),
   ADD KEY `fk_ques_id_reslist` (`ques_id`),
   ADD KEY `fk_ans_id_reslist` (`ans_id`);
@@ -327,6 +399,7 @@ ALTER TABLE `students`
 -- Indexes for table `stud_feedback`
 --
 ALTER TABLE `stud_feedback`
+  ADD PRIMARY KEY (`feed_id`),
   ADD KEY `stud_id_feedback` (`stud_id`);
 
 --
@@ -337,19 +410,25 @@ ALTER TABLE `stud_feedback`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `ans_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ans_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `counsel_req`
+-- AUTO_INCREMENT for table `coun_feedback`
 --
-ALTER TABLE `counsel_req`
-  MODIFY `req_id` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `coun_feedback`
+  MODIFY `feed_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `logins`
 --
 ALTER TABLE `logins`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `mess_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `questions`
@@ -361,13 +440,25 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `response`
 --
 ALTER TABLE `response`
-  MODIFY `res_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `res_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `response_list`
+--
+ALTER TABLE `response_list`
+  MODIFY `rl_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `stud_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `stud_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `stud_feedback`
+--
+ALTER TABLE `stud_feedback`
+  MODIFY `feed_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -392,18 +483,17 @@ ALTER TABLE `counsellors`
   ADD CONSTRAINT `fk_coun_id` FOREIGN KEY (`coun_id`) REFERENCES `logins` (`user_id`);
 
 --
--- Constraints for table `counsel_req`
---
-ALTER TABLE `counsel_req`
-  ADD CONSTRAINT `fk_coun_id_req` FOREIGN KEY (`coun_id`) REFERENCES `counsellors` (`coun_id`),
-  ADD CONSTRAINT `fk_res_id_req` FOREIGN KEY (`res_id`) REFERENCES `response` (`res_id`),
-  ADD CONSTRAINT `fk_stud_id_req` FOREIGN KEY (`stud_id`) REFERENCES `students` (`stud_id`);
-
---
 -- Constraints for table `coun_feedback`
 --
 ALTER TABLE `coun_feedback`
   ADD CONSTRAINT `fk_coun_id_feed` FOREIGN KEY (`coun_id`) REFERENCES `counsellors` (`coun_id`);
+
+--
+-- Constraints for table `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`stud_id`) REFERENCES `students` (`stud_id`),
+  ADD CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`coun_id`) REFERENCES `counsellors` (`coun_id`);
 
 --
 -- Constraints for table `response`

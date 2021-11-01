@@ -28,7 +28,7 @@ const StudMess = ({ messages, setAlert, active }) => {
   }, [active, messages]);
 
   useEffect(() => {
-    const interval = setInterval(loadMessages, 2000);
+    const interval = setInterval(loadMessages, 3000);
     return () => clearInterval(interval);
     // eslint-disable-next-line
   }, []);

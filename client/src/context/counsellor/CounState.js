@@ -124,6 +124,8 @@ const CounState = (props) => {
       dispatch({
         type: MESSAGE_SEND_SUCCESS,
       });
+
+      loadMessages();
     } catch (err) {
       dispatch({
         type: MESSAGE_SEND_FAIL,

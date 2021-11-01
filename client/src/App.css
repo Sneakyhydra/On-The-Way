@@ -824,3 +824,30 @@ nav {
     opacity: 0.95;
     background-color: rgb(246, 250, 253);
 }
+
+.chatUsers {
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    height: 50px;
+    background-color: white;
+}
+
+.chatActive {
+    color: whitesmoke;
+    background-color: #00bf72;
+}
+
+.chatUsers:focus {
+    color: whitesmoke;
+    background-color: #00bf72;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+    justify-content: flex-end;
+}

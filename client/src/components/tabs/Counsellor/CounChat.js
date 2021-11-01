@@ -2,23 +2,24 @@ import { useEffect, useContext, useState } from "react";
 import CounContext from "../../../context/counsellor/counContext";
 import M from "materialize-css/dist/js/materialize.min.js";
 import AlertContext from "../../../context/alert/alertContext";
-import AuthContext from "../../../context/auth/authContext";
 import Preloader from "../../layout/Preloader";
 import CounMess from "../../layout/CounMess";
+import CounUsers from "../../layout/CounUsers";
 
 const CounChat = () => {
   const counContext = useContext(CounContext);
   const alertContext = useContext(AlertContext);
-  const authContext = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
 
-  const { loadMessages, messages, error } = counContext;
+  const { loadMessages, messages, error, students, loadStudents } = counContext;
   const { setAlert } = alertContext;
-  const { loadUser, user } = authContext;
+
+  const [active, setActive] = useState(0);
 
   // Load the user when dashboard is rendered
   useEffect(() => {
     loadMessages();
+    loadStudents();
     setLoading(false);
     M.AutoInit();
     M.updateTextFields();
@@ -35,49 +36,25 @@ const CounChat = () => {
   if (!messages) {
     return <Preloader />;
   }
-
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   let date;
-  //   date = new Date();
-  //   date =
-  //     date.getUTCFullYear() +
-  //     "-" +
-  //     ("00" + (date.getUTCMonth() + 1)).slice(-2) +
-  //     "-" +
-  //     ("00" + date.getUTCDate()).slice(-2) +
-  //     " " +
-  //     ("00" + date.getUTCHours()).slice(-2) +
-  //     ":" +
-  //     ("00" + date.getUTCMinutes()).slice(-2) +
-  //     ":" +
-  //     ("00" + date.getUTCSeconds()).slice(-2);
-
-  //   submitQuiz({
-  //     quesAns: quiz,
-  //     stud_id: user.user_id,
-  //     date: date,
-  //   });
-  //   setAlert("Quiz Submitted", "success");
-  //   loadUser();
-
-  //   window.location.reload(false);
-  // };
+  if (!students) {
+    return <Preloader />;
+  }
 
   return (
     <div
       style={{
         marginTop: "5em",
-        width: "100%",
+        width: "80%",
         display: "flex",
-        flexWrap: "wrap",
+        flexWrap: "nowrap",
         flexDirection: "row",
+        border: "3px solid black",
+        marginLeft: "10%",
+        height: "600px",
       }}
     >
-      {messages.map((mess) => {
-        return <CounMess mess={mess} setAlert={setAlert} />;
-      })}
+      <CounUsers setActive={setActive} setAlert={setAlert} users={students} />
+      <CounMess setAlert={setAlert} messages={messages} active={active} />
     </div>
   );
 };

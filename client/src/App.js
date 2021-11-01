@@ -39,8 +39,8 @@ import background from "./images/Background1.jpeg";
 import M from "materialize-css/dist/js/materialize.min.js";
 
 // Initialize token everytime the app is rendered
-if (localStorage.token) {
-  setAuthToken(localStorage.token);
+if (sessionStorage.token) {
+  setAuthToken(sessionStorage.token);
 }
 
 const App = () => {

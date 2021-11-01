@@ -8,9 +8,16 @@ const StudMess = ({ messages, setAlert, active }) => {
   const studContext = useContext(StudContext);
   const authContext = useContext(AuthContext);
 
-  const { sendMessage } = studContext;
+  const { sendMessage, loadMessages } = studContext;
   const { user } = authContext;
   const [currMess, setCurrMess] = useState("");
+
+  const scrollToBottom = () => {
+    const elem = document.getElementById("messagesEndStud");
+    if (elem) {
+      elem.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   let temp = [];
   useEffect(() => {
@@ -25,7 +32,17 @@ const StudMess = ({ messages, setAlert, active }) => {
     }
     setMessToShow(temp);
     //eslint-disable-next-line
-  }, [active]);
+  }, [active, messages]);
+
+  useEffect(() => {
+    const interval = setInterval(loadMessages, 2000);
+    return () => clearInterval(interval);
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messToShow]);
 
   const onChange = (e) => {
     M.updateTextFields();
@@ -73,6 +90,49 @@ const StudMess = ({ messages, setAlert, active }) => {
     sendMessage(messToSend);
   };
 
+  const sendOnEnter = (event) => {
+    if (event.key === "Enter") {
+      let date;
+      date = new Date();
+      date =
+        date.getUTCFullYear() +
+        "-" +
+        ("00" + (date.getUTCMonth() + 1)).slice(-2) +
+        "-" +
+        ("00" + date.getUTCDate()).slice(-2) +
+        " " +
+        ("00" + date.getUTCHours()).slice(-2) +
+        ":" +
+        ("00" + date.getUTCMinutes()).slice(-2) +
+        ":" +
+        ("00" + date.getUTCSeconds()).slice(-2);
+
+      if (currMess === "") {
+        return;
+      }
+      let messToSend = {
+        stud_id: user.user_id,
+        coun_id: active,
+        from_role: "student",
+        mess_desc: currMess,
+        mess_date: date,
+      };
+
+      setCurrMess("");
+
+      let temp = messToShow;
+      temp.push(messToSend);
+      if (temp.length === 1) {
+        temp[temp.length - 1].mess_id = 1;
+      } else {
+        temp[temp.length - 1].mess_id = temp[temp.length - 2].mess_id + 1;
+      }
+      setMessToShow(temp);
+
+      sendMessage(messToSend);
+    }
+  };
+
   if (active === 0) {
     return "";
   }
@@ -89,7 +149,13 @@ const StudMess = ({ messages, setAlert, active }) => {
         justifyContent: "space-between",
       }}
     >
-      <div>
+      <div
+        style={{
+          height: "500px",
+          overflowX: "hidden",
+          padding: "1.5rem",
+        }}
+      >
         {messToShow.map((mess) => {
           return (
             <div
@@ -109,6 +175,10 @@ const StudMess = ({ messages, setAlert, active }) => {
             </div>
           );
         })}
+        <div
+          style={{ float: "left", clear: "both" }}
+          id='messagesEndStud'
+        ></div>
       </div>
 
       <div
@@ -125,6 +195,7 @@ const StudMess = ({ messages, setAlert, active }) => {
           name='currMess'
           className='validate'
           onChange={onChange}
+          onKeyPress={sendOnEnter}
         />
         <button
           onClick={send}

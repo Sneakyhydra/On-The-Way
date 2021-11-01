@@ -53,7 +53,7 @@ const Login = () => {
     }
   };
 
-  if (localStorage.token) {
+  if (sessionStorage.token) {
     authContext.loadUser();
   }
 

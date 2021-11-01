@@ -10,7 +10,7 @@ const DashNavbar = () => {
 
   // Load user if token exists
   useEffect(() => {
-    if (localStorage.token) {
+    if (sessionStorage.token) {
       authContext.loadUser();
     }
     M.AutoInit();

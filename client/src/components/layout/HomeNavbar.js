@@ -13,7 +13,7 @@ const HomeNavbar = ({ scrollState }) => {
 
   // Load user if token exists
   useEffect(() => {
-    if (localStorage.token) {
+    if (sessionStorage.token) {
       authContext.loadUser();
     }
     setWindowWidth(window.innerWidth);

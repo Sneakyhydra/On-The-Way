@@ -92,7 +92,7 @@ const RegisterAdmin = () => {
     }
   };
 
-  if (localStorage.token) {
+  if (sessionStorage.token) {
     authContext.loadUser();
   }
 

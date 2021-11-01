@@ -115,7 +115,7 @@ const RegisterStudent = () => {
     }
   };
 
-  if (localStorage.token) {
+  if (sessionStorage.token) {
     authContext.loadUser();
   }
 

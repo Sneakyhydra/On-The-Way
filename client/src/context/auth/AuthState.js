@@ -21,7 +21,7 @@ import setAuthToken from "../../utils/setAuthToken";
 const AuthState = (props) => {
   // Set initial state
   const initialState = {
-    token: localStorage.getItem("token"),
+    token: sessionStorage.getItem("token"),
     isAuthenticated: false,
     loading: true,
     user: null,
@@ -34,8 +34,8 @@ const AuthState = (props) => {
 
   // Load User
   const loadUser = async () => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
+    if (sessionStorage.token) {
+      setAuthToken(sessionStorage.token);
     }
 
     try {

@@ -24,6 +24,8 @@ import {
   COUN_FEED_FAIL,
   STUD_FEED_SUCCESS,
   STUD_FEED_FAIL,
+  FEED_DELETE_SUCCESS,
+  FEED_DELETE_FAIL,
 } from "../types";
 import axios from "axios";
 
@@ -287,6 +289,68 @@ const AdminState = (props) => {
     }
   };
 
+  // Delete student feedback
+  const deleteStudFeed = async (formData) => {
+    // Set header of the input data
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: {
+        ...formData,
+      },
+    };
+
+    try {
+      // Make a delete request at localhost:5000/api/admin/studfeed
+      await axios.delete("api/admin/studfeed", config);
+
+      // Dispatch the action to reducer for FEED_DELETE_SUCCESS
+      dispatch({
+        type: FEED_DELETE_SUCCESS,
+      });
+
+      loadStudFeed();
+    } catch (err) {
+      // Dispatch the action to reducer for FEED_DELETE_FAIL
+      dispatch({
+        type: FEED_DELETE_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
+  // Delete counsellor feedback
+  const deleteCounFeed = async (formData) => {
+    // Set header of the input data
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: {
+        ...formData,
+      },
+    };
+
+    try {
+      // Make a delete request at localhost:5000/api/admin/counfeed
+      await axios.delete("api/admin/counfeed", config);
+
+      // Dispatch the action to reducer for FEED_DELETE_SUCCESS
+      dispatch({
+        type: FEED_DELETE_SUCCESS,
+      });
+
+      loadCounFeed();
+    } catch (err) {
+      // Dispatch the action to reducer for FEED_DELETE_FAIL
+      dispatch({
+        type: FEED_DELETE_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => {
     // Dispatch the action to reducer for CLEAR_ERRORS
@@ -319,6 +383,8 @@ const AdminState = (props) => {
         loadRejected,
         loadCounFeed,
         loadStudFeed,
+        deleteCounFeed,
+        deleteStudFeed,
       }}
     >
       {props.children}

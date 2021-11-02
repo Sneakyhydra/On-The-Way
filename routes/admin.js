@@ -530,4 +530,74 @@ router.get("/studfeed", auth, async(req, res) => {
     }
 });
 
+// @route   DELETE api/admin/counfeed
+// @desc    Delete counsellor feedback
+// @access  Private
+router.delete("/counfeed", auth, async(req, res) => {
+    // Extract user id from req
+    const user_id = req.user_id;
+
+    try {
+        // Get role of the user from DB
+        const [rows] = await promisePool.query(
+            `SELECT role from logins WHERE user_id='${user_id}'`
+        );
+
+        // Extract role from rows
+        const { role } = rows[0];
+
+        // Check if the user is admin
+        if (role === "admin") {
+            // Get counsellors with coun_status=Pending from the DB
+            await promisePool.query(
+                `DELETE FROM coun_feedback WHERE feed_id=${req.body.feed_id}`
+            );
+
+            // Send data to the client
+            res.send("Deleted Successfully");
+        } else {
+            // Unauthorized
+            res.status(401).json({ msg: "Only admins can access this portal" });
+        }
+    } catch (err) {
+        // Catch errors
+        throw err;
+    }
+});
+
+// @route   DELETE api/admin/studfeed
+// @desc    Delete student feedbacks
+// @access  Private
+router.delete("/studfeed", auth, async(req, res) => {
+    // Extract user id from req
+    const user_id = req.user_id;
+
+    try {
+        // Get role of the user from DB
+        const [rows] = await promisePool.query(
+            `SELECT role from logins WHERE user_id='${user_id}'`
+        );
+
+        // Extract role from rows
+        const { role } = rows[0];
+
+        // Check if the user is admin
+        if (role === "admin") {
+            // Get counsellors with coun_status=Pending from the DB
+            await promisePool.query(
+                `DELETE FROM stud_feedback WHERE feed_id=${req.body.feed_id}`
+            );
+
+            // Send data to the client
+            res.send("Deleted Successfully");
+        } else {
+            // Unauthorized
+            res.status(401).json({ msg: "Only admins can access this portal" });
+        }
+    } catch (err) {
+        // Catch errors
+        throw err;
+    }
+});
+
 module.exports = router;

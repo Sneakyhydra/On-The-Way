@@ -20,6 +20,8 @@ import {
   COUN_FEED_FAIL,
   STUD_FEED_SUCCESS,
   STUD_FEED_FAIL,
+  FEED_DELETE_SUCCESS,
+  FEED_DELETE_FAIL,
 } from "../types";
 
 // Change state according to the type of action
@@ -152,6 +154,19 @@ const adminReducer = (state, action) => {
         ...state,
         loading: false,
         studfeed: null,
+        error: action.payload,
+      };
+
+    case FEED_DELETE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case FEED_DELETE_FAIL:
+      return {
+        ...state,
+        loading: false,
         error: action.payload,
       };
 

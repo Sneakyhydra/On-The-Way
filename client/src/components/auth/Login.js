@@ -4,10 +4,13 @@ import AlertContext from "../../context/alert/alertContext";
 import AuthContext from "../../context/auth/authContext";
 import { useHistory } from "react-router";
 import M from "materialize-css/dist/js/materialize.min.js";
+import Cookies from "universal-cookie";
 
 const Login = () => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
+
+  const cookies = new Cookies();
 
   const { setAlert } = alertContext;
 
@@ -53,9 +56,7 @@ const Login = () => {
     }
   };
 
-  if (sessionStorage.token) {
-    authContext.loadUser();
-  }
+  console.log(cookies.get("token"));
 
   return (
     <div className='center' id='fcenter'>

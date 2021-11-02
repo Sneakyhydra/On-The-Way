@@ -28,6 +28,7 @@ import {
   FEED_DELETE_FAIL,
 } from "../types";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const AdminState = (props) => {
   // Set initial state

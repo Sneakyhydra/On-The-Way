@@ -10,7 +10,7 @@ const EditStudent = ({ user, setEdit }) => {
 
   const { setAlert } = alertContext;
 
-  const { editStudent, login } = authContext;
+  const { editStudent } = authContext;
 
   useEffect(() => {
     M.AutoInit();
@@ -77,7 +77,7 @@ const EditStudent = ({ user, setEdit }) => {
       setAlert("Phone number should have 10 digits", "danger");
     } else {
       // eslint-disable-next-line
-      const a = await editStudent({
+      await editStudent({
         user_email: email,
         role: "student",
         stud_name: username,
@@ -90,10 +90,7 @@ const EditStudent = ({ user, setEdit }) => {
         roll_no: rollno,
       });
 
-      await login({
-        user_email: email,
-        user_password: password,
-      });
+      setEdit(false);
     }
   };
 

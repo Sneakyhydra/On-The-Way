@@ -27,9 +27,6 @@ import AdminState from "./context/admin/AdminState";
 import CounState from "./context/counsellor/CounState";
 import StudState from "./context/student/StudState";
 
-// Global header for axios
-import setAuthToken from "./utils/setAuthToken";
-
 // CSS
 import "materialize-css/dist/css/materialize.min.css";
 import M from "materialize-css/dist/js/materialize.min.js";
@@ -37,11 +34,6 @@ import "./App.css";
 
 // Images
 import background from "./images/HomePage/Background1.jpeg";
-
-// Initialize token everytime the app is rendered
-if (sessionStorage.token) {
-  setAuthToken(sessionStorage.token);
-}
 
 const App = () => {
   // Set scroll state

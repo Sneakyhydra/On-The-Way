@@ -16,6 +16,7 @@ import {
   MESSAGE_LOAD_FAIL,
 } from "../types";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const CounState = (props) => {
   // Set initial state

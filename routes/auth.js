@@ -221,24 +221,26 @@ router.post(
                     };
 
                     // Create a token
-                    jwt.sign(
-                        payload,
-                        config.get("jwtSecret"), {
-                            expiresIn: 3600, //seconds
-                        },
-                        (err, token) => {
-                            if (err) throw err;
-
-                            // Send token to the client
-                            res.json({ token });
-                        }
-                    );
+                    const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 3600, });
+                    res.cookie('token', token, { httpOnly: true });
+                    res.send("Logged in");
                 }
             }
         } catch (err) {
             // Catch errors
             throw err;
         }
+    }
+);
+
+// @route   DELETE api/auth
+// @desc    Delete cookie
+// @access  Private
+router.delete(
+    "/", auth,
+    async(req, res) => {
+        res.clearCookie('token');
+        res.send("Logged out");
     }
 );
 

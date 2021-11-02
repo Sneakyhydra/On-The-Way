@@ -4,13 +4,15 @@ import { NavLink } from "react-router-dom";
 import AuthContext from "../../../context/auth/authContext";
 import { Icon } from "react-materialize";
 import M from "materialize-css/dist/js/materialize.min.js";
+import Cookies from "universal-cookie";
 
 const DashNavbar = () => {
   const authContext = useContext(AuthContext);
+  const cookies = new Cookies();
 
   // Load user if token exists
   useEffect(() => {
-    if (sessionStorage.token) {
+    if (cookies.get("token")) {
       authContext.loadUser();
     }
     M.AutoInit();
@@ -20,8 +22,9 @@ const DashNavbar = () => {
 
   const { isAuthenticated, logout } = authContext;
 
-  const onLogout = () => {
-    logout();
+  const onLogout = async () => {
+    await logout();
+    authContext.loadUser();
   };
 
   const authLinks = (

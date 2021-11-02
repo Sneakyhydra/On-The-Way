@@ -1,5 +1,5 @@
 // Imports
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 
@@ -15,6 +15,11 @@ import background2 from "../../images/HomePage/background2.png";
 const Home = () => {
   const authContext = useContext(AuthContext);
   const { isAuthenticated } = authContext;
+
+  useEffect(() => {
+    authContext.loadUser();
+    // eslint-disable-next-line
+  }, []);
 
   // Elements to be displayed to a logged in user
   const authBtns = (

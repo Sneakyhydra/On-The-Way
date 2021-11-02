@@ -15,12 +15,15 @@ import {
   EDIT_FAIL,
 } from "../types";
 import axios from "axios";
-import setAuthToken from "../../utils/setAuthToken";
+import Cookies from "universal-cookie";
+axios.defaults.withCredentials = true;
 
 const AuthState = (props) => {
+  const cookies = new Cookies();
+
   // Set initial state
   const initialState = {
-    token: sessionStorage.getItem("token"),
+    token: cookies.get("token"),
     isAuthenticated: false,
     loading: true,
     user: null,
@@ -32,11 +35,6 @@ const AuthState = (props) => {
 
   // Load User
   const loadUser = async () => {
-    // Check for token
-    if (sessionStorage.token) {
-      setAuthToken(sessionStorage.token);
-    }
-
     try {
       // Make a get request at localhost:5000/api/auth
       const res = await axios.get("/api/auth");
@@ -257,12 +255,17 @@ const AuthState = (props) => {
   };
 
   // Logout
-  const logout = () => {
-    // Delete the token
-    setAuthToken();
+  const logout = async () => {
+    try {
+      await axios.delete("/api/auth");
 
-    // Dispatch the action to reducer for LOGOUT
-    dispatch({ type: LOGOUT });
+      // Delete the token
+      cookies.remove("token");
+      // Dispatch the action to reducer for LOGOUT
+      dispatch({ type: LOGOUT });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // Clear Errors

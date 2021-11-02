@@ -113,19 +113,10 @@ router.post(
                     `INSERT INTO admins (admin_id, admin_name, admin_gender, admin_phone) VALUES (${user_id},"${admin_name}", "${admin_gender}", "${admin_phone}")`
                 );
 
-                // Create token
-                jwt.sign(
-                    payload,
-                    config.get("jwtSecret"), {
-                        expiresIn: 3600,
-                    },
-                    (err, token) => {
-                        if (err) throw err;
-
-                        // Send the token to the user
-                        res.json({ token });
-                    }
-                );
+                // Create a token
+                const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 3600, });
+                res.cookie('token', token, { httpOnly: true });
+                res.send("Logged in");
             }
         } catch (err) {
             // Catch errors
@@ -235,19 +226,10 @@ router.post(
                     `INSERT INTO counsellors (coun_id, coun_name, coun_gender, coun_phone, coun_dept, coun_status) VALUES (${user_id},"${coun_name}", "${coun_gender}", "${coun_phone}", "${coun_dept}", "${coun_status}")`
                 );
 
-                // Create token
-                jwt.sign(
-                    payload,
-                    config.get("jwtSecret"), {
-                        expiresIn: 3600,
-                    },
-                    (err, token) => {
-                        if (err) throw err;
-
-                        // Send the token to the user
-                        res.json({ token });
-                    }
-                );
+                // Create a token
+                const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 3600, });
+                res.cookie('token', token, { httpOnly: true });
+                res.send("Logged in");
             }
         } catch (err) {
             // Catch errors
@@ -370,19 +352,10 @@ router.post(
                     `INSERT INTO students (stud_id, stud_name, roll_no, stud_gender, stud_phone, stud_dept, stud_branch) VALUES (${user_id},"${stud_name}", "${roll_no}", "${stud_gender}", "${stud_phone}", "${stud_dept}", "${stud_branch}")`
                 );
 
-                // Create token
-                jwt.sign(
-                    payload,
-                    config.get("jwtSecret"), {
-                        expiresIn: 3600,
-                    },
-                    (err, token) => {
-                        if (err) throw err;
-
-                        // Send the token to the user
-                        res.json({ token });
-                    }
-                );
+                // Create a token
+                const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 3600, });
+                res.cookie('token', token, { httpOnly: true });
+                res.send("Logged in");
             }
         } catch (err) {
             // Catch errors

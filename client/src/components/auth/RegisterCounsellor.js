@@ -3,10 +3,13 @@ import AlertContext from "../../context/alert/alertContext";
 import AuthContext from "../../context/auth/authContext";
 import { useHistory } from "react-router";
 import M from "materialize-css/dist/js/materialize.min.js";
+import Cookies from "universal-cookie";
 
 const RegisterCounsellor = () => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
+
+  const cookies = new Cookies();
 
   const { setAlert } = alertContext;
 
@@ -101,7 +104,7 @@ const RegisterCounsellor = () => {
     }
   };
 
-  if (sessionStorage.token) {
+  if (cookies.get("token")) {
     authContext.loadUser();
   }
 

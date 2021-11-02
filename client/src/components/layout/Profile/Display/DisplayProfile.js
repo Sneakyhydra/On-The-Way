@@ -23,6 +23,11 @@ const DisplayProfile = () => {
     // eslint-disable-next-line
   }, [loading]);
 
+  useEffect(() => {
+    authContext.loadUser();
+    //eslint-disable-next-line
+  }, []);
+
   const user = authContext.user;
 
   if (loading) {

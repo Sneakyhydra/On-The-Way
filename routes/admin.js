@@ -2,7 +2,7 @@
 const express = require("express"); // To create router
 const mysql = require("mysql2"); // To connect to the DB
 const auth = require("../middleware/auth"); // Middleware
-const readXlsxFile = require('read-excel-file/node');
+const readXlsxFile = require("read-excel-file/node");
 
 // Init router
 const router = express.Router();
@@ -48,16 +48,11 @@ router.get("/quesans", auth, async(req, res) => {
 
         // Check if the user is admin
         if (role === "admin") {
-
             // Get all questions from the DB
-            const [ques] = await promisePool.query(
-                `SELECT * from questions`
-            );
+            const [ques] = await promisePool.query(`SELECT * from questions`);
 
             // Get all answers from the DB
-            const [ans] = await promisePool.query(
-                `SELECT * from answers`
-            );
+            const [ans] = await promisePool.query(`SELECT * from answers`);
 
             // Init array to be sent to the client
             let quesAns = [];
@@ -67,7 +62,7 @@ router.get("/quesans", auth, async(req, res) => {
                 ques_id: null,
                 ques_desc: null,
                 ques_no: null,
-                answers: []
+                answers: [],
             };
 
             // Element of quesItem
@@ -75,7 +70,7 @@ router.get("/quesans", auth, async(req, res) => {
                 ans_id: null,
                 ans_no: null,
                 ans_desc: null,
-                response: null
+                response: null,
             };
 
             // Loop through all the questions
@@ -85,7 +80,7 @@ router.get("/quesans", auth, async(req, res) => {
                     ques_id: ques[i].ques_id,
                     ques_desc: ques[i].ques_desc,
                     ques_no: ques[i].ques_no,
-                    answers: []
+                    answers: [],
                 };
 
                 // Loop through all the answers
@@ -174,12 +169,16 @@ router.put("/quiz", auth, async(req, res) => {
             // Loop through all questions
             for (let i = 0; i < quesAns.length; i++) {
                 // Insert question details in questions table
-                await promisePool.query(`UPDATE questions SET ques_desc="${quesAns[i].ques_desc}" WHERE ques_id=${quesAns[i].ques_id}`);
+                await promisePool.query(
+                    `UPDATE questions SET ques_desc="${quesAns[i].ques_desc}" WHERE ques_id=${quesAns[i].ques_id}`
+                );
 
                 // Loop through all answers of this question
                 for (let j = 0; j < quesAns[i].answers.length; j++) {
                     // Insert answer details in answers table
-                    await promisePool.query(`UPDATE answers SET ans_desc="${quesAns[i].answers[j].ans_desc}", response="${quesAns[i].answers[j].response}" WHERE ans_id=${quesAns[i].answers[j].ans_id}`);
+                    await promisePool.query(
+                        `UPDATE answers SET ans_desc="${quesAns[i].answers[j].ans_desc}", response="${quesAns[i].answers[j].response}" WHERE ans_id=${quesAns[i].answers[j].ans_id}`
+                    );
                 }
             }
 
@@ -354,15 +353,13 @@ router.get("/students", auth, async(req, res) => {
         // Check if the user is admin
         if (role === "admin") {
             // Get all students from the DB
-            const [rows] = await promisePool.query(
-                `SELECT * from students`
-            );
+            const [rows] = await promisePool.query(`SELECT * from students`);
 
             // Init students array
             let students = [];
 
             // Read CPI_sheet.xlsx
-            readXlsxFile('./CPI_sheet.xlsx').then((cpis) => {
+            readXlsxFile("./CPI_sheet.xlsx").then((cpis) => {
                 // Loop through all students
                 for (let i = 0; i < rows.length; i++) {
                     // Init student object
@@ -374,7 +371,7 @@ router.get("/students", auth, async(req, res) => {
                         stud_phone: rows[i].stud_phone,
                         stud_dept: rows[i].stud_dept,
                         stud_branch: rows[i].stud_branch,
-                        cpi: null
+                        cpi: null,
                     };
 
                     // Loop through all rows in excel sheet
@@ -422,14 +419,10 @@ router.get("/counfeed", auth, async(req, res) => {
         // Check if the user is admin
         if (role === "admin") {
             // Get counsellors with coun_status=Pending from the DB
-            const [rows] = await promisePool.query(
-                `SELECT * from coun_feedback`
-            );
+            const [rows] = await promisePool.query(`SELECT * from coun_feedback`);
 
             // Get all counsellors
-            const [rows1] = await promisePool.query(
-                `SELECT * from counsellors`
-            );
+            const [rows1] = await promisePool.query(`SELECT * from counsellors`);
 
             let finalFeed = [];
             for (let i = 0; i < rows.length; i++) {
@@ -437,9 +430,9 @@ router.get("/counfeed", auth, async(req, res) => {
                     coun_id: rows[i].coun_id,
                     feed_id: rows[i].feed_id,
                     feed_desc: rows[i].feed_desc,
-                    coun_name: null
+                    coun_name: null,
                 };
-                for (let j = 0; j < rows1.length; i++) {
+                for (let j = 0; j < rows1.length; j++) {
                     if (rows1[j].coun_id === rows[i].coun_id) {
                         temp.coun_name = rows1[j].coun_name;
                         break;
@@ -479,13 +472,9 @@ router.get("/studfeed", auth, async(req, res) => {
         // Check if the user is admin
         if (role === "admin") {
             // Get counsellors with coun_status=Pending from the DB
-            const [rows] = await promisePool.query(
-                `SELECT * from stud_feedback`
-            );
+            const [rows] = await promisePool.query(`SELECT * from stud_feedback`);
             // Get all students
-            const [rows1] = await promisePool.query(
-                `SELECT * from students`
-            );
+            const [rows1] = await promisePool.query(`SELECT * from students`);
 
             let finalFeed = [];
             for (let i = 0; i < rows.length; i++) {
@@ -493,7 +482,7 @@ router.get("/studfeed", auth, async(req, res) => {
                     stud_id: rows[i].stud_id,
                     feed_id: rows[i].feed_id,
                     feed_desc: rows[i].feed_desc,
-                    stud_name: null
+                    stud_name: null,
                 };
                 for (let j = 0; j < rows1.length; j++) {
                     if (rows1[j].stud_id === rows[i].stud_id) {

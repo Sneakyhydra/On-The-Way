@@ -548,12 +548,12 @@ router.delete("/counfeed", auth, async(req, res) => {
 
         // Check if the user is admin
         if (role === "admin") {
-            // Get counsellors with coun_status=Pending from the DB
+            // Delete counsellor feedback with the given feed_id
             await promisePool.query(
                 `DELETE FROM coun_feedback WHERE feed_id=${req.body.feed_id}`
             );
 
-            // Send data to the client
+            // Send success message to the client
             res.send("Deleted Successfully");
         } else {
             // Unauthorized
@@ -583,12 +583,12 @@ router.delete("/studfeed", auth, async(req, res) => {
 
         // Check if the user is admin
         if (role === "admin") {
-            // Get counsellors with coun_status=Pending from the DB
+            // Delete student feedback with the given feed_id
             await promisePool.query(
                 `DELETE FROM stud_feedback WHERE feed_id=${req.body.feed_id}`
             );
 
-            // Send data to the client
+            // Send success message to the client
             res.send("Deleted Successfully");
         } else {
             // Unauthorized

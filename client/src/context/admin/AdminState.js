@@ -291,7 +291,7 @@ const AdminState = (props) => {
 
   // Delete student feedback
   const deleteStudFeed = async (formData) => {
-    // Set header of the input data
+    // Set header and data in the config
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -310,6 +310,7 @@ const AdminState = (props) => {
         type: FEED_DELETE_SUCCESS,
       });
 
+      // Load student feedbacks after deletion
       loadStudFeed();
     } catch (err) {
       // Dispatch the action to reducer for FEED_DELETE_FAIL
@@ -322,7 +323,7 @@ const AdminState = (props) => {
 
   // Delete counsellor feedback
   const deleteCounFeed = async (formData) => {
-    // Set header of the input data
+    // Set header and data in the config
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -341,6 +342,7 @@ const AdminState = (props) => {
         type: FEED_DELETE_SUCCESS,
       });
 
+      // Load counsellor feedbacks after deletion
       loadCounFeed();
     } catch (err) {
       // Dispatch the action to reducer for FEED_DELETE_FAIL

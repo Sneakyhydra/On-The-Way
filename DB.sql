@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2021 at 06:25 PM
+-- Generation Time: Nov 02, 2021 at 01:48 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -107,11 +107,12 @@ CREATE TABLE `counsellors` (
 
 INSERT INTO `counsellors` (`coun_id`, `coun_name`, `coun_gender`, `coun_phone`, `coun_dept`, `coun_status`) VALUES
 (2, 'Abc', 'Female', '1234567890', 'M.Tech', 'Approved'),
-(4, 'askfhkj', 'Male', '123123', 'M.Des', 'Approved'),
-(6, 'ajfhakj', 'Female', '1241', 'M.Tech', 'Rejected'),
+(4, 'askfhkj', 'Male', '123123', 'M.Des', 'Rejected'),
+(6, 'ajfhakj', 'Female', '1241', 'M.Tech', 'Approved'),
 (9, 'Manu', 'Male', '1234567890', 'B.Tech', 'Approved'),
-(12, 'B', 'Male', '4643413232', 'M.Des', 'Rejected'),
-(17, 'asdafajl', 'Other', '1234567890', 'M.Des', 'Rejected');
+(12, 'B', 'Male', '4643413232', 'M.Des', 'Approved'),
+(17, 'asdafajl', 'Other', '1234567890', 'M.Des', 'Rejected'),
+(19, 'coun', 'Male', '1234567890', 'B.Tech', 'Approved');
 
 -- --------------------------------------------------------
 
@@ -124,16 +125,6 @@ CREATE TABLE `coun_feedback` (
   `coun_id` bigint(20) NOT NULL,
   `feed_desc` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `coun_feedback`
---
-
-INSERT INTO `coun_feedback` (`feed_id`, `coun_id`, `feed_desc`) VALUES
-(1, 2, 'hello'),
-(2, 2, 'hi'),
-(3, 2, 'done'),
-(4, 2, 'abc');
 
 -- --------------------------------------------------------
 
@@ -155,7 +146,7 @@ CREATE TABLE `logins` (
 INSERT INTO `logins` (`user_id`, `user_email`, `user_password`, `role`) VALUES
 (1, 'dhruvrishishwar2@gmail.com', '$2a$10$cc7yBuZQOS56aXbPwe0gEeE/hGKYK1jbVbm/Uxh9bhvS24DMjBmAy', 'student'),
 (2, 'abc@gmail.com', '$2a$10$7yNoPWBNM39EmntpKU2hxehe7pX4moIl3xgo2S1FOKYJD0QdaA.3G', 'counsellor'),
-(3, 'dev@gmail.com', '$2a$10$QPmRWe5bSMQ/yPamIw89he.o.jrDVCe9pXV3.2rl.tyQ/q1XqECGa', 'admin'),
+(3, 'dev@gmail.com', '$2a$10$AS21r0mFRZHLrBTijGhhBOs/dfCW1mSPR9I3ZdlP1VcM4gsoj1kkK', 'admin'),
 (4, 'akdlfh@gmail.com', '$2a$10$V2dx.wPE7ec0kYjMmTrQU.hcu95/cek1SMxOUZ0M6m5UEhLidC2Wm', 'counsellor'),
 (5, 'kdsfk@gmail.com', '$2a$10$BssCQ.oes9vGXlh3eipNfe/yx7GLLbys/.QQtjI9B5hsVZV7QVAJi', 'student'),
 (6, 'jdkfha@gmail.com', '$2a$10$DJwTh0oVJR3.tKMr9cQ5henfNYGrBszJPnNeWUSUlTxgbCamG2C4a', 'counsellor'),
@@ -169,7 +160,9 @@ INSERT INTO `logins` (`user_id`, `user_email`, `user_password`, `role`) VALUES
 (15, 'a@mail.com', '$2a$10$smK.BUeRx/DpyzSRHugkd.HMOcbMj1hDVeYkaDs9340.GOLq3FxEG', 'student'),
 (16, 'akfjbasj@mail.com', '$2a$10$M3MTUlMb5WGVDfZZiSE5AOVdDAGYu28uSQogHAr6.C85KOp6P/rvS', 'student'),
 (17, 'anfaljsfn@mail.com', '$2a$10$uzEDmIvS9LlvddFtWXzbfeWkqXGH0.YfCTEaw6mESDqlcNU0lPU6.', 'counsellor'),
-(18, 'lafnasjl@mail.com', '$2a$10$v0s1VLL.7nk9CkQI4PdtZu26iz53AqUVbFIewZB9wUKjS2Qt/8iMa', 'admin');
+(18, 'lafnasjl@mail.com', '$2a$10$v0s1VLL.7nk9CkQI4PdtZu26iz53AqUVbFIewZB9wUKjS2Qt/8iMa', 'admin'),
+(19, 'a@gmail.com', '$2a$10$fB1WgyneNhm5ECQw9LevzOd.AZWZtCYjxvzcZ5GGH8qs4rwctdjAK', 'counsellor'),
+(20, 'abc@mail.com', '$2a$10$fA0JCGzkSZ1QNnQX.XjZjOFKyxbFEuSytve.oQgd12FUSQNH/oS3i', 'student');
 
 -- --------------------------------------------------------
 
@@ -206,7 +199,115 @@ INSERT INTO `messages` (`mess_id`, `stud_id`, `coun_id`, `from_role`, `mess_desc
 (18, 1, 2, 'student', 'abc', '2021-11-01 17:03:26'),
 (19, 1, 4, 'student', 'abc', '2021-11-01 17:03:30'),
 (20, 1, 9, 'student', 'abc', '2021-11-01 17:03:34'),
-(21, 1, 2, 'counsellor', 'hi dhruv', '2021-11-01 17:20:43');
+(21, 1, 2, 'counsellor', 'hi dhruv', '2021-11-01 17:20:43'),
+(22, 1, 2, 'student', 'i need ur help', '2021-11-01 20:36:19'),
+(23, 1, 2, 'counsellor', 'no problem', '2021-11-01 20:37:21'),
+(24, 1, 2, 'counsellor', 'i will help u', '2021-11-01 20:37:32'),
+(25, 1, 2, 'student', 'i want', '2021-11-01 20:44:11'),
+(27, 1, 2, 'student', 'hi', '2021-11-01 20:46:22'),
+(28, 1, 2, 'counsellor', 'hi', '2021-11-01 20:46:24'),
+(29, 1, 2, 'student', 'hello', '2021-11-01 21:13:20'),
+(30, 1, 2, 'student', 'hi', '2021-11-01 21:13:25'),
+(31, 1, 2, 'student', 'how are you?', '2021-11-01 21:13:30'),
+(32, 1, 2, 'counsellor', 'i am fine thank you', '2021-11-01 21:13:35'),
+(33, 1, 2, 'student', 'abc', '2021-11-01 21:15:00'),
+(34, 1, 2, 'student', 'sadjk', '2021-11-01 21:15:43'),
+(35, 1, 2, 'student', 'askfjaskf', '2021-11-01 21:15:45'),
+(36, 1, 2, 'counsellor', 'hello', '2021-11-01 21:27:22'),
+(37, 1, 2, 'counsellor', 'are u there', '2021-11-01 21:29:53'),
+(38, 1, 2, 'counsellor', 'abc', '2021-11-01 21:50:06'),
+(39, 1, 2, 'student', 'hello', '2021-11-01 21:50:22'),
+(40, 1, 2, 'counsellor', 'hello', '2021-11-01 21:51:11'),
+(41, 1, 2, 'counsellor', 'sadjka', '2021-11-01 21:51:47'),
+(42, 1, 2, 'student', 'sakflaks', '2021-11-01 21:51:51'),
+(43, 1, 2, 'counsellor', 'ksadkjas', '2021-11-01 21:52:21'),
+(44, 1, 2, 'student', 'skagfkasfa', '2021-11-01 21:52:25'),
+(45, 1, 2, 'counsellor', 'no', '2021-11-01 21:52:55'),
+(46, 1, 2, 'student', 'hehe', '2021-11-01 21:53:03'),
+(47, 1, 2, 'student', 'hi', '2021-11-01 22:23:14'),
+(48, 1, 2, 'counsellor', 'ih', '2021-11-01 22:23:20'),
+(49, 1, 2, 'counsellor', 'sajdna', '2021-11-01 22:23:33'),
+(50, 1, 2, 'student', 'asljfna', '2021-11-01 22:24:26'),
+(51, 1, 2, 'counsellor', 'safljsa', '2021-11-01 22:24:37'),
+(52, 1, 2, 'student', 'hi', '2021-11-01 22:27:35'),
+(53, 1, 2, 'counsellor', 'i am here', '2021-11-01 22:27:44'),
+(54, 1, 2, 'counsellor', 'how are you', '2021-11-01 22:32:16'),
+(55, 1, 2, 'student', 'i am fine', '2021-11-01 22:32:23'),
+(56, 1, 2, 'student', 'hehe', '2021-11-01 22:38:20'),
+(57, 1, 2, 'counsellor', 'my god', '2021-11-01 22:38:28'),
+(58, 1, 2, 'counsellor', 'its working', '2021-11-01 22:38:33'),
+(59, 1, 19, 'counsellor', 'hey', '2021-11-01 22:41:33'),
+(60, 1, 19, 'counsellor', 'how are you', '2021-11-01 22:41:37'),
+(61, 1, 19, 'student', 'i am fine thank u', '2021-11-01 22:41:49'),
+(62, 1, 2, 'counsellor', 'u talking to someone else?', '2021-11-01 22:41:58'),
+(63, 1, 19, 'counsellor', 'nice', '2021-11-01 22:42:03'),
+(64, 1, 2, 'student', 'no', '2021-11-01 22:42:10'),
+(65, 1, 2, 'student', 'its faster now', '2021-11-01 22:43:15'),
+(66, 1, 2, 'counsellor', 'ikr', '2021-11-01 22:43:21'),
+(67, 1, 2, 'counsellor', 'hey are there any errors?', '2021-11-01 22:44:35'),
+(68, 1, 2, 'student', 'i dont think so', '2021-11-01 22:44:42'),
+(69, 1, 2, 'student', 'i love this', '2021-11-01 22:45:00'),
+(70, 1, 2, 'counsellor', 'dont get distracted', '2021-11-01 22:45:08'),
+(71, 14, 2, 'counsellor', 'hi', '2021-11-01 23:07:51'),
+(72, 8, 2, 'counsellor', 'hi', '2021-11-01 23:07:58'),
+(73, 1, 2, 'counsellor', 'hi', '2021-11-01 23:43:02'),
+(74, 1, 2, 'counsellor', 'an', '2021-11-01 23:44:51'),
+(75, 1, 2, 'counsellor', 'pasd', '2021-11-01 23:44:53'),
+(76, 1, 2, 'counsellor', 'ajksfksj', '2021-11-01 23:44:55'),
+(77, 1, 2, 'counsellor', 'salkfhsjak', '2021-11-01 23:44:57'),
+(78, 1, 2, 'counsellor', 'bg', '2021-11-01 23:45:58'),
+(79, 1, 2, 'counsellor', 'asdh', '2021-11-01 23:46:11'),
+(80, 1, 2, 'counsellor', 'helo there', '2021-11-01 23:47:56'),
+(81, 15, 2, 'counsellor', 'a', '2021-11-01 23:48:04'),
+(82, 14, 2, 'counsellor', 'safs', '2021-11-01 23:48:08'),
+(83, 8, 2, 'counsellor', 'safds', '2021-11-01 23:48:12'),
+(84, 1, 2, 'student', 'basd', '2021-11-01 23:49:53'),
+(85, 1, 2, 'student', 'qiwghkj', '2021-11-01 23:49:56'),
+(86, 1, 2, 'student', 'safhdsbaf', '2021-11-01 23:50:32'),
+(87, 1, 2, 'student', 'dsaflhsdbfla', '2021-11-01 23:50:33'),
+(88, 1, 4, 'student', 'afs', '2021-11-01 23:50:45'),
+(89, 1, 9, 'student', 'asfa', '2021-11-01 23:50:48'),
+(90, 1, 2, 'student', 'sajdbajf', '2021-11-01 23:50:54'),
+(91, 1, 2, 'counsellor', 'askdbfks', '2021-11-01 23:51:05'),
+(92, 1, 2, 'counsellor', 'hjvjh', '2021-11-01 23:51:08'),
+(93, 1, 2, 'student', 'sjafbks', '2021-11-01 23:51:13'),
+(94, 1, 2, 'student', 'jasdbfa', '2021-11-01 23:52:10'),
+(95, 1, 2, 'counsellor', 'asdfb', '2021-11-01 23:52:18'),
+(96, 1, 2, 'counsellor', 'aks', '2021-11-01 23:52:19'),
+(97, 1, 2, 'student', 'aksf', '2021-11-01 23:52:24'),
+(98, 1, 2, 'student', 'kajsk', '2021-11-01 23:52:30'),
+(99, 1, 2, 'student', 'hello', '2021-11-02 00:00:30'),
+(100, 1, 2, 'counsellor', 'hello', '2021-11-02 00:00:37'),
+(101, 1, 2, 'student', 'gjj', '2021-11-02 00:00:48'),
+(102, 1, 2, 'student', 'how are you', '2021-11-02 07:30:08'),
+(103, 1, 2, 'counsellor', 'i am fine', '2021-11-02 07:30:39'),
+(104, 1, 2, 'counsellor', 'mic test', '2021-11-02 08:06:34'),
+(105, 1, 2, 'counsellor', 'are u there?', '2021-11-02 08:06:39'),
+(106, 1, 2, 'student', 'what?', '2021-11-02 08:06:49'),
+(107, 1, 2, 'student', 'helo', '2021-11-02 08:07:07'),
+(108, 1, 2, 'counsellor', 'abc', '2021-11-02 08:07:31'),
+(109, 1, 2, 'counsellor', 'def', '2021-11-02 08:07:33'),
+(110, 1, 2, 'counsellor', 'hi', '2021-11-02 08:18:31'),
+(111, 1, 2, 'counsellor', 'hi', '2021-11-02 08:18:37'),
+(112, 5, 2, 'counsellor', 'hi', '2021-11-02 08:18:53'),
+(113, 1, 2, 'counsellor', 'hi', '2021-11-02 08:21:38'),
+(114, 1, 2, 'student', 'hello', '2021-11-02 08:21:44'),
+(115, 1, 2, 'student', 'how are you?', '2021-11-02 08:21:52'),
+(116, 1, 2, 'counsellor', 'kya', '2021-11-02 08:50:36'),
+(117, 1, 2, 'counsellor', 'kya', '2021-11-02 08:51:17'),
+(118, 1, 2, 'counsellor', 'abc', '2021-11-02 08:51:27'),
+(119, 1, 2, 'student', 'hello', '2021-11-02 08:51:46'),
+(120, 1, 2, 'counsellor', 'xchxh', '2021-11-02 08:51:52'),
+(121, 1, 2, 'counsellor', 'Hello', '2021-11-02 08:53:58'),
+(122, 1, 2, 'student', 'hi', '2021-11-02 08:54:09'),
+(123, 1, 2, 'counsellor', 'How are u?', '2021-11-02 08:54:16'),
+(124, 1, 2, 'student', 'iam finw', '2021-11-02 08:54:26'),
+(125, 1, 12, 'counsellor', 'hey ', '2021-11-02 09:06:13'),
+(126, 1, 12, 'counsellor', 'how are u', '2021-11-02 09:06:34'),
+(127, 1, 12, 'student', 'I am fine', '2021-11-02 09:06:43'),
+(128, 1, 12, 'student', 'How are u', '2021-11-02 09:06:48'),
+(129, 1, 2, 'student', 'hello', '2021-11-02 11:13:31'),
+(130, 1, 2, 'counsellor', 'ms', '2021-11-02 11:13:38');
 
 -- --------------------------------------------------------
 
@@ -248,7 +349,9 @@ CREATE TABLE `response` (
 --
 
 INSERT INTO `response` (`res_id`, `stud_id`, `res_date`) VALUES
-(11, 1, '2021-10-31 14:20:06');
+(11, 1, '2021-10-31 14:20:06'),
+(12, 1, '2021-11-02 08:20:41'),
+(13, 20, '2021-11-02 11:12:09');
 
 -- --------------------------------------------------------
 
@@ -272,7 +375,17 @@ INSERT INTO `response_list` (`rl_id`, `res_id`, `ques_id`, `ans_id`) VALUES
 (52, 11, 2, 6),
 (53, 11, 3, 11),
 (54, 11, 4, 17),
-(55, 11, 5, 18);
+(55, 11, 5, 18),
+(56, 12, 1, 1),
+(57, 12, 2, 6),
+(58, 12, 3, 11),
+(59, 12, 4, 17),
+(60, 12, 5, 21),
+(61, 13, 1, 1),
+(62, 13, 2, 5),
+(63, 13, 3, 9),
+(64, 13, 4, 13),
+(65, 13, 5, 19);
 
 -- --------------------------------------------------------
 
@@ -300,7 +413,8 @@ INSERT INTO `students` (`stud_id`, `stud_name`, `roll_no`, `stud_gender`, `stud_
 (8, 'Dhruv', '20bcs075', 'Male', '6268086918', 'B.Tech', 'CSE'),
 (14, 'sadajhfl', 'sjkhasfjl', 'Other', '0987654321', 'B.Tech', 'ECE'),
 (15, 'a', 'jafnaslfsal', 'Other', '1234567890', 'M.Tech', 'ECE'),
-(16, 'sdafjdbfk', 'aksdjnfsk', 'Female', '1123123123', 'B.Tech', 'ECE');
+(16, 'sdafjdbfk', 'aksdjnfsk', 'Female', '1123123123', 'B.Tech', 'ECE'),
+(20, 'mili', 'ahfaskf', 'Female', '1234567890', 'B.Tech', 'ECE');
 
 -- --------------------------------------------------------
 
@@ -313,14 +427,6 @@ CREATE TABLE `stud_feedback` (
   `stud_id` bigint(20) NOT NULL,
   `feed_desc` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `stud_feedback`
---
-
-INSERT INTO `stud_feedback` (`feed_id`, `stud_id`, `feed_desc`) VALUES
-(1, 1, 'hello'),
-(2, 1, 'release chat soon');
 
 --
 -- Indexes for dumped tables
@@ -416,19 +522,19 @@ ALTER TABLE `answers`
 -- AUTO_INCREMENT for table `coun_feedback`
 --
 ALTER TABLE `coun_feedback`
-  MODIFY `feed_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `feed_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `logins`
 --
 ALTER TABLE `logins`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `mess_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `mess_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- AUTO_INCREMENT for table `questions`
@@ -440,25 +546,25 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `response`
 --
 ALTER TABLE `response`
-  MODIFY `res_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `res_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `response_list`
 --
 ALTER TABLE `response_list`
-  MODIFY `rl_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `rl_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `stud_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `stud_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `stud_feedback`
 --
 ALTER TABLE `stud_feedback`
-  MODIFY `feed_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `feed_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

@@ -193,6 +193,7 @@ const EditAdmin = ({ user, setEdit }) => {
 
             <button
               className='btn waves-effect waves-light'
+              type='button'
               value='Cancel'
               onClick={onCancel}
               style={{ marginTop: "2em", borderRadius: "2em", width: "13em" }}

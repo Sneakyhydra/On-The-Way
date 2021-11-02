@@ -239,6 +239,7 @@ const EditCounsellor = ({ user, setEdit }) => {
             <button
               className='btn waves-effect waves-light'
               value='Cancel'
+              type='button'
               onClick={onCancel}
               style={{ marginTop: "2em", borderRadius: "2em", width: "13em" }}
             >

@@ -1,9 +1,9 @@
 import { useEffect, useContext, useState } from "react";
 import AdminContext from "../../../context/admin/adminContext";
 import M from "materialize-css/dist/js/materialize.min.js";
-import StudFeedCard from "../../layout/StudFeedCard";
+import StudFeedCard from "../../layout/Admin/Feedback/StudFeedCard";
 import AlertContext from "../../../context/alert/alertContext";
-import Preloader from "../../layout/Preloader";
+import Preloader from "../../layout/Preloader/Preloader";
 
 const AdminStudFeed = () => {
   const adminContext = useContext(AdminContext);

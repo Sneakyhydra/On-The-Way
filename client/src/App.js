@@ -17,8 +17,8 @@ import RegisterAdmin from "./components/auth/RegisterAdmin";
 import PrivateRoute from "./components/routing/PrivateRoute";
 
 // Layout components
-import HomeNavbar from "./components/layout/HomeNavbar";
-import Alerts from "./components/layout/Alerts";
+import HomeNavbar from "./components/layout/Navbar/HomeNavbar";
+import Alerts from "./components/layout/Alert/Alerts";
 
 // States
 import AuthState from "./context/auth/AuthState";
@@ -35,7 +35,7 @@ import "materialize-css/dist/css/materialize.min.css";
 import "./App.css";
 
 // Images
-import background from "./images/Background1.jpeg";
+import background from "./images/HomePage/Background1.jpeg";
 import M from "materialize-css/dist/js/materialize.min.js";
 
 // Initialize token everytime the app is rendered

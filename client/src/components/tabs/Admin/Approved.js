@@ -1,21 +1,21 @@
 import { useEffect, useContext, useState } from "react";
 import AdminContext from "../../../context/admin/adminContext";
 import M from "materialize-css/dist/js/materialize.min.js";
-import RejectedCard from "../../layout/Admin/Counsellors/RejectedCard";
+import ApprovedCard from "../../layout/Admin/Counsellors/ApprovedCard";
 import AlertContext from "../../../context/alert/alertContext";
 import Preloader from "../../layout/Preloader/Preloader";
 
-const Rejected = () => {
+const Approved = () => {
   const adminContext = useContext(AdminContext);
   const alertContext = useContext(AlertContext);
   const [loading, setLoading] = useState(true);
 
-  const { rejected, loadRejected } = adminContext;
+  const { counsellors, loadCounsellors } = adminContext;
   const { setAlert } = alertContext;
 
   // Load the user when dashboard is rendered
   useEffect(() => {
-    loadRejected();
+    loadCounsellors();
     setLoading(false);
     M.AutoInit();
     M.updateTextFields();
@@ -24,7 +24,7 @@ const Rejected = () => {
   if (loading) {
     return <Preloader />;
   }
-  if (!rejected) {
+  if (!counsellors) {
     return <Preloader />;
   }
 
@@ -45,9 +45,9 @@ const Rejected = () => {
           justifyContent: "flex-start",
         }}
       >
-        {rejected.map((item) => {
+        {counsellors.map((item) => {
           return (
-            <RejectedCard key={item.coun_id} user={item} setAlert={setAlert} />
+            <ApprovedCard key={item.coun_id} user={item} setAlert={setAlert} />
           );
         })}
       </div>
@@ -55,4 +55,4 @@ const Rejected = () => {
   );
 };
 
-export default Rejected;
+export default Approved;

@@ -1,20 +1,20 @@
 // Imports
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/auth/authContext";
-import DashNavbar from "../layout/DashNavbar";
+import DashNavbar from "../layout/Navbar/DashNavbar";
 import { Tab, Tabs } from "react-bootstrap";
-import ProfileTab from "../tabs/ProfileTab";
+import Profile from "../tabs/Profile";
 
 import Pending from "../tabs/Admin/Pending";
-import Questions from "../tabs/Admin/Questions";
-import Counsellors from "../tabs/Admin/Counsellors";
+import AdminQuiz from "../tabs/Admin/AdminQuiz";
+import Approved from "../tabs/Admin/Approved";
 import Students from "../tabs/Admin/Students";
 import Rejected from "../tabs/Admin/Rejected";
 import AdminCounFeed from "../tabs/Admin/AdminCounFeed";
 import AdminStudFeed from "../tabs/Admin/AdminStudFeed";
 
 import StudentInfo from "../tabs/Counsellor/StudentInfo";
-import Quiz from "../tabs/Counsellor/Quiz";
+import CounQuiz from "../tabs/Counsellor/CounQuiz";
 import CounChat from "../tabs/Counsellor/CounChat";
 import CounFeed from "../tabs/Counsellor/CounFeed";
 
@@ -23,7 +23,7 @@ import StudCoun from "../tabs/Student/StudCoun";
 import StudChat from "../tabs/Student/StudChat";
 import StudFeed from "../tabs/Student/StudFeed";
 
-import Preloader from "../layout/Preloader";
+import Preloader from "../layout/Preloader/Preloader";
 import M from "materialize-css/dist/js/materialize.min.js";
 
 const Dashboard = () => {
@@ -64,7 +64,7 @@ const Dashboard = () => {
       variant='pills'
     >
       <Tab eventKey='profile' title='Profile'>
-        <ProfileTab />
+        <Profile />
       </Tab>
     </Tabs>
   );
@@ -85,10 +85,10 @@ const Dashboard = () => {
         variant='pills'
       >
         <Tab eventKey='profile' title='Profile' className='z-depth-0'>
-          <ProfileTab />
+          <Profile />
         </Tab>
-        <Tab eventKey='questions' title='Questions' className='z-depth-0'>
-          <Questions />
+        <Tab eventKey='questions' title='Quiz' className='z-depth-0'>
+          <AdminQuiz />
         </Tab>
         <Tab eventKey='counsellors' title='Counsellors' className='z-depth-0'>
           <Tabs
@@ -114,7 +114,7 @@ const Dashboard = () => {
               <Rejected />
             </Tab>
             <Tab eventKey='approved' title='Approved' className='z-depth-0'>
-              <Counsellors />
+              <Approved />
             </Tab>
           </Tabs>
         </Tab>
@@ -165,7 +165,7 @@ const Dashboard = () => {
         variant='pills'
       >
         <Tab eventKey='profile' title='Profile' className='z-depth-0'>
-          <ProfileTab />
+          <Profile />
         </Tab>
         {user.coun_status === "Approved" ? (
           <Tab eventKey='studentInfo' title='Students' className='z-depth-0'>
@@ -175,8 +175,8 @@ const Dashboard = () => {
           ""
         )}
         {user.coun_status === "Approved" ? (
-          <Tab eventKey='quiz' title='Quiz' className='z-depth-0'>
-            <Quiz />
+          <Tab eventKey='counquiz' title='Quiz' className='z-depth-0'>
+            <CounQuiz />
           </Tab>
         ) : (
           ""
@@ -213,7 +213,7 @@ const Dashboard = () => {
         variant='pills'
       >
         <Tab eventKey='profile' title='Profile' className='z-depth-0'>
-          <ProfileTab />
+          <Profile />
         </Tab>
         <Tab eventKey='studquiz' title='Quiz' className='z-depth-0'>
           <StudQuiz />

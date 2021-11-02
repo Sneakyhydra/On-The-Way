@@ -2,9 +2,9 @@ import { useEffect, useContext, useState } from "react";
 import CounContext from "../../../context/counsellor/counContext";
 import M from "materialize-css/dist/js/materialize.min.js";
 import AlertContext from "../../../context/alert/alertContext";
-import Preloader from "../../layout/Preloader";
-import CounMess from "../../layout/CounMess";
-import CounUsers from "../../layout/CounUsers";
+import Preloader from "../../layout/Preloader/Preloader";
+import CounMess from "../../layout/Counsellor/Chat/CounMess";
+import CounUsers from "../../layout/Counsellor/Chat/CounUsers";
 
 const CounChat = () => {
   const counContext = useContext(CounContext);

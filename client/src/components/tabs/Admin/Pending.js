@@ -1,9 +1,9 @@
 import { useEffect, useContext, useState } from "react";
 import AdminContext from "../../../context/admin/adminContext";
 import M from "materialize-css/dist/js/materialize.min.js";
-import CustomCard from "../../layout/CustomCard";
+import PendingCard from "../../layout/Admin/Counsellors/PendingCard";
 import AlertContext from "../../../context/alert/alertContext";
-import Preloader from "../../layout/Preloader";
+import Preloader from "../../layout/Preloader/Preloader";
 
 const Pending = () => {
   const adminContext = useContext(AdminContext);
@@ -47,7 +47,7 @@ const Pending = () => {
       >
         {pending.map((item) => {
           return (
-            <CustomCard key={item.coun_id} user={item} setAlert={setAlert} />
+            <PendingCard key={item.coun_id} user={item} setAlert={setAlert} />
           );
         })}
       </div>

@@ -317,15 +317,15 @@ nav {
 }
 
 #i1 {
-    background-image: url("./images/icon1.svg");
+    background-image: url("./images/HomePage/icon1.svg");
 }
 
 #i2 {
-    background-image: url("./images/icon2.svg");
+    background-image: url("./images/HomePage/icon2.svg");
 }
 
 #i3 {
-    background-image: url("./images/icon3.svg");
+    background-image: url("./images/HomePage/icon3.svg");
 }
 
 .footerborder {
@@ -475,7 +475,7 @@ nav {
     /* position: absolute; */
     height: 100px;
     width: 100px;
-    background-image: url(./images/footericon.svg);
+    background-image: url(./images/HomePage/footericon.svg);
     background-size: cover;
 }
 
@@ -518,7 +518,7 @@ nav {
     margin: 0%;
     padding: 0%;
     /* background-color: yellow; */
-    background-image: url(./images/login2.jpg);
+    background-image: url(./images/LoginPage/login2.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;

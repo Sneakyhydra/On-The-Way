@@ -2,9 +2,9 @@ import { useEffect, useContext, useState } from "react";
 import StudContext from "../../../context/student/studContext";
 import M from "materialize-css/dist/js/materialize.min.js";
 import AlertContext from "../../../context/alert/alertContext";
-import Preloader from "../../layout/Preloader";
-import StudMess from "../../layout/StudMess";
-import StudUsers from "../../layout/StudUsers";
+import Preloader from "../../layout/Preloader/Preloader";
+import StudMess from "../../layout/Student/Chat/StudMess";
+import StudUsers from "../../layout/Student/Chat/StudUsers";
 
 const StudChat = () => {
   const studContext = useContext(StudContext);

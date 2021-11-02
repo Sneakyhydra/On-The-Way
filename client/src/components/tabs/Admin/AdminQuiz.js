@@ -1,22 +1,19 @@
 import { useEffect, useContext, useState } from "react";
-import StudContext from "../../../context/student/studContext";
+import AdminContext from "../../../context/admin/adminContext";
 import M from "materialize-css/dist/js/materialize.min.js";
-import StudQuesCard from "../../layout/Student/Quiz/StudQuesCard";
+import QuestionsCard from "../../layout/Admin/Quiz/QuestionsCard";
 import AlertContext from "../../../context/alert/alertContext";
-import AuthContext from "../../../context/auth/authContext";
 import Preloader from "../../layout/Preloader/Preloader";
 
-const StudQuiz = () => {
-  const studContext = useContext(StudContext);
+const AdminQuiz = () => {
+  const adminContext = useContext(AdminContext);
   const alertContext = useContext(AlertContext);
-  const authContext = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
 
-  const { quesAns, loadQuesAns, error, submitQuiz } = studContext;
+  const { quesAns, loadQuesAns, updateQuiz, error } = adminContext;
   const { setAlert } = alertContext;
-  const { loadUser, user } = authContext;
 
-  const [quiz, setQuiz] = useState({});
+  const [cntChanges, setCntChanges] = useState(0);
 
   // Load the user when dashboard is rendered
   useEffect(() => {
@@ -31,6 +28,12 @@ const StudQuiz = () => {
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    setLoading(false);
+    M.AutoInit();
+    M.updateTextFields();
+  }, [cntChanges]);
+
   if (loading) {
     return <Preloader />;
   }
@@ -38,33 +41,16 @@ const StudQuiz = () => {
     return <Preloader />;
   }
 
+  let editedQuesAns = [...quesAns];
+
   const onSubmit = (e) => {
     e.preventDefault();
 
-    let date;
-    date = new Date();
-    date =
-      date.getUTCFullYear() +
-      "-" +
-      ("00" + (date.getUTCMonth() + 1)).slice(-2) +
-      "-" +
-      ("00" + date.getUTCDate()).slice(-2) +
-      " " +
-      ("00" + date.getUTCHours()).slice(-2) +
-      ":" +
-      ("00" + date.getUTCMinutes()).slice(-2) +
-      ":" +
-      ("00" + date.getUTCSeconds()).slice(-2);
-
-    submitQuiz({
-      quesAns: quiz,
-      stud_id: user.user_id,
-      date: date,
+    console.log(editedQuesAns);
+    updateQuiz({
+      quesAns: editedQuesAns,
     });
-    setAlert("Quiz Submitted", "success");
-    loadUser();
-
-    window.location.reload(false);
+    setAlert("Quiz Updated", "success");
   };
 
   return (
@@ -90,15 +76,15 @@ const StudQuiz = () => {
           alignItems: "center",
         }}
       >
-        {quesAns.map((item, idx) => {
+        {editedQuesAns.map((item, idx) => {
           return (
-            <StudQuesCard
-              quesAns={quesAns}
+            <QuestionsCard
+              editedQuesAns={editedQuesAns}
               key={item.ques_id}
               question={item}
+              cntChanges={cntChanges}
+              setCntChanges={setCntChanges}
               idx={idx}
-              quiz={quiz}
-              setQuiz={setQuiz}
             />
           );
         })}
@@ -117,10 +103,10 @@ const StudQuiz = () => {
           textTransform: "capitalize",
         }}
       >
-        Submit
+        Save
       </button>
     </form>
   );
 };
 
-export default StudQuiz;
+export default AdminQuiz;

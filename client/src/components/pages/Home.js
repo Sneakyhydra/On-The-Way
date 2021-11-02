@@ -4,13 +4,13 @@ import { NavLink } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 
 // Import images
-import privateImg from "../../images/private.png";
-import clockImg from "../../images/247.png";
-import anonymousImg from "../../images/anonymous.png";
-import help1 from "../../images/1.svg";
-import help2 from "../../images/2.svg";
-import help3 from "../../images/3.svg";
-import background2 from "../../images/background2.png";
+import privateImg from "../../images/HomePage/private.png";
+import clockImg from "../../images/HomePage/247.png";
+import anonymousImg from "../../images/HomePage/anonymous.png";
+import help1 from "../../images/HomePage/help1.svg";
+import help2 from "../../images/HomePage/help2.svg";
+import help3 from "../../images/HomePage/help3.svg";
+import background2 from "../../images/HomePage/background2.png";
 
 const Home = () => {
   const authContext = useContext(AuthContext);

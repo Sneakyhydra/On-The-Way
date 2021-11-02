@@ -1,8 +1,8 @@
 import { useEffect, useContext, useState } from "react";
 import StudContext from "../../../context/student/studContext";
 import M from "materialize-css/dist/js/materialize.min.js";
-import StudCounCard from "../../layout/student/StudCounCard";
-import Preloader from "../../layout/Preloader";
+import StudCounCard from "../../layout/Student/Coun/StudCounCard";
+import Preloader from "../../layout/Preloader/Preloader";
 
 const StudCoun = () => {
   const studContext = useContext(StudContext);

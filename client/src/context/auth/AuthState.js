@@ -13,7 +13,6 @@ import {
   CLEAR_ERRORS,
   EDIT_SUCCESS,
   EDIT_FAIL,
-  SET_KEY,
 } from "../types";
 import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
@@ -26,7 +25,6 @@ const AuthState = (props) => {
     loading: true,
     user: null,
     error: null,
-    key: "profile",
   };
 
   // Init Reducer
@@ -34,6 +32,7 @@ const AuthState = (props) => {
 
   // Load User
   const loadUser = async () => {
+    // Check for token
     if (sessionStorage.token) {
       setAuthToken(sessionStorage.token);
     }
@@ -274,13 +273,6 @@ const AuthState = (props) => {
     });
   };
 
-  const setKey = (k) => {
-    dispatch({
-      type: SET_KEY,
-      payload: k,
-    });
-  };
-
   return (
     <AuthContext.Provider
       // Provide these values to all components wrapped in AuthContext in App.js
@@ -290,7 +282,6 @@ const AuthState = (props) => {
         loading: state.loading,
         user: state.user,
         error: state.error,
-        key: state.key,
         regStudent,
         regCounsellor,
         login,
@@ -299,7 +290,6 @@ const AuthState = (props) => {
         clearErrors,
         regAdmin,
         editAdmin,
-        setKey,
         editCounsellor,
         editStudent,
       }}

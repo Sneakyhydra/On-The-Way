@@ -22,6 +22,9 @@ const promisePool = pool.promise();
 /**
  * Get all students
  * Get all questions and answers
+ * Submit feedback
+ * Send message
+ * Get all messages of user
  */
 
 // @route   GET api/counsellor/students
@@ -182,7 +185,7 @@ router.get("/quesans", auth, async(req, res) => {
 });
 
 // @route   POST api/counsellor/submitFeed
-// @desc    Submit feedback for counsellors
+// @desc    Submit feedback
 // @access  Private
 router.post(
     "/submitFeed", auth,
@@ -220,7 +223,7 @@ router.post(
 );
 
 // @route   POST api/counsellor/message
-// @desc    Messaging for counsellors
+// @desc    Send message
 // @access  Private
 router.post(
     "/message", auth,
@@ -244,7 +247,7 @@ router.post(
                     `INSERT INTO messages (stud_id, coun_id, from_role, mess_desc, mess_date) VALUES (${req.body.stud_id}, ${user_id}, "${role}", "${req.body.mess_desc}", "${req.body.mess_date}")`
                 );
 
-                // Send data to the client
+                // Send success message to the client
                 res.send("Sent Successfully");
             } else {
                 // Unauthorized
@@ -258,7 +261,7 @@ router.post(
 );
 
 // @route   GET api/counsellor/message
-// @desc    Messaging for counsellors
+// @desc    Get all messages of user
 // @access  Private
 router.get(
     "/message", auth,
@@ -277,7 +280,7 @@ router.get(
 
             // Check if the user is counsellor
             if (role === "counsellor") {
-                // Get messages from DB
+                // Get messages of this user from DB
                 const [messages] = await promisePool.query(
                     `SELECT * FROM messages WHERE coun_id=${user_id}`
                 );

@@ -30,18 +30,19 @@ const CounState = (props) => {
   // Init Reducer
   const [state, dispatch] = useReducer(counReducer, initialState);
 
+  // Load quiz
   const loadQuesAns = async () => {
     try {
-      // Make a get request at localhost:5000/api/admin/quesans
+      // Make a get request at localhost:5000/api/counsellor/quesAns
       const res = await axios.get("api/counsellor/quesans");
 
-      // Dispatch the action to reducer for REGISTER_SUCCESS
+      // Dispatch the action to reducer for QUIZ_LOAD_SUCCESS
       dispatch({
         type: QUIZ_LOAD_SUCCESS,
         payload: res.data,
       });
     } catch (err) {
-      // Dispatch the action to reducer for REGISTER_FAIL
+      // Dispatch the action to reducer for QUIZ_LOAD_FAIL
       dispatch({
         type: QUIZ_LOAD_FAIL,
         payload: err.response.data.msg,
@@ -49,18 +50,19 @@ const CounState = (props) => {
     }
   };
 
+  // Load all students
   const loadStudents = async () => {
     try {
-      // Make a get request at localhost:5000/api/admin/quesans
+      // Make a get request at localhost:5000/api/counsellor/students
       const res = await axios.get("api/counsellor/students");
 
-      // Dispatch the action to reducer for REGISTER_SUCCESS
+      // Dispatch the action to reducer for STUD_LOAD_SUCCESS
       dispatch({
         type: STUD_LOAD_SUCCESS,
         payload: res.data,
       });
     } catch (err) {
-      // Dispatch the action to reducer for REGISTER_FAIL
+      // Dispatch the action to reducer for STUD_LOAD_FAIL
       dispatch({
         type: STUD_LOAD_FAIL,
         payload: err.response.data.msg,
@@ -78,15 +80,15 @@ const CounState = (props) => {
     };
 
     try {
-      // Make a post request at localhost:5000/api/users/student
+      // Make a post request at localhost:5000/api/counsellor/submitFeed
       await axios.post("api/counsellor/submitFeed", formData, config);
 
-      // Dispatch the action to reducer for REGISTER_SUCCESS
+      // Dispatch the action to reducer for FEED_SUCCESS
       dispatch({
         type: FEED_SUCCESS,
       });
     } catch (err) {
-      // Dispatch the action to reducer for REGISTER_FAIL
+      // Dispatch the action to reducer for FEED_FAIL
       dispatch({
         type: FEED_FAIL,
         payload: err.response.data.msg,
@@ -94,15 +96,19 @@ const CounState = (props) => {
     }
   };
 
+  // Load all messages of user
   const loadMessages = async () => {
     try {
+      // Make a get request at localhost:5000/api/counsellor/message
       const res = await axios.get("api/counsellor/message");
 
+      // Dispatch the action to reducer for MESSAGE_LOAD_SUCCESS
       dispatch({
         type: MESSAGE_LOAD_SUCCESS,
         payload: res.data,
       });
     } catch (err) {
+      // // Dispatch the action to reducer for MESSAGE_LOAD_FAIL
       dispatch({
         type: MESSAGE_LOAD_FAIL,
         payload: err.response.data.msg,
@@ -110,6 +116,7 @@ const CounState = (props) => {
     }
   };
 
+  // Send message
   const sendMessage = async (formData) => {
     // Set header of the input data
     const config = {
@@ -119,14 +126,18 @@ const CounState = (props) => {
     };
 
     try {
+      // Make a post request at localhost:5000/api/counsellor/message
       await axios.post("api/counsellor/message", formData, config);
 
+      // Dispatch the action to reducer for MESSAGE_SEND_SUCCESS
       dispatch({
         type: MESSAGE_SEND_SUCCESS,
       });
 
+      // Load all messages of user
       loadMessages();
     } catch (err) {
+      // Dispatch the action to reducer for MESSAGE_SEND_FAIL
       dispatch({
         type: MESSAGE_SEND_FAIL,
         payload: err.response.data.msg,
@@ -144,7 +155,7 @@ const CounState = (props) => {
 
   return (
     <CounContext.Provider
-      // Provide these values to all components wrapped in AuthContext in App.js
+      // Provide these values to all components wrapped in CounContext in App.js
       value={{
         loading: state.loading,
         error: state.error,

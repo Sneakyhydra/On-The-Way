@@ -12,8 +12,8 @@ import {
   QUIZ_UPDATE_FAIL,
   STUD_LOAD_SUCCESS,
   STUD_LOAD_FAIL,
-  COUN_LOAD_SUCCESS,
-  COUN_LOAD_FAIL,
+  APPROVED_SUCCESS,
+  APPROVED_FAIL,
   REJECTED_SUCCESS,
   REJECTED_FAIL,
   COUN_FEED_SUCCESS,
@@ -102,11 +102,11 @@ const adminReducer = (state, action) => {
         students: action.payload,
       };
 
-    case COUN_LOAD_SUCCESS:
+    case APPROVED_SUCCESS:
       return {
         ...state,
         loading: false,
-        counsellors: action.payload,
+        approved: action.payload,
       };
 
     case STUD_LOAD_FAIL:
@@ -117,11 +117,11 @@ const adminReducer = (state, action) => {
         error: action.payload,
       };
 
-    case COUN_LOAD_FAIL:
+    case APPROVED_FAIL:
       return {
         ...state,
         loading: false,
-        counsellors: null,
+        approved: null,
         error: action.payload,
       };
 

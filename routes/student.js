@@ -24,6 +24,9 @@ const promisePool = pool.promise();
  * Get all questions and answersw without responses
  * Get all approved counsellors
  * Submit quiz
+ * Submit feedback
+ * Send message
+ * Get all messages of user
  */
 
 // @route   GET api/student/quesans
@@ -202,7 +205,7 @@ router.post(
 );
 
 // @route   POST api/student/submitFeed
-// @desc    Submit feedback for students
+// @desc    Submit feedback
 // @access  Private
 router.post(
     "/submitFeed", auth,
@@ -219,7 +222,7 @@ router.post(
             // Extract role from rows
             const { role } = rows[0];
 
-            // Check if the user is counsellor
+            // Check if the user is student
             if (role === "student") {
                 // Insert feedback in DB
                 await promisePool.query(
@@ -240,7 +243,7 @@ router.post(
 );
 
 // @route   POST api/student/message
-// @desc    Messaging for students
+// @desc    Send message
 // @access  Private
 router.post(
     "/message", auth,
@@ -257,7 +260,7 @@ router.post(
             // Extract role from rows
             const { role } = rows[0];
 
-            // Check if the user is counsellor
+            // Check if the user is student
             if (role === "student") {
                 // Insert message in DB
                 await promisePool.query(
@@ -278,7 +281,7 @@ router.post(
 );
 
 // @route   GET api/student/message
-// @desc    Messaging for students
+// @desc    Get all messages of user
 // @access  Private
 router.get(
     "/message", auth,
@@ -295,9 +298,9 @@ router.get(
             // Extract role from rows
             const { role } = rows[0];
 
-            // Check if the user is counsellor
+            // Check if the user is student
             if (role === "student") {
-                // Get messages from DB
+                // Get messages of this user from DB
                 const [messages] = await promisePool.query(
                     `SELECT * FROM messages WHERE stud_id=${user_id}`
                 );

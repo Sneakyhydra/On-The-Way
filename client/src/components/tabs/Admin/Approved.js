@@ -10,12 +10,12 @@ const Approved = () => {
   const alertContext = useContext(AlertContext);
   const [loading, setLoading] = useState(true);
 
-  const { counsellors, loadCounsellors } = adminContext;
+  const { approved, loadApproved } = adminContext;
   const { setAlert } = alertContext;
 
   // Load the user when dashboard is rendered
   useEffect(() => {
-    loadCounsellors();
+    loadApproved();
     setLoading(false);
     M.AutoInit();
     M.updateTextFields();
@@ -24,7 +24,7 @@ const Approved = () => {
   if (loading) {
     return <Preloader />;
   }
-  if (!counsellors) {
+  if (!approved) {
     return <Preloader />;
   }
 
@@ -45,7 +45,7 @@ const Approved = () => {
           justifyContent: "flex-start",
         }}
       >
-        {counsellors.map((item) => {
+        {approved.map((item) => {
           return (
             <ApprovedCard key={item.coun_id} user={item} setAlert={setAlert} />
           );

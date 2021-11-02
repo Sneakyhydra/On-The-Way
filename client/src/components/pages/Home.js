@@ -1,9 +1,9 @@
 // Imports
-import { Fragment, useContext, useEffect } from "react";
+import { Fragment, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 
-// Import images
+// Images
 import privateImg from "../../images/HomePage/private.png";
 import clockImg from "../../images/HomePage/247.png";
 import anonymousImg from "../../images/HomePage/anonymous.png";
@@ -14,12 +14,7 @@ import background2 from "../../images/HomePage/background2.png";
 
 const Home = () => {
   const authContext = useContext(AuthContext);
-  const { isAuthenticated, setKey } = authContext;
-
-  useEffect(() => {
-    setKey("history");
-    // eslint-disable-next-line
-  }, []);
+  const { isAuthenticated } = authContext;
 
   // Elements to be displayed to a logged in user
   const authBtns = (

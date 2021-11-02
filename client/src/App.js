@@ -32,11 +32,11 @@ import setAuthToken from "./utils/setAuthToken";
 
 // CSS
 import "materialize-css/dist/css/materialize.min.css";
+import M from "materialize-css/dist/js/materialize.min.js";
 import "./App.css";
 
 // Images
 import background from "./images/HomePage/Background1.jpeg";
-import M from "materialize-css/dist/js/materialize.min.js";
 
 // Initialize token everytime the app is rendered
 if (sessionStorage.token) {

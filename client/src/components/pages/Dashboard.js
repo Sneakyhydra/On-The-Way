@@ -5,6 +5,7 @@ import DashNavbar from "../layout/Navbar/DashNavbar";
 import { Tab, Tabs } from "react-bootstrap";
 import Profile from "../tabs/Profile";
 
+// Admin
 import Pending from "../tabs/Admin/Pending";
 import AdminQuiz from "../tabs/Admin/AdminQuiz";
 import Approved from "../tabs/Admin/Approved";
@@ -13,16 +14,19 @@ import Rejected from "../tabs/Admin/Rejected";
 import AdminCounFeed from "../tabs/Admin/AdminCounFeed";
 import AdminStudFeed from "../tabs/Admin/AdminStudFeed";
 
+// Counsellor
 import StudentInfo from "../tabs/Counsellor/StudentInfo";
 import CounQuiz from "../tabs/Counsellor/CounQuiz";
 import CounChat from "../tabs/Counsellor/CounChat";
 import CounFeed from "../tabs/Counsellor/CounFeed";
 
+// Student
 import StudQuiz from "../tabs/Student/StudQuiz";
 import StudCoun from "../tabs/Student/StudCoun";
 import StudChat from "../tabs/Student/StudChat";
 import StudFeed from "../tabs/Student/StudFeed";
 
+// CSS
 import Preloader from "../layout/Preloader/Preloader";
 import M from "materialize-css/dist/js/materialize.min.js";
 
@@ -40,6 +44,7 @@ const Dashboard = () => {
     M.updateTextFields();
     // eslint-disable-next-line
   }, []);
+
   if (loading) {
     return <Preloader />;
   }
@@ -49,6 +54,7 @@ const Dashboard = () => {
 
   const { role } = user;
 
+  // Init allTabs with profile tab
   let allTabs = (
     <Tabs
       className='mb-3 z-depth-1'
@@ -69,6 +75,7 @@ const Dashboard = () => {
     </Tabs>
   );
 
+  // If user is admin
   if (role === "admin") {
     allTabs = (
       <Tabs
@@ -150,6 +157,7 @@ const Dashboard = () => {
       </Tabs>
     );
   } else if (role === "counsellor") {
+    // Else if user is counsellor
     allTabs = (
       <Tabs
         className='mb-3 z-depth-1'
@@ -167,6 +175,8 @@ const Dashboard = () => {
         <Tab eventKey='profile' title='Profile' className='z-depth-0'>
           <Profile />
         </Tab>
+
+        {/* Show below tabs only if counsellor is approved */}
         {user.coun_status === "Approved" ? (
           <Tab eventKey='studentInfo' title='Students' className='z-depth-0'>
             <StudentInfo />
@@ -198,6 +208,7 @@ const Dashboard = () => {
       </Tabs>
     );
   } else if (role === "student") {
+    // Else if user is student
     allTabs = (
       <Tabs
         className='mb-3 z-depth-1'

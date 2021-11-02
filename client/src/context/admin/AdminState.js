@@ -16,8 +16,8 @@ import {
   QUIZ_UPDATE_FAIL,
   STUD_LOAD_SUCCESS,
   STUD_LOAD_FAIL,
-  COUN_LOAD_SUCCESS,
-  COUN_LOAD_FAIL,
+  APPROVED_SUCCESS,
+  APPROVED_FAIL,
   REJECTED_SUCCESS,
   REJECTED_FAIL,
   COUN_FEED_SUCCESS,
@@ -44,19 +44,19 @@ const AdminState = (props) => {
   // Init Reducer
   const [state, dispatch] = useReducer(adminReducer, initialState);
 
-  // Load Pending
+  // Load Pending Counsellors
   const loadPending = async () => {
     try {
       // Make a get request at localhost:5000/api/admin/pending
       const res = await axios.get("api/admin/pending");
 
-      // Dispatch the action to reducer for REGISTER_SUCCESS
+      // Dispatch the action to reducer for PENDING_SUCCESS
       dispatch({
         type: PENDING_SUCCESS,
         payload: res.data,
       });
     } catch (err) {
-      // Dispatch the action to reducer for REGISTER_FAIL
+      // Dispatch the action to reducer for PENDING_FAIL
       dispatch({
         type: PENDING_FAIL,
         payload: err.response.data.msg,
@@ -64,18 +64,19 @@ const AdminState = (props) => {
     }
   };
 
+  // Load Rejected Counsellors
   const loadRejected = async () => {
     try {
-      // Make a get request at localhost:5000/api/admin/pending
+      // Make a get request at localhost:5000/api/admin/rejected
       const res = await axios.get("api/admin/rejected");
 
-      // Dispatch the action to reducer for REGISTER_SUCCESS
+      // Dispatch the action to reducer for REJECTED_SUCCESS
       dispatch({
         type: REJECTED_SUCCESS,
         payload: res.data,
       });
     } catch (err) {
-      // Dispatch the action to reducer for REGISTER_FAIL
+      // Dispatch the action to reducer for REJECTED_FAIL
       dispatch({
         type: REJECTED_FAIL,
         payload: err.response.data.msg,
@@ -93,20 +94,26 @@ const AdminState = (props) => {
     };
 
     try {
+      // Init object with id of counsellor and type as Approved
       const appr = {
         id: counid,
         type: "Approved",
       };
+
+      // Make a put request at localhost:5000/api/admin/pending
       await axios.put("api/admin/pending", appr, config);
 
+      // Dispatch the action to reducer for APPROVE_SUCCESS
       dispatch({
         type: APPROVE_SUCCESS,
       });
 
+      // Load all counsellors
       loadPending();
-      loadCounsellors();
+      loadApproved();
       loadRejected();
     } catch (err) {
+      // Dispatch the action to reducer for APPROVE_FAIL
       dispatch({
         type: APPROVE_FAIL,
         payload: err.response.data.msg,
@@ -124,39 +131,46 @@ const AdminState = (props) => {
     };
 
     try {
+      // Init object with id of counsellor and type as Rejected
       const reject = {
         id: counid,
         type: "Rejected",
       };
+
+      // Make a put request at localhost:5000/api/admin/pending
       await axios.put("api/admin/pending", reject, config);
 
+      // Dispatch the action to reducer for REJECT_SUCCESS
       dispatch({
         type: REJECT_SUCCESS,
       });
 
+      // Load all counsellors
       loadPending();
-      loadCounsellors();
+      loadApproved();
       loadRejected();
     } catch (err) {
       dispatch({
+        // Dispatch the action to reducer for REJECT_FAIL
         type: REJECT_FAIL,
         payload: err.response.data.msg,
       });
     }
   };
 
+  // Load Quiz
   const loadQuesAns = async () => {
     try {
       // Make a get request at localhost:5000/api/admin/quesans
       const res = await axios.get("api/admin/quesans");
 
-      // Dispatch the action to reducer for REGISTER_SUCCESS
+      // Dispatch the action to reducer for QUIZ_LOAD_SUCCESS
       dispatch({
         type: QUIZ_LOAD_SUCCESS,
         payload: res.data,
       });
     } catch (err) {
-      // Dispatch the action to reducer for REGISTER_FAIL
+      // Dispatch the action to reducer for QUIZ_LOAD_FAIL
       dispatch({
         type: QUIZ_LOAD_FAIL,
         payload: err.response.data.msg,
@@ -164,6 +178,7 @@ const AdminState = (props) => {
     }
   };
 
+  // Update Quiz
   const updateQuiz = async (formData) => {
     // Set header of the input data
     const config = {
@@ -173,14 +188,18 @@ const AdminState = (props) => {
     };
 
     try {
+      // Make a put request at localhost:5000/api/admin/quiz
       await axios.put("api/admin/quiz", formData, config);
 
+      // Dispatch the action to reducer for QUIZ_UPDATE_SUCCESS
       dispatch({
         type: QUIZ_UPDATE_SUCCESS,
       });
 
+      // Load Quiz
       await loadQuesAns();
     } catch (err) {
+      // Dispatch the action to reducer for QUIZ_UPDATE_FAIL
       dispatch({
         type: QUIZ_UPDATE_FAIL,
         payload: err.response.data.msg,
@@ -188,18 +207,19 @@ const AdminState = (props) => {
     }
   };
 
+  // Load all students
   const loadStudents = async () => {
     try {
-      // Make a get request at localhost:5000/api/admin/quesans
+      // Make a get request at localhost:5000/api/admin/students
       const res = await axios.get("api/admin/students");
 
-      // Dispatch the action to reducer for REGISTER_SUCCESS
+      // Dispatch the action to reducer for STUD_LOAD_SUCCESS
       dispatch({
         type: STUD_LOAD_SUCCESS,
         payload: res.data,
       });
     } catch (err) {
-      // Dispatch the action to reducer for REGISTER_FAIL
+      // Dispatch the action to reducer for STUD_LOAD_FAIL
       dispatch({
         type: STUD_LOAD_FAIL,
         payload: err.response.data.msg,
@@ -207,34 +227,39 @@ const AdminState = (props) => {
     }
   };
 
-  const loadCounsellors = async () => {
+  // Load approved counsellors
+  const loadApproved = async () => {
     try {
-      // Make a get request at localhost:5000/api/admin/quesans
+      // Make a get request at localhost:5000/api/admin/approved
       const res = await axios.get("api/admin/approved");
 
-      // Dispatch the action to reducer for REGISTER_SUCCESS
+      // Dispatch the action to reducer for APPROVED_SUCCESS
       dispatch({
-        type: COUN_LOAD_SUCCESS,
+        type: APPROVED_SUCCESS,
         payload: res.data,
       });
     } catch (err) {
-      // Dispatch the action to reducer for REGISTER_FAIL
+      // Dispatch the action to reducer for APPROVED_FAIL
       dispatch({
-        type: COUN_LOAD_FAIL,
+        type: APPROVED_FAIL,
         payload: err.response.data.msg,
       });
     }
   };
 
+  // Load counsellor feedbacks
   const loadCounFeed = async () => {
     try {
+      // Make a get request at localhost:5000/api/admin/counfeed
       const res = await axios.get("api/admin/counfeed");
 
+      // Dispatch the action to reducer for COUN_FEED_SUCCESS
       dispatch({
         type: COUN_FEED_SUCCESS,
         payload: res.data,
       });
     } catch (err) {
+      // Dispatch the action to reducer for COUN_FEED_FAIL
       dispatch({
         type: COUN_FEED_FAIL,
         payload: err.response.data.msg,
@@ -242,15 +267,19 @@ const AdminState = (props) => {
     }
   };
 
+  // Load student feedbacks
   const loadStudFeed = async () => {
     try {
+      // Make a get request at localhost:5000/api/admin/studfeed
       const res = await axios.get("api/admin/studfeed");
 
+      // Dispatch the action to reducer for STUD_FEED_SUCCESS
       dispatch({
         type: STUD_FEED_SUCCESS,
         payload: res.data,
       });
     } catch (err) {
+      // Dispatch the action to reducer for STUD_FEED_FAIL
       dispatch({
         type: STUD_FEED_FAIL,
         payload: err.response.data.msg,
@@ -268,14 +297,14 @@ const AdminState = (props) => {
 
   return (
     <AdminContext.Provider
-      // Provide these values to all components wrapped in AuthContext in App.js
+      // Provide these values to all components wrapped in AdminContext in App.js
       value={{
         loading: state.loading,
         error: state.error,
         quesAns: state.quesAns,
         pending: state.pending,
         students: state.students,
-        counsellors: state.counsellors,
+        approved: state.approved,
         rejected: state.rejected,
         counfeed: state.counfeed,
         studfeed: state.studfeed,
@@ -286,7 +315,7 @@ const AdminState = (props) => {
         loadQuesAns,
         updateQuiz,
         loadStudents,
-        loadCounsellors,
+        loadApproved,
         loadRejected,
         loadCounFeed,
         loadStudFeed,

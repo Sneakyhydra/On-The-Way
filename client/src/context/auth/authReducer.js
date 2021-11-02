@@ -9,7 +9,6 @@ import {
   CLEAR_ERRORS,
   EDIT_FAIL,
   EDIT_SUCCESS,
-  SET_KEY,
 } from "../types";
 
 // Change state according to the type of action
@@ -60,12 +59,6 @@ const authReducer = (state, action) => {
       return {
         ...state,
         error: null,
-      };
-
-    case SET_KEY:
-      return {
-        ...state,
-        key: action.payload,
       };
 
     default:

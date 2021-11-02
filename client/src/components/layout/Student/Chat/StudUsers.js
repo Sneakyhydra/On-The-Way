@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
-const StudUsers = ({ users, setAlert, setActive, active }) => {
+const StudUsers = ({ users, setActive }) => {
   const [clickedOn, setClickedOn] = useState(0);
 
   useEffect(() => {
@@ -51,6 +52,12 @@ const StudUsers = ({ users, setAlert, setActive, active }) => {
       })}
     </div>
   );
+};
+
+// Set proptypes
+StudUsers.propTypes = {
+  users: PropTypes.array.isRequired,
+  setActive: PropTypes.func.isRequired,
 };
 
 export default StudUsers;

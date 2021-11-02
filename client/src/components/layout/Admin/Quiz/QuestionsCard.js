@@ -2,6 +2,7 @@ import M from "materialize-css/dist/js/materialize.min.js";
 import { useEffect, useState } from "react";
 import AnswersCard from "./AnswersCard";
 import { Card, Row, Col, Icon, Textarea } from "react-materialize";
+import PropTypes from "prop-types";
 
 const QuestionsCard = ({
   editedQuesAns,
@@ -91,6 +92,15 @@ const QuestionsCard = ({
       </Col>
     </Row>
   );
+};
+
+// Set proptypes
+QuestionsCard.propTypes = {
+  editedQuesAns: PropTypes.array.isRequired,
+  question: PropTypes.object.isRequired,
+  cntChanges: PropTypes.number.isRequired,
+  setCntChanges: PropTypes.func.isRequired,
+  idx: PropTypes.number.isRequired,
 };
 
 export default QuestionsCard;

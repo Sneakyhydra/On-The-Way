@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
+import PropTypes from "prop-types";
 
 const DisplayAdmin = ({ user, setEdit }) => {
   useEffect(() => {
@@ -110,6 +111,12 @@ const DisplayAdmin = ({ user, setEdit }) => {
       </div>
     </div>
   );
+};
+
+// Set proptypes
+DisplayAdmin.propTypes = {
+  user: PropTypes.object.isRequired,
+  setEdit: PropTypes.func.isRequired,
 };
 
 export default DisplayAdmin;

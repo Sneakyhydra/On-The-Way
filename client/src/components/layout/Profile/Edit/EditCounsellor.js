@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import AlertContext from "../../../../context/alert/alertContext";
 import AuthContext from "../../../../context/auth/authContext";
 import M from "materialize-css/dist/js/materialize.min.js";
+import PropTypes from "prop-types";
 
 const EditCounsellor = ({ user, setEdit }) => {
   const alertContext = useContext(AlertContext);
@@ -253,6 +254,12 @@ const EditCounsellor = ({ user, setEdit }) => {
       </div>
     </div>
   );
+};
+
+// Set proptypes
+EditCounsellor.propTypes = {
+  user: PropTypes.object.isRequired,
+  setEdit: PropTypes.func.isRequired,
 };
 
 export default EditCounsellor;

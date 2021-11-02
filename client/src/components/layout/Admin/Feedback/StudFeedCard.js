@@ -1,4 +1,5 @@
 import { Card, Row, Col, Icon } from "react-materialize";
+import PropTypes from "prop-types";
 
 const StudFeedCard = ({ feed }) => {
   return (
@@ -16,6 +17,11 @@ const StudFeedCard = ({ feed }) => {
       </Col>
     </Row>
   );
+};
+
+// Set proptypes
+StudFeedCard.propTypes = {
+  feed: PropTypes.object.isRequired,
 };
 
 export default StudFeedCard;

@@ -1,6 +1,7 @@
 import { Fragment, useContext } from "react";
 import { Card, Row, Col, Icon } from "react-materialize";
 import AdminContext from "../../../../context/admin/adminContext";
+import PropTypes from "prop-types";
 
 const ApprovedCard = ({ user, setAlert }) => {
   const { coun_name, coun_gender, coun_phone, coun_dept, coun_id } = user;
@@ -51,6 +52,12 @@ const ApprovedCard = ({ user, setAlert }) => {
       </Col>
     </Row>
   );
+};
+
+// Set proptypes
+ApprovedCard.propTypes = {
+  user: PropTypes.object.isRequired,
+  setAlert: PropTypes.func.isRequired,
 };
 
 export default ApprovedCard;

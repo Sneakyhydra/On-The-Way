@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { Card, Row, Col, Icon } from "react-materialize";
+import PropTypes from "prop-types";
 
 const StudCard = ({ user }) => {
   const {
@@ -45,6 +46,11 @@ const StudCard = ({ user }) => {
       </Col>
     </Row>
   );
+};
+
+// Set proptypes
+StudCard.propTypes = {
+  user: PropTypes.object.isRequired,
 };
 
 export default StudCard;

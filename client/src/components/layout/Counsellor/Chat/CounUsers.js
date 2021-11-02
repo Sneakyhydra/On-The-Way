@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 const CounUsers = ({ users, setActive }) => {
   const [clickedOn, setClickedOn] = useState(0);
@@ -51,6 +52,12 @@ const CounUsers = ({ users, setActive }) => {
       })}
     </div>
   );
+};
+
+// Set proptypes
+CounUsers.propTypes = {
+  users: PropTypes.array.isRequired,
+  setActive: PropTypes.func.isRequired,
 };
 
 export default CounUsers;

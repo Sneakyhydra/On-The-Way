@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
+import PropTypes from "prop-types";
 
 const DisplayStudent = ({ user, setEdit }) => {
   useEffect(() => {
@@ -207,6 +208,12 @@ const DisplayStudent = ({ user, setEdit }) => {
       </div>
     </div>
   );
+};
+
+// Set proptypes
+DisplayStudent.propTypes = {
+  user: PropTypes.object.isRequired,
+  setEdit: PropTypes.func.isRequired,
 };
 
 export default DisplayStudent;

@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { Card, Row, Col, Icon } from "react-materialize";
+import PropTypes from "prop-types";
 
 const StudCounCard = ({ user }) => {
   const { coun_name, coun_gender, coun_phone, coun_dept } = user;
@@ -25,6 +26,11 @@ const StudCounCard = ({ user }) => {
       </Col>
     </Row>
   );
+};
+
+// Set proptypes
+StudCounCard.propTypes = {
+  user: PropTypes.object.isRequired,
 };
 
 export default StudCounCard;

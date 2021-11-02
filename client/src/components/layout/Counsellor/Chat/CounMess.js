@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import CounContext from "../../../../context/counsellor/counContext";
 import AuthContext from "../../../../context/auth/authContext";
 import M from "materialize-css/dist/js/materialize.min.js";
+import PropTypes from "prop-types";
 
 const CounMess = ({ messages, active }) => {
   const [messToShow, setMessToShow] = useState([]);
@@ -212,6 +213,12 @@ const CounMess = ({ messages, active }) => {
       </div>
     </div>
   );
+};
+
+// Set proptypes
+CounMess.propTypes = {
+  messages: PropTypes.array.isRequired,
+  active: PropTypes.number.isRequired,
 };
 
 export default CounMess;

@@ -1,6 +1,7 @@
 import M from "materialize-css/dist/js/materialize.min.js";
 import { useEffect } from "react";
 import { Card, Row, Col, Icon } from "react-materialize";
+import PropTypes from "prop-types";
 
 const QuesAnsCard = ({ answer }) => {
   const { ans_no, ans_desc, response } = answer;
@@ -52,6 +53,11 @@ const QuesAnsCard = ({ answer }) => {
       </Col>
     </Row>
   );
+};
+
+// Set proptypes
+QuesAnsCard.propTypes = {
+  answer: PropTypes.object.isRequired,
 };
 
 export default QuesAnsCard;

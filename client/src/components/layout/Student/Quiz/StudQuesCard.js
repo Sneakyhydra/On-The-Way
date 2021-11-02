@@ -1,6 +1,7 @@
 import M from "materialize-css/dist/js/materialize.min.js";
 import { useEffect, useState } from "react";
 import { Card, Row, Col, Icon } from "react-materialize";
+import PropTypes from "prop-types";
 
 const StudQuesCard = ({ quesAns, question, idx, quiz, setQuiz }) => {
   const { ques_no, ques_desc, ques_id } = question;
@@ -66,6 +67,15 @@ const StudQuesCard = ({ quesAns, question, idx, quiz, setQuiz }) => {
       </Col>
     </Row>
   );
+};
+
+// Set proptypes
+StudQuesCard.propTypes = {
+  quesAns: PropTypes.array.isRequired,
+  question: PropTypes.object.isRequired,
+  idx: PropTypes.number.isRequired,
+  quiz: PropTypes.object.isRequired,
+  setQuiz: PropTypes.func.isRequired,
 };
 
 export default StudQuesCard;

@@ -2,8 +2,9 @@ import { useEffect, useState, useContext } from "react";
 import StudContext from "../../../../context/student/studContext";
 import AuthContext from "../../../../context/auth/authContext";
 import M from "materialize-css/dist/js/materialize.min.js";
+import PropTypes from "prop-types";
 
-const StudMess = ({ messages, setAlert, active }) => {
+const StudMess = ({ messages, active }) => {
   const [messToShow, setMessToShow] = useState([]);
   const studContext = useContext(StudContext);
   const authContext = useContext(AuthContext);
@@ -212,6 +213,12 @@ const StudMess = ({ messages, setAlert, active }) => {
       </div>
     </div>
   );
+};
+
+// Set proptypes
+StudMess.propTypes = {
+  messages: PropTypes.array.isRequired,
+  active: PropTypes.number.isRequired,
 };
 
 export default StudMess;

@@ -36,7 +36,7 @@ const DashNavbar = () => {
           width: "100%",
           background: "transparent",
           marginRight: "4.5em",
-          marginTop: "1.5em",
+          marginTop: "30px",
           fontSize: "15px",
         }}
       >

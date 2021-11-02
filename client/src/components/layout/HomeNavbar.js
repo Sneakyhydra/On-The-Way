@@ -35,7 +35,6 @@ const HomeNavbar = ({ scrollState }) => {
           width: "100%",
           background: "transparent",
           marginRight: "4.5em",
-          marginTop: "1em",
           fontSize: "15px",
         }}
       >

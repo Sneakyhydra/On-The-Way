@@ -29,10 +29,10 @@ const StudFeedCard = ({ feed }) => {
                 justifyContent: "flex-end",
                 alignItems: "flex-end",
               }}
+              key='1'
             >
               <a
                 href='#!'
-                key='1'
                 className='waves-effect waves-light btn'
                 style={{
                   borderRadius: "10px",

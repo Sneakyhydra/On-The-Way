@@ -171,29 +171,15 @@ router.put("/quiz", auth, async(req, res) => {
                 quesAns[i].answers.sort(compareAns);
             }
 
-            // SQL Queries
-            const emptyAnswersSQL = "DELETE FROM answers WHERE ans_id > 0;";
-            const resetAnswersSQL = "ALTER TABLE answers AUTO_INCREMENT = 1;";
-            const emptyQuestionsSQL = "DELETE FROM questions WHERE ques_id > 0;";
-
-            // Empty the answers table
-            await promisePool.query(emptyAnswersSQL);
-
-            // Reset auto increment in answers table
-            await promisePool.query(resetAnswersSQL);
-
-            // Empty the questions table
-            await promisePool.query(emptyQuestionsSQL);
-
             // Loop through all questions
             for (let i = 0; i < quesAns.length; i++) {
                 // Insert question details in questions table
-                await promisePool.query(`INSERT INTO questions (ques_no, ques_desc, ques_id) VALUES (${quesAns[i].ques_no}, "${quesAns[i].ques_desc}", ${quesAns[i].ques_id})`);
+                await promisePool.query(`UPDATE questions SET ques_desc="${quesAns[i].ques_desc}" WHERE ques_id=${quesAns[i].ques_id}`);
 
                 // Loop through all answers of this question
                 for (let j = 0; j < quesAns[i].answers.length; j++) {
                     // Insert answer details in answers table
-                    await promisePool.query(`INSERT INTO answers (ques_id, ans_no, ans_desc, response) VALUES (${quesAns[i].ques_id}, ${quesAns[i].answers[j].ans_no}, "${quesAns[i].answers[j].ans_desc}", "${quesAns[i].answers[j].response}")`);
+                    await promisePool.query(`UPDATE answers SET ans_desc="${quesAns[i].answers[j].ans_desc}", response="${quesAns[i].answers[j].response}" WHERE ans_id=${quesAns[i].answers[j].ans_id}`);
                 }
             }
 
@@ -509,7 +495,7 @@ router.get("/studfeed", auth, async(req, res) => {
                     feed_desc: rows[i].feed_desc,
                     stud_name: null
                 };
-                for (let j = 0; j < rows1.length; i++) {
+                for (let j = 0; j < rows1.length; j++) {
                     if (rows1[j].stud_id === rows[i].stud_id) {
                         temp.stud_name = rows1[j].stud_name;
                         break;

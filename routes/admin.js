@@ -1,8 +1,8 @@
 // Imports
-const express = require("express"); // To create router
-const mysql = require("mysql2"); // To connect to the DB
+const express = require("express"); // Create router
+const mysql = require("mysql2"); // Connect to the DB
 const auth = require("../middleware/auth"); // Middleware
-const readXlsxFile = require("read-excel-file/node");
+const readXlsxFile = require("read-excel-file/node"); // Read excel files
 
 // Init router
 const router = express.Router();
@@ -27,7 +27,10 @@ const promisePool = pool.promise();
  * Get rejected counsellors
  * Get approved counsellors
  * Get all students
- * Get feedback
+ * Get stud feedback
+ * Get coun feedback
+ * Delete stud feedback
+ * Delete coun feedback
  */
 
 // @route   GET api/admin/quesans
@@ -168,14 +171,14 @@ router.put("/quiz", auth, async(req, res) => {
 
             // Loop through all questions
             for (let i = 0; i < quesAns.length; i++) {
-                // Insert question details in questions table
+                // Update question details in questions table
                 await promisePool.query(
                     `UPDATE questions SET ques_desc="${quesAns[i].ques_desc}" WHERE ques_id=${quesAns[i].ques_id}`
                 );
 
                 // Loop through all answers of this question
                 for (let j = 0; j < quesAns[i].answers.length; j++) {
-                    // Insert answer details in answers table
+                    // Update answer details in answers table
                     await promisePool.query(
                         `UPDATE answers SET ans_desc="${quesAns[i].answers[j].ans_desc}", response="${quesAns[i].answers[j].response}" WHERE ans_id=${quesAns[i].answers[j].ans_id}`
                     );

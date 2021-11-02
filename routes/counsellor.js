@@ -1,8 +1,8 @@
 // Imports
-const express = require("express"); // To create router
-const mysql = require("mysql2"); // To connect to the DB
+const express = require("express"); // Create router
+const mysql = require("mysql2"); // Connect to the DB
 const auth = require("../middleware/auth"); // Middleware
-const readXlsxFile = require('read-excel-file/node');
+const readXlsxFile = require('read-excel-file/node'); // Read excel files
 
 // Init router
 const router = express.Router();
@@ -209,7 +209,7 @@ router.post(
                     `INSERT INTO coun_feedback (coun_id, feed_desc) VALUES (${user_id}, "${req.body.desc}")`
                 );
 
-                // Send data to the client
+                // Send success message to the client
                 res.send("Submitted Successfully");
             } else {
                 // Unauthorized

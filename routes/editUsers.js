@@ -1,10 +1,10 @@
 // Imports
-const express = require("express"); // To create router
-const mysql = require("mysql2"); // To connect with DB
-const bcrypt = require("bcryptjs"); // For encrypting password
+const express = require("express"); // Create router
+const mysql = require("mysql2"); // Connect with DB
+const bcrypt = require("bcryptjs"); // Encrypt password
 const auth = require("../middleware/auth"); // Middleware
-const { check, validationResult } = require("express-validator"); // To check and validate the inputs
-const readXlsxFile = require('read-excel-file/node');
+const { check, validationResult } = require("express-validator"); // Check and validate the inputs
+const readXlsxFile = require('read-excel-file/node'); // Read excel files
 
 // Init router
 const router = express.Router();
@@ -98,6 +98,11 @@ router.put(
                     admin_gender !== "Other"
                 ) {
                     return res.status(400).json({ msg: "Gender is not valid" });
+                }
+
+                // Check id
+                if (user_id !== admin_id) {
+                    return res.status(400).json({ msg: 'Invalid id' });
                 }
 
                 // Encrypt Password
@@ -213,6 +218,11 @@ router.put(
                     return res.status(400).json({ msg: "Programme(dept) is not valid" });
                 }
 
+                // Check id
+                if (user_id !== coun_id) {
+                    return res.status(400).json({ msg: 'Invalid id' });
+                }
+
                 // Encrypt Password
                 const salt = await bcrypt.genSalt(10);
                 user_password = await bcrypt.hash(user_password, salt);
@@ -310,7 +320,7 @@ router.put(
 
                 // Check id
                 if (user_id !== stud_id) {
-                    return res.status(400).json({ msg: "Invalid access" });
+                    return res.status(400).json({ msg: "Invalid id" });
                 }
 
                 // Check role

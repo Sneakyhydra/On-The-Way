@@ -1,9 +1,8 @@
 // Imports
-const express = require("express"); // To create router
-const mysql = require("mysql2"); // To connect to the DB
+const express = require("express"); // Create router
+const mysql = require("mysql2"); // Connect to the DB
 const auth = require("../middleware/auth"); // Middleware
-const readXlsxFile = require('read-excel-file/node');
-const { check, validationResult } = require("express-validator"); // To check and validate the inputs
+const { check, validationResult } = require("express-validator"); // Check and validate the inputs
 
 // Init router
 const router = express.Router();
@@ -173,25 +172,33 @@ router.post(
 
             // Check if the user is student
             if (role === "student") {
+                // Extract question answer, student id and response date from body
                 const quesAns = req.body.quesAns;
                 const stud_id = req.body.stud_id;
                 const res_date = req.body.date.toString();
 
+                // Insert date in response table
                 await promisePool.query(
                     `INSERT INTO response (stud_id, res_date) VALUES (${stud_id}, "${res_date}")`
                 );
 
+                // Get response id of this response
                 const [resp] = await promisePool.query(
                     `SELECT res_id FROM response WHERE res_date="${res_date}"`
                 );
+
+                // Extract id in variable
                 res_id = resp[0].res_id;
 
+                // For quesId in quesAns
                 for (var ques in quesAns) {
+                    // Insert question answer pairs in response_list
                     await promisePool.query(
                         `INSERT INTO response_list (res_id, ques_id, ans_id) VALUES (${res_id}, ${parseInt( ques )}, ${quesAns[ques]})`
                     );
                 }
 
+                // Send success message to the client
                 res.send("Submitted Successfully");
             } else {
                 // Unauthorized
@@ -229,7 +236,7 @@ router.post(
                     `INSERT INTO stud_feedback (stud_id, feed_desc) VALUES (${user_id}, "${req.body.desc}")`
                 );
 
-                // Send data to the client
+                // Send success message to the client
                 res.send("Submitted Successfully");
             } else {
                 // Unauthorized
@@ -267,7 +274,7 @@ router.post(
                     `INSERT INTO messages (stud_id, coun_id, from_role, mess_desc, mess_date) VALUES (${user_id}, ${req.body.coun_id}, "${role}", "${req.body.mess_desc}", "${req.body.mess_date}")`
                 );
 
-                // Send data to the client
+                // Send success message to the client
                 res.send("Sent Successfully");
             } else {
                 // Unauthorized

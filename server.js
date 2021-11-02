@@ -1,7 +1,7 @@
 // Imports
-const express = require("express"); // To create server
+const express = require("express"); // Create server
 const cors = require("cors"); // Cors middleware
-const cookieParser = require("cookie-parser");
+const cookieParser = require("cookie-parser"); // Cookies
 
 // Init app
 const app = express();

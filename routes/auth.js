@@ -1,12 +1,12 @@
 // Imports
-const express = require("express"); // To create router
-const bcrypt = require("bcryptjs"); // For encrypting password
-const jwt = require("jsonwebtoken"); // For authorization
-const config = require("config"); // For global variables
-const mysql = require("mysql2"); // To connect to the DB
+const express = require("express"); // Create router
+const bcrypt = require("bcryptjs"); // Encrypt password
+const jwt = require("jsonwebtoken"); // Authorization
+const config = require("config"); // Global variables
+const mysql = require("mysql2"); // Connect to the DB
 const auth = require("../middleware/auth"); // Middleware
-const { check, validationResult } = require("express-validator"); // To check and validate the inputs
-const readXlsxFile = require('read-excel-file/node');
+const { check, validationResult } = require("express-validator"); // Check and validate the inputs
+const readXlsxFile = require('read-excel-file/node'); // Read excel files
 
 // Init router
 const router = express.Router();
@@ -26,6 +26,7 @@ const promisePool = pool.promise();
 /**
  * Get logged in user
  * Login
+ * Delete cookie
  */
 
 // @route   GET api/auth
@@ -101,35 +102,49 @@ router.get("/", auth, async(req, res) => {
                 response: null,
             };
 
+            // List of responses from last quiz given by student
             let finalResp = [];
 
+            // Get response ids
             const [respID] = await promisePool.query(
                 `SELECT res_id FROM response WHERE stud_id=${user_id}`
             );
+
+            // If response id exists
             if (respID.length > 0) {
+                // Store the last one as it is the latest
                 const res_id = respID[respID.length - 1].res_id;
 
+                // Get all answer ids of that response
                 const [resps] = await promisePool.query(
                     `SELECT ans_id FROM response_list WHERE res_id=${res_id}`
                 );
 
+                // Loop through all answer ids
                 for (let i = 0; i < resps.length; i++) {
+                    // Get responses of those answers
                     const [temp] = await promisePool.query(
                         `SELECT response FROM answers WHERE ans_id=${resps[i].ans_id}`
                     );
+
+                    // If a response exists
                     if (temp.length > 0) {
+                        // Push that in our final array
                         finalResp.push(temp[0].response);
                     }
                 }
             }
+
+            // Store it in user object
             user.response = finalResp;
 
+            // Read CPI_sheet.xlsx
             readXlsxFile('./CPI_sheet.xlsx').then((cpis) => {
-                // `rows` is an array of rows
-                // each row being an array of cells.
-
+                // Loop through all rows
                 for (let j = 0; j < cpis.length; j++) {
+                    // Check if the roll no is same
                     if (user.roll_no.toLowerCase() === cpis[j][0].toLowerCase()) {
+                        // Store it in user
                         user.cpi = cpis[j][2];
                         break;
                     }
@@ -222,7 +237,11 @@ router.post(
 
                     // Create a token
                     const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 3600, });
+
+                    // Store the token in an httpOnly cookie
                     res.cookie('token', token, { httpOnly: true });
+
+                    // Send success message to client
                     res.send("Logged in");
                 }
             }
@@ -239,7 +258,10 @@ router.post(
 router.delete(
     "/", auth,
     async(req, res) => {
+        // Delete the cookie
         res.clearCookie('token');
+
+        // Send success message to client
         res.send("Logged out");
     }
 );

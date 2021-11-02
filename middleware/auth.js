@@ -1,12 +1,12 @@
 // Imports
-const jwt = require("jsonwebtoken"); // To verify token
-const config = require("config"); // For global variables
+const jwt = require("jsonwebtoken"); // Verify token
+const config = require("config"); // Global variables
 
 const auth = (req, res, next) => {
     // Get token from cookies
     const token = req.cookies.token;
 
-    // Check if not token
+    // Check if token exists
     if (!token) {
         // Return json with the given status and message
         return res.status(401).json({ msg: "No token, authorization denied" });

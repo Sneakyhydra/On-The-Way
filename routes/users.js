@@ -1,10 +1,10 @@
 // Imports
-const express = require("express"); // To create router
-const mysql = require("mysql2"); // To connect with DB
-const bcrypt = require("bcryptjs"); // For encrypting password
-const jwt = require("jsonwebtoken"); // For authorization
-const config = require("config"); // For global variables
-const { check, validationResult } = require("express-validator"); // To check and validate the inputs
+const express = require("express"); // Create router
+const mysql = require("mysql2"); // Connect with DB
+const bcrypt = require("bcryptjs"); // Encrypt password
+const jwt = require("jsonwebtoken"); // Authorization
+const config = require("config"); // Global variables
+const { check, validationResult } = require("express-validator"); // Check and validate the inputs
 
 // Init router
 const router = express.Router();
@@ -115,7 +115,11 @@ router.post(
 
                 // Create a token
                 const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 3600, });
+
+                // Create an httpOnly cookie
                 res.cookie('token', token, { httpOnly: true });
+
+                // Send success message to the client
                 res.send("Logged in");
             }
         } catch (err) {
@@ -228,7 +232,11 @@ router.post(
 
                 // Create a token
                 const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 3600, });
+
+                // Create an httpOnly cookie
                 res.cookie('token', token, { httpOnly: true });
+
+                // Send success message to the client
                 res.send("Logged in");
             }
         } catch (err) {
@@ -354,7 +362,11 @@ router.post(
 
                 // Create a token
                 const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 3600, });
+
+                // Create an httpOnly cookie
                 res.cookie('token', token, { httpOnly: true });
+
+                // Send success message to the client
                 res.send("Logged in");
             }
         } catch (err) {

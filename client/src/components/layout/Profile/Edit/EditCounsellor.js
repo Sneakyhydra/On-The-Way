@@ -84,6 +84,7 @@ const EditCounsellor = ({ user, setEdit }) => {
       });
 
       setEdit(false);
+      window.location.reload();
     }
   };
 

@@ -33,7 +33,7 @@ const CounFeed = () => {
 
       setAlert("Submitted Successfully", "success");
 
-      window.location.reload(false);
+      setDesc("");
     }
   };
 

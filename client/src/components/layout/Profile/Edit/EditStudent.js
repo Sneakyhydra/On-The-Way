@@ -91,6 +91,7 @@ const EditStudent = ({ user, setEdit }) => {
       });
 
       setEdit(false);
+      window.location.reload();
     }
   };
 

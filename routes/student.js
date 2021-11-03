@@ -9,10 +9,10 @@ const router = express.Router();
 
 // Create the pool
 const pool = mysql.createPool({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "student_counselling",
+    host: "remotemysql.com",
+    user: "PCige3566j",
+    password: "0rgo2Zpkd4",
+    database: "PCige3566j",
 });
 
 // Get a Promise wrapped instance of that pool

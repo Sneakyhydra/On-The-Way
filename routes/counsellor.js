@@ -2,17 +2,17 @@
 const express = require("express"); // Create router
 const mysql = require("mysql2"); // Connect to the DB
 const auth = require("../middleware/auth"); // Middleware
-const readXlsxFile = require('read-excel-file/node'); // Read excel files
+const readXlsxFile = require("read-excel-file/node"); // Read excel files
 
 // Init router
 const router = express.Router();
 
 // Create the pool
 const pool = mysql.createPool({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "student_counselling",
+    host: "remotemysql.com",
+    user: "PCige3566j",
+    password: "0rgo2Zpkd4",
+    database: "PCige3566j",
 });
 
 // Get a Promise wrapped instance of that pool
@@ -46,15 +46,13 @@ router.get("/students", auth, async(req, res) => {
         // Check if the user is counsellor
         if (role === "counsellor") {
             // Get all students from the DB
-            const [rows] = await promisePool.query(
-                `SELECT * from students`
-            );
+            const [rows] = await promisePool.query(`SELECT * from students`);
 
             // Init students array
             let students = [];
 
             // Read CPI_sheet.xlsx
-            readXlsxFile('./CPI_sheet.xlsx').then((cpis) => {
+            readXlsxFile("./CPI_sheet.xlsx").then((cpis) => {
                 // Loop through all students
                 for (let i = 0; i < rows.length; i++) {
                     // Init student object
@@ -66,7 +64,7 @@ router.get("/students", auth, async(req, res) => {
                         stud_phone: rows[i].stud_phone,
                         stud_dept: rows[i].stud_dept,
                         stud_branch: rows[i].stud_branch,
-                        cpi: null
+                        cpi: null,
                     };
 
                     // Loop through all rows in excel sheet
@@ -114,14 +112,10 @@ router.get("/quesans", auth, async(req, res) => {
         // Check if the user is counsellor
         if (role === "counsellor") {
             // Get all questions from the DB
-            const [ques] = await promisePool.query(
-                `SELECT * from questions`
-            );
+            const [ques] = await promisePool.query(`SELECT * from questions`);
 
             // Get all answers from the DB
-            const [ans] = await promisePool.query(
-                `SELECT * from answers`
-            );
+            const [ans] = await promisePool.query(`SELECT * from answers`);
 
             // Init array to be sent to the client
             let quesAns = [];
@@ -131,7 +125,7 @@ router.get("/quesans", auth, async(req, res) => {
                 ques_id: null,
                 ques_desc: null,
                 ques_no: null,
-                answers: []
+                answers: [],
             };
 
             // Element of quesItem
@@ -139,7 +133,7 @@ router.get("/quesans", auth, async(req, res) => {
                 ans_id: null,
                 ans_no: null,
                 ans_desc: null,
-                response: null
+                response: null,
             };
 
             // Loop through all the questions
@@ -149,7 +143,7 @@ router.get("/quesans", auth, async(req, res) => {
                     ques_id: ques[i].ques_id,
                     ques_desc: ques[i].ques_desc,
                     ques_no: ques[i].ques_no,
-                    answers: []
+                    answers: [],
                 };
 
                 // Loop through all the answers
@@ -187,115 +181,106 @@ router.get("/quesans", auth, async(req, res) => {
 // @route   POST api/counsellor/submitFeed
 // @desc    Submit feedback
 // @access  Private
-router.post(
-    "/submitFeed", auth,
-    async(req, res) => {
-        // Extract user id from req
-        const user_id = req.user_id;
+router.post("/submitFeed", auth, async(req, res) => {
+    // Extract user id from req
+    const user_id = req.user_id;
 
-        try {
-            // Get role of the user from DB
-            const [rows] = await promisePool.query(
-                `SELECT role from logins WHERE user_id='${user_id}'`
+    try {
+        // Get role of the user from DB
+        const [rows] = await promisePool.query(
+            `SELECT role from logins WHERE user_id='${user_id}'`
+        );
+
+        // Extract role from rows
+        const { role } = rows[0];
+
+        // Check if the user is counsellor
+        if (role === "counsellor") {
+            // Insert feedback in DB
+            await promisePool.query(
+                `INSERT INTO coun_feedback (coun_id, feed_desc) VALUES (${user_id}, "${req.body.desc}")`
             );
 
-            // Extract role from rows
-            const { role } = rows[0];
-
-            // Check if the user is counsellor
-            if (role === "counsellor") {
-                // Insert feedback in DB
-                await promisePool.query(
-                    `INSERT INTO coun_feedback (coun_id, feed_desc) VALUES (${user_id}, "${req.body.desc}")`
-                );
-
-                // Send success message to the client
-                res.send("Submitted Successfully");
-            } else {
-                // Unauthorized
-                res.status(401).json({ msg: "Only counsellors can access this portal" });
-            }
-        } catch (err) {
-            // Catch errors
-            throw err;
+            // Send success message to the client
+            res.send("Submitted Successfully");
+        } else {
+            // Unauthorized
+            res.status(401).json({ msg: "Only counsellors can access this portal" });
         }
+    } catch (err) {
+        // Catch errors
+        throw err;
     }
-);
+});
 
 // @route   POST api/counsellor/message
 // @desc    Send message
 // @access  Private
-router.post(
-    "/message", auth,
-    async(req, res) => {
-        // Extract user id from req
-        const user_id = req.user_id;
+router.post("/message", auth, async(req, res) => {
+    // Extract user id from req
+    const user_id = req.user_id;
 
-        try {
-            // Get role of the user from DB
-            const [rows] = await promisePool.query(
-                `SELECT role from logins WHERE user_id='${user_id}'`
+    try {
+        // Get role of the user from DB
+        const [rows] = await promisePool.query(
+            `SELECT role from logins WHERE user_id='${user_id}'`
+        );
+
+        // Extract role from rows
+        const { role } = rows[0];
+
+        // Check if the user is counsellor
+        if (role === "counsellor") {
+            // Insert message in DB
+            await promisePool.query(
+                `INSERT INTO messages (stud_id, coun_id, from_role, mess_desc, mess_date) VALUES (${req.body.stud_id}, ${user_id}, "${role}", "${req.body.mess_desc}", "${req.body.mess_date}")`
             );
 
-            // Extract role from rows
-            const { role } = rows[0];
-
-            // Check if the user is counsellor
-            if (role === "counsellor") {
-                // Insert message in DB
-                await promisePool.query(
-                    `INSERT INTO messages (stud_id, coun_id, from_role, mess_desc, mess_date) VALUES (${req.body.stud_id}, ${user_id}, "${role}", "${req.body.mess_desc}", "${req.body.mess_date}")`
-                );
-
-                // Send success message to the client
-                res.send("Sent Successfully");
-            } else {
-                // Unauthorized
-                res.status(401).json({ msg: "Only counsellors can access this portal" });
-            }
-        } catch (err) {
-            // Catch errors
-            throw err;
+            // Send success message to the client
+            res.send("Sent Successfully");
+        } else {
+            // Unauthorized
+            res.status(401).json({ msg: "Only counsellors can access this portal" });
         }
+    } catch (err) {
+        // Catch errors
+        throw err;
     }
-);
+});
 
 // @route   GET api/counsellor/message
 // @desc    Get all messages of user
 // @access  Private
-router.get(
-    "/message", auth,
-    async(req, res) => {
-        // Extract user id from req
-        const user_id = req.user_id;
+router.get("/message", auth, async(req, res) => {
+    // Extract user id from req
+    const user_id = req.user_id;
 
-        try {
-            // Get role of the user from DB
-            const [rows] = await promisePool.query(
-                `SELECT role from logins WHERE user_id='${user_id}'`
+    try {
+        // Get role of the user from DB
+        const [rows] = await promisePool.query(
+            `SELECT role from logins WHERE user_id='${user_id}'`
+        );
+
+        // Extract role from rows
+        const { role } = rows[0];
+
+        // Check if the user is counsellor
+        if (role === "counsellor") {
+            // Get messages of this user from DB
+            const [messages] = await promisePool.query(
+                `SELECT * FROM messages WHERE coun_id=${user_id}`
             );
 
-            // Extract role from rows
-            const { role } = rows[0];
-
-            // Check if the user is counsellor
-            if (role === "counsellor") {
-                // Get messages of this user from DB
-                const [messages] = await promisePool.query(
-                    `SELECT * FROM messages WHERE coun_id=${user_id}`
-                );
-
-                // Send data to the client
-                res.send(messages);
-            } else {
-                // Unauthorized
-                res.status(401).json({ msg: "Only counsellors can access this portal" });
-            }
-        } catch (err) {
-            // Catch errors
-            throw err;
+            // Send data to the client
+            res.send(messages);
+        } else {
+            // Unauthorized
+            res.status(401).json({ msg: "Only counsellors can access this portal" });
         }
+    } catch (err) {
+        // Catch errors
+        throw err;
     }
-);
+});
 
 module.exports = router;

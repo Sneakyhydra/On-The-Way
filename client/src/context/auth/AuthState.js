@@ -16,6 +16,7 @@ import {
 } from "../types";
 import axios from "axios";
 import Cookies from "universal-cookie";
+
 axios.defaults.withCredentials = true;
 
 const AuthState = (props) => {
@@ -259,8 +260,6 @@ const AuthState = (props) => {
     try {
       await axios.delete("/api/auth");
 
-      // Delete the token
-      cookies.remove("token");
       // Dispatch the action to reducer for LOGOUT
       dispatch({ type: LOGOUT });
     } catch (err) {

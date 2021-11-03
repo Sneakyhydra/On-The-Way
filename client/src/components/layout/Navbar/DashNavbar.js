@@ -24,7 +24,8 @@ const DashNavbar = () => {
 
   const onLogout = async () => {
     await logout();
-    setTimeout(authContext.loadUser(), 1000);
+    await authContext.loadUser();
+    window.location.reload();
   };
 
   const authLinks = (

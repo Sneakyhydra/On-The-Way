@@ -5,17 +5,13 @@ import logo from "../../../images/Logo/logo.png";
 import PropTypes from "prop-types";
 import AuthContext from "../../../context/auth/authContext";
 import { Icon } from "react-materialize";
-import Cookies from "universal-cookie";
 
 const HomeNavbar = ({ scrollState }) => {
   const authContext = useContext(AuthContext);
-  const cookies = new Cookies();
 
   // Load user if token exists
   useEffect(() => {
-    if (cookies.get("token")) {
-      authContext.loadUser();
-    }
+    authContext.loadUser();
     // eslint-disable-next-line
   }, []);
 
@@ -23,7 +19,8 @@ const HomeNavbar = ({ scrollState }) => {
 
   const onLogout = async () => {
     await logout();
-    authContext.loadUser();
+    await authContext.loadUser();
+    window.location.reload();
   };
 
   const authLinks = (

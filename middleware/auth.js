@@ -8,6 +8,8 @@ const auth = (req, res, next) => {
 
     // Check if token exists
     if (!token) {
+        res.clearCookie("token");
+
         // Return json with the given status and message
         return res.status(401).json({ msg: "No token, authorization denied" });
     }
@@ -22,6 +24,8 @@ const auth = (req, res, next) => {
         // Go next
         next();
     } catch (err) {
+        res.clearCookie("token");
+
         // Return json with the given status and message
         res.status(401).json({ msg: "Token is not valid" });
     }

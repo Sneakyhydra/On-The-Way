@@ -3,19 +3,24 @@ import AlertContext from "../../context/alert/alertContext";
 import AuthContext from "../../context/auth/authContext";
 import { useHistory } from "react-router";
 import M from "materialize-css/dist/js/materialize.min.js";
-import Cookies from "universal-cookie";
+import { Row, Col, Preloader } from "react-materialize";
 
 const RegisterCounsellor = () => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
-  const cookies = new Cookies();
-
   const { setAlert } = alertContext;
 
-  const { regCounsellor, error, clearErrors, isAuthenticated } = authContext;
+  const { regCounsellor, error, clearErrors, isAuthenticated, loadUser } =
+    authContext;
+  const [loginProgress, setLoginProgress] = useState(false);
 
   const history = useHistory();
+
+  useEffect(() => {
+    loadUser();
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     M.AutoInit();
@@ -70,8 +75,10 @@ const RegisterCounsellor = () => {
     return false;
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+
+    setLoginProgress(true);
 
     if (
       email === "" ||
@@ -91,7 +98,7 @@ const RegisterCounsellor = () => {
     } else if (password !== password2) {
       setAlert("Passwords do not match", "danger");
     } else {
-      regCounsellor({
+      await regCounsellor({
         user_email: email,
         user_password: password,
         role: "counsellor",
@@ -102,11 +109,9 @@ const RegisterCounsellor = () => {
         coun_status: status,
       });
     }
-  };
 
-  if (cookies.get("token")) {
-    authContext.loadUser();
-  }
+    setLoginProgress(false);
+  };
 
   return (
     <div className='center' id='cbg'>
@@ -254,18 +259,37 @@ const RegisterCounsellor = () => {
               </div>
             </div>
 
-            <div className='row'>
-              <button
-                className='btn waves-effect waves-light'
-                id='cbtn'
-                type='submit'
-                value='Register'
-                style={{ marginTop: "2em", borderRadius: "2em", width: "10em" }}
-              >
-                Register
-                <i className='material-icons right'>send</i>
-              </button>
-            </div>
+            {loginProgress ? (
+              <div style={{ marginTop: "540px", marginRight: "20px" }}>
+                <Row>
+                  <Col s={4}>
+                    <Preloader
+                      active
+                      color='blue'
+                      flashing={false}
+                      size='small'
+                    />
+                  </Col>
+                </Row>
+              </div>
+            ) : (
+              <div className='row'>
+                <button
+                  className='btn waves-effect waves-light'
+                  id='cbtn'
+                  type='submit'
+                  value='Register'
+                  style={{
+                    marginTop: "2em",
+                    borderRadius: "2em",
+                    width: "10em",
+                  }}
+                >
+                  Register
+                  <i className='material-icons right'>send</i>
+                </button>
+              </div>
+            )}
           </form>
         </div>
       </div>

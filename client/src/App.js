@@ -82,9 +82,11 @@ const App = () => {
                       <div
                         style={{
                           backgroundImage: `url(${background})`,
-                          height: "720px",
-                          backgroundSize: "cover",
+                          maxHeight: "720px",
                           fontFamily: "Lucida Sans, sans-serif",
+                          backgroundRepeat: "no-repeat",
+                          backgroundPosition: "center center",
+                          backgroundSize: "100% 100%",
                         }}
                       >
                         <HomeNavbar scrollState={scrollState} />

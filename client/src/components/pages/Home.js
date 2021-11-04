@@ -75,6 +75,7 @@ const Home = () => {
         style={{
           backgroundImage: `url(${background2})`,
           backgroundSize: "cover",
+          height: "auto",
         }}
       >
         <div className='helptitle'>Three steps we can help you</div>
@@ -84,7 +85,37 @@ const Home = () => {
               <div className='img-container'>
                 <img src={help1} alt='step1' />
               </div>
-              <div className='content-container'></div>
+              <div className='content-container'>
+                <div className='txt1'>
+                  <div style={{ display: "inline-flex" }}>
+                    <h1 style={{ color: "#bababa", marginRight: "1rem" }}>1</h1>
+                    <h3
+                      style={{
+                        color: "#302664",
+                        fontSize: "19px",
+                        fontWeight: "900",
+                        fontFamily: "Open Sans, sans-serif",
+                        lineHeight: "1.5",
+                        marginTop: "3.5em",
+                      }}
+                    >
+                      Connect with your Expert
+                    </h3>
+                  </div>
+                  <h5
+                    style={{
+                      color: "#444",
+                      fontSize: "13px",
+                      lineHeight: "26px",
+                      fontFamily: "Open Sans, sans-serif",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Chat anonymously with a YourDOST expert who's here to help
+                    you and not judge you.
+                  </h5>
+                </div>
+              </div>
             </div>
           </div>
           <div className='col l4 s12 center'>
@@ -92,7 +123,37 @@ const Home = () => {
               <div className='img-container'>
                 <img src={help2} alt='step2' />
               </div>
-              <div className='content-container'></div>
+              <div className='content-container'>
+                <div className='txt1'>
+                  <div style={{ display: "inline-flex" }}>
+                    <h1 style={{ color: "#bababa", marginRight: "1rem" }}>2</h1>
+                    <h3
+                      style={{
+                        color: "#302664",
+                        fontSize: "19px",
+                        fontWeight: "900",
+                        fontFamily: "Open Sans, sans-serif",
+                        lineHeight: "1.5",
+                        marginTop: "3.5em",
+                      }}
+                    >
+                      Discuss your Concerns
+                    </h3>
+                  </div>
+                  <h5
+                    style={{
+                      color: "#444",
+                      fontSize: "13px",
+                      lineHeight: "26px",
+                      fontFamily: "Open Sans, sans-serif",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Open up to your Expert in a space where you get the guidance
+                    you need, and your concerns get the attention they deserve.
+                  </h5>
+                </div>
+              </div>
             </div>
           </div>
           <div className='col l4 s12 center'>
@@ -100,88 +161,38 @@ const Home = () => {
               <div className='img-container'>
                 <img src={help3} alt='step3' />
               </div>
-              <div className='content-container'></div>
+              <div className='content-container'>
+                <div className='txt1'>
+                  <div style={{ display: "inline-flex" }}>
+                    <h1 style={{ color: "#bababa", marginRight: "1rem" }}>3</h1>
+                    <h3
+                      style={{
+                        color: "#302664",
+                        fontSize: "19px",
+                        fontWeight: "900",
+                        fontFamily: "Open Sans, sans-serif",
+                        lineHeight: "1.5",
+                        marginTop: "3.5em",
+                      }}
+                    >
+                      Unleash a Better You
+                    </h3>
+                  </div>
+                  <h5
+                    style={{
+                      color: "#444",
+                      fontSize: "13px",
+                      lineHeight: "26px",
+                      fontFamily: "Open Sans, sans-serif",
+                      fontWeight: "600",
+                    }}
+                  >
+                    With 24X7 support from our experts, bid goodbye to your old
+                    self and be on your way to becoming a better you.
+                  </h5>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className='rowtxt'>
-          <div className='txt1'>
-            <h1 style={{ color: "#bababa" }}>1</h1>
-            <h3
-              style={{
-                color: "#302664",
-                fontSize: "19px",
-                fontWeight: "900",
-                fontFamily: "Open Sans, sans-serif",
-                lineHeight: "1.5",
-              }}
-            >
-              Connect with your Expert
-            </h3>
-            <h5
-              style={{
-                color: "#444",
-                fontSize: "13px",
-                lineHeight: "26px",
-                fontFamily: "Open Sans, sans-serif",
-                fontWeight: "600",
-              }}
-            >
-              Chat anonymously with a YourDOST expert who's here to help you and
-              not judge you.
-            </h5>
-          </div>
-          <div className='txt1'>
-            <h1 style={{ color: "#bababa" }}>2</h1>
-            <h3
-              style={{
-                color: "#302664",
-                fontSize: "19px",
-                fontWeight: "900",
-                fontFamily: "Open Sans, sans-serif",
-                lineHeight: "1.5",
-              }}
-            >
-              Discuss your Concerns
-            </h3>
-            <h5
-              style={{
-                color: "#444",
-                fontSize: "13px",
-                lineHeight: "26px",
-                fontFamily: "Open Sans, sans-serif",
-                fontWeight: "600",
-              }}
-            >
-              Open up to your Expert in a space where you get the guidance you
-              need, and your concerns get the attention they deserve.
-            </h5>
-          </div>
-          <div className='txt1'>
-            <h1 style={{ color: "#bababa" }}>3</h1>
-            <h3
-              style={{
-                color: "#302664",
-                fontSize: "19px",
-                fontWeight: "900",
-                fontFamily: "Open Sans, sans-serif",
-                lineHeight: "1.5",
-              }}
-            >
-              Unleash a Better You
-            </h3>
-            <h5
-              style={{
-                color: "#444",
-                fontSize: "13px",
-                lineHeight: "26px",
-                fontFamily: "Open Sans, sans-serif",
-                fontWeight: "600",
-              }}
-            >
-              With 24X7 support from our experts, bid goodbye to your old self
-              and be on your way to becoming a better you.
-            </h5>
           </div>
         </div>
       </div>

@@ -17,6 +17,9 @@ const pool = mysql.createPool({
     user: "PCige3566j",
     password: "0rgo2Zpkd4",
     database: "PCige3566j",
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
 // Get a Promise wrapped instance of that pool

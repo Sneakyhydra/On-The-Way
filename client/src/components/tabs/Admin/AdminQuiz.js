@@ -5,10 +5,9 @@ import QuestionsCard from "../../layout/Admin/Quiz/QuestionsCard";
 import AlertContext from "../../../context/alert/alertContext";
 import Preloader from "../../layout/Preloader/Preloader";
 
-const AdminQuiz = () => {
+const AdminQuiz = ({ tabKey }) => {
   const adminContext = useContext(AdminContext);
   const alertContext = useContext(AlertContext);
-  const [loading, setLoading] = useState(true);
 
   const { quesAns, loadQuesAns, updateQuiz, error } = adminContext;
   const { setAlert } = alertContext;
@@ -17,8 +16,6 @@ const AdminQuiz = () => {
 
   // Load the user when dashboard is rendered
   useEffect(() => {
-    loadQuesAns();
-    setLoading(false);
     M.AutoInit();
     M.updateTextFields();
 
@@ -29,16 +26,21 @@ const AdminQuiz = () => {
   }, []);
 
   useEffect(() => {
-    setLoading(false);
     M.AutoInit();
     M.updateTextFields();
+    // eslint-disable-next-line
   }, [cntChanges]);
 
-  if (loading) {
-    return <Preloader />;
+  if (tabKey === "questions") {
+    loadQuesAns();
   }
+
   if (!quesAns) {
-    return <Preloader />;
+    return (
+      <div style={{ marginTop: "3.5em" }}>
+        <Preloader />
+      </div>
+    );
   }
 
   let editedQuesAns = [...quesAns];

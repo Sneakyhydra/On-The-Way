@@ -35,6 +35,9 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
 
   const { user } = authContext;
+  const [tabKey, setTabKey] = useState("profile");
+  const [tabKeyCoun, setTabKeyCoun] = useState("pending");
+  const [tabKeyFeed, setTabKeyFeed] = useState("counfeed");
 
   // Load the user when dashboard is rendered
   useEffect(() => {
@@ -90,12 +93,15 @@ const Dashboard = () => {
           width: "100%",
         }}
         variant='pills'
+        defaultActiveKey='profile'
+        activeKey={tabKey}
+        onSelect={(k) => setTabKey(k)}
       >
         <Tab eventKey='profile' title='Profile' className='z-depth-0'>
-          <Profile />
+          <Profile tabKey={tabKey} />
         </Tab>
         <Tab eventKey='questions' title='Quiz' className='z-depth-0'>
-          <AdminQuiz />
+          <AdminQuiz tabKey={tabKey} />
         </Tab>
         <Tab eventKey='counsellors' title='Counsellors' className='z-depth-0'>
           <Tabs
@@ -113,20 +119,22 @@ const Dashboard = () => {
               borderBottomRightRadius: "10px",
             }}
             variant='pills'
+            activeKey={tabKeyCoun}
+            onSelect={(k) => setTabKeyCoun(k)}
           >
             <Tab eventKey='pending' title='Pending' className='z-depth-0'>
-              <Pending />
+              <Pending tabKeyCoun={tabKeyCoun} tabKey={tabKey} />
             </Tab>
             <Tab eventKey='rejected' title='Rejected' className='z-depth-0'>
-              <Rejected />
+              <Rejected tabKeyCoun={tabKeyCoun} tabKey={tabKey} />
             </Tab>
             <Tab eventKey='approved' title='Approved' className='z-depth-0'>
-              <Approved />
+              <Approved tabKeyCoun={tabKeyCoun} tabKey={tabKey} />
             </Tab>
           </Tabs>
         </Tab>
         <Tab eventKey='students' title='Students' className='z-depth-0'>
-          <Students />
+          <Students tabKey={tabKey} />
         </Tab>
         <Tab eventKey='feedback' title='Feedback' className='z-depth-0'>
           <Tabs
@@ -145,12 +153,14 @@ const Dashboard = () => {
               flexWrap: "nowrap",
             }}
             variant='pills'
+            activeKey={tabKeyFeed}
+            onSelect={(k) => setTabKeyFeed(k)}
           >
             <Tab eventKey='counfeed' title='Counsellors' className='z-depth-0'>
-              <AdminCounFeed />
+              <AdminCounFeed tabKeyFeed={tabKeyFeed} tabKey={tabKey} />
             </Tab>
             <Tab eventKey='studfeed' title='Students' className='z-depth-0'>
-              <AdminStudFeed />
+              <AdminStudFeed tabKeyFeed={tabKeyFeed} tabKey={tabKey} />
             </Tab>
           </Tabs>
         </Tab>

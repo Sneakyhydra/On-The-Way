@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../../../../context/auth/authContext";
 import DisplayAdmin from "./DisplayAdmin";
 import DisplayStudent from "./DisplayStudent";
@@ -8,31 +8,16 @@ import EditStudent from "../Edit/EditStudent";
 import EditCounsellor from "../Edit/EditCounsellor";
 import Preloader from "../../Preloader/Preloader";
 
-const DisplayProfile = () => {
+const DisplayProfile = ({ tabKey }) => {
   const authContext = useContext(AuthContext);
-  const [loading, setLoading] = useState(true);
   const [edit, setEdit] = useState(false);
 
-  // Load the user when dashboard is rendered
-  useEffect(() => {
-    const fetchUser = async () => {
-      await authContext.loadUser();
-      setLoading(false);
-    };
-    fetchUser();
-    // eslint-disable-next-line
-  }, [loading]);
+  const { user, loadUser } = authContext;
 
-  useEffect(() => {
-    authContext.loadUser();
-    //eslint-disable-next-line
-  }, []);
-
-  const user = authContext.user;
-
-  if (loading) {
-    return <Preloader />;
+  if (tabKey === "profile") {
+    loadUser();
   }
+
   if (!user) {
     return <Preloader />;
   }

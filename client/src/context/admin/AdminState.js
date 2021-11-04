@@ -6,13 +6,10 @@ import {
   CLEAR_ERRORS,
   PENDING_SUCCESS,
   PENDING_FAIL,
-  APPROVE_SUCCESS,
   APPROVE_FAIL,
-  REJECT_SUCCESS,
   REJECT_FAIL,
   QUIZ_LOAD_SUCCESS,
   QUIZ_LOAD_FAIL,
-  QUIZ_UPDATE_SUCCESS,
   QUIZ_UPDATE_FAIL,
   STUD_LOAD_SUCCESS,
   STUD_LOAD_FAIL,
@@ -33,12 +30,11 @@ axios.defaults.withCredentials = true;
 const AdminState = (props) => {
   // Set initial state
   const initialState = {
-    loading: true,
     error: null,
     quesAns: null,
     pending: null,
     students: null,
-    counsellors: null,
+    approved: null,
     rejected: null,
     counfeed: null,
     studfeed: null,
@@ -106,11 +102,6 @@ const AdminState = (props) => {
       // Make a put request at localhost:5000/api/admin/pending
       await axios.put("api/admin/pending", appr, config);
 
-      // Dispatch the action to reducer for APPROVE_SUCCESS
-      dispatch({
-        type: APPROVE_SUCCESS,
-      });
-
       // Load all counsellors
       loadPending();
       loadApproved();
@@ -142,11 +133,6 @@ const AdminState = (props) => {
 
       // Make a put request at localhost:5000/api/admin/pending
       await axios.put("api/admin/pending", reject, config);
-
-      // Dispatch the action to reducer for REJECT_SUCCESS
-      dispatch({
-        type: REJECT_SUCCESS,
-      });
 
       // Load all counsellors
       loadPending();
@@ -193,11 +179,6 @@ const AdminState = (props) => {
     try {
       // Make a put request at localhost:5000/api/admin/quiz
       await axios.put("api/admin/quiz", formData, config);
-
-      // Dispatch the action to reducer for QUIZ_UPDATE_SUCCESS
-      dispatch({
-        type: QUIZ_UPDATE_SUCCESS,
-      });
 
       // Load Quiz
       await loadQuesAns();
@@ -366,7 +347,6 @@ const AdminState = (props) => {
     <AdminContext.Provider
       // Provide these values to all components wrapped in AdminContext in App.js
       value={{
-        loading: state.loading,
         error: state.error,
         quesAns: state.quesAns,
         pending: state.pending,

@@ -1,31 +1,45 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
 import AdminContext from "../../../context/admin/adminContext";
 import M from "materialize-css/dist/js/materialize.min.js";
 import PendingCard from "../../layout/Admin/Counsellors/PendingCard";
 import AlertContext from "../../../context/alert/alertContext";
 import Preloader from "../../layout/Preloader/Preloader";
+import { Row, Col } from "react-materialize";
 
-const Pending = () => {
+const Pending = ({ tabKey, tabKeyCoun }) => {
   const adminContext = useContext(AdminContext);
   const alertContext = useContext(AlertContext);
-  const [loading, setLoading] = useState(true);
 
   const { pending, loadPending } = adminContext;
   const { setAlert } = alertContext;
 
   // Load the user when dashboard is rendered
   useEffect(() => {
-    loadPending();
-    setLoading(false);
     M.AutoInit();
     M.updateTextFields();
     // eslint-disable-next-line
   }, []);
-  if (loading) {
-    return <Preloader />;
+
+  if (tabKey === "counsellors") {
+    if (tabKeyCoun === "pending") {
+      loadPending();
+    }
   }
+
   if (!pending) {
-    return <Preloader />;
+    return (
+      <div
+        style={{
+          marginTop: "3.52em",
+        }}
+      >
+        <Row>
+          <Col style={{ marginTop: "3em" }}>
+            <Preloader />
+          </Col>
+        </Row>
+      </div>
+    );
   }
 
   return (

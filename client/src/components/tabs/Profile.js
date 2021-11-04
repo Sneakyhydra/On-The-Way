@@ -1,9 +1,9 @@
 import DisplayProfile from "../layout/Profile/Display/DisplayProfile";
 
-const Profile = () => {
+const Profile = ({ tabKey }) => {
   return (
     <div style={{ marginTop: "5em" }}>
-      <DisplayProfile />
+      <DisplayProfile tabKey={tabKey} />
     </div>
   );
 };

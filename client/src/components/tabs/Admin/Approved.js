@@ -1,31 +1,45 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
 import AdminContext from "../../../context/admin/adminContext";
 import M from "materialize-css/dist/js/materialize.min.js";
 import ApprovedCard from "../../layout/Admin/Counsellors/ApprovedCard";
 import AlertContext from "../../../context/alert/alertContext";
 import Preloader from "../../layout/Preloader/Preloader";
+import { Row, Col } from "react-materialize";
 
-const Approved = () => {
+const Approved = ({ tabKey, tabKeyCoun }) => {
   const adminContext = useContext(AdminContext);
   const alertContext = useContext(AlertContext);
-  const [loading, setLoading] = useState(true);
 
   const { approved, loadApproved } = adminContext;
   const { setAlert } = alertContext;
 
   // Load the user when dashboard is rendered
   useEffect(() => {
-    loadApproved();
-    setLoading(false);
     M.AutoInit();
     M.updateTextFields();
     // eslint-disable-next-line
   }, []);
-  if (loading) {
-    return <Preloader />;
+
+  if (tabKey === "counsellors") {
+    if (tabKeyCoun === "approved") {
+      loadApproved();
+    }
   }
+
   if (!approved) {
-    return <Preloader />;
+    return (
+      <div
+        style={{
+          marginTop: "3.52em",
+        }}
+      >
+        <Row>
+          <Col style={{ marginTop: "3em" }}>
+            <Preloader />
+          </Col>
+        </Row>
+      </div>
+    );
   }
 
   return (

@@ -1,31 +1,45 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
 import AdminContext from "../../../context/admin/adminContext";
 import M from "materialize-css/dist/js/materialize.min.js";
 import StudFeedCard from "../../layout/Admin/Feedback/StudFeedCard";
 import AlertContext from "../../../context/alert/alertContext";
 import Preloader from "../../layout/Preloader/Preloader";
+import { Row, Col } from "react-materialize";
 
-const AdminStudFeed = () => {
+const AdminStudFeed = ({ tabKey, tabKeyFeed }) => {
   const adminContext = useContext(AdminContext);
   const alertContext = useContext(AlertContext);
-  const [loading, setLoading] = useState(true);
 
   const { studfeed, loadStudFeed } = adminContext;
   const { setAlert } = alertContext;
 
   // Load the user when dashboard is rendered
   useEffect(() => {
-    loadStudFeed();
-    setLoading(false);
     M.AutoInit();
     M.updateTextFields();
     // eslint-disable-next-line
   }, []);
-  if (loading) {
-    return <Preloader />;
+
+  if (tabKey === "feedback") {
+    if (tabKeyFeed === "studfeed") {
+      loadStudFeed();
+    }
   }
+
   if (!studfeed) {
-    return <Preloader />;
+    return (
+      <div
+        style={{
+          marginTop: "3.52em",
+        }}
+      >
+        <Row>
+          <Col style={{ marginTop: "3em" }}>
+            <Preloader />
+          </Col>
+        </Row>
+      </div>
+    );
   }
 
   return (

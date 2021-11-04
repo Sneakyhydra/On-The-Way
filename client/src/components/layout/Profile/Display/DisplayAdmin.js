@@ -1,16 +1,18 @@
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 import PropTypes from "prop-types";
-import AuthContext from "../../../../context/auth/authContext";
 
 const DisplayAdmin = ({ user, setEdit }) => {
-  const authContext = useContext(AuthContext);
+  useEffect(() => {
+    M.AutoInit();
+    M.updateTextFields();
+    // eslint-disable-next-line
+  }, [user]);
 
   useEffect(() => {
     M.AutoInit();
     M.updateTextFields();
-    authContext.loadUser();
-    //eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   const { admin_name, user_email, admin_phone, admin_gender } = user;

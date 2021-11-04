@@ -20,11 +20,14 @@ const AdminStudFeed = ({ tabKey, tabKeyFeed }) => {
     // eslint-disable-next-line
   }, []);
 
-  if (tabKey === "feedback") {
-    if (tabKeyFeed === "studfeed") {
-      loadStudFeed();
+  useEffect(() => {
+    if (tabKey === "feedback") {
+      if (tabKeyFeed === "studfeed") {
+        loadStudFeed();
+      }
     }
-  }
+    // eslint-disable-next-line
+  }, [tabKey, tabKeyFeed]);
 
   if (!studfeed) {
     return (

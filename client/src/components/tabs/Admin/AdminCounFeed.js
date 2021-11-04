@@ -20,11 +20,14 @@ const AdminCounFeed = ({ tabKey, tabKeyFeed }) => {
     // eslint-disable-next-line
   }, []);
 
-  if (tabKey === "feedback") {
-    if (tabKeyFeed === "counfeed") {
-      loadCounFeed();
+  useEffect(() => {
+    if (tabKey === "feedback") {
+      if (tabKeyFeed === "counfeed") {
+        loadCounFeed();
+      }
     }
-  }
+    // eslint-disable-next-line
+  }, [tabKey, tabKeyFeed]);
 
   if (!counfeed) {
     return (

@@ -1,21 +1,18 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
 import CounContext from "../../../context/counsellor/counContext";
 import M from "materialize-css/dist/js/materialize.min.js";
 import QuizQuesCard from "../../layout/Counsellor/Quiz/QuizQuesCard";
 import AlertContext from "../../../context/alert/alertContext";
 import Preloader from "../../layout/Preloader/Preloader";
 
-const CounQuiz = () => {
+const CounQuiz = ({ tabKey }) => {
   const counContext = useContext(CounContext);
   const alertContext = useContext(AlertContext);
-  const [loading, setLoading] = useState(true);
 
   const { quesAns, loadQuesAns, error } = counContext;
   const { setAlert } = alertContext;
 
   useEffect(() => {
-    loadQuesAns();
-    setLoading(false);
     M.AutoInit();
     M.updateTextFields();
 
@@ -25,11 +22,19 @@ const CounQuiz = () => {
     // eslint-disable-next-line
   }, []);
 
-  if (loading) {
-    return <Preloader />;
-  }
+  useEffect(() => {
+    if (tabKey === "counquiz") {
+      loadQuesAns();
+    }
+    // eslint-disable-next-line
+  }, [tabKey]);
+
   if (!quesAns) {
-    return <Preloader />;
+    return (
+      <div style={{ marginTop: "3.5em" }}>
+        <Preloader />
+      </div>
+    );
   }
 
   return (

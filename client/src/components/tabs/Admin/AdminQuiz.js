@@ -31,9 +31,12 @@ const AdminQuiz = ({ tabKey }) => {
     // eslint-disable-next-line
   }, [cntChanges]);
 
-  if (tabKey === "questions") {
-    loadQuesAns();
-  }
+  useEffect(() => {
+    if (tabKey === "questions") {
+      loadQuesAns();
+    }
+    // eslint-disable-next-line
+  }, [tabKey]);
 
   if (!quesAns) {
     return (
@@ -48,7 +51,6 @@ const AdminQuiz = ({ tabKey }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    console.log(editedQuesAns);
     updateQuiz({
       quesAns: editedQuesAns,
     });

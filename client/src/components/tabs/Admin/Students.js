@@ -15,9 +15,12 @@ const Students = ({ tabKey }) => {
     // eslint-disable-next-line
   }, []);
 
-  if (tabKey === "students") {
-    loadStudents();
-  }
+  useEffect(() => {
+    if (tabKey === "students") {
+      loadStudents();
+    }
+    // eslint-disable-next-line
+  }, [tabKey]);
 
   if (!students) {
     return (

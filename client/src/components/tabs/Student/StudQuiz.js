@@ -6,22 +6,20 @@ import AlertContext from "../../../context/alert/alertContext";
 import AuthContext from "../../../context/auth/authContext";
 import Preloader from "../../layout/Preloader/Preloader";
 
-const StudQuiz = () => {
+const StudQuiz = ({ tabKey, setTabKey }) => {
   const studContext = useContext(StudContext);
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
-  const [loading, setLoading] = useState(true);
 
   const { quesAns, loadQuesAns, error, submitQuiz } = studContext;
   const { setAlert } = alertContext;
-  const { loadUser, user } = authContext;
+  const { user, loadUser } = authContext;
 
   const [quiz, setQuiz] = useState({});
+  const [submitted, setSubmitted] = useState(false);
 
   // Load the user when dashboard is rendered
   useEffect(() => {
-    loadQuesAns();
-    setLoading(false);
     M.AutoInit();
     M.updateTextFields();
 
@@ -31,11 +29,26 @@ const StudQuiz = () => {
     // eslint-disable-next-line
   }, []);
 
-  if (loading) {
-    return <Preloader />;
-  }
+  useEffect(() => {
+    if (submitted === true) {
+      setTabKey("profile");
+    }
+    // eslint-disable-next-line
+  }, [submitted]);
+
+  useEffect(() => {
+    if (tabKey === "studquiz") {
+      loadQuesAns();
+    }
+    // eslint-disable-next-line
+  }, [tabKey]);
+
   if (!quesAns) {
-    return <Preloader />;
+    return (
+      <div style={{ marginTop: "3.5em" }}>
+        <Preloader />
+      </div>
+    );
   }
 
   const onSubmit = (e) => {
@@ -64,7 +77,8 @@ const StudQuiz = () => {
     setAlert("Quiz Submitted", "success");
     loadUser();
 
-    window.location.reload(false);
+    setQuiz({});
+    setSubmitted(true);
   };
 
   return (
@@ -99,6 +113,7 @@ const StudQuiz = () => {
               idx={idx}
               quiz={quiz}
               setQuiz={setQuiz}
+              submitted={submitted}
             />
           );
         })}

@@ -71,7 +71,6 @@ const EditAdmin = ({ user, setEdit }) => {
       });
 
       setEdit(false);
-      window.location.reload();
     }
   };
 

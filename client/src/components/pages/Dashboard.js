@@ -121,6 +121,7 @@ const Dashboard = () => {
             variant='pills'
             activeKey={tabKeyCoun}
             onSelect={(k) => setTabKeyCoun(k)}
+            defaultActiveKey='pending'
           >
             <Tab eventKey='pending' title='Pending' className='z-depth-0'>
               <Pending tabKeyCoun={tabKeyCoun} tabKey={tabKey} />
@@ -154,6 +155,7 @@ const Dashboard = () => {
             }}
             variant='pills'
             activeKey={tabKeyFeed}
+            defaultActiveKey='counfeed'
             onSelect={(k) => setTabKeyFeed(k)}
           >
             <Tab eventKey='counfeed' title='Counsellors' className='z-depth-0'>
@@ -181,29 +183,32 @@ const Dashboard = () => {
           width: "100%",
         }}
         variant='pills'
+        activeKey={tabKey}
+        onSelect={(k) => setTabKey(k)}
+        defaultActiveKey='profile'
       >
         <Tab eventKey='profile' title='Profile' className='z-depth-0'>
-          <Profile />
+          <Profile tabKey={tabKey} />
         </Tab>
 
         {/* Show below tabs only if counsellor is approved */}
         {user.coun_status === "Approved" ? (
           <Tab eventKey='studentInfo' title='Students' className='z-depth-0'>
-            <StudentInfo />
+            <StudentInfo tabKey={tabKey} />
           </Tab>
         ) : (
           ""
         )}
         {user.coun_status === "Approved" ? (
           <Tab eventKey='counquiz' title='Quiz' className='z-depth-0'>
-            <CounQuiz />
+            <CounQuiz tabKey={tabKey} />
           </Tab>
         ) : (
           ""
         )}
         {user.coun_status === "Approved" ? (
           <Tab eventKey='chat' title='Chat' className='z-depth-0'>
-            <CounChat />
+            <CounChat tabKey={tabKey} />
           </Tab>
         ) : (
           ""
@@ -232,18 +237,21 @@ const Dashboard = () => {
           width: "100%",
         }}
         variant='pills'
+        activeKey={tabKey}
+        onSelect={(k) => setTabKey(k)}
+        defaultActiveKey='profile'
       >
         <Tab eventKey='profile' title='Profile' className='z-depth-0'>
-          <Profile />
+          <Profile tabKey={tabKey} />
         </Tab>
         <Tab eventKey='studquiz' title='Quiz' className='z-depth-0'>
-          <StudQuiz />
+          <StudQuiz tabKey={tabKey} setTabKey={setTabKey} />
         </Tab>
         <Tab eventKey='studcoun' title='Counsellors' className='z-depth-0'>
-          <StudCoun />
+          <StudCoun tabKey={tabKey} />
         </Tab>
         <Tab eventKey='studchat' title='Chat' className='z-depth-0'>
-          <StudChat />
+          <StudChat tabKey={tabKey} />
         </Tab>
         <Tab eventKey='studfeed' title='Feedback' className='z-depth-0'>
           <StudFeed />

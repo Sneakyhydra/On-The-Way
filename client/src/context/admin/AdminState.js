@@ -21,7 +21,6 @@ import {
   COUN_FEED_FAIL,
   STUD_FEED_SUCCESS,
   STUD_FEED_FAIL,
-  FEED_DELETE_SUCCESS,
   FEED_DELETE_FAIL,
 } from "../types";
 import axios from "axios";
@@ -287,11 +286,6 @@ const AdminState = (props) => {
       // Make a delete request at localhost:5000/api/admin/studfeed
       await axios.delete("api/admin/studfeed", config);
 
-      // Dispatch the action to reducer for FEED_DELETE_SUCCESS
-      dispatch({
-        type: FEED_DELETE_SUCCESS,
-      });
-
       // Load student feedbacks after deletion
       loadStudFeed();
     } catch (err) {
@@ -318,11 +312,6 @@ const AdminState = (props) => {
     try {
       // Make a delete request at localhost:5000/api/admin/counfeed
       await axios.delete("api/admin/counfeed", config);
-
-      // Dispatch the action to reducer for FEED_DELETE_SUCCESS
-      dispatch({
-        type: FEED_DELETE_SUCCESS,
-      });
 
       // Load counsellor feedbacks after deletion
       loadCounFeed();

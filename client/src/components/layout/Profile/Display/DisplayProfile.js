@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import AuthContext from "../../../../context/auth/authContext";
 import DisplayAdmin from "./DisplayAdmin";
 import DisplayStudent from "./DisplayStudent";
@@ -14,9 +14,16 @@ const DisplayProfile = ({ tabKey }) => {
 
   const { user, loadUser } = authContext;
 
-  if (tabKey === "profile") {
-    loadUser();
-  }
+  useEffect(() => {
+    if (tabKey === "profile") {
+      loadUser();
+    }
+    // eslint-disable-next-line
+  }, [tabKey]);
+
+  useEffect(() => {
+    // eslint-disable-next-line
+  }, [user]);
 
   if (!user) {
     return <Preloader />;

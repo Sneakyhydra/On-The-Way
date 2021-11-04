@@ -6,10 +6,9 @@ import Preloader from "../../layout/Preloader/Preloader";
 import StudMess from "../../layout/Student/Chat/StudMess";
 import StudUsers from "../../layout/Student/Chat/StudUsers";
 
-const StudChat = () => {
+const StudChat = ({ tabKey }) => {
   const studContext = useContext(StudContext);
   const alertContext = useContext(AlertContext);
-  const [loading, setLoading] = useState(true);
 
   const { loadMessages, messages, error, counsellors, loadCounsellors } =
     studContext;
@@ -19,9 +18,6 @@ const StudChat = () => {
 
   // Load the user when dashboard is rendered
   useEffect(() => {
-    loadMessages();
-    loadCounsellors();
-    setLoading(false);
     M.AutoInit();
     M.updateTextFields();
 
@@ -31,14 +27,27 @@ const StudChat = () => {
     // eslint-disable-next-line
   }, []);
 
-  if (loading) {
-    return <Preloader />;
-  }
+  useEffect(() => {
+    if (tabKey === "studchat") {
+      loadCounsellors();
+      loadMessages();
+    }
+    // eslint-disable-next-line
+  }, [tabKey]);
+
   if (!messages) {
-    return <Preloader />;
+    return (
+      <div style={{ marginTop: "3.5em" }}>
+        <Preloader />
+      </div>
+    );
   }
   if (!counsellors) {
-    return <Preloader />;
+    return (
+      <div style={{ marginTop: "3.5em" }}>
+        <Preloader />
+      </div>
+    );
   }
 
   return (

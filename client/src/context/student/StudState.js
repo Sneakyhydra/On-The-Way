@@ -10,9 +10,7 @@ import {
   COUN_LOAD_FAIL,
   QUIZ_SUBMIT_SUCCESS,
   QUIZ_SUBMIT_FAIL,
-  FEED_SUCCESS,
   FEED_FAIL,
-  MESSAGE_SEND_SUCCESS,
   MESSAGE_SEND_FAIL,
   MESSAGE_LOAD_SUCCESS,
   MESSAGE_LOAD_FAIL,
@@ -23,9 +21,8 @@ axios.defaults.withCredentials = true;
 const StudState = (props) => {
   // Set initial state
   const initialState = {
-    loading: true,
     error: null,
-    quesAns: [],
+    quesAns: null,
     counsellors: null,
     messages: null,
   };
@@ -114,11 +111,6 @@ const StudState = (props) => {
     try {
       // Make a post request at localhost:5000/api/student/submitFeed
       await axios.post("api/student/submitFeed", formData, config);
-
-      // Dispatch the action to reducer for FEED_SUCCESS
-      dispatch({
-        type: FEED_SUCCESS,
-      });
     } catch (err) {
       // Dispatch the action to reducer for FEED_FAIL
       dispatch({
@@ -160,14 +152,6 @@ const StudState = (props) => {
     try {
       // Make a post request at localhost:5000/api/student/message
       await axios.post("api/student/message", formData, config);
-
-      // Dispatch the action to reducer for MESSAGE_SEND_SUCCESS
-      dispatch({
-        type: MESSAGE_SEND_SUCCESS,
-      });
-
-      // Load all messages of user
-      loadMessages();
     } catch (err) {
       // Dispatch the action to reducer for MESSAGE_SEND_FAIL
       dispatch({
@@ -189,7 +173,6 @@ const StudState = (props) => {
     <StudContext.Provider
       // Provide these values to all components wrapped in StudContext in App.js
       value={{
-        loading: state.loading,
         error: state.error,
         quesAns: state.quesAns,
         counsellors: state.counsellors,

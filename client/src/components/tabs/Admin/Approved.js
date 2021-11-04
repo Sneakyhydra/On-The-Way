@@ -20,11 +20,14 @@ const Approved = ({ tabKey, tabKeyCoun }) => {
     // eslint-disable-next-line
   }, []);
 
-  if (tabKey === "counsellors") {
-    if (tabKeyCoun === "approved") {
-      loadApproved();
+  useEffect(() => {
+    if (tabKey === "counsellors") {
+      if (tabKeyCoun === "approved") {
+        loadApproved();
+      }
     }
-  }
+    // eslint-disable-next-line
+  }, [tabKey, tabKeyCoun]);
 
   if (!approved) {
     return (

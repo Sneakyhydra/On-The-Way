@@ -1,17 +1,19 @@
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 import PropTypes from "prop-types";
-import AuthContext from "../../../../context/auth/authContext";
 
 const DisplayCounsellor = ({ user, setEdit }) => {
-  const authContext = useContext(AuthContext);
+  useEffect(() => {
+    M.AutoInit();
+    M.updateTextFields();
+    //eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     M.AutoInit();
     M.updateTextFields();
-    authContext.loadUser();
-    //eslint-disable-next-line
-  }, []);
+    // eslint-disable-next-line
+  }, [user]);
 
   const {
     coun_name,

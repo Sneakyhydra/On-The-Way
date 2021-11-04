@@ -20,11 +20,14 @@ const Pending = ({ tabKey, tabKeyCoun }) => {
     // eslint-disable-next-line
   }, []);
 
-  if (tabKey === "counsellors") {
-    if (tabKeyCoun === "pending") {
-      loadPending();
+  useEffect(() => {
+    if (tabKey === "counsellors") {
+      if (tabKeyCoun === "pending") {
+        loadPending();
+      }
     }
-  }
+    // eslint-disable-next-line
+  }, [tabKey, tabKeyCoun]);
 
   if (!pending) {
     return (

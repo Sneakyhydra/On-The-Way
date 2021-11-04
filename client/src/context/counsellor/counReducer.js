@@ -4,9 +4,7 @@ import {
   QUIZ_LOAD_FAIL,
   STUD_LOAD_SUCCESS,
   STUD_LOAD_FAIL,
-  FEED_SUCCESS,
   FEED_FAIL,
-  MESSAGE_SEND_SUCCESS,
   MESSAGE_SEND_FAIL,
   MESSAGE_LOAD_SUCCESS,
   MESSAGE_LOAD_FAIL,
@@ -15,74 +13,54 @@ import {
 // Change state according to the type of action
 const counReducer = (state, action) => {
   switch (action.type) {
-    case QUIZ_LOAD_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        quesAns: action.payload,
-      };
-
-    case QUIZ_LOAD_FAIL:
-      return {
-        ...state,
-        loading: false,
-        quesAns: null,
-        error: action.payload,
-      };
-
     case STUD_LOAD_SUCCESS:
       return {
         ...state,
-        loading: false,
         students: action.payload,
       };
 
     case STUD_LOAD_FAIL:
       return {
         ...state,
-        loading: false,
         students: null,
         error: action.payload,
       };
 
-    case FEED_SUCCESS:
+    case QUIZ_LOAD_SUCCESS:
       return {
         ...state,
-        loading: false,
+        quesAns: action.payload,
       };
 
-    case FEED_FAIL:
+    case QUIZ_LOAD_FAIL:
       return {
         ...state,
-        loading: false,
+        quesAns: null,
         error: action.payload,
       };
 
     case MESSAGE_LOAD_SUCCESS:
       return {
         ...state,
-        loading: false,
         messages: action.payload,
       };
 
     case MESSAGE_LOAD_FAIL:
       return {
         ...state,
-        loading: false,
         messages: null,
         error: action.payload,
-      };
-
-    case MESSAGE_SEND_SUCCESS:
-      return {
-        ...state,
-        loading: false,
       };
 
     case MESSAGE_SEND_FAIL:
       return {
         ...state,
-        loading: false,
+        error: action.payload,
+      };
+
+    case FEED_FAIL:
+      return {
+        ...state,
         error: action.payload,
       };
 

@@ -8,9 +8,7 @@ import {
   STUD_LOAD_SUCCESS,
   STUD_LOAD_FAIL,
   CLEAR_ERRORS,
-  FEED_SUCCESS,
   FEED_FAIL,
-  MESSAGE_SEND_SUCCESS,
   MESSAGE_SEND_FAIL,
   MESSAGE_LOAD_SUCCESS,
   MESSAGE_LOAD_FAIL,
@@ -21,7 +19,6 @@ axios.defaults.withCredentials = true;
 const CounState = (props) => {
   // Set initial state
   const initialState = {
-    loading: true,
     error: null,
     quesAns: null,
     students: null,
@@ -83,11 +80,6 @@ const CounState = (props) => {
     try {
       // Make a post request at localhost:5000/api/counsellor/submitFeed
       await axios.post("api/counsellor/submitFeed", formData, config);
-
-      // Dispatch the action to reducer for FEED_SUCCESS
-      dispatch({
-        type: FEED_SUCCESS,
-      });
     } catch (err) {
       // Dispatch the action to reducer for FEED_FAIL
       dispatch({
@@ -129,14 +121,6 @@ const CounState = (props) => {
     try {
       // Make a post request at localhost:5000/api/counsellor/message
       await axios.post("api/counsellor/message", formData, config);
-
-      // Dispatch the action to reducer for MESSAGE_SEND_SUCCESS
-      dispatch({
-        type: MESSAGE_SEND_SUCCESS,
-      });
-
-      // Load all messages of user
-      loadMessages();
     } catch (err) {
       // Dispatch the action to reducer for MESSAGE_SEND_FAIL
       dispatch({
@@ -158,7 +142,6 @@ const CounState = (props) => {
     <CounContext.Provider
       // Provide these values to all components wrapped in CounContext in App.js
       value={{
-        loading: state.loading,
         error: state.error,
         quesAns: state.quesAns,
         students: state.students,

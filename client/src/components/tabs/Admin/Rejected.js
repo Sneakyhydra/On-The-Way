@@ -20,11 +20,14 @@ const Rejected = ({ tabKey, tabKeyCoun }) => {
     // eslint-disable-next-line
   }, []);
 
-  if (tabKey === "counsellors") {
-    if (tabKeyCoun === "rejected") {
-      loadRejected();
+  useEffect(() => {
+    if (tabKey === "counsellors") {
+      if (tabKeyCoun === "rejected") {
+        loadRejected();
+      }
     }
-  }
+    // eslint-disable-next-line
+  }, [tabKey, tabKeyCoun]);
 
   if (!rejected) {
     return (

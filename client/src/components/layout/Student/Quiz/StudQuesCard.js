@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Card, Row, Col, Icon } from "react-materialize";
 import PropTypes from "prop-types";
 
-const StudQuesCard = ({ quesAns, question, idx, quiz, setQuiz }) => {
+const StudQuesCard = ({ quesAns, question, idx, quiz, setQuiz, submitted }) => {
   const { ques_no, ques_desc, ques_id } = question;
 
   const [ans, setAns] = useState(0);
@@ -19,6 +19,13 @@ const StudQuesCard = ({ quesAns, question, idx, quiz, setQuiz }) => {
     M.updateTextFields();
     M.AutoInit();
   }, []);
+
+  useEffect(() => {
+    if (submitted === true) {
+      setAns(0);
+    }
+    // eslint-disable-next-line
+  }, [submitted]);
 
   return (
     <Row style={{ margin: "0" }}>

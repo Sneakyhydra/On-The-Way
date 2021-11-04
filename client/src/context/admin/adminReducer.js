@@ -17,7 +17,6 @@ import {
   COUN_FEED_FAIL,
   STUD_FEED_SUCCESS,
   STUD_FEED_FAIL,
-  FEED_DELETE_SUCCESS,
   FEED_DELETE_FAIL,
 } from "../types";
 
@@ -128,11 +127,6 @@ const adminReducer = (state, action) => {
         ...state,
         studfeed: null,
         error: action.payload,
-      };
-
-    case FEED_DELETE_SUCCESS:
-      return {
-        ...state,
       };
 
     case FEED_DELETE_FAIL:

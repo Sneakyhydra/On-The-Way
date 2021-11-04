@@ -1,28 +1,33 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
 import CounContext from "../../../context/counsellor/counContext";
 import M from "materialize-css/dist/js/materialize.min.js";
 import StudCard from "../../layout/Counsellor/Stud/StudCard";
 import Preloader from "../../layout/Preloader/Preloader";
 
-const StudentInfo = () => {
+const StudentInfo = ({ tabKey }) => {
   const counContext = useContext(CounContext);
-  const [loading, setLoading] = useState(true);
-
   const { students, loadStudents } = counContext;
 
   // Load the user when dashboard is rendered
   useEffect(() => {
-    loadStudents();
-    setLoading(false);
     M.AutoInit();
     M.updateTextFields();
     // eslint-disable-next-line
   }, []);
-  if (loading) {
-    return <Preloader />;
-  }
+
+  useEffect(() => {
+    if (tabKey === "studentInfo") {
+      loadStudents();
+    }
+    // eslint-disable-next-line
+  }, [tabKey]);
+
   if (!students) {
-    return <Preloader />;
+    return (
+      <div style={{ marginTop: "3.5em" }}>
+        <Preloader />
+      </div>
+    );
   }
 
   return (

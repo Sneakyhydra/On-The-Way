@@ -19,6 +19,7 @@ const Login = () => {
 
   useEffect(() => {
     loadUser();
+    return () => setLoginProgress(false);
     // eslint-disable-next-line
   }, []);
 
@@ -60,8 +61,6 @@ const Login = () => {
         user_password: password,
       });
     }
-
-    setLoginProgress(false);
   };
 
   return (

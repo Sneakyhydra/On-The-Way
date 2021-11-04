@@ -20,6 +20,7 @@ const RegisterAdmin = () => {
 
   useEffect(() => {
     loadUser();
+    return () => setLoginProgress(false);
     // eslint-disable-next-line
   }, []);
 
@@ -101,8 +102,6 @@ const RegisterAdmin = () => {
         admin_phone: phone,
       });
     }
-
-    setLoginProgress(false);
   };
 
   return (

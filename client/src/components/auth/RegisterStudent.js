@@ -19,6 +19,7 @@ const RegisterStudent = () => {
 
   useEffect(() => {
     loadUser();
+    return () => setLoginProgress(false);
     // eslint-disable-next-line
   }, []);
 
@@ -123,8 +124,6 @@ const RegisterStudent = () => {
         stud_branch: branch,
       });
     }
-
-    setLoginProgress(false);
   };
 
   return (

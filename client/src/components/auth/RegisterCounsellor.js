@@ -19,6 +19,7 @@ const RegisterCounsellor = () => {
 
   useEffect(() => {
     loadUser();
+    return () => setLoginProgress(false);
     // eslint-disable-next-line
   }, []);
 
@@ -109,8 +110,6 @@ const RegisterCounsellor = () => {
         coun_status: status,
       });
     }
-
-    setLoginProgress(false);
   };
 
   return (

@@ -2,7 +2,7 @@
 const express = require("express"); // Create server
 const cors = require("cors"); // Cors middleware
 const cookieParser = require("cookie-parser"); // Cookies
-const path = require('path');
+const path = require("path");
 
 // Init app
 const app = express();
@@ -16,12 +16,12 @@ app.use(cors());
 app.use(cookieParser());
 
 // Define routes
-app.use('/api/users', require('./routes/users'));
-app.use('/api/editUsers', require('./routes/editUsers'));
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/admin', require('./routes/admin'));
-app.use('/api/counsellor', require('./routes/counsellor'));
-app.use('/api/student', require('./routes/student'));
+app.use("/api/users", require("./routes/users"));
+app.use("/api/editUsers", require("./routes/editUsers"));
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/admin", require("./routes/admin"));
+app.use("/api/counsellor", require("./routes/counsellor"));
+app.use("/api/student", require("./routes/student"));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === "production") {

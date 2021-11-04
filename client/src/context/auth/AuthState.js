@@ -39,10 +39,14 @@ const AuthState = (props) => {
     try {
       // Make a get request at localhost:5000/api/auth
       const res = await axios.get("/api/auth");
+      console.log(res);
 
       // Dispatch the action to reducer for USER_LOADED
       dispatch({ type: USER_LOADED, payload: res.data });
     } catch (err) {
+      if (err.response.status === 401) {
+        console.log("This is the desired behaviour");
+      }
       // Dispatch the action to reducer for AUTH_ERROR
       dispatch({ type: AUTH_ERROR });
     }

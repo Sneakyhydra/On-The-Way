@@ -1,7 +1,5 @@
 // Imports
-import { Fragment, useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import AuthContext from "../../context/auth/authContext";
 
 // Images
 import privateImg from "../../images/HomePage/private.png";
@@ -13,47 +11,6 @@ import help3 from "../../images/HomePage/help3.svg";
 import background2 from "../../images/HomePage/background2.png";
 
 const Home = () => {
-  const authContext = useContext(AuthContext);
-  const { isAuthenticated } = authContext;
-
-  useEffect(() => {
-    authContext.loadUser();
-    // eslint-disable-next-line
-  }, []);
-
-  // Elements to be displayed to a logged in user
-  const authBtns = (
-    <Fragment>
-      <NavLink
-        className='waves-effect waves-light btn regcounsellor z-depth-1'
-        to='/dashboard'
-        style={{ marginRight: "2em", marginTop: "3em" }}
-      >
-        Dashboard
-      </NavLink>
-    </Fragment>
-  );
-
-  // Elements to be displayed to a guest
-  const guestBtns = (
-    <Fragment>
-      <NavLink
-        className='waves-effect waves-light btn regstudent z-depth-1'
-        to='/regstudent'
-        style={{ marginRight: "2em", marginTop: "3em" }}
-      >
-        Chat Now
-      </NavLink>
-      <NavLink
-        className='waves-effect waves-light btn regcounsellor z-depth-1'
-        to='/regcounsellor'
-        style={{ marginRight: "2em", marginTop: "3em" }}
-      >
-        Be a member
-      </NavLink>
-    </Fragment>
-  );
-
   return (
     <div>
       <div style={{ marginLeft: "6.5em", marginTop: "8em" }}>
@@ -67,7 +24,20 @@ const Home = () => {
           right here, right now.
         </p>
 
-        {isAuthenticated ? authBtns : guestBtns}
+        <NavLink
+          className='waves-effect waves-light btn regstudent z-depth-1'
+          to='/regstudent'
+          style={{ marginRight: "2em", marginTop: "3em" }}
+        >
+          Chat Now
+        </NavLink>
+        <NavLink
+          className='waves-effect waves-light btn regcounsellor z-depth-1'
+          to='/regcounsellor'
+          style={{ marginRight: "2em", marginTop: "3em" }}
+        >
+          Be a member
+        </NavLink>
       </div>
 
       <div

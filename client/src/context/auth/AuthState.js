@@ -15,18 +15,13 @@ import {
   EDIT_FAIL,
 } from "../types";
 import axios from "axios";
-import Cookies from "universal-cookie";
 
 axios.defaults.withCredentials = true;
 
 const AuthState = (props) => {
-  const cookies = new Cookies();
-
   // Set initial state
   const initialState = {
-    token: cookies.get("token"),
     isAuthenticated: false,
-    loading: true,
     user: null,
     error: null,
   };
@@ -39,7 +34,6 @@ const AuthState = (props) => {
     try {
       // Make a get request at localhost:5000/api/auth
       const res = await axios.get("/api/auth");
-      console.log(res);
 
       // Dispatch the action to reducer for USER_LOADED
       dispatch({ type: USER_LOADED, payload: res.data });
@@ -283,9 +277,7 @@ const AuthState = (props) => {
     <AuthContext.Provider
       // Provide these values to all components wrapped in AuthContext in App.js
       value={{
-        token: state.token,
         isAuthenticated: state.isAuthenticated,
-        loading: state.loading,
         user: state.user,
         error: state.error,
         regStudent,

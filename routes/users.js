@@ -103,7 +103,7 @@ router.post(
                 );
 
                 // Create a token
-                const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 3600, });
+                const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 21600, });
 
                 // Create an httpOnly cookie
                 res.cookie('token', token, { httpOnly: true });
@@ -220,7 +220,7 @@ router.post(
                 );
 
                 // Create a token
-                const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 3600, });
+                const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 21600, });
 
                 // Create an httpOnly cookie
                 res.cookie('token', token, { httpOnly: true });
@@ -350,7 +350,7 @@ router.post(
                 );
 
                 // Create a token
-                const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 3600, });
+                const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 21600, });
 
                 // Create an httpOnly cookie
                 res.cookie('token', token, { httpOnly: true });

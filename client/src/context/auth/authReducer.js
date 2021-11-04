@@ -18,7 +18,6 @@ const authReducer = (state, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        loading: false,
         user: action.payload,
       };
 
@@ -29,17 +28,14 @@ const authReducer = (state, action) => {
         ...state,
         ...action.payload,
         isAuthenticated: true,
-        loading: false,
       };
 
     case REGISTER_FAIL:
     case AUTH_ERROR:
     case LOGIN_FAIL:
-    case LOGOUT:
       return {
         ...state,
         isAuthenticated: false,
-        loading: false,
         user: null,
         error: action.payload,
       };
@@ -48,6 +44,14 @@ const authReducer = (state, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+
+    case LOGOUT:
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: null,
+        error: null,
       };
 
     case CLEAR_ERRORS:

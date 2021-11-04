@@ -225,7 +225,7 @@ router.post(
                     };
 
                     // Create a token
-                    const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 3600, });
+                    const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 21600, });
 
                     // Store the token in an httpOnly cookie
                     res.cookie('token', token, { httpOnly: true });

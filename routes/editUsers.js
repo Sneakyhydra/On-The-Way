@@ -409,11 +409,11 @@ router.put(
                     // Read CPI_sheet.xlsx
                     readXlsxFile("./CPI_sheet.xlsx").then((cpis) => {
                         // Loop through all rows in excel sheet
-                        for (let j = 2; j < cpis.length; j++) {
+                        for (let j = 1; j < cpis.length; j++) {
                             // Check if roll no is same
-                            if (user.roll_no.toLowerCase() === cpis[j][1].toLowerCase()) {
+                            if (user.roll_no.toLowerCase() === cpis[j][0].toLowerCase()) {
                                 // Add cpi to the user object
-                                user.cpi = cpis[j][5];
+                                user.cpi = cpis[j][1];
                                 break;
                             }
                         }

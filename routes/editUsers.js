@@ -3,7 +3,7 @@ const express = require("express"); // Create router
 const bcrypt = require("bcryptjs"); // Encrypt password
 const auth = require("../middleware/auth"); // Middleware
 const { check, validationResult } = require("express-validator"); // Check and validate the inputs
-const readXlsxFile = require('read-excel-file/node'); // Read excel files
+const readXlsxFile = require("read-excel-file/node"); // Read excel files
 const promisePool = require("../config/db");
 
 // Init router
@@ -20,7 +20,8 @@ const router = express.Router();
 // @desc    Edit admin
 // @access  Private
 router.put(
-    "/admin1234", [auth,
+    "/admin1234", [
+        auth,
         check("user_email", "email is required").isEmail(), // Check the email
         check(
             "user_password",
@@ -91,25 +92,36 @@ router.put(
 
                 // Check id
                 if (user_id !== admin_id) {
-                    return res.status(400).json({ msg: 'Invalid id' });
+                    return res.status(400).json({ msg: "Invalid id" });
                 }
 
-                // Encrypt Password
-                const salt = await bcrypt.genSalt(10);
-                user_password = await bcrypt.hash(user_password, salt);
-
-                // Update details in logins table
-                await promisePool.query(
-                    `UPDATE logins SET user_email='${user_email}', user_password='${user_password}' WHERE user_id=${user_id}`
+                // Check if user exists
+                const [rows] = await promisePool.query(
+                    `SELECT EXISTS(SELECT * from logins WHERE user_email = "${user_email}" AND user_id<>${user_id}) "EXISTS" FROM DUAL`
                 );
+                const result = rows[0].EXISTS;
 
-                // Update details in admins table
-                await promisePool.query(
-                    `UPDATE admins SET admin_name='${admin_name}', admin_gender='${admin_gender}', admin_phone='${admin_phone}' WHERE admin_id=${user_id}`
-                );
+                if (result) {
+                    // User already exists
+                    return res.status(400).json({ msg: "User already exists" });
+                } else {
+                    // Encrypt Password
+                    const salt = await bcrypt.genSalt(10);
+                    user_password = await bcrypt.hash(user_password, salt);
 
-                // Send updated details to the client
-                res.send(user);
+                    // Update details in logins table
+                    await promisePool.query(
+                        `UPDATE logins SET user_email='${user_email}', user_password='${user_password}' WHERE user_id=${user_id}`
+                    );
+
+                    // Update details in admins table
+                    await promisePool.query(
+                        `UPDATE admins SET admin_name='${admin_name}', admin_gender='${admin_gender}', admin_phone='${admin_phone}' WHERE admin_id=${user_id}`
+                    );
+
+                    // Send updated details to the client
+                    res.send(user);
+                }
             } else {
                 // Unauthorized
                 res.status(401).json({ msg: "Only admins can access this portal" });
@@ -118,13 +130,15 @@ router.put(
             // Catch errors
             throw err;
         }
-    });
+    }
+);
 
 // @route   PUT api/editUsers/counsellor
 // @desc    Edit counsellor
 // @access  Private
 router.put(
-    "/counsellor", [auth,
+    "/counsellor", [
+        auth,
         check("user_email", "email is required").isEmail(), // Check the email
         check(
             "user_password",
@@ -209,40 +223,55 @@ router.put(
 
                 // Check id
                 if (user_id !== coun_id) {
-                    return res.status(400).json({ msg: 'Invalid id' });
+                    return res.status(400).json({ msg: "Invalid id" });
                 }
 
-                // Encrypt Password
-                const salt = await bcrypt.genSalt(10);
-                user_password = await bcrypt.hash(user_password, salt);
-
-                // Update details in logins table
-                await promisePool.query(
-                    `UPDATE logins SET user_email='${user_email}', user_password='${user_password}' WHERE user_id=${user_id}`
+                // Check if user exists
+                const [rows] = await promisePool.query(
+                    `SELECT EXISTS(SELECT * from logins WHERE user_email = "${user_email}" AND user_id<>${user_id}) "EXISTS" FROM DUAL`
                 );
+                const result = rows[0].EXISTS;
 
-                // Update details in counsellors table
-                await promisePool.query(
-                    `UPDATE counsellors SET coun_name='${coun_name}', coun_gender='${coun_gender}', coun_phone='${coun_phone}', coun_dept='${coun_dept}' WHERE coun_id=${user_id}`
-                );
+                if (result) {
+                    // User already exists
+                    return res.status(400).json({ msg: "User already exists" });
+                } else {
+                    // Encrypt Password
+                    const salt = await bcrypt.genSalt(10);
+                    user_password = await bcrypt.hash(user_password, salt);
 
-                // Send updated details to the client
-                res.send(user);
+                    // Update details in logins table
+                    await promisePool.query(
+                        `UPDATE logins SET user_email='${user_email}', user_password='${user_password}' WHERE user_id=${user_id}`
+                    );
+
+                    // Update details in counsellors table
+                    await promisePool.query(
+                        `UPDATE counsellors SET coun_name='${coun_name}', coun_gender='${coun_gender}', coun_phone='${coun_phone}', coun_dept='${coun_dept}' WHERE coun_id=${user_id}`
+                    );
+
+                    // Send updated details to the client
+                    res.send(user);
+                }
             } else {
                 // Unauthorized
-                res.status(401).json({ msg: "Only counsellors can access this portal" });
+                res
+                    .status(401)
+                    .json({ msg: "Only counsellors can access this portal" });
             }
         } catch (err) {
             // Catch errors
             throw err;
         }
-    });
+    }
+);
 
 // @route   PUT api/editUsers/student
 // @desc    Edit student
 // @access  Private
 router.put(
-    "/student", [auth,
+    "/student", [
+        auth,
         check("user_email", "email is required").isEmail(), // Check the email
         check(
             "user_password",
@@ -348,39 +377,50 @@ router.put(
                     return res.status(400).json({ msg: "Branch is not valid" });
                 }
 
-                // Encrypt Password
-                const salt = await bcrypt.genSalt(10);
-                user_password = await bcrypt.hash(user_password, salt);
+                // Check if user exists
+                const [rows] = await promisePool.query(
+                    `SELECT EXISTS(SELECT * from logins WHERE user_email = "${user_email}" AND user_id<>${user_id} ) "EXISTS" FROM DUAL`
+                );
+                const result = rows[0].EXISTS;
 
-                try {
-                    // Update details in logins table
-                    await promisePool.query(
-                        `UPDATE logins SET user_email='${user_email}', user_password='${user_password}' WHERE user_id=${user_id}`
-                    );
+                if (result) {
+                    // User already exists
+                    return res.status(400).json({ msg: "User already exists" });
+                } else {
+                    // Encrypt Password
+                    const salt = await bcrypt.genSalt(10);
+                    user_password = await bcrypt.hash(user_password, salt);
 
-                    // Update details in students table
-                    await promisePool.query(
-                        `UPDATE students SET stud_name='${stud_name}', stud_gender='${stud_gender}', stud_phone='${stud_phone}', stud_dept='${stud_dept}', stud_branch='${stud_branch}', roll_no='${roll_no}' WHERE stud_id=${user_id}`
-                    );
-                } catch (err) {
-                    // Catch errors
-                    throw err;
-                }
+                    try {
+                        // Update details in logins table
+                        await promisePool.query(
+                            `UPDATE logins SET user_email='${user_email}', user_password='${user_password}' WHERE user_id=${user_id}`
+                        );
 
-                // Read CPI_sheet.xlsx
-                readXlsxFile('./CPI_sheet.xlsx').then((cpis) => {
-                    // Loop through all rows in excel sheet
-                    for (let j = 0; j < cpis.length; j++) {
-                        // Check if roll no is same
-                        if (user.roll_no.toLowerCase() === cpis[j][0].toLowerCase()) {
-                            // Add cpi to the user object
-                            user.cpi = cpis[j][2];
-                            break;
-                        }
+                        // Update details in students table
+                        await promisePool.query(
+                            `UPDATE students SET stud_name='${stud_name}', stud_gender='${stud_gender}', stud_phone='${stud_phone}', stud_dept='${stud_dept}', stud_branch='${stud_branch}', roll_no='${roll_no}' WHERE stud_id=${user_id}`
+                        );
+                    } catch (err) {
+                        // Catch errors
+                        throw err;
                     }
-                    // Send data to the client
-                    res.json(user);
-                });
+
+                    // Read CPI_sheet.xlsx
+                    readXlsxFile("./CPI_sheet.xlsx").then((cpis) => {
+                        // Loop through all rows in excel sheet
+                        for (let j = 2; j < cpis.length; j++) {
+                            // Check if roll no is same
+                            if (user.roll_no.toLowerCase() === cpis[j][1].toLowerCase()) {
+                                // Add cpi to the user object
+                                user.cpi = cpis[j][5];
+                                break;
+                            }
+                        }
+                        // Send data to the client
+                        res.json(user);
+                    });
+                }
             } else {
                 // Unauthorized
                 res.status(401).json({ msg: "Only students can access this portal" });

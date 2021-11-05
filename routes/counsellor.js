@@ -57,11 +57,11 @@ router.get("/students", auth, async(req, res) => {
                     };
 
                     // Loop through all rows in excel sheet
-                    for (let j = 0; j < cpis.length; j++) {
+                    for (let j = 2; j < cpis.length; j++) {
                         // Check if roll no is same
-                        if (student.roll_no.toLowerCase() === cpis[j][0].toLowerCase()) {
+                        if (student.roll_no.toLowerCase() === cpis[j][1].toLowerCase()) {
                             // Add cpi to the student object
-                            student.cpi = cpis[j][2];
+                            student.cpi = cpis[j][5];
                             break;
                         }
                     }

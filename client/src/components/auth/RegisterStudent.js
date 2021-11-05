@@ -11,14 +11,13 @@ const RegisterStudent = () => {
 
   const { setAlert } = alertContext;
 
-  const { regStudent, error, clearErrors, isAuthenticated, loadUser } =
-    authContext;
+  const { regStudent, error, clearErrors, token, validate } = authContext;
   const [loginProgress, setLoginProgress] = useState(false);
 
   const history = useHistory();
 
   useEffect(() => {
-    loadUser();
+    validate();
     return () => setLoginProgress(false);
     // eslint-disable-next-line
   }, []);
@@ -30,7 +29,7 @@ const RegisterStudent = () => {
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (token) {
       history.replace("/dashboard");
     }
 
@@ -48,7 +47,7 @@ const RegisterStudent = () => {
 
     clearErrors();
     // eslint-disable-next-line
-  }, [error, isAuthenticated]);
+  }, [error, token]);
 
   const [student, setStudent] = useState({
     email: "",
@@ -88,9 +87,7 @@ const RegisterStudent = () => {
     return false;
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
+  const onSubmit = async () => {
     setLoginProgress(true);
 
     if (
@@ -133,7 +130,7 @@ const RegisterStudent = () => {
           <h4>Register as a Student</h4>
         </div>
         <div className='row'>
-          <form className='col s12' onSubmit={onSubmit}>
+          <form className='col s12'>
             <div
               className='row'
               id='rname'
@@ -333,8 +330,9 @@ const RegisterStudent = () => {
                 <button
                   className='btn waves-effect waves-light'
                   id='rbtn'
-                  type='submit'
+                  type='button'
                   value='Register'
+                  onClick={onSubmit}
                   style={{
                     marginTop: "2em",
                     borderRadius: "2em",

@@ -36,9 +36,7 @@ router.get("/quesans", auth, async(req, res) => {
         // Check if the user is counsellor
         if (role === "student") {
             // Get all questions from the DB
-            const [ques] = await promisePool.query(
-                `SELECT * from questions`
-            );
+            const [ques] = await promisePool.query(`SELECT * from questions`);
 
             // Get all answers from the DB
             const [ans] = await promisePool.query(
@@ -53,7 +51,7 @@ router.get("/quesans", auth, async(req, res) => {
                 ques_id: null,
                 ques_desc: null,
                 ques_no: null,
-                answers: []
+                answers: [],
             };
 
             // Element of quesItem
@@ -70,7 +68,7 @@ router.get("/quesans", auth, async(req, res) => {
                     ques_id: ques[i].ques_id,
                     ques_desc: ques[i].ques_desc,
                     ques_no: ques[i].ques_no,
-                    answers: []
+                    answers: [],
                 };
 
                 // Loop through all the answers
@@ -143,7 +141,8 @@ router.get("/counsellors", auth, async(req, res) => {
 // @desc    Submit quiz
 // @access  Public
 router.post(
-    "/submitQuiz", [auth,
+    "/submitQuiz", [
+        auth,
         check("quesAns", "Question answer is required").exists(), // Check quesAns
     ],
     async(req, res) => {
@@ -183,7 +182,9 @@ router.post(
                 for (var ques in quesAns) {
                     // Insert question answer pairs in response_list
                     await promisePool.query(
-                        `INSERT INTO response_list (res_id, ques_id, ans_id) VALUES (${res_id}, ${parseInt( ques )}, ${quesAns[ques]})`
+                        `INSERT INTO response_list (res_id, ques_id, ans_id) VALUES (${res_id}, ${parseInt(
+                            ques
+                        )}, ${quesAns[ques]})`
                     );
                 }
 
@@ -203,115 +204,106 @@ router.post(
 // @route   POST api/student/submitFeed
 // @desc    Submit feedback
 // @access  Private
-router.post(
-    "/submitFeed", auth,
-    async(req, res) => {
-        // Extract user id from req
-        const user_id = req.user_id;
+router.post("/submitFeed", auth, async(req, res) => {
+    // Extract user id from req
+    const user_id = req.user_id;
 
-        try {
-            // Get role of the user from DB
-            const [rows] = await promisePool.query(
-                `SELECT role from logins WHERE user_id='${user_id}'`
+    try {
+        // Get role of the user from DB
+        const [rows] = await promisePool.query(
+            `SELECT role from logins WHERE user_id='${user_id}'`
+        );
+
+        // Extract role from rows
+        const { role } = rows[0];
+
+        // Check if the user is student
+        if (role === "student") {
+            // Insert feedback in DB
+            await promisePool.query(
+                `INSERT INTO stud_feedback (stud_id, feed_desc) VALUES (${user_id}, "${req.body.desc}")`
             );
 
-            // Extract role from rows
-            const { role } = rows[0];
-
-            // Check if the user is student
-            if (role === "student") {
-                // Insert feedback in DB
-                await promisePool.query(
-                    `INSERT INTO stud_feedback (stud_id, feed_desc) VALUES (${user_id}, "${req.body.desc}")`
-                );
-
-                // Send success message to the client
-                res.send("Submitted Successfully");
-            } else {
-                // Unauthorized
-                res.status(401).json({ msg: "Only students can access this portal" });
-            }
-        } catch (err) {
-            // Catch errors
-            throw err;
+            // Send success message to the client
+            res.send("Submitted Successfully");
+        } else {
+            // Unauthorized
+            res.status(401).json({ msg: "Only students can access this portal" });
         }
+    } catch (err) {
+        // Catch errors
+        throw err;
     }
-);
+});
 
 // @route   POST api/student/message
 // @desc    Send message
 // @access  Private
-router.post(
-    "/message", auth,
-    async(req, res) => {
-        // Extract user id from req
-        const user_id = req.user_id;
+router.post("/message", auth, async(req, res) => {
+    // Extract user id from req
+    const user_id = req.user_id;
 
-        try {
-            // Get role of the user from DB
-            const [rows] = await promisePool.query(
-                `SELECT role from logins WHERE user_id='${user_id}'`
+    try {
+        // Get role of the user from DB
+        const [rows] = await promisePool.query(
+            `SELECT role from logins WHERE user_id='${user_id}'`
+        );
+
+        // Extract role from rows
+        const { role } = rows[0];
+
+        // Check if the user is student
+        if (role === "student") {
+            // Insert message in DB
+            await promisePool.query(
+                `INSERT INTO messages (stud_id, coun_id, from_role, mess_desc, mess_date) VALUES (${user_id}, ${req.body.coun_id}, "${role}", "${req.body.mess_desc}", "${req.body.mess_date}")`
             );
 
-            // Extract role from rows
-            const { role } = rows[0];
-
-            // Check if the user is student
-            if (role === "student") {
-                // Insert message in DB
-                await promisePool.query(
-                    `INSERT INTO messages (stud_id, coun_id, from_role, mess_desc, mess_date) VALUES (${user_id}, ${req.body.coun_id}, "${role}", "${req.body.mess_desc}", "${req.body.mess_date}")`
-                );
-
-                // Send success message to the client
-                res.send("Sent Successfully");
-            } else {
-                // Unauthorized
-                res.status(401).json({ msg: "Only students can access this portal" });
-            }
-        } catch (err) {
-            // Catch errors
-            throw err;
+            // Send success message to the client
+            res.send("Sent Successfully");
+        } else {
+            // Unauthorized
+            res.status(401).json({ msg: "Only students can access this portal" });
         }
+    } catch (err) {
+        // Catch errors
+        throw err;
     }
-);
+});
 
 // @route   GET api/student/message
 // @desc    Get all messages of user
 // @access  Private
-router.get(
-    "/message", auth,
-    async(req, res) => {
-        // Extract user id from req
-        const user_id = req.user_id;
+router.get("/message", auth, async(req, res) => {
+    // Extract user id from req
+    const user_id = req.user_id;
 
-        try {
-            // Get role of the user from DB
-            const [rows] = await promisePool.query(
-                `SELECT role from logins WHERE user_id='${user_id}'`
+    try {
+        // Get role of the user from DB
+        const [rows] = await promisePool.query(
+            `SELECT role from logins WHERE user_id='${user_id}'`
+        );
+
+        // Extract role from rows
+        const { role } = rows[0];
+
+        // Check if the user is student
+        if (role === "student") {
+            // Get messages of this user from DB
+            const [messages] = await promisePool.query(
+                `SELECT * FROM messages WHERE stud_id=${user_id}`
             );
 
-            // Extract role from rows
-            const { role } = rows[0];
-
-            // Check if the user is student
-            if (role === "student") {
-                // Get messages of this user from DB
-                const [messages] = await promisePool.query(
-                    `SELECT * FROM messages WHERE stud_id=${user_id}`
-                );
-
-                // Send data to the client
-                res.send(messages);
-            } else {
-                // Unauthorized
-                res.status(401).json({ msg: "Only students can access this portal" });
-            }
-        } catch (err) {
-            // Catch errors
-            throw err;
+            // Send data to the client
+            res.send(messages);
+        } else {
+            // Unauthorized
+            res.status(401).json({ msg: "Only students can access this portal" });
         }
+    } catch (err) {
+        // Catch errors
+        console.log(err.message);
     }
-);
+});
 
 module.exports = router;

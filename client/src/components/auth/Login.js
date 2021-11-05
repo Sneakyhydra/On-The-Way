@@ -12,19 +12,21 @@ const Login = () => {
 
   const { setAlert } = alertContext;
 
-  const { login, error, clearErrors, isAuthenticated, loadUser } = authContext;
+  const { login, error, clearErrors, validate, token } = authContext;
   const [loginProgress, setLoginProgress] = useState(false);
 
   const history = useHistory();
 
   useEffect(() => {
-    loadUser();
-    return () => setLoginProgress(false);
+    validate();
+    return () => {
+      setLoginProgress(false);
+    };
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (token) {
       history.replace("/dashboard");
     }
 
@@ -34,7 +36,7 @@ const Login = () => {
 
     clearErrors();
     // eslint-disable-next-line
-  }, [error, isAuthenticated]);
+  }, [error, token]);
 
   const [user, setUser] = useState({
     email: "",
@@ -48,9 +50,7 @@ const Login = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
+  const onSubmit = async () => {
     setLoginProgress(true);
 
     if (email === "" || password === "") {
@@ -74,7 +74,7 @@ const Login = () => {
         </div>
 
         <div className='row'>
-          <form className='col s12' onSubmit={onSubmit}>
+          <form className='col s12'>
             <div className='row' style={{ width: "300px", margin: "auto" }}>
               <div className='input-field col s12'>
                 <input
@@ -122,8 +122,9 @@ const Login = () => {
               <div className='row'>
                 <button
                   className='btn waves-effect waves-light'
-                  type='submit'
+                  type='button'
                   value='Login'
+                  onClick={onSubmit}
                   style={{
                     borderRadius: "2em",
                     marginTop: "2em",

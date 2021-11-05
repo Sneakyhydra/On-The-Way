@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const authContext = useContext(AuthContext);
-  const { isAuthenticated, loading } = authContext;
+  const { token, loading } = authContext;
 
   return (
     <Route
@@ -14,11 +14,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       render={(
         props // Check if the user is not authenticated and not loading
       ) =>
-        !isAuthenticated && !loading ? (
-          <Redirect to='/login' />
-        ) : (
-          <Component {...props} />
-        )
+        !token && !loading ? <Redirect to='/login' /> : <Component {...props} />
       }
     />
   );

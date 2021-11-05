@@ -13,6 +13,8 @@ import {
   CLEAR_ERRORS,
   EDIT_SUCCESS,
   EDIT_FAIL,
+  VALID_FAIL,
+  VALID_SUCCESS,
 } from "../types";
 import axios from "axios";
 
@@ -24,6 +26,7 @@ const AuthState = (props) => {
     isAuthenticated: false,
     user: null,
     error: null,
+    token: false,
   };
 
   // Init Reducer
@@ -265,6 +268,22 @@ const AuthState = (props) => {
     }
   };
 
+  // Validate user
+  const validate = async () => {
+    try {
+      const res = await axios.get("/api/auth/check");
+      if (res.data === "Valid") {
+        dispatch({
+          type: VALID_SUCCESS,
+        });
+      }
+    } catch (err) {
+      dispatch({
+        type: VALID_FAIL,
+      });
+    }
+  };
+
   // Clear Errors
   const clearErrors = () => {
     // Dispatch the action to reducer for CLEAR_ERRORS
@@ -280,6 +299,7 @@ const AuthState = (props) => {
         isAuthenticated: state.isAuthenticated,
         user: state.user,
         error: state.error,
+        token: state.token,
         regStudent,
         regCounsellor,
         login,
@@ -290,6 +310,7 @@ const AuthState = (props) => {
         editAdmin,
         editCounsellor,
         editStudent,
+        validate,
       }}
     >
       {props.children}

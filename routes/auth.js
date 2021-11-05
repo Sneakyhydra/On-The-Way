@@ -15,7 +15,8 @@ const router = express.Router();
 /**
  * Get logged in user
  * Login
- * Delete cookie
+ * Delete cookie / logout
+ * Validate user
  */
 
 // @route   GET api/auth
@@ -254,5 +255,28 @@ router.delete(
         res.send("Logged out");
     }
 );
+
+// @route   GET api/auth/check
+// @desc    Validate user
+// @access  Private
+router.get("/check", async(req, res) => {
+    // Get token from cookies
+    const token = req.cookies.token;
+
+    // Check if token exists
+    if (!token) {
+        res.clearCookie("token");
+        res.send("No token");
+    }
+
+    try {
+        // Verify the token
+        const decoded = jwt.verify(token, config.get("jwtSecret"));
+
+        res.send("Valid");
+    } catch (err) {
+        console.log("Invalid");
+    }
+});
 
 module.exports = router;

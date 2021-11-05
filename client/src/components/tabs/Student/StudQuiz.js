@@ -79,6 +79,7 @@ const StudQuiz = ({ tabKey, setTabKey }) => {
 
     setQuiz({});
     setSubmitted(true);
+    window.location.reload();
   };
 
   return (

@@ -229,7 +229,7 @@ router.post(
                     const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 21600, });
 
                     // Store the token in an httpOnly cookie
-                    res.cookie('token', token, { httpOnly: true });
+                    res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV !== "development", maxAge: 6 * 60 * 60 * 1000 });
 
                     // Send success message to client
                     res.send("Logged in");

@@ -19,7 +19,7 @@ const CounFeedCard = ({ feed }) => {
 
   return (
     <Row style={{ margin: "0" }}>
-      <Col m={6} s={12} style={{ width: "300px" }}>
+      <Col m={6} s={12} style={{ width: "365px" }}>
         <Card
           actions={[
             <div

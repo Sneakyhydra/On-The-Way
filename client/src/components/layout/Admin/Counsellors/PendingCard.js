@@ -21,7 +21,7 @@ const PendingCard = ({ user, setAlert }) => {
 
   return (
     <Row style={{ margin: "0" }}>
-      <Col m={6} s={12} style={{ width: "400px" }}>
+      <Col m={6} s={12} style={{ width: "365px" }}>
         <Card
           actions={[
             <a
@@ -48,7 +48,7 @@ const PendingCard = ({ user, setAlert }) => {
                 minWidth: "120px",
                 width: "auto",
                 backgroundColor: "#BA3F1D",
-                marginLeft: "15px",
+                marginLeft: "25px",
               }}
               onClick={reject}
             >

@@ -87,6 +87,7 @@ const App = () => {
                           backgroundRepeat: "no-repeat",
                           backgroundPosition: "center center",
                           backgroundSize: "100% 100%",
+                          backgroundColor: "white",
                         }}
                       >
                         <HomeNavbar scrollState={scrollState} />

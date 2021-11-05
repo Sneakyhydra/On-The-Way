@@ -41,12 +41,11 @@ const CounQuiz = ({ tabKey }) => {
     <div
       className='col s12'
       style={{
-        marginTop: "3.5em",
+        marginTop: "1.5em",
         width: "100%",
         height: "100%",
         marginLeft: "auto",
         marginRight: "auto",
-        backgroundColor: "#2bc592",
         textAlign: "center",
       }}
     >

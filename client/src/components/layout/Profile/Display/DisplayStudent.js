@@ -38,8 +38,8 @@ const DisplayStudent = ({ user, setEdit }) => {
 
   return (
     <div
-      className='container rounded bg-white mt-3 mb-5'
-      style={{ width: "100%" }}
+      className='container bg-white mt-3 mb-5'
+      style={{ width: "100%", borderRadius: "0.5rem" }}
     >
       <div className='row'>
         <div className='col-md-3 border-right'>
@@ -176,7 +176,11 @@ const DisplayStudent = ({ user, setEdit }) => {
               className='btn waves-effect waves-light'
               value='Edit'
               onClick={onEdit}
-              style={{ marginTop: "2em", borderRadius: "2em", width: "13em" }}
+              style={{
+                marginTop: "2em",
+                borderRadius: "0.75rem",
+                width: "13em",
+              }}
             >
               Edit Profile
             </button>

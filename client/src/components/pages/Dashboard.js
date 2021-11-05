@@ -29,6 +29,7 @@ import StudFeed from "../tabs/Student/StudFeed";
 // CSS
 import Preloader from "../layout/Preloader/Preloader";
 import M from "materialize-css/dist/js/materialize.min.js";
+import "./Dashboard.css";
 
 const Dashboard = () => {
   const authContext = useContext(AuthContext);
@@ -45,6 +46,7 @@ const Dashboard = () => {
     setLoading(false);
     M.AutoInit();
     M.updateTextFields();
+    document.body.style.backgroundColor = "#ddc8c4";
     // eslint-disable-next-line
   }, []);
 

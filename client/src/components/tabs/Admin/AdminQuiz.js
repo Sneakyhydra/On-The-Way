@@ -61,12 +61,11 @@ const AdminQuiz = ({ tabKey }) => {
     <form
       className='col s12'
       style={{
-        marginTop: "3.5em",
+        marginTop: "4.5em",
         width: "100%",
         height: "100%",
         marginLeft: "auto",
         marginRight: "auto",
-        backgroundColor: "#2bc592",
         textAlign: "center",
       }}
       onSubmit={onSubmit}
@@ -97,7 +96,7 @@ const AdminQuiz = ({ tabKey }) => {
         type='submit'
         className='waves-effect waves-light btn save-quiz'
         style={{
-          borderRadius: "2em",
+          borderRadius: "1rem",
           width: "10em",
           border: "2px solid #400279",
           fontWeight: "bolder",

@@ -3,7 +3,7 @@
 }
 
 ::-webkit-scrollbar-track {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: white;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -11,6 +11,10 @@
     background-image: -webkit-linear-gradient( 150deg, rgba(255, 255, 255, 0.35) 20%, transparent 20%, transparent 40%, rgba(255, 255, 255, 0.35) 40%, rgba(255, 255, 255, 0.35) 60%, transparent 60%, transparent 80%, rgba(255, 255, 255, 0.35) 80%);
     border-radius: 20px;
     background-clip: content-box;
+}
+
+body {
+    background-color: white;
 }
 
 
@@ -770,7 +774,7 @@ nav {
 }
 
 .card {
-    background-color: #4a6d7c;
+    background-color: #54a5a2;
     border-radius: 20px;
 }
 
@@ -787,28 +791,28 @@ nav {
 }
 
 .save-quiz {
-    background-color: #400279;
+    background-color: #2c363f;
     color: white;
     transition-duration: 0.08s;
 }
 
 .save-quiz:visited {
     color: white;
-    background-color: #400279;
+    background-color: #2c363f;
 }
 
 .save-quiz:hover {
-    color: #400279;
+    color: #2c363f;
     background-color: white;
 }
 
 .save-quiz:active {
-    color: #400279;
+    color: #2c363f;
     background-color: white;
 }
 
 .save-quiz:focus {
-    background-color: #400279;
+    background-color: #2c363f;
     color: white;
 }
 

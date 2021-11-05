@@ -99,7 +99,10 @@ const EditStudent = ({ user, setEdit }) => {
   };
 
   return (
-    <div className='container rounded bg-white mt-3 mb-5'>
+    <div
+      className='container bg-white mt-3 mb-5'
+      style={{ width: "100%", borderRadius: "0.5rem" }}
+    >
       <div className='row'>
         <div className='col-md-3 border-right'>
           <div className='d-flex flex-column align-items-center text-center p-3 py-5'>
@@ -255,7 +258,11 @@ const EditStudent = ({ user, setEdit }) => {
               className='btn waves-effect waves-light'
               type='submit'
               value='Register'
-              style={{ marginTop: "2em", borderRadius: "2em", width: "13em" }}
+              style={{
+                marginTop: "2em",
+                borderRadius: "0.75rem",
+                width: "13em",
+              }}
             >
               Save Profile
               <i className='material-icons right' style={{ marginLeft: "0px" }}>
@@ -268,7 +275,11 @@ const EditStudent = ({ user, setEdit }) => {
               value='Cancel'
               type='button'
               onClick={onCancel}
-              style={{ marginTop: "2em", borderRadius: "2em", width: "13em" }}
+              style={{
+                marginTop: "2em",
+                borderRadius: "0.75rem",
+                width: "13em",
+              }}
             >
               Cancel
               <i className='material-icons right' style={{ marginLeft: "0px" }}>

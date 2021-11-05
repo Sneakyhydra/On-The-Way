@@ -26,7 +26,9 @@ const DashNavbar = () => {
       <nav className='z-depth-0' style={{ backgroundColor: "white" }}>
         <div className='nav-wrapper'>
           <div style={{ display: "inline-flex" }}>
-            <h4 className='title'>Dashboard</h4>
+            <h4 className='title' style={{ color: "#54A5A2" }}>
+              Dashboard
+            </h4>
           </div>
 
           <ul className='right' style={{ display: "inline-block" }}>

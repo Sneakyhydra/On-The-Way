@@ -91,7 +91,7 @@ const StudQuiz = ({ tabKey, setTabKey }) => {
         height: "100%",
         marginLeft: "auto",
         marginRight: "auto",
-        backgroundColor: "#2bc592",
+        backgroundColor: "#DDC8C4",
         textAlign: "center",
       }}
       onSubmit={onSubmit}
@@ -123,9 +123,9 @@ const StudQuiz = ({ tabKey, setTabKey }) => {
         type='submit'
         className='waves-effect waves-light btn save-quiz'
         style={{
-          borderRadius: "2em",
+          borderRadius: "1rem",
           width: "10em",
-          border: "2px solid #400279",
+          border: "2px solid #2C363F",
           fontWeight: "bolder",
           fontSize: "18px",
           margin: "2em 0",

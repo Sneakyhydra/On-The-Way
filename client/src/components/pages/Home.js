@@ -9,8 +9,13 @@ import help1 from "../../images/HomePage/help1.svg";
 import help2 from "../../images/HomePage/help2.svg";
 import help3 from "../../images/HomePage/help3.svg";
 import background2 from "../../images/HomePage/background2.png";
+import { useEffect } from "react";
 
 const Home = () => {
+  useEffect(() => {
+    document.body.style.backgroundColor = "white";
+  }, []);
+
   return (
     <div>
       <div style={{ marginLeft: "6.5em", marginTop: "8em" }}>

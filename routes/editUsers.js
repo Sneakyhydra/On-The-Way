@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs"); // Encrypt password
 const auth = require("../middleware/auth"); // Middleware
 const { check, validationResult } = require("express-validator"); // Check and validate the inputs
 const readXlsxFile = require("read-excel-file/node"); // Read excel files
-const promisePool = require("../config/db");
+const promisePool = require("../config/db"); // Import instance of mysql pool
 
 // Init router
 const router = express.Router();

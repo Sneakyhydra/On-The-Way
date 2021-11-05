@@ -2,7 +2,7 @@
 const express = require("express"); // Create router
 const auth = require("../middleware/auth"); // Middleware
 const { check, validationResult } = require("express-validator"); // Check and validate the inputs
-const promisePool = require("../config/db");
+const promisePool = require("../config/db"); // Import instance of mysql pool
 
 // Init router
 const router = express.Router();

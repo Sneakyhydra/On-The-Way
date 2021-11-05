@@ -6,7 +6,7 @@ const config = require("config"); // Global variables
 const auth = require("../middleware/auth"); // Middleware
 const { check, validationResult } = require("express-validator"); // Check and validate the inputs
 const readXlsxFile = require('read-excel-file/node'); // Read excel files
-const promisePool = require("../config/db");
+const promisePool = require("../config/db"); // Import instance of mysql pool
 
 // Init router
 const router = express.Router();

@@ -2,7 +2,7 @@
 const express = require("express"); // Create router
 const auth = require("../middleware/auth"); // Middleware
 const readXlsxFile = require("read-excel-file/node"); // Read excel files
-const promisePool = require("../config/db");
+const promisePool = require("../config/db"); // Import instance of mysql pool
 
 // Init router
 const router = express.Router();

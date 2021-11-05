@@ -33,6 +33,7 @@ const StudQuiz = ({ tabKey, setTabKey }) => {
     if (submitted === true) {
       setTabKey("profile");
     }
+    setSubmitted(false);
     // eslint-disable-next-line
   }, [submitted]);
 
@@ -79,7 +80,6 @@ const StudQuiz = ({ tabKey, setTabKey }) => {
 
     setQuiz({});
     setSubmitted(true);
-    window.location.reload();
   };
 
   return (

@@ -34,6 +34,7 @@ const Login = () => {
       setAlert(error, "danger");
     }
 
+    setLoginProgress(false);
     clearErrors();
     // eslint-disable-next-line
   }, [error, token]);

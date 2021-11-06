@@ -775,11 +775,11 @@ nav {
 
 .card {
     background-color: #54a5a2;
-    border-radius: 20px;
+    border-radius: 1rem;
 }
 
 .card .card-action:last-child {
-    border-radius: 0 0 20px 20px;
+    border-radius: 0 0 1rem 1rem;
 }
 
 .question {

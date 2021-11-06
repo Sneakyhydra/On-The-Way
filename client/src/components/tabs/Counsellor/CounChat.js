@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
 import CounContext from "../../../context/counsellor/counContext";
 import M from "materialize-css/dist/js/materialize.min.js";
 import AlertContext from "../../../context/alert/alertContext";
@@ -6,14 +6,12 @@ import Preloader from "../../layout/Preloader/Preloader";
 import CounMess from "../../layout/Counsellor/Chat/CounMess";
 import CounUsers from "../../layout/Counsellor/Chat/CounUsers";
 
-const CounChat = ({ tabKey }) => {
+const CounChat = ({ tabKey, active, setActive }) => {
   const counContext = useContext(CounContext);
   const alertContext = useContext(AlertContext);
 
   const { loadMessages, messages, error, students, loadStudents } = counContext;
   const { setAlert } = alertContext;
-
-  const [active, setActive] = useState(0);
 
   // Load the user when dashboard is rendered
   useEffect(() => {
@@ -33,6 +31,8 @@ const CounChat = ({ tabKey }) => {
     }
     // eslint-disable-next-line
   }, [tabKey]);
+
+  useEffect(() => {}, [active]);
 
   if (!messages) {
     return (
@@ -62,7 +62,12 @@ const CounChat = ({ tabKey }) => {
         height: "600px",
       }}
     >
-      <CounUsers setActive={setActive} setAlert={setAlert} users={students} />
+      <CounUsers
+        setActive={setActive}
+        setAlert={setAlert}
+        users={students}
+        active={active}
+      />
       <CounMess setAlert={setAlert} messages={messages} active={active} />
     </div>
   );

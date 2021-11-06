@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-const StudUsers = ({ users, setActive }) => {
-  const [clickedOn, setClickedOn] = useState(0);
+const StudUsers = ({ users, setActive, active }) => {
+  const [clickedOn, setClickedOn] = useState(active);
 
   useEffect(() => {
     setActive(clickedOn);
     // eslint-disable-next-line
   }, [clickedOn]);
+
+  useEffect(() => {
+    setClickedOn(active);
+  }, [active]);
 
   const scrollToBottom = () => {
     const elem = document.getElementById("messagesEndStud");

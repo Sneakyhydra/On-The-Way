@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
 import StudContext from "../../../context/student/studContext";
 import M from "materialize-css/dist/js/materialize.min.js";
 import AlertContext from "../../../context/alert/alertContext";
@@ -6,15 +6,13 @@ import Preloader from "../../layout/Preloader/Preloader";
 import StudMess from "../../layout/Student/Chat/StudMess";
 import StudUsers from "../../layout/Student/Chat/StudUsers";
 
-const StudChat = ({ tabKey }) => {
+const StudChat = ({ tabKey, active, setActive }) => {
   const studContext = useContext(StudContext);
   const alertContext = useContext(AlertContext);
 
   const { loadMessages, messages, error, counsellors, loadCounsellors } =
     studContext;
   const { setAlert } = alertContext;
-
-  const [active, setActive] = useState(0);
 
   // Load the user when dashboard is rendered
   useEffect(() => {
@@ -67,6 +65,7 @@ const StudChat = ({ tabKey }) => {
         setActive={setActive}
         setAlert={setAlert}
         users={counsellors}
+        active={active}
       />
       <StudMess setAlert={setAlert} messages={messages} active={active} />
     </div>

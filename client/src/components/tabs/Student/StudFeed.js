@@ -38,13 +38,22 @@ const CounFeed = () => {
   };
 
   return (
-    <div className='row'>
+    <div
+      className='row'
+      style={{
+        backgroundColor: "white",
+        width: "40vw",
+        height: "40vh",
+        borderRadius: "0.75rem",
+        marginTop: "1em",
+      }}
+    >
       <form
         className='col s12'
         onSubmit={onSubmit}
         style={{ marginTop: "5em" }}
       >
-        <div className='row' style={{ width: "400px", margin: "auto" }}>
+        <div className='row' style={{ width: "25vw", margin: "auto" }}>
           <div className='input-field col s12'>
             <textarea
               id='desc'
@@ -53,8 +62,6 @@ const CounFeed = () => {
               className='validate materialize-textarea'
               value={desc}
               onChange={onChange}
-              required
-              style={{ minWidth: "400px" }}
             />
             <label htmlFor='desc'>Feedback</label>
           </div>
@@ -65,7 +72,7 @@ const CounFeed = () => {
             className='btn waves-effect waves-light'
             type='submit'
             value='Feedback'
-            style={{ borderRadius: "2em", marginTop: "2em", width: "10em" }}
+            style={{ borderRadius: "1rem", marginTop: "2em", width: "10em" }}
           >
             Send Feedback
             <i className='material-icons right'>send</i>

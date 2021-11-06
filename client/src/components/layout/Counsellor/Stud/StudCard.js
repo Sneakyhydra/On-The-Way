@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Card, Row, Col, Icon } from "react-materialize";
 import PropTypes from "prop-types";
 
-const StudCard = ({ user }) => {
+const StudCard = ({ user, setTabKey, setActive }) => {
   const {
     stud_name,
     stud_gender,
@@ -11,6 +11,7 @@ const StudCard = ({ user }) => {
     stud_branch,
     roll_no,
     cpi,
+    stud_id,
   } = user;
 
   let CPI = cpi;
@@ -19,10 +20,32 @@ const StudCard = ({ user }) => {
     CPI = "Not found";
   }
 
+  const chat = () => {
+    setActive(stud_id);
+    setTabKey("chat");
+  };
+
   return (
     <Row style={{ margin: "0" }}>
       <Col m={6} s={12} style={{ width: "365px" }}>
         <Card
+          actions={[
+            <a
+              href='#!'
+              key='1'
+              className='waves-effect waves-light btn'
+              onClick={chat}
+              style={{
+                borderRadius: "10px",
+                minWidth: "120px",
+                width: "auto",
+                backgroundColor: "#2BC592",
+                marginRight: "15px",
+              }}
+            >
+              Chat
+            </a>,
+          ]}
           className='z-depth-1 grow'
           closeIcon={<Icon>close</Icon>}
           revealIcon={<Icon>more_vert</Icon>}

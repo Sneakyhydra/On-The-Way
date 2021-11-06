@@ -4,7 +4,7 @@ import M from "materialize-css/dist/js/materialize.min.js";
 import StudCounCard from "../../layout/Student/Coun/StudCounCard";
 import Preloader from "../../layout/Preloader/Preloader";
 
-const StudCoun = ({ tabKey }) => {
+const StudCoun = ({ tabKey, setTabKey, setActive }) => {
   const studContext = useContext(StudContext);
   const { counsellors, loadCounsellors } = studContext;
 
@@ -40,7 +40,14 @@ const StudCoun = ({ tabKey }) => {
       }}
     >
       {counsellors.map((item) => {
-        return <StudCounCard key={item.coun_id} user={item} />;
+        return (
+          <StudCounCard
+            key={item.coun_id}
+            user={item}
+            setTabKey={setTabKey}
+            setActive={setActive}
+          />
+        );
       })}
     </div>
   );

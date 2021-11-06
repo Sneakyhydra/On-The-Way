@@ -40,6 +40,8 @@ const Dashboard = () => {
   const [tabKeyCoun, setTabKeyCoun] = useState("pending");
   const [tabKeyFeed, setTabKeyFeed] = useState("counfeed");
 
+  const [active, setActive] = useState(0);
+
   // Load the user when dashboard is rendered
   useEffect(() => {
     authContext.loadUser();
@@ -196,7 +198,11 @@ const Dashboard = () => {
         {/* Show below tabs only if counsellor is approved */}
         {user.coun_status === "Approved" ? (
           <Tab eventKey='studentInfo' title='Students' className='z-depth-0'>
-            <StudentInfo tabKey={tabKey} />
+            <StudentInfo
+              tabKey={tabKey}
+              setTabKey={setTabKey}
+              setActive={setActive}
+            />
           </Tab>
         ) : (
           ""
@@ -210,7 +216,7 @@ const Dashboard = () => {
         )}
         {user.coun_status === "Approved" ? (
           <Tab eventKey='chat' title='Chat' className='z-depth-0'>
-            <CounChat tabKey={tabKey} />
+            <CounChat tabKey={tabKey} active={active} setActive={setActive} />
           </Tab>
         ) : (
           ""
@@ -250,10 +256,14 @@ const Dashboard = () => {
           <StudQuiz tabKey={tabKey} setTabKey={setTabKey} />
         </Tab>
         <Tab eventKey='studcoun' title='Counsellors' className='z-depth-0'>
-          <StudCoun tabKey={tabKey} />
+          <StudCoun
+            tabKey={tabKey}
+            setTabKey={setTabKey}
+            setActive={setActive}
+          />
         </Tab>
         <Tab eventKey='studchat' title='Chat' className='z-depth-0'>
-          <StudChat tabKey={tabKey} />
+          <StudChat tabKey={tabKey} active={active} setActive={setActive} />
         </Tab>
         <Tab eventKey='studfeed' title='Feedback' className='z-depth-0'>
           <StudFeed />

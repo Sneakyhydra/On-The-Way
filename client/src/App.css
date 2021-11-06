@@ -830,28 +830,83 @@ nav {
 }
 
 .chatUsers {
-    width: 200px;
+    width: 100.25%;
     margin: 0;
     padding: 0;
-    height: 50px;
+    height: 3.5em;
     background-color: white;
+    border: none;
+    border-bottom: 2px solid #2c363f;
+    z-index: 0;
 }
 
 .chatActive {
     color: whitesmoke;
-    background-color: #00bf72;
+    background-color: #54a5a2;
 }
 
 .chatUsers:focus {
     color: whitesmoke;
-    background-color: #00bf72;
+    background-color: #54a5a2;
+    width: 100.25%;
+    margin: 0;
+    padding: 0;
+    height: 3.5em;
+    border: none;
+    border-bottom: 2px solid #2c363f;
 }
 
 .text-left {
     text-align: left;
+    margin-left: 1rem;
 }
 
 .text-right {
     text-align: right;
     justify-content: flex-end;
+}
+
+.text-right>div {
+    margin-right: 1rem;
+}
+
+.userArea :first-child {
+    border-top-left-radius: 0.4rem;
+}
+
+.message {
+    padding: 0.4rem 1rem;
+    background-color: white;
+    border-radius: 0.35rem;
+}
+
+.message-container {
+    margin-bottom: 1rem;
+}
+
+.chat {
+    position: relative;
+    margin-top: 5em;
+    width: 80%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    border: 2px solid #2c363f;
+    margin-left: 10%;
+    height: 600px;
+    background-color: whitesmoke;
+    padding: 0;
+    border-radius: 0.5rem;
+    justify-content: space-between;
+}
+
+.chat::before {
+    content: "";
+    background-image: url("./images/Chat/chat-background.jpg");
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.15;
 }

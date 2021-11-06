@@ -33,6 +33,8 @@ const StudChat = ({ tabKey, active, setActive }) => {
     // eslint-disable-next-line
   }, [tabKey]);
 
+  useEffect(() => {}, [active]);
+
   if (!messages) {
     return (
       <div style={{ marginTop: "3.5em" }}>
@@ -49,18 +51,7 @@ const StudChat = ({ tabKey, active, setActive }) => {
   }
 
   return (
-    <div
-      style={{
-        marginTop: "5em",
-        width: "80%",
-        display: "flex",
-        flexWrap: "nowrap",
-        flexDirection: "row",
-        border: "3px solid black",
-        marginLeft: "10%",
-        height: "600px",
-      }}
-    >
+    <div className='chat'>
       <StudUsers
         setActive={setActive}
         setAlert={setAlert}

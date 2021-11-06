@@ -140,12 +140,14 @@ const StudMess = ({ messages, active }) => {
     <div
       style={{
         height: "100%",
-        width: "100%",
+        width: "75%",
         overflowY: "hidden",
-        padding: "1.5rem",
+        padding: "1rem 0",
+        paddingBottom: "0",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
+        margin: "auto",
       }}
     >
       <div
@@ -153,6 +155,7 @@ const StudMess = ({ messages, active }) => {
           height: "500px",
           overflowX: "hidden",
           padding: "1.5rem",
+          zIndex: "100",
         }}
       >
         {messToShow.length === 0
@@ -171,8 +174,10 @@ const StudMess = ({ messages, active }) => {
                 mess.from_role === "student" ? "text-right" : "text-left"
               }
             >
-              <div>
-                <span style={{ maxWidth: "200px" }}>{mess.mess_desc}</span>
+              <div className='message-container'>
+                <span style={{ maxWidth: "200px" }} className='message'>
+                  {mess.mess_desc}
+                </span>
               </div>
             </div>
           );
@@ -188,6 +193,11 @@ const StudMess = ({ messages, active }) => {
           display: "flex",
           flexDirection: "row",
           flexWrap: "nowrap",
+          justifyContent: "flex-end",
+          zIndex: "100",
+          borderBottomRightRadius: "0.25rem",
+          padding: "0.5rem",
+          backgroundColor: "rgba(255,255,255,0.75)",
         }}
       >
         <input
@@ -198,18 +208,25 @@ const StudMess = ({ messages, active }) => {
           className='validate'
           onChange={onChange}
           onKeyPress={sendOnEnter}
+          placeholder='Type something'
+          style={{ width: "80%", marginRight: "2rem" }}
         />
-        <button
+        <a
           onClick={send}
+          className='waves-effect waves-light btn z-depth-0'
           style={{
-            height: "30px",
-            padding: "5px",
-            marginTop: "15px",
-            marginLeft: "10px",
+            borderRadius: "10px",
+            backgroundColor: "#255F85",
+            margin: "0",
+            width: "10%",
+            marginTop: "8px",
+            marginRight: "1.5em",
+            fontSize: "1rem",
           }}
+          href='#!'
         >
           send
-        </button>
+        </a>
       </div>
     </div>
   );

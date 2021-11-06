@@ -50,18 +50,7 @@ const CounChat = ({ tabKey, active, setActive }) => {
   }
 
   return (
-    <div
-      style={{
-        marginTop: "5em",
-        width: "80%",
-        display: "flex",
-        flexWrap: "nowrap",
-        flexDirection: "row",
-        border: "3px solid black",
-        marginLeft: "10%",
-        height: "600px",
-      }}
-    >
+    <div className='chat'>
       <CounUsers
         setActive={setActive}
         setAlert={setAlert}

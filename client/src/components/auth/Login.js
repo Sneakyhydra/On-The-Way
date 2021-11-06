@@ -56,6 +56,7 @@ const Login = () => {
 
     if (email === "" || password === "") {
       setAlert("Please enter all fields", "danger");
+      setLoginProgress(false);
     } else {
       await login({
         user_email: email,

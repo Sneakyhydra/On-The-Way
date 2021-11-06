@@ -85,12 +85,16 @@ const RegisterAdmin = () => {
       phone === ""
     ) {
       setAlert("Please enter all fields", "danger");
+      setLoginProgress(false);
     } else if (!validateEmail(email)) {
       setAlert("Email not valid", "danger");
+      setLoginProgress(false);
     } else if (phone.length !== 10) {
       setAlert("Phone number should have 10 digits", "danger");
+      setLoginProgress(false);
     } else if (password !== password2) {
       setAlert("Passwords do not match", "danger");
+      setLoginProgress(false);
     } else {
       await regAdmin({
         user_email: email,

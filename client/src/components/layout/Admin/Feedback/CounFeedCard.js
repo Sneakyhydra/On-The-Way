@@ -38,7 +38,7 @@ const CounFeedCard = ({ feed }) => {
                   borderRadius: "10px",
                   minWidth: "50px",
                   width: "75px",
-                  backgroundColor: "#BA3F1D",
+                  backgroundColor: "#D7263D",
                   margin: "0",
                   marginRight: "15px",
                 }}

@@ -88,7 +88,9 @@ const EditAdmin = ({ user, setEdit }) => {
               alt='Profile'
               src='https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg'
             />
-            <span className='font-weight-bold'>{admin_name}</span>
+            <span className='font-weight-bold' style={{ color: "#2c363f" }}>
+              {admin_name}
+            </span>
             <span className='text-black-50'>{user_email}</span>
             <span> </span>
           </div>
@@ -181,13 +183,14 @@ const EditAdmin = ({ user, setEdit }) => {
 
           <div className='row'>
             <button
-              className='btn waves-effect waves-light'
+              className='btn waves-effect waves-light z-depth-0'
               type='submit'
               value='Register'
               style={{
                 marginTop: "2em",
                 borderRadius: "0.75rem",
                 width: "13em",
+                backgroundColor: "#255F85",
               }}
             >
               Save Profile
@@ -197,7 +200,7 @@ const EditAdmin = ({ user, setEdit }) => {
             </button>
 
             <button
-              className='btn waves-effect waves-light'
+              className='btn waves-effect waves-light z-depth-0'
               type='button'
               value='Cancel'
               onClick={onCancel}
@@ -205,6 +208,7 @@ const EditAdmin = ({ user, setEdit }) => {
                 marginTop: "2em",
                 borderRadius: "0.75rem",
                 width: "13em",
+                backgroundColor: "#D7263D",
               }}
             >
               Cancel

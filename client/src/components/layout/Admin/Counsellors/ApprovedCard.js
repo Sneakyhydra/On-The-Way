@@ -27,7 +27,7 @@ const ApprovedCard = ({ user, setAlert }) => {
                 borderRadius: "10px",
                 minWidth: "120px",
                 width: "auto",
-                backgroundColor: "#BA3F1D",
+                backgroundColor: "#D7263D",
                 marginLeft: "160px",
               }}
               onClick={reject}

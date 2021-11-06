@@ -35,7 +35,9 @@ const DisplayAdmin = ({ user, setEdit }) => {
               alt='Profile'
               src='https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg'
             />
-            <span className='font-weight-bold'>{admin_name}</span>
+            <span className='font-weight-bold' style={{ color: "#2c363f" }}>
+              {admin_name}
+            </span>
             <span className='text-black-50'>{user_email}</span>
             <span> </span>
           </div>
@@ -56,7 +58,9 @@ const DisplayAdmin = ({ user, setEdit }) => {
                 disabled
                 readOnly
               />
-              <label htmlFor='username'>Name</label>
+              <label htmlFor='username' style={{ color: "#2c363f" }}>
+                Name
+              </label>
             </div>
           </div>
 
@@ -71,7 +75,9 @@ const DisplayAdmin = ({ user, setEdit }) => {
                 readOnly
                 disabled
               />
-              <label htmlFor='email'>Email</label>
+              <label htmlFor='email' style={{ color: "#2c363f" }}>
+                Email
+              </label>
             </div>
           </div>
 
@@ -85,7 +91,7 @@ const DisplayAdmin = ({ user, setEdit }) => {
                 <option value='Female'>Female</option>
                 <option value='Other'>Other</option>
               </select>
-              <label>Gender</label>
+              <label style={{ color: "#2c363f" }}>Gender</label>
             </div>
           </div>
 
@@ -100,7 +106,11 @@ const DisplayAdmin = ({ user, setEdit }) => {
                 disabled
                 readOnly
               />
-              <label htmlFor='phone' className='active'>
+              <label
+                htmlFor='phone'
+                className='active'
+                style={{ color: "#2c363f" }}
+              >
                 Mobile Number
               </label>
             </div>
@@ -108,13 +118,14 @@ const DisplayAdmin = ({ user, setEdit }) => {
 
           <div className='row'>
             <button
-              className='btn waves-effect waves-light'
+              className='btn waves-effect waves-light z-depth-0'
               value='Edit'
               onClick={onEdit}
               style={{
                 marginTop: "2em",
                 borderRadius: "0.75rem",
                 width: "13em",
+                backgroundColor: "#255F85",
               }}
             >
               Edit Profile

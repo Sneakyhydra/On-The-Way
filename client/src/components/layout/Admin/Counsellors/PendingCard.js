@@ -32,7 +32,7 @@ const PendingCard = ({ user, setAlert }) => {
                 borderRadius: "10px",
                 minWidth: "120px",
                 width: "auto",
-                backgroundColor: "#2BC592",
+                backgroundColor: "#255F85",
                 marginRight: "15px",
               }}
               onClick={approve}
@@ -47,7 +47,7 @@ const PendingCard = ({ user, setAlert }) => {
                 borderRadius: "10px",
                 minWidth: "120px",
                 width: "auto",
-                backgroundColor: "#BA3F1D",
+                backgroundColor: "#D7263D",
                 marginLeft: "25px",
               }}
               onClick={reject}

@@ -121,7 +121,7 @@ const StudQuiz = ({ tabKey, setTabKey }) => {
       </div>
       <button
         type='submit'
-        className='waves-effect waves-light btn save-quiz'
+        className='waves-effect waves-light btn save-quiz z-depth-0'
         style={{
           borderRadius: "1rem",
           width: "10em",

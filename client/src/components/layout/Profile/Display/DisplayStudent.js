@@ -50,7 +50,9 @@ const DisplayStudent = ({ user, setEdit }) => {
               alt='Profile'
               src='https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg'
             />
-            <span className='font-weight-bold'>{stud_name}</span>
+            <span className='font-weight-bold' style={{ color: "#2c363f" }}>
+              {stud_name}
+            </span>
             <span className='text-black-50'>{user_email}</span>
             <span className='text-black-50'>CPI: {CPI}</span>
             <span> </span>
@@ -72,7 +74,9 @@ const DisplayStudent = ({ user, setEdit }) => {
                 disabled
                 readOnly
               />
-              <label htmlFor='username'>Name</label>
+              <label htmlFor='username' style={{ color: "#2c363f" }}>
+                Name
+              </label>
             </div>
           </div>
 
@@ -87,7 +91,9 @@ const DisplayStudent = ({ user, setEdit }) => {
                 readOnly
                 disabled
               />
-              <label htmlFor='email'>Email</label>
+              <label htmlFor='email' style={{ color: "#2c363f" }}>
+                Email
+              </label>
             </div>
           </div>
 
@@ -101,7 +107,7 @@ const DisplayStudent = ({ user, setEdit }) => {
                 <option value='Female'>Female</option>
                 <option value='Other'>Other</option>
               </select>
-              <label>Gender</label>
+              <label style={{ color: "#2c363f" }}>Gender</label>
             </div>
           </div>
 
@@ -116,7 +122,9 @@ const DisplayStudent = ({ user, setEdit }) => {
                 disabled
                 readOnly
               />
-              <label htmlFor='rollno'>Roll Number</label>
+              <label htmlFor='rollno' style={{ color: "#2c363f" }}>
+                Roll Number
+              </label>
             </div>
           </div>
 
@@ -131,7 +139,11 @@ const DisplayStudent = ({ user, setEdit }) => {
                 disabled
                 readOnly
               />
-              <label htmlFor='phone' className='active'>
+              <label
+                htmlFor='phone'
+                className='active'
+                style={{ color: "#2c363f" }}
+              >
                 Mobile Number
               </label>
             </div>
@@ -147,7 +159,7 @@ const DisplayStudent = ({ user, setEdit }) => {
                 <option value='M.Des'>M.Des</option>
                 <option value='P.hd'>P.hd</option>
               </select>
-              <label>Programme</label>
+              <label style={{ color: "#2c363f" }}>Programme</label>
             </div>
           </div>
 
@@ -167,19 +179,20 @@ const DisplayStudent = ({ user, setEdit }) => {
                 <option value='ME'>Mechanical Engineering&#40;ME&#41;</option>
                 <option value='NS'>Natural Sciences&#40;NS&#41;</option>
               </select>
-              <label>Branch</label>
+              <label style={{ color: "#2c363f" }}>Branch</label>
             </div>
           </div>
 
           <div className='row'>
             <button
-              className='btn waves-effect waves-light'
+              className='btn waves-effect waves-light z-depth-0'
               value='Edit'
               onClick={onEdit}
               style={{
                 marginTop: "2em",
                 borderRadius: "0.75rem",
                 width: "13em",
+                backgroundColor: "#255F85",
               }}
             >
               Edit Profile
@@ -194,7 +207,7 @@ const DisplayStudent = ({ user, setEdit }) => {
               style={{ flexDirection: "column" }}
             >
               {response.length > 0 ? (
-                <h5>Response from last quiz</h5>
+                <h5 style={{ color: "#2c363f" }}>Response from last quiz</h5>
               ) : (
                 "Take the quiz for a personal response"
               )}

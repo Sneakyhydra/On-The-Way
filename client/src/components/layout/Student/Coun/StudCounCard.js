@@ -24,7 +24,7 @@ const StudCounCard = ({ user, setTabKey, setActive }) => {
                 borderRadius: "10px",
                 minWidth: "120px",
                 width: "auto",
-                backgroundColor: "#2BC592",
+                backgroundColor: "#255F85",
                 marginRight: "15px",
               }}
             >

@@ -62,8 +62,6 @@ const CounFeed = () => {
               className='validate materialize-textarea'
               value={desc}
               onChange={onChange}
-              required
-              style={{ minWidth: "400px" }}
             />
             <label htmlFor='desc'>Feedback</label>
           </div>
@@ -71,10 +69,15 @@ const CounFeed = () => {
 
         <div className='row'>
           <button
-            className='btn waves-effect waves-light'
+            className='btn waves-effect waves-light z-depth-0'
             type='submit'
             value='Feedback'
-            style={{ borderRadius: "1rem", marginTop: "2em", width: "10em" }}
+            style={{
+              borderRadius: "1rem",
+              marginTop: "2em",
+              width: "10em",
+              backgroundColor: "#255F85",
+            }}
           >
             Send Feedback
             <i className='material-icons right'>send</i>

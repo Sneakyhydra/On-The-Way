@@ -142,8 +142,7 @@ const CounMess = ({ messages, active }) => {
         height: "100%",
         width: "75%",
         overflowY: "hidden",
-        padding: "1rem 0",
-        paddingBottom: "0",
+        paddingTop: "0.15rem",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -152,7 +151,6 @@ const CounMess = ({ messages, active }) => {
     >
       <div
         style={{
-          height: "500px",
           overflowX: "hidden",
           padding: "1.5rem",
           zIndex: "100",

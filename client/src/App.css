@@ -522,9 +522,10 @@ nav {
     margin: 0%;
     padding: 0%;
     /* background-color: yellow; */
-    background-image: url(./images/LoginPage/login2.jpg);
+    background-image: url(./images/login10.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: top;
     height: 100vh;
     width: 197.4vh;
     position: absolute;
@@ -536,7 +537,7 @@ nav {
     height: 73vh;
     width: 65vh;
     position: absolute;
-    left: 15vh;
+    left: 115vh;
     top: 50%;
     transform: translate(0, -50%);
     padding-top: 0%;
@@ -550,14 +551,16 @@ nav {
     /* position: absolute; */
     color: white;
     height: 20%;
-    background-color: #021b79;
+    background-color: #FFD248;
 }
 
 .row.mt-5 {
     margin: 0% !important;
 }
 
-#shade {
+#shade{
+    position: absolute;
+    right: 0%;
     height: 100vh;
     width: 50vh;
     background-color: black;
@@ -648,7 +651,7 @@ nav {
 
 #sbg {
     height: 100vh;
-    background: linear-gradient(180deg, #71b5e0, #43274e 100%);
+    background: linear-gradient( 180deg, #FFEFB2, #FBD242 100%);
 }
 
 .box .row.mt-5 h4 {
@@ -712,7 +715,7 @@ nav {
 
 #cbg {
     height: 100vh;
-    background: linear-gradient(180deg, #71b5e0, #43274e 100%);
+    background: linear-gradient( 180deg, #FFEFB2, #FBD242 100%);
 }
 
 .box .row.mt-5 h4 {
@@ -770,7 +773,7 @@ nav {
 
 #abg {
     height: 100vh;
-    background: linear-gradient(180deg, #71b5e0, #43274e 100%);
+    background: linear-gradient( 180deg, #FFEFB2, #FBD242 100%);
 }
 
 .card {

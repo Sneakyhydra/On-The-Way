@@ -30,6 +30,8 @@ const StudMess = ({ messages, active }) => {
 
   useEffect(() => {
     const interval = setInterval(loadMessages, 3000);
+    M.AutoInit();
+    M.updateTextFields();
     return () => clearInterval(interval);
     // eslint-disable-next-line
   }, []);
@@ -74,6 +76,7 @@ const StudMess = ({ messages, active }) => {
     };
 
     setCurrMess("");
+    M.updateTextFields();
 
     let temp = messToShow;
     temp.push(messToSend);
@@ -88,50 +91,6 @@ const StudMess = ({ messages, active }) => {
     setTimeout(scrollToBottom, 10);
   };
 
-  const sendOnEnter = (event) => {
-    if (event.key === "Enter") {
-      let date;
-      date = new Date();
-      date =
-        date.getUTCFullYear() +
-        "-" +
-        ("00" + (date.getUTCMonth() + 1)).slice(-2) +
-        "-" +
-        ("00" + date.getUTCDate()).slice(-2) +
-        " " +
-        ("00" + date.getUTCHours()).slice(-2) +
-        ":" +
-        ("00" + date.getUTCMinutes()).slice(-2) +
-        ":" +
-        ("00" + date.getUTCSeconds()).slice(-2);
-
-      if (currMess === "") {
-        return;
-      }
-      let messToSend = {
-        stud_id: user.user_id,
-        coun_id: active,
-        from_role: "student",
-        mess_desc: currMess,
-        mess_date: date,
-      };
-
-      setCurrMess("");
-
-      let temp = messToShow;
-      temp.push(messToSend);
-      if (temp.length === 1) {
-        temp[temp.length - 1].mess_id = 1;
-      } else {
-        temp[temp.length - 1].mess_id = temp[temp.length - 2].mess_id + 1;
-      }
-      setMessToShow(temp);
-
-      sendMessage(messToSend);
-      setTimeout(scrollToBottom, 10);
-    }
-  };
-
   if (active === 0) {
     return "";
   }
@@ -141,7 +100,6 @@ const StudMess = ({ messages, active }) => {
       style={{
         height: "100%",
         width: "75%",
-        overflowY: "hidden",
         paddingTop: "0.15rem",
         display: "flex",
         flexDirection: "column",
@@ -167,15 +125,27 @@ const StudMess = ({ messages, active }) => {
                 width: "100%",
                 display: "flex",
                 flexDirection: "column",
+                whiteSpace: "initial",
               }}
-              className={
-                mess.from_role === "student" ? "text-right" : "text-left"
-              }
             >
-              <div className='message-container'>
-                <span style={{ maxWidth: "200px" }} className='message'>
+              <div
+                className={
+                  mess.from_role === "student"
+                    ? "text-right message-container"
+                    : "text-left message-container"
+                }
+              >
+                <pre
+                  style={{
+                    display: "block",
+                    maxWidth: "250px",
+                    whiteSpace: "pre-line",
+                    fontFamily: "Lucida Sans, sans-serif",
+                  }}
+                  className='message'
+                >
                   {mess.mess_desc}
-                </span>
+                </pre>
               </div>
             </div>
           );
@@ -198,16 +168,14 @@ const StudMess = ({ messages, active }) => {
           backgroundColor: "rgba(255,255,255,0.75)",
         }}
       >
-        <input
-          type='text'
+        <textarea
           value={currMess}
           id='currMess'
           name='currMess'
-          className='validate'
+          className='validate materialize-textarea'
           onChange={onChange}
-          onKeyPress={sendOnEnter}
           placeholder='Type something'
-          style={{ width: "80%", marginRight: "2rem" }}
+          style={{ width: "80%", marginRight: "2rem", maxHeight: "75px" }}
         />
         <a
           onClick={send}

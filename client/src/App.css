@@ -823,12 +823,10 @@ nav {
 }
 
 .text-left {
-    text-align: left;
     margin-left: 1rem;
 }
 
 .text-right {
-    text-align: right;
     justify-content: flex-end;
 }
 
@@ -844,10 +842,15 @@ nav {
     padding: 0.4rem 1rem;
     background-color: white;
     border-radius: 0.35rem;
+    word-wrap: break-word;
+    margin-right: 0;
+    margin-left: 0;
 }
 
 .message-container {
     margin-bottom: 1rem;
+    width: 100%;
+    display: flex;
 }
 
 .chat {

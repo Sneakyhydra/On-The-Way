@@ -599,7 +599,12 @@ nav {
 
 #sbg {
     height: 100vh;
-    background: linear-gradient(180deg, #ffefb2, #fbd242 100%);
+    background: #43c6ac;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #f8ffae, #43c6ac);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #f8ffae, #43c6ac);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .box .row.mt-5 h4 {
@@ -663,7 +668,12 @@ nav {
 
 #cbg {
     height: 100vh;
-    background: linear-gradient(180deg, #ffefb2, #fbd242 100%);
+    background: #43c6ac;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #f8ffae, #43c6ac);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #f8ffae, #43c6ac);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .box .row.mt-5 h4 {
@@ -721,7 +731,12 @@ nav {
 
 #abg {
     height: 100vh;
-    background: linear-gradient(180deg, #ffefb2, #fbd242 100%);
+    background: #43c6ac;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #f8ffae, #43c6ac);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #f8ffae, #43c6ac);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .card {

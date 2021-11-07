@@ -17,28 +17,23 @@ import RegisterAdmin from "./components/auth/RegisterAdmin";
 import PrivateRoute from "./components/routing/PrivateRoute";
 
 // Layout components
-import HomeNavbar from "./components/layout/HomeNavbar";
-import Alerts from "./components/layout/Alerts";
+import HomeNavbar from "./components/layout/Navbar/HomeNavbar";
+import Alerts from "./components/layout/Alert/Alerts";
 
 // States
 import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alert/AlertState";
-
-// Global header for axios
-import setAuthToken from "./utils/setAuthToken";
+import AdminState from "./context/admin/AdminState";
+import CounState from "./context/counsellor/CounState";
+import StudState from "./context/student/StudState";
 
 // CSS
 import "materialize-css/dist/css/materialize.min.css";
+import M from "materialize-css/dist/js/materialize.min.js";
 import "./App.css";
 
 // Images
-import background from "./images/Background1.jpeg";
-import M from "materialize-css/dist/js/materialize.min.js";
-
-// Initialize token everytime the app is rendered
-if (localStorage.token) {
-  setAuthToken(localStorage.token);
-}
+import background from "./images/HomePage/Background1.jpeg";
 
 const App = () => {
   // Set scroll state
@@ -75,79 +70,88 @@ const App = () => {
   return (
     <AuthState>
       <AlertState>
-        <Router>
-          <Alerts />
-          <Switch>
-            {/* Home page */}
-            <Route exact path='/'>
-              <Fragment>
-                <div
-                  style={{
-                    backgroundImage: `url(${background})`,
-                    height: "720px",
-                    backgroundSize: "cover",
-                    fontFamily: "Lucida Sans, sans-serif",
-                  }}
-                >
-                  <HomeNavbar scrollState={scrollState} />
-                  <Home />
-                </div>
-              </Fragment>
-            </Route>
+        <AdminState>
+          <CounState>
+            <StudState>
+              <Router>
+                <Alerts />
+                <Switch>
+                  {/* Home page */}
+                  <Route exact path='/'>
+                    <Fragment>
+                      <div
+                        style={{
+                          backgroundImage: `url(${background})`,
+                          maxHeight: "720px",
+                          fontFamily: "Lucida Sans, sans-serif",
+                          backgroundRepeat: "no-repeat",
+                          backgroundPosition: "center center",
+                          backgroundSize: "100% 100%",
+                          backgroundColor: "white",
+                        }}
+                      >
+                        <HomeNavbar scrollState={scrollState} />
+                        <Home />
+                      </div>
+                    </Fragment>
+                  </Route>
 
-            {/* Login page */}
-            <Route exact path='/login'>
-              <div
-                style={{
-                  fontFamily: "Lucida Sans, sans-serif",
-                }}
-              >
-                <Login />
-              </div>
-            </Route>
+                  {/* Login page */}
+                  <Route exact path='/login'>
+                    <div
+                      style={{
+                        fontFamily: "Lucida Sans, sans-serif",
+                      }}
+                    >
+                      <Login />
+                    </div>
+                  </Route>
 
-            {/* Register student page */}
-            <Route exact path='/regstudent'>
-              <div
-                style={{
-                  fontFamily: "Lucida Sans, sans-serif",
-                }}
-              >
-                <RegisterStudent />
-              </div>
-            </Route>
+                  {/* Register student page */}
+                  <Route exact path='/regstudent'>
+                    <div
+                      style={{
+                        fontFamily: "Lucida Sans, sans-serif",
+                      }}
+                    >
+                      <RegisterStudent />
+                    </div>
+                  </Route>
 
-            {/* Register counsellor page */}
-            <Route exact path='/regcounsellor'>
-              <div
-                style={{
-                  fontFamily: "Lucida Sans, sans-serif",
-                }}
-              >
-                <RegisterCounsellor />
-              </div>
-            </Route>
+                  {/* Register counsellor page */}
+                  <Route exact path='/regcounsellor'>
+                    <div
+                      style={{
+                        fontFamily: "Lucida Sans, sans-serif",
+                      }}
+                    >
+                      <RegisterCounsellor />
+                    </div>
+                  </Route>
 
-            {/* Dashboard */}
-            <PrivateRoute exact path='/dashboard' component={Dashboard} />
+                  {/* Dashboard */}
+                  <PrivateRoute exact path='/dashboard' component={Dashboard} />
 
-            {/* Register admin page */}
-            <Route exact path='/ad123'>
-              <div
-                style={{
-                  fontFamily: "Lucida Sans, sans-serif",
-                }}
-              >
-                <RegisterAdmin />
-              </div>
-            </Route>
+                  {/* Register admin page */}
+                  <Route exact path='/ad123'>
+                    <div
+                      style={{
+                        fontFamily: "Lucida Sans, sans-serif",
+                      }}
+                    >
+                      <RegisterAdmin />
+                    </div>
+                  </Route>
 
-            {/* Not found */}
-            <Route path='*'>
-              <NotFound />
-            </Route>
-          </Switch>
-        </Router>
+                  {/* Not found */}
+                  <Route path='*'>
+                    <NotFound />
+                  </Route>
+                </Switch>
+              </Router>
+            </StudState>
+          </CounState>
+        </AdminState>
       </AlertState>
     </AuthState>
   );

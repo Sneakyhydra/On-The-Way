@@ -13,20 +13,20 @@ import {
   CLEAR_ERRORS,
   EDIT_SUCCESS,
   EDIT_FAIL,
-  SET_KEY,
+  VALID_FAIL,
+  VALID_SUCCESS,
 } from "../types";
 import axios from "axios";
-import setAuthToken from "../../utils/setAuthToken";
+
+axios.defaults.withCredentials = true;
 
 const AuthState = (props) => {
   // Set initial state
   const initialState = {
-    token: localStorage.getItem("token"),
     isAuthenticated: false,
-    loading: true,
     user: null,
     error: null,
-    key: "history",
+    token: false,
   };
 
   // Init Reducer
@@ -34,10 +34,6 @@ const AuthState = (props) => {
 
   // Load User
   const loadUser = async () => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
-
     try {
       // Make a get request at localhost:5000/api/auth
       const res = await axios.get("/api/auth");
@@ -45,6 +41,9 @@ const AuthState = (props) => {
       // Dispatch the action to reducer for USER_LOADED
       dispatch({ type: USER_LOADED, payload: res.data });
     } catch (err) {
+      if (err.response.status === 401) {
+        console.log("This is the desired behaviour");
+      }
       // Dispatch the action to reducer for AUTH_ERROR
       dispatch({ type: AUTH_ERROR });
     }
@@ -153,7 +152,65 @@ const AuthState = (props) => {
       // Make a put request at localhost:5000/api/editUsers/admin1234
       const res = await axios.put("api/editUsers/admin1234", formData, config);
 
-      // Dispatch the action to reducer for REGISTER_SUCCESS
+      // Dispatch the action to reducer for EDIT_SUCCESS
+      dispatch({
+        type: EDIT_SUCCESS,
+        payload: res.data,
+      });
+
+      // Load the user after successful edit
+      loadUser();
+    } catch (err) {
+      // Dispatch the action to reducer for EDIT_FAIL
+      dispatch({
+        type: EDIT_FAIL,
+      });
+    }
+  };
+
+  // Edit Counsellor
+  const editCounsellor = async (formData) => {
+    // Set header of the input data
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      // Make a put request at localhost:5000/api/editUsers/counsellor
+      const res = await axios.put("api/editUsers/counsellor", formData, config);
+
+      // Dispatch the action to reducer for EDIT_SUCCESS
+      dispatch({
+        type: EDIT_SUCCESS,
+        payload: res.data,
+      });
+
+      // Load the user after successful edit
+      loadUser();
+    } catch (err) {
+      // Dispatch the action to reducer for EDIT_FAIL
+      dispatch({
+        type: EDIT_FAIL,
+      });
+    }
+  };
+
+  // Edit Student
+  const editStudent = async (formData) => {
+    // Set header of the input data
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      // Make a put request at localhost:5000/api/editUsers/student
+      const res = await axios.put("api/editUsers/student", formData, config);
+
+      // Dispatch the action to reducer for EDIT_SUCCESS
       dispatch({
         type: EDIT_SUCCESS,
         payload: res.data,
@@ -200,12 +257,31 @@ const AuthState = (props) => {
   };
 
   // Logout
-  const logout = () => {
-    // Delete the token
-    setAuthToken();
+  const logout = async () => {
+    try {
+      await axios.delete("/api/auth");
 
-    // Dispatch the action to reducer for LOGOUT
-    dispatch({ type: LOGOUT });
+      // Dispatch the action to reducer for LOGOUT
+      dispatch({ type: LOGOUT });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // Validate user
+  const validate = async () => {
+    try {
+      const res = await axios.get("/api/auth/check");
+      if (res.data === "Valid") {
+        dispatch({
+          type: VALID_SUCCESS,
+        });
+      }
+    } catch (err) {
+      dispatch({
+        type: VALID_FAIL,
+      });
+    }
   };
 
   // Clear Errors
@@ -216,23 +292,14 @@ const AuthState = (props) => {
     });
   };
 
-  const setKey = (k) => {
-    dispatch({
-      type: SET_KEY,
-      payload: k,
-    });
-  };
-
   return (
     <AuthContext.Provider
       // Provide these values to all components wrapped in AuthContext in App.js
       value={{
-        token: state.token,
         isAuthenticated: state.isAuthenticated,
-        loading: state.loading,
         user: state.user,
         error: state.error,
-        key: state.key,
+        token: state.token,
         regStudent,
         regCounsellor,
         login,
@@ -241,7 +308,9 @@ const AuthState = (props) => {
         clearErrors,
         regAdmin,
         editAdmin,
-        setKey,
+        editCounsellor,
+        editStudent,
+        validate,
       }}
     >
       {props.children}

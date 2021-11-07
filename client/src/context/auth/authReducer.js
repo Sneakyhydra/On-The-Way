@@ -9,7 +9,8 @@ import {
   CLEAR_ERRORS,
   EDIT_FAIL,
   EDIT_SUCCESS,
-  SET_KEY,
+  VALID_SUCCESS,
+  VALID_FAIL,
 } from "../types";
 
 // Change state according to the type of action
@@ -19,35 +20,29 @@ const authReducer = (state, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        loading: false,
         user: action.payload,
+        token: true,
       };
 
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
     case EDIT_SUCCESS:
-      localStorage.setItem("token", action.payload.token);
-
       return {
         ...state,
         ...action.payload,
         isAuthenticated: true,
-        loading: false,
+        token: true,
       };
 
     case REGISTER_FAIL:
     case AUTH_ERROR:
     case LOGIN_FAIL:
-    case LOGOUT:
-      localStorage.removeItem("token");
-
       return {
         ...state,
-        token: null,
         isAuthenticated: false,
-        loading: false,
         user: null,
         error: action.payload,
+        token: false,
       };
 
     case EDIT_FAIL:
@@ -56,16 +51,31 @@ const authReducer = (state, action) => {
         error: action.payload,
       };
 
+    case LOGOUT:
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: null,
+        error: null,
+        token: false,
+      };
+
     case CLEAR_ERRORS:
       return {
         ...state,
         error: null,
       };
 
-    case SET_KEY:
+    case VALID_SUCCESS:
       return {
         ...state,
-        key: action.payload,
+        token: true,
+      };
+
+    case VALID_FAIL:
+      return {
+        ...state,
+        token: false,
       };
 
     default:

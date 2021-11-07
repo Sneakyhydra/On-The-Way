@@ -3,7 +3,7 @@
 }
 
 ::-webkit-scrollbar-track {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: white;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -11,6 +11,10 @@
     background-image: -webkit-linear-gradient( 150deg, rgba(255, 255, 255, 0.35) 20%, transparent 20%, transparent 40%, rgba(255, 255, 255, 0.35) 40%, rgba(255, 255, 255, 0.35) 60%, transparent 60%, transparent 80%, rgba(255, 255, 255, 0.35) 80%);
     border-radius: 20px;
     background-clip: content-box;
+}
+
+body {
+    background-color: white;
 }
 
 
@@ -104,7 +108,7 @@ nav {
 }
 
 .regstudent:hover {
-    opacity: 0.7;
+    opacity: 0.85;
 }
 
 
@@ -122,7 +126,7 @@ nav {
 }
 
 .regcounsellor:hover {
-    opacity: 0.7;
+    opacity: 0.85;
 }
 
 .btn {
@@ -176,7 +180,19 @@ nav {
 
 .nav-item>.active {
     background-color: #2bc592 !important;
-    z-index: 1;
+}
+
+.nav-item {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 2px;
+    width: 150px;
+    margin-right: 0;
+}
+
+.nav-item>button {
+    height: 36px;
+    width: 150px;
 }
 
 .nav-link:hover {
@@ -193,20 +209,23 @@ nav {
     font-weight: 600;
     font-size: 1.15rem;
 }
-.rowtxt{
+
+.rowtxt {
     margin-top: 25px;
-   min-height: 35vh;
+    min-height: 35vh;
     width: 100%;
     /* background-color: #00bf72; */
     position: absolute;
     display: flex;
     justify-content: space-between;
 }
-.help{
+
+.help {
     /* background-color: grey; */
     position: relative;
 }
-.rowtxt .txt1{
+
+.rowtxt .txt1 {
     margin: 0%;
     padding: 0%;
     position: relative;
@@ -217,7 +236,7 @@ nav {
     /* background-color: #0575e6; */
 }
 
-.rowtxt .txt1 h1{
+.rowtxt .txt1 h1 {
     font-size: 80px;
     margin: 0%;
     padding: 0%;
@@ -225,8 +244,9 @@ nav {
     top: 0%;
     color: grey;
 }
-.rowtxt .txt1 h3{
-    text-align:start;
+
+.rowtxt .txt1 h3 {
+    text-align: start;
     line-height: 30px;
     font-weight: 500;
     font-size: 23px;
@@ -238,74 +258,81 @@ nav {
     top: 7%;
     left: 30%;
     position: absolute;
-    
 }
-.rowtxt .txt1 h5{
-    
+
+.rowtxt .txt1 h5 {
     margin-top: 30px;
     line-height: 30px;
-    text-align:start;
+    text-align: start;
     position: absolute;
     top: 30%;
     font-size: 13px;
 }
-.desc{
+
+.desc {
     position: absolute;
     width: 100%;
     top: 183%;
 }
-.support{
-    box-shadow:  0 0 5px 5px #83838a;
-        position: absolute;
-        height: 33%;
-        width: 85%;
-        background-color: #414242;
-        left: 8%;
-        top: 253%;
-        border-radius: 15px;
-        display: flex;
-        justify-content: space-between;
-        overflow: hidden;
+
+.support {
+    box-shadow: 0 0 5px 5px #83838a;
+    position: absolute;
+    height: 33%;
+    width: 85%;
+    background-color: #414242;
+    left: 8%;
+    top: 253%;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
 }
-.support .txt{
-    
+
+.support .txt {
     position: relative;
     padding: 30px;
     height: 100%;
     width: 33.25%;
     background-color: rgb(255, 255, 255);
 }
-.support .innertxt{
+
+.support .innertxt {
     font-size: 18px;
     color: #302664;
     font-weight: 600;
     position: absolute;
     left: 33%;
 }
-.support .innertxt2{
-position: absolute;
-left: 33%;
-top: 30%;
-width: 50%;
+
+.support .innertxt2 {
+    position: absolute;
+    left: 33%;
+    top: 30%;
+    width: 50%;
 }
-.support .icon{
+
+.support .icon {
     position: absolute;
     height: 50px;
     width: 50px;
     /* background-color: brown; */
-   
     background-size: cover;
 }
-#i1{
-    background-image: url('./images/icon1.svg');
+
+#i1 {
+    background-image: url("./images/HomePage/icon1.svg");
 }
-#i2{
-    background-image: url('./images/icon2.svg');
+
+#i2 {
+    background-image: url("./images/HomePage/icon2.svg");
 }
-#i3{
-    background-image: url('./images/icon3.svg');
+
+#i3 {
+    background-image: url("./images/HomePage/icon3.svg");
 }
-.footerborder{
+
+.footerborder {
     position: absolute;
     top: 300%;
     height: 12px;
@@ -313,27 +340,32 @@ width: 50%;
     background-color: brown;
     display: flex;
 }
-.p1{
+
+.p1 {
     height: 100%;
     width: 25%;
-    background-color: #F6B717;
+    background-color: #f6b717;
 }
-.p2{
+
+.p2 {
     height: 100%;
     width: 25%;
-    background-color: #F3914C;
+    background-color: #f3914c;
 }
-.p3{
+
+.p3 {
     height: 100%;
     width: 25%;
-    background-color: #A39DD6;
+    background-color: #a39dd6;
 }
-.p4{
+
+.p4 {
     height: 100%;
     width: 25%;
-    background-color: #FDE7A0;
+    background-color: #fde7a0;
 }
-.footer{
+
+.footer {
     position: absolute;
     top: 301.8%;
     min-height: 90vh;
@@ -341,9 +373,9 @@ width: 50%;
     background-color: #302056;
     padding-left: 60px;
     padding-top: 30px;
-    
 }
-.counselling{
+
+.counselling {
     left: 7%;
     box-sizing: border-box;
     padding: 0%;
@@ -351,27 +383,32 @@ width: 50%;
     color: white;
     margin: 0%;
 }
-.footer h4 a{
+
+.footer h4 a {
     text-decoration: none;
     color: white;
     margin: 0%;
     font-size: 15px;
     font-weight: 600;
 }
-.footer h6{
+
+.footer h6 {
     color: yellow;
     font-size: 13px;
 }
-.footer h6 a{
+
+.footer h6 a {
     text-decoration: none;
     color: white;
 }
-.footer a{
-    color: #F7A344;
+
+.footer a {
+    color: #f7a344;
     font-size: 13px;
     text-decoration: underline;
 }
-.aboutus{
+
+.aboutus {
     margin: 0%;
     position: absolute;
     left: 25%;
@@ -380,7 +417,8 @@ width: 50%;
     position: absolute;
     color: white;
 }
-.footer .innertxt{
+
+.footer .innertxt {
     left: 7%;
     position: absolute;
     bottom: 2%;
@@ -388,25 +426,28 @@ width: 50%;
     width: 45%;
     /* background-color: violet; */
 }
-.footer .innertxt h4 a{
+
+.footer .innertxt h4 a {
     position: absolute;
     top: 0%;
-
 }
-.footer .innertxt h3{
+
+.footer .innertxt h3 {
     position: absolute;
     top: 7%;
     font-size: 13px;
     color: white;
     line-height: 30px;
 }
-.footer .innertxt h5{
+
+.footer .innertxt h5 {
     font-size: 16px;
     color: white;
     position: absolute;
     bottom: 3%;
 }
-.rgtbtn{
+
+.rgtbtn {
     /* background-color: yellow; */
     /* display: flex; */
     width: 30%;
@@ -415,46 +456,59 @@ width: 50%;
     top: 50%;
     color: white;
 }
-.rgtbtn h3{
+
+.rgtbtn h3 {
     position: absolute;
     top: 2%;
     margin: 0%;
-    left: 35%;
+    left: 26%;
     font-size: 20px;
-
 }
-.rgtbtn h4{
+
+.rgtbtn h4 {
     position: absolute;
     top: 30%;
     margin: 0%;
-    left: 35%;
+    left: 26%;
     font-size: 13px;
+    color: #d3d3d3;
+    width: 85%;
 }
-.rgtbtn .icon{
+
+.rgtbtn .icon {
     /* position: absolute; */
     height: 100px;
     width: 100px;
-    background-image: url(./images/footericon.svg);
+    background-image: url(./images/HomePage/footericon.svg);
     background-size: cover;
 }
-.rgtbtn button{
-width: 100%;
-height: 8vh;
-border-radius: 8px;
-background-color: #CE7B4F;
-border: 0px;
-color:#302056;
-font-weight: 500;
+
+.rgtbtn .expert {
+    width: 80%;
+    height: 6vh;
+    border-radius: 4px;
+    background-color: #f5924d;
+    border: 0px;
+    color: #302056;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    text-decoration: none;
+    padding: 0.75em;
+    text-align: center;
+    margin-top: 0.5em;
 }
-.follow{
+
+.follow {
     position: absolute;
     left: 63%;
 }
 
-.follow .icons svg{
-margin-right:0px;    
+.follow .icons svg {
+    margin-right: 0px;
 }
-.follow .icons{
+
+.follow .icons {
     display: flex;
     justify-content: space-between;
     padding: 0%;
@@ -463,7 +517,8 @@ margin-right:0px;
     left: -10%;
     /* background-color: yellow; */
 }
-#fcenter{
+
+#fcenter {
     margin: 0%;
     padding: 0%;
     /* background-color: yellow; */
@@ -475,7 +530,8 @@ margin-right:0px;
     width: 197.4vh;
     position: absolute;
 }
-#card{
+
+#card {
     background-color: white;
     border-radius: 15px;
     height: 73vh;
@@ -483,13 +539,13 @@ margin-right:0px;
     position: absolute;
     left: 115vh;
     top: 50%;
-    transform: translate(0,-50%);    
+    transform: translate(0, -50%);
     padding-top: 0%;
     overflow: hidden;
     box-shadow: 5px 5px 10px #535353;
 }
-#updiv{
 
+#updiv {
     padding: 25px;
     margin-bottom: 30px;
     /* position: absolute; */
@@ -497,9 +553,11 @@ margin-right:0px;
     height: 20%;
     background-color: #FFD248;
 }
-.row.mt-5{
-    margin: 0%!important;
+
+.row.mt-5 {
+    margin: 0% !important;
 }
+
 #shade{
     position: absolute;
     right: 0%;
@@ -509,8 +567,7 @@ margin-right:0px;
     opacity: 0.3;
 }
 
-.box{
-    
+.box {
     background-color: white;
     margin: 0%;
     position: absolute;
@@ -520,180 +577,339 @@ margin-right:0px;
     left: 15%;
     border-radius: 15px;
 }
-.box .row.mt-5 h4{
-    
+
+.box .row.mt-5 h4 {
     position: absolute;
     left: -22%;
     /* width: auto; */
     top: 5%;
 }
-#rname{
+
+#rname {
     position: absolute;
     left: 7%;
     top: 14%;
 }
-#remail{
+
+#remail {
     position: absolute;
     left: 7%;
     top: 27%;
 }
-#rroll{
+
+#rroll {
     position: absolute;
     left: 7%;
     top: 40%;
 }
-#rgender{
+
+#rgender {
     position: absolute;
     left: 7%;
     top: 53%;
 }
-#rno{
+
+#rno {
     position: absolute;
     left: 7%;
     top: 66%;
 }
-#rprog{
+
+#rprog {
     position: absolute;
     left: 50%;
     top: 14%;
 }
-#rbranch{
+
+#rbranch {
     position: absolute;
     left: 50%;
     top: 27%;
 }
-#rpass{
+
+#rpass {
     position: absolute;
     left: 50%;
     top: 40%;
 }
-#rcpass{
+
+#rcpass {
     position: absolute;
     left: 50%;
     top: 53%;
 }
-#rbtn{
+
+#rbtn {
     top: 80%;
     margin-top: 2em;
     border-radius: 2em;
     width: 10em;
     position: absolute;
     left: 50%;
-    transform: translate(-50%,0%);
+    transform: translate(-50%, 0%);
 }
-#sbg{
+
+#sbg {
     height: 100vh;
     background: linear-gradient( 180deg, #FFEFB2, #FBD242 100%);
 }
 
-
-
-.box .row.mt-5 h4{
-    
+.box .row.mt-5 h4 {
     position: absolute;
     left: -22%;
     /* width: auto; */
     top: 5%;
 }
-#cname{
+
+#cname {
     position: absolute;
     left: 7%;
     top: 14%;
 }
-#cemail{
+
+#cemail {
     position: absolute;
     left: 7%;
     top: 27%;
 }
-#cgender{
+
+#cgender {
     position: absolute;
     left: 7%;
     top: 40%;
 }
-#cno{
+
+#cno {
     position: absolute;
     left: 7%;
     top: 53%;
 }
-#ctype{
+
+#ctype {
     position: absolute;
     left: 50%;
     top: 14%;
 }
-#cpass{
+
+#cpass {
     position: absolute;
     left: 50%;
     top: 27%;
 }
-#ccpass{
+
+#ccpass {
     position: absolute;
     left: 50%;
     top: 40%;
 }
-#cbtn{
+
+#cbtn {
     top: 80%;
     margin-top: 2em;
     border-radius: 2em;
     width: 10em;
     position: absolute;
     left: 50%;
-    transform: translate(-50%,0%);
+    transform: translate(-50%, 0%);
 }
-#cbg{
+
+#cbg {
     height: 100vh;
     background: linear-gradient( 180deg, #FFEFB2, #FBD242 100%);
 }
 
-
-
-.box .row.mt-5 h4{
-    
+.box .row.mt-5 h4 {
     position: absolute;
     left: -22%;
     /* width: auto; */
     top: 5%;
 }
-#aname{
+
+#aname {
     position: absolute;
     left: 7%;
     top: 14%;
 }
-#aemail{
+
+#aemail {
     position: absolute;
     left: 7%;
     top: 27%;
 }
-#agender{
+
+#agender {
     position: absolute;
     left: 7%;
     top: 40%;
 }
-#ano{
+
+#ano {
     position: absolute;
     left: 7%;
     top: 53%;
 }
-#apass{
+
+#apass {
     position: absolute;
     left: 50%;
     top: 14%;
 }
-#acpass{
+
+#acpass {
     position: absolute;
     left: 50%;
     top: 27%;
 }
 
-#abtn{
+#abtn {
     top: 80%;
     margin-top: 2em;
     border-radius: 2em;
     width: 10em;
     position: absolute;
     left: 50%;
-    transform: translate(-50%,0%);
+    transform: translate(-50%, 0%);
 }
-#abg{
+
+#abg {
     height: 100vh;
     background: linear-gradient( 180deg, #FFEFB2, #FBD242 100%);
+}
+
+.card {
+    background-color: #54a5a2;
+    border-radius: 1rem;
+}
+
+.card .card-action:last-child {
+    border-radius: 0 0 1rem 1rem;
+}
+
+.question {
+    background-color: white;
+}
+
+.answer {
+    background-color: whitesmoke;
+}
+
+.save-quiz {
+    background-color: #2c363f;
+    color: white;
+    transition-duration: 0.08s;
+}
+
+.save-quiz:visited {
+    color: white;
+    background-color: #2c363f;
+}
+
+.save-quiz:hover {
+    color: #2c363f;
+    background-color: white;
+}
+
+.save-quiz:active {
+    color: #2c363f;
+    background-color: white;
+}
+
+.save-quiz:focus {
+    background-color: #2c363f;
+    color: white;
+}
+
+.grow {
+    transition: all 0.15s ease-in-out;
+}
+
+.grow:hover {
+    transform: scale(1.025);
+}
+
+.greyOnHover:hover {
+    opacity: 0.95;
+    background-color: rgb(246, 250, 253);
+}
+
+.chatUsers {
+    width: 100.25%;
+    margin: 0;
+    padding: 0;
+    height: 3.5em;
+    background-color: white;
+    border: none;
+    border-bottom: 2px solid #2c363f;
+    z-index: 0;
+}
+
+.chatActive {
+    color: whitesmoke;
+    background-color: #54a5a2;
+}
+
+.chatUsers:focus {
+    color: whitesmoke;
+    background-color: #54a5a2;
+    width: 100.25%;
+    margin: 0;
+    padding: 0;
+    height: 3.5em;
+    border: none;
+    border-bottom: 2px solid #2c363f;
+}
+
+.text-left {
+    text-align: left;
+    margin-left: 1rem;
+}
+
+.text-right {
+    text-align: right;
+    justify-content: flex-end;
+}
+
+.text-right>div {
+    margin-right: 1rem;
+}
+
+.userArea :first-child {
+    border-top-left-radius: 0.4rem;
+}
+
+.message {
+    padding: 0.4rem 1rem;
+    background-color: white;
+    border-radius: 0.35rem;
+}
+
+.message-container {
+    margin-bottom: 1rem;
+}
+
+.chat {
+    position: relative;
+    margin-top: 5em;
+    width: 80%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    border: 2px solid #2c363f;
+    margin-left: 10%;
+    height: 600px;
+    background-color: whitesmoke;
+    padding: 0;
+    border-radius: 0.5rem;
+    justify-content: space-between;
+}
+
+.chat::before {
+    content: "";
+    background-image: url("./images/Chat/chat-background.jpg");
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.15;
 }

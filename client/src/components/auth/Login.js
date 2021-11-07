@@ -19,6 +19,7 @@ const Login = () => {
 
   useEffect(() => {
     validate();
+    document.body.style.backgroundColor = "white";
     return () => {
       setLoginProgress(false);
     };
@@ -66,81 +67,65 @@ const Login = () => {
   };
 
   return (
-    <div className='center' id='fcenter'>
-      <div id='shade'></div>
-      <div id='card'>
-        <div id='updiv'>
-          <div className='row mt-5'>
-            <h4>Login</h4>
+    <div className='row'>
+      <form className='col s12'>
+        <div className='row' style={{ margin: "auto" }}>
+          <div className='input-field col s12'>
+            <input
+              id='email'
+              name='email'
+              type='text'
+              className='validate'
+              value={email}
+              onChange={onChange}
+              required
+            />
+            <label htmlFor='email'>Email</label>
           </div>
         </div>
 
-        <div className='row'>
-          <form className='col s12'>
-            <div className='row' style={{ width: "300px", margin: "auto" }}>
-              <div className='input-field col s12'>
-                <input
-                  id='email'
-                  name='email'
-                  type='text'
-                  className='validate'
-                  value={email}
-                  onChange={onChange}
-                  required
-                />
-                <label htmlFor='email'>Email</label>
-              </div>
-            </div>
-
-            <div className='row' style={{ width: "300px", margin: "auto" }}>
-              <div className='input-field col s12'>
-                <input
-                  id='password'
-                  name='password'
-                  type='password'
-                  className='validate'
-                  value={password}
-                  onChange={onChange}
-                  required
-                />
-                <label htmlFor='password'>Password</label>
-              </div>
-            </div>
-
-            {loginProgress ? (
-              <div style={{ marginTop: "30px" }}>
-                <Row>
-                  <Col s={4}>
-                    <Preloader
-                      active
-                      color='blue'
-                      flashing={false}
-                      size='small'
-                    />
-                  </Col>
-                </Row>
-              </div>
-            ) : (
-              <div className='row'>
-                <button
-                  className='btn waves-effect waves-light'
-                  type='button'
-                  value='Login'
-                  onClick={onSubmit}
-                  style={{
-                    borderRadius: "2em",
-                    marginTop: "2em",
-                    width: "10em",
-                  }}
-                >
-                  Login
-                  <i className='material-icons right'>send</i>
-                </button>
-              </div>
-            )}
-          </form>
+        <div className='row' style={{ margin: "auto" }}>
+          <div className='input-field col s12'>
+            <input
+              id='password'
+              name='password'
+              type='password'
+              className='validate'
+              value={password}
+              onChange={onChange}
+              required
+            />
+            <label htmlFor='password'>Password</label>
+          </div>
         </div>
-      </div>
+
+        {loginProgress ? (
+          <div style={{ marginTop: "25px" }}>
+            <Row>
+              <Col s={4}>
+                <Preloader active color='blue' flashing={false} size='small' />
+              </Col>
+            </Row>
+          </div>
+        ) : (
+          <div className='row'>
+            <button
+              className='btn waves-effect waves-light'
+              type='button'
+              value='Login'
+              onClick={onSubmit}
+              style={{
+                borderRadius: "2em",
+                marginTop: "2em",
+                width: "10em",
+              }}
+            >
+              Login
+              <i className='material-icons right'>send</i>
+            </button>
+          </div>
+        )}
+      </form>
     </div>
   );
 };

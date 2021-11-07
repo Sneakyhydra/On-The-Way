@@ -1,7 +1,9 @@
 // Imports
-import { NavLink } from "react-router-dom";
 import logo from "../../../images/Logo/logo.png";
 import PropTypes from "prop-types";
+import { useState } from "react";
+import { Modal } from "react-bootstrap";
+import Login from "../../auth/Login";
 
 const HomeNavbar = ({ scrollState }) => {
   let depth = "z-depth-0";
@@ -10,6 +12,11 @@ const HomeNavbar = ({ scrollState }) => {
     depth = "z-depth-1";
     scrolled = true;
   }
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div className='navbar-fixed'>
@@ -23,22 +30,33 @@ const HomeNavbar = ({ scrollState }) => {
           </div>
 
           <ul className='right' style={{ display: "inline-block" }}>
-            <li id='loginBtn'>
-              <NavLink
-                className='waves-effect waves-light btn z-depth-0 login'
-                to='/login'
+            <>
+              <a
+                className='waves-effect waves-light btn login z-depth-0'
+                onClick={handleShow}
+                id='loginBtn'
+                href='#!'
                 style={{
-                  borderRadius: "2em",
-                  width: "7em",
+                  borderRadius: "2rem",
+                  width: "50%",
+                  fontWeight: "600",
+                  fontSize: "1.1rem",
                   border: "2px solid #400279",
-                  fontWeight: "bolder",
-                  fontSize: "17px",
-                  textTransform: "capitalize",
+                  textTransform: "unset",
                 }}
               >
                 Login
-              </NavLink>
-            </li>
+              </a>
+
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Login</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Login />
+                </Modal.Body>
+              </Modal>
+            </>
           </ul>
         </div>
       </nav>

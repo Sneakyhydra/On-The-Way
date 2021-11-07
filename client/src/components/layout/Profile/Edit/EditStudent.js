@@ -27,7 +27,13 @@ const EditStudent = ({ user, setEdit }) => {
     stud_branch,
     roll_no,
     user_id,
+    cpi,
   } = user;
+
+  let CPI = cpi;
+  if (!cpi) {
+    CPI = "Not Found";
+  }
 
   const [student, setStudent] = useState({
     email: user_email,
@@ -116,6 +122,7 @@ const EditStudent = ({ user, setEdit }) => {
               {stud_name}
             </span>
             <span className='text-black-50'>{user_email}</span>
+            <span className='text-black-50'>CPI: {CPI}</span>
             <span> </span>
           </div>
         </div>

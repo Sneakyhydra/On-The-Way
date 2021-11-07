@@ -80,13 +80,14 @@ nav {
 }
 
 .login:hover {
-    color: white;
-    background-color: #400279;
+    background-color: rgba(0, 0, 0, 0);
+    color: #400279;
+    opacity: 0.85;
 }
 
 .login:active {
-    color: white;
-    background-color: #400279;
+    background-color: rgba(0, 0, 0, 0);
+    color: #400279;
 }
 
 .login:focus {
@@ -136,7 +137,7 @@ nav {
 }
 
 #loginBtn {
-    margin-right: 3em;
+    margin-right: 6.6em;
 }
 
 .desc {
@@ -148,10 +149,6 @@ nav {
     outline: 0 !important;
     justify-content: space-evenly;
     margin-top: 10em;
-}
-
-.center {
-    text-align: center;
 }
 
 .no-margin {
@@ -518,55 +515,6 @@ nav {
     /* background-color: yellow; */
 }
 
-#fcenter {
-    margin: 0%;
-    padding: 0%;
-    /* background-color: yellow; */
-    background-image: url(./images/login10.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top;
-    height: 100vh;
-    width: 197.4vh;
-    position: absolute;
-}
-
-#card {
-    background-color: white;
-    border-radius: 15px;
-    height: 73vh;
-    width: 65vh;
-    position: absolute;
-    left: 115vh;
-    top: 50%;
-    transform: translate(0, -50%);
-    padding-top: 0%;
-    overflow: hidden;
-    box-shadow: 5px 5px 10px #535353;
-}
-
-#updiv {
-    padding: 25px;
-    margin-bottom: 30px;
-    /* position: absolute; */
-    color: white;
-    height: 20%;
-    background-color: #FFD248;
-}
-
-.row.mt-5 {
-    margin: 0% !important;
-}
-
-#shade{
-    position: absolute;
-    right: 0%;
-    height: 100vh;
-    width: 50vh;
-    background-color: black;
-    opacity: 0.3;
-}
-
 .box {
     background-color: white;
     margin: 0%;
@@ -651,7 +599,7 @@ nav {
 
 #sbg {
     height: 100vh;
-    background: linear-gradient( 180deg, #FFEFB2, #FBD242 100%);
+    background: linear-gradient(180deg, #ffefb2, #fbd242 100%);
 }
 
 .box .row.mt-5 h4 {
@@ -715,7 +663,7 @@ nav {
 
 #cbg {
     height: 100vh;
-    background: linear-gradient( 180deg, #FFEFB2, #FBD242 100%);
+    background: linear-gradient(180deg, #ffefb2, #fbd242 100%);
 }
 
 .box .row.mt-5 h4 {
@@ -773,7 +721,7 @@ nav {
 
 #abg {
     height: 100vh;
-    background: linear-gradient( 180deg, #FFEFB2, #FBD242 100%);
+    background: linear-gradient(180deg, #ffefb2, #fbd242 100%);
 }
 
 .card {
@@ -912,4 +860,20 @@ nav {
     bottom: 0px;
     left: 0px;
     opacity: 0.15;
+}
+
+
+/* Login Page Styling */
+
+.center {
+    text-align: center;
+}
+
+.fade.modal.show {
+    background: transparent;
+    box-shadow: none;
+}
+
+.preloader-wrapper {
+    margin-left: 45%;
 }

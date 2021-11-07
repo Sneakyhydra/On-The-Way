@@ -8,7 +8,6 @@ import Dashboard from "./components/pages/Dashboard";
 import NotFound from "./components/pages/NotFound";
 
 // Auth routes
-import Login from "./components/auth/Login";
 import RegisterStudent from "./components/auth/RegisterStudent";
 import RegisterCounsellor from "./components/auth/RegisterCounsellor";
 import RegisterAdmin from "./components/auth/RegisterAdmin";
@@ -94,17 +93,6 @@ const App = () => {
                         <Home />
                       </div>
                     </Fragment>
-                  </Route>
-
-                  {/* Login page */}
-                  <Route exact path='/login'>
-                    <div
-                      style={{
-                        fontFamily: "Lucida Sans, sans-serif",
-                      }}
-                    >
-                      <Login />
-                    </div>
                   </Route>
 
                   {/* Register student page */}

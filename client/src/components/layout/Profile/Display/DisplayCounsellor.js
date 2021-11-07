@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 import PropTypes from "prop-types";
+import male from "../../../../images/Avatar/male.jpg";
+import female from "../../../../images/Avatar/female.png";
+import other from "../../../../images/Avatar/other.jpg";
 
 const DisplayCounsellor = ({ user, setEdit }) => {
   useEffect(() => {
@@ -28,6 +31,37 @@ const DisplayCounsellor = ({ user, setEdit }) => {
     setEdit(true);
   };
 
+  let avatar = null;
+  if (coun_gender === "Male") {
+    avatar = (
+      <img
+        className='rounded-circle mt-0'
+        width='150px'
+        alt='Profile'
+        src={male}
+      />
+    );
+  } else if (coun_gender === "Female") {
+    avatar = (
+      <img
+        className='rounded-circle'
+        width='150px'
+        alt='Profile'
+        style={{ marginBottom: "1rem", marginTop: "1.25rem" }}
+        src={female}
+      />
+    );
+  } else {
+    avatar = (
+      <img
+        className='rounded-circle mt-0'
+        width='150px'
+        alt='Profile'
+        src={other}
+      />
+    );
+  }
+
   return (
     <div
       className='container bg-white mt-3 mb-5'
@@ -36,12 +70,7 @@ const DisplayCounsellor = ({ user, setEdit }) => {
       <div className='row'>
         <div className='col-md-3 border-right'>
           <div className='d-flex flex-column align-items-center text-center p-3 py-5'>
-            <img
-              className='rounded-circle mt-0'
-              width='150px'
-              alt='Profile'
-              src='https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg'
-            />
+            {avatar}
             <span className='font-weight-bold' style={{ color: "#2c363f" }}>
               {coun_name}
             </span>

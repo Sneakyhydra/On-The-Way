@@ -4,7 +4,7 @@
 This project is an implementation of a student counselling system made by
 students of IIITDM Jabalpur.
 
-#### Highlight of our project is -
+#### Highlight of this project is -
 - Anonymous chat between students and counsellors.
 
 

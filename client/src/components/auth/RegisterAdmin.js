@@ -234,7 +234,7 @@ const RegisterAdmin = () => {
             </div>
 
             {loginProgress ? (
-              <div style={{ marginTop: "560px", marginRight: "30px" }}>
+              <div style={{ marginTop: "475px", marginRight: "315px" }}>
                 <Row>
                   <Col s={4}>
                     <Preloader
@@ -254,7 +254,6 @@ const RegisterAdmin = () => {
                   value='Register'
                   onClick={onSubmit}
                   style={{
-                    marginTop: "2em",
                     borderRadius: "2em",
                     width: "10em",
                   }}

@@ -100,7 +100,7 @@ const Login = () => {
         </div>
 
         {loginProgress ? (
-          <div style={{ marginTop: "25px" }}>
+          <div style={{ marginTop: "25px", marginRight:"15px" }}>
             <Row>
               <Col s={4}>
                 <Preloader active color='blue' flashing={false} size='small' />

@@ -262,7 +262,7 @@ const RegisterCounsellor = () => {
             </div>
 
             {loginProgress ? (
-              <div style={{ marginTop: "540px", marginRight: "20px" }}>
+              <div style={{ marginTop: "475px", marginRight: "315px" }}>
                 <Row>
                   <Col s={4}>
                     <Preloader

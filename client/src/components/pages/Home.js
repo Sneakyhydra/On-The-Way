@@ -86,7 +86,7 @@ const Home = () => {
                       fontWeight: "600",
                     }}
                   >
-                    Chat anonymously with a YourDOST expert who's here to help
+                    Chat anonymously with an OnTheWay expert who's here to help
                     you and not judge you.
                   </h5>
                 </div>

@@ -1,0 +1,23 @@
+Steps to run-
+
+1. Run command `npm run install-all` in the root folder.
+
+2. Create a database named `student_counselling` in phpmyadmin and import using the sql file in DATABASE folder.
+
+- Database connection can be changed in "db.js" located in config folder.
+
+3. Run command `npm run dev` in the root folder.
+
+- This command runs both the frontend and the backend server in the same terminal using concurrently.
+
+4. Register as a student on -
+
+- http://localhost:3000/regstudent
+
+5. Register as a counsellor on -
+
+- http://localhost:3000/regcounsellor
+
+6. Register as an admin on -
+
+- http://localhost:3000/ad123

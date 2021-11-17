@@ -21,3 +21,17 @@ Steps to run-
 6. Register as an admin on -
 
 - http://localhost:3000/ad123
+
+These are some ready made accounts:
+
+Admin:
+- Email: dev@gmail.com
+- Password: 123456
+
+Counsellor:
+- Email: abc@gmail.com
+- Password: 123
+
+Student:
+- Email: dr@gmail.com
+- Password: 123

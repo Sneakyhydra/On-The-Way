@@ -92,6 +92,9 @@ const RegisterAdmin = () => {
     } else if (phone.length !== 10) {
       setAlert("Phone number should have 10 digits", "danger");
       setLoginProgress(false);
+    } else if (password.length < 6) {
+      setAlert("Password should be of atleast 6 characters", "danger");
+      setLoginProgress(false);
     } else if (password !== password2) {
       setAlert("Passwords do not match", "danger");
       setLoginProgress(false);

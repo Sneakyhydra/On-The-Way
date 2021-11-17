@@ -110,6 +110,9 @@ const RegisterStudent = () => {
     } else if (phone.length !== 10) {
       setAlert("Phone number should have 10 digits", "danger");
       setLoginProgress(false);
+    } else if (password.length < 3) {
+      setAlert("Password should be of atleast 3 characters", "danger");
+      setLoginProgress(false);
     } else if (password !== password2) {
       setAlert("Passwords do not match", "danger");
       setLoginProgress(false);

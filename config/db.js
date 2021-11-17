@@ -2,9 +2,10 @@ const mysql = require("mysql2"); // Connect to the DB
 
 // Create the pool
 const pool = mysql.createPool({
-    user: "root",
-    password: "",
-    database: "student_counselling",
+    host: "remotemysql.com",
+    user: "PCige3566j",
+    password: "0rgo2Zpkd4",
+    database: "PCige3566j",
     waitForConnections: true,
     connectionLimit: 2,
     queueLimit: 0

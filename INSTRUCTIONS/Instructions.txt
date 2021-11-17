@@ -1,4 +1,8 @@
-Steps to run-
+Production build has been deployed on heroku:
+
+Url: https://student-counselling.herokuapp.com/
+
+Steps to run locally-
 
 1. Run command `npm run install-all` in the root folder.
 

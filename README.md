@@ -37,5 +37,7 @@ This is a student project.
 ## Tech Stack
 
 **Client:** Html, Css, Js, React
+
 **Server:** NodeJs, ExpressJs
+
 **Database:** MySql

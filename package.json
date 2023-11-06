@@ -1,5 +1,5 @@
 {
-	"module": "es6",
+	"type": "commonjs",
 	"name": "on-the-way",
 	"version": "1.0.0",
 	"description": "Student Counselling System for IIITDMJ",

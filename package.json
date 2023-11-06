@@ -11,6 +11,7 @@
 		"client-install": "cd client && npm install",
 		"dev": "concurrently \"npm run server\" \"npm run client\"",
 		"install-all": "npm install && cd client && npm install",
+		"build": "cd client && npm run build",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "",

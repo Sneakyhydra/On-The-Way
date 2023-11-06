@@ -9,7 +9,7 @@ require('dotenv').config()
 const app = express();
 
 // Store port number in a variable
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 // Init middleware
 app.use(express.json({ extended: false }));

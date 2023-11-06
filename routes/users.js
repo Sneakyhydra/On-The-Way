@@ -3,7 +3,7 @@ const express = require("express"); // Create router
 const bcrypt = require("bcryptjs"); // Encrypt password
 const jwt = require("jsonwebtoken"); // Authorization
 const { check, validationResult } = require("express-validator"); // Check and validate the inputs
-const promisePool = require("../database/db"); // Import instance of mysql pool
+const promisePool = require("../database/db.js"); // Import instance of mysql pool
 
 // Init router
 const router = express.Router();

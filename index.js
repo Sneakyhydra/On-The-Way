@@ -9,7 +9,7 @@ require('dotenv').config()
 const app = express();
 
 // Store port number in a variable
-const port = process.env.SERVER_PORT || 5000;
+const port = process.env.SERVER_PORT || 4000;
 
 // Init middleware
 app.use(express.json({ extended: false }));
@@ -31,3 +31,5 @@ app.get("/*", (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'buil
 
 // Listen to port
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+module.exports = app;

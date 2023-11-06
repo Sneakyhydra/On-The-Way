@@ -5,8 +5,7 @@ const jwt = require("jsonwebtoken"); // Authorization
 const auth = require("../middleware/auth"); // Middleware
 const { check, validationResult } = require("express-validator"); // Check and validate the inputs
 const readXlsxFile = require('read-excel-file/node'); // Read excel files
-const db = require("../database/db.js"); // Import instance of mysql pool
-const promisePool = db();
+const promisePool = require("./db");
 // Init router
 const router = express.Router();
 

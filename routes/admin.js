@@ -2,7 +2,7 @@
 const express = require("express"); // Create router
 const auth = require("../middleware/auth"); // Middleware
 const readXlsxFile = require("read-excel-file/node"); // Read excel files
-const promisePool = require("../config/db"); // Import instance of mysql pool
+const promisePool = require("../database/db"); // Import instance of mysql pool
 
 // Init router
 const router = express.Router();
@@ -25,7 +25,7 @@ const router = express.Router();
 // @route   GET api/admin/quesans
 // @desc    Get all questions and answers
 // @access  Private
-router.get("/quesans", auth, async(req, res) => {
+router.get("/quesans", auth, async (req, res) => {
     // Extract user id from req
     const user_id = req.user_id;
 
@@ -110,7 +110,7 @@ router.get("/quesans", auth, async(req, res) => {
 // @route   PUT api/admin/quiz
 // @desc    Edit quiz
 // @access  Private
-router.put("/quiz", auth, async(req, res) => {
+router.put("/quiz", auth, async (req, res) => {
     // Extract user id from req
     const user_id = req.user_id;
 
@@ -189,7 +189,7 @@ router.put("/quiz", auth, async(req, res) => {
 // @route   GET api/admin/pending
 // @desc    Get pending counsellors
 // @access  Private
-router.get("/pending", auth, async(req, res) => {
+router.get("/pending", auth, async (req, res) => {
     // Extract user id from req
     const user_id = req.user_id;
 
@@ -224,7 +224,7 @@ router.get("/pending", auth, async(req, res) => {
 // @route   PUT api/admin/pending
 // @desc    APPROVE or REJECT a counsellor
 // @access  Private
-router.put("/pending", auth, async(req, res) => {
+router.put("/pending", auth, async (req, res) => {
     // Extract user id from req
     const user_id = req.user_id;
 
@@ -259,7 +259,7 @@ router.put("/pending", auth, async(req, res) => {
 // @route   GET api/admin/rejected
 // @desc    Get rejected counsellors
 // @access  Private
-router.get("/rejected", auth, async(req, res) => {
+router.get("/rejected", auth, async (req, res) => {
     // Extract user id from req
     const user_id = req.user_id;
 
@@ -294,7 +294,7 @@ router.get("/rejected", auth, async(req, res) => {
 // @route   GET api/admin/approved
 // @desc    Get approved counsellors
 // @access  Private
-router.get("/approved", auth, async(req, res) => {
+router.get("/approved", auth, async (req, res) => {
     // Extract user id from req
     const user_id = req.user_id;
 
@@ -329,7 +329,7 @@ router.get("/approved", auth, async(req, res) => {
 // @route   GET api/admin/students
 // @desc    Get all students
 // @access  Private
-router.get("/students", auth, async(req, res) => {
+router.get("/students", auth, async (req, res) => {
     // Extract user id from req
     const user_id = req.user_id;
 
@@ -395,7 +395,7 @@ router.get("/students", auth, async(req, res) => {
 // @route   GET api/admin/counfeed
 // @desc    Get counsellor feedbacks
 // @access  Private
-router.get("/counfeed", auth, async(req, res) => {
+router.get("/counfeed", auth, async (req, res) => {
     // Extract user id from req
     const user_id = req.user_id;
 
@@ -448,7 +448,7 @@ router.get("/counfeed", auth, async(req, res) => {
 // @route   GET api/admin/studfeed
 // @desc    Get student feedbacks
 // @access  Private
-router.get("/studfeed", auth, async(req, res) => {
+router.get("/studfeed", auth, async (req, res) => {
     // Extract user id from req
     const user_id = req.user_id;
 
@@ -500,7 +500,7 @@ router.get("/studfeed", auth, async(req, res) => {
 // @route   DELETE api/admin/counfeed
 // @desc    Delete counsellor feedback
 // @access  Private
-router.delete("/counfeed", auth, async(req, res) => {
+router.delete("/counfeed", auth, async (req, res) => {
     // Extract user id from req
     const user_id = req.user_id;
 
@@ -535,7 +535,7 @@ router.delete("/counfeed", auth, async(req, res) => {
 // @route   DELETE api/admin/studfeed
 // @desc    Delete student feedbacks
 // @access  Private
-router.delete("/studfeed", auth, async(req, res) => {
+router.delete("/studfeed", auth, async (req, res) => {
     // Extract user id from req
     const user_id = req.user_id;
 

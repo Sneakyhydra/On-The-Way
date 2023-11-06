@@ -2,7 +2,7 @@
 const express = require("express"); // Create router
 const auth = require("../middleware/auth"); // Middleware
 const { check, validationResult } = require("express-validator"); // Check and validate the inputs
-const promisePool = require("../config/db"); // Import instance of mysql pool
+const promisePool = require("../database/db"); // Import instance of mysql pool
 
 // Init router
 const router = express.Router();
@@ -20,7 +20,7 @@ const router = express.Router();
 // @route   GET api/student/quesans
 // @desc    Get all questions and answers without responses
 // @access  Private
-router.get("/quesans", auth, async(req, res) => {
+router.get("/quesans", auth, async (req, res) => {
     // Extract user id from req
     const user_id = req.user_id;
 
@@ -105,7 +105,7 @@ router.get("/quesans", auth, async(req, res) => {
 // @route   GET api/student/counsellors
 // @desc    Get all approved counsellors
 // @access  Private
-router.get("/counsellors", auth, async(req, res) => {
+router.get("/counsellors", auth, async (req, res) => {
     // Extract user id from req
     const user_id = req.user_id;
 
@@ -142,10 +142,10 @@ router.get("/counsellors", auth, async(req, res) => {
 // @access  Public
 router.post(
     "/submitQuiz", [
-        auth,
-        check("quesAns", "Question answer is required").exists(), // Check quesAns
-    ],
-    async(req, res) => {
+    auth,
+    check("quesAns", "Question answer is required").exists(), // Check quesAns
+],
+    async (req, res) => {
         // Extract user id from req
         const user_id = req.user_id;
 
@@ -204,7 +204,7 @@ router.post(
 // @route   POST api/student/submitFeed
 // @desc    Submit feedback
 // @access  Private
-router.post("/submitFeed", auth, async(req, res) => {
+router.post("/submitFeed", auth, async (req, res) => {
     // Extract user id from req
     const user_id = req.user_id;
 
@@ -239,7 +239,7 @@ router.post("/submitFeed", auth, async(req, res) => {
 // @route   POST api/student/message
 // @desc    Send message
 // @access  Private
-router.post("/message", auth, async(req, res) => {
+router.post("/message", auth, async (req, res) => {
     // Extract user id from req
     const user_id = req.user_id;
 
@@ -274,7 +274,7 @@ router.post("/message", auth, async(req, res) => {
 // @route   GET api/student/message
 // @desc    Get all messages of user
 // @access  Private
-router.get("/message", auth, async(req, res) => {
+router.get("/message", auth, async (req, res) => {
     // Extract user id from req
     const user_id = req.user_id;
 

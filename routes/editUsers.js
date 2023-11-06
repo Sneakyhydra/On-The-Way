@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs"); // Encrypt password
 const auth = require("../middleware/auth"); // Middleware
 const { check, validationResult } = require("express-validator"); // Check and validate the inputs
 const readXlsxFile = require("read-excel-file/node"); // Read excel files
-const promisePool = require("../config/db"); // Import instance of mysql pool
+const promisePool = require("../database/db"); // Import instance of mysql pool
 
 // Init router
 const router = express.Router();
@@ -21,19 +21,19 @@ const router = express.Router();
 // @access  Private
 router.put(
     "/admin1234", [
-        auth,
-        check("user_email", "email is required").isEmail(), // Check the email
-        check(
-            "user_password",
-            "Please enter a password with 6 or more characters"
-        ).isLength({ min: 6 }), // Check the password
-        check("role", "Role is required").notEmpty(), // Check the role
-        check("admin_name", "Name is required").notEmpty(), // Check the name
-        check("admin_gender", "Gender is required").notEmpty(), // Check the gender
-        check("admin_phone", "Phone is required").notEmpty(), // Check the phone
-        check("admin_id", "ID is required").notEmpty(), // Check the phone
-    ],
-    async(req, res) => {
+    auth,
+    check("user_email", "email is required").isEmail(), // Check the email
+    check(
+        "user_password",
+        "Please enter a password with 6 or more characters"
+    ).isLength({ min: 6 }), // Check the password
+    check("role", "Role is required").notEmpty(), // Check the role
+    check("admin_name", "Name is required").notEmpty(), // Check the name
+    check("admin_gender", "Gender is required").notEmpty(), // Check the gender
+    check("admin_phone", "Phone is required").notEmpty(), // Check the phone
+    check("admin_id", "ID is required").notEmpty(), // Check the phone
+],
+    async (req, res) => {
         // Extract user id from req
         const user_id = req.user_id;
 
@@ -138,20 +138,20 @@ router.put(
 // @access  Private
 router.put(
     "/counsellor", [
-        auth,
-        check("user_email", "email is required").isEmail(), // Check the email
-        check(
-            "user_password",
-            "Please enter a password with 3 or more characters"
-        ).isLength({ min: 3 }), // Check the password
-        check("role", "Role is required").notEmpty(), // Check the role
-        check("coun_name", "Name is required").notEmpty(), // Check the name
-        check("coun_gender", "Gender is required").notEmpty(), // Check the gender
-        check("coun_phone", "Phone is required").notEmpty(), // Check the phone
-        check("coun_id", "ID is required").notEmpty(), // Check the phone
-        check("coun_dept", "Dept is required").notEmpty(), // Check the dept
-    ],
-    async(req, res) => {
+    auth,
+    check("user_email", "email is required").isEmail(), // Check the email
+    check(
+        "user_password",
+        "Please enter a password with 3 or more characters"
+    ).isLength({ min: 3 }), // Check the password
+    check("role", "Role is required").notEmpty(), // Check the role
+    check("coun_name", "Name is required").notEmpty(), // Check the name
+    check("coun_gender", "Gender is required").notEmpty(), // Check the gender
+    check("coun_phone", "Phone is required").notEmpty(), // Check the phone
+    check("coun_id", "ID is required").notEmpty(), // Check the phone
+    check("coun_dept", "Dept is required").notEmpty(), // Check the dept
+],
+    async (req, res) => {
         // Extract user id from req
         const user_id = req.user_id;
 
@@ -271,22 +271,22 @@ router.put(
 // @access  Private
 router.put(
     "/student", [
-        auth,
-        check("user_email", "email is required").isEmail(), // Check the email
-        check(
-            "user_password",
-            "Please enter a password with 3 or more characters"
-        ).isLength({ min: 3 }), // Check the password
-        check("role", "Role is required").notEmpty(), // Check the role
-        check("stud_name", "Name is required").notEmpty(), // Check the name
-        check("stud_gender", "Gender is required").notEmpty(), // Check the gender
-        check("stud_phone", "Phone is required").notEmpty(), // Check the phone
-        check("stud_id", "ID is required").notEmpty(), // Check the phone
-        check("stud_dept", "Dept is required").notEmpty(), // Check the dept
-        check("roll_no", "Roll no is required").notEmpty(), // Check the roll no
-        check("stud_branch", "Branch is required").notEmpty(), // Check the branch
-    ],
-    async(req, res) => {
+    auth,
+    check("user_email", "email is required").isEmail(), // Check the email
+    check(
+        "user_password",
+        "Please enter a password with 3 or more characters"
+    ).isLength({ min: 3 }), // Check the password
+    check("role", "Role is required").notEmpty(), // Check the role
+    check("stud_name", "Name is required").notEmpty(), // Check the name
+    check("stud_gender", "Gender is required").notEmpty(), // Check the gender
+    check("stud_phone", "Phone is required").notEmpty(), // Check the phone
+    check("stud_id", "ID is required").notEmpty(), // Check the phone
+    check("stud_dept", "Dept is required").notEmpty(), // Check the dept
+    check("roll_no", "Roll no is required").notEmpty(), // Check the roll no
+    check("stud_branch", "Branch is required").notEmpty(), // Check the branch
+],
+    async (req, res) => {
         // Extract user id from req
         const user_id = req.user_id;
 

@@ -1,6 +1,5 @@
 // Imports
 const jwt = require("jsonwebtoken"); // Verify token
-const config = require("config"); // Global variables
 
 const auth = (req, res, next) => {
     // Get token from cookies
@@ -16,7 +15,7 @@ const auth = (req, res, next) => {
 
     try {
         // Verify the token
-        const decoded = jwt.verify(token, config.get("jwtSecret"));
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         // Store user_id in req
         req.user_id = decoded.id;

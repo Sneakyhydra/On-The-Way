@@ -10,7 +10,7 @@ Steps to run locally-
 
 3. Create a database named `student_counselling` in phpmyadmin and import using the sql file in DATABASE folder.
 
-- Database connection can be changed in "db.js" located in config folder.
+- Database connection can be changed in "db.js" located in database folder.
 
 4. Run command `npm run dev` in the root folder.
 

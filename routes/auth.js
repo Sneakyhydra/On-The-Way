@@ -2,11 +2,10 @@
 const express = require("express"); // Create router
 const bcrypt = require("bcryptjs"); // Encrypt password
 const jwt = require("jsonwebtoken"); // Authorization
-const config = require("config"); // Global variables
 const auth = require("../middleware/auth"); // Middleware
 const { check, validationResult } = require("express-validator"); // Check and validate the inputs
 const readXlsxFile = require('read-excel-file/node'); // Read excel files
-const promisePool = require("../config/db"); // Import instance of mysql pool
+const promisePool = require("../database/db"); // Import instance of mysql pool
 
 // Init router
 const router = express.Router();
@@ -22,7 +21,7 @@ const router = express.Router();
 // @route   GET api/auth
 // @desc    Get logged in user
 // @access  Private
-router.get("/", auth, async(req, res) => {
+router.get("/", auth, async (req, res) => {
     // Extract user id from req
     const user_id = req.user_id;
 
@@ -176,10 +175,10 @@ router.get("/", auth, async(req, res) => {
 // @access  Public
 router.post(
     "/", [
-        check("user_email", "email is required").notEmpty(), // Check email
-        check("user_password", "Password is required").exists(), // Check password
-    ],
-    async(req, res) => {
+    check("user_email", "email is required").notEmpty(), // Check email
+    check("user_password", "Password is required").exists(), // Check password
+],
+    async (req, res) => {
         // Check if there are errors
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -226,7 +225,7 @@ router.post(
                     };
 
                     // Create a token
-                    const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 21600, });
+                    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 21600, });
 
                     // Store the token in an httpOnly cookie
                     res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV !== "development", maxAge: 6 * 60 * 60 * 1000 });
@@ -247,7 +246,7 @@ router.post(
 // @access  Private
 router.delete(
     "/", auth,
-    async(req, res) => {
+    async (req, res) => {
         // Delete the cookie
         res.clearCookie('token');
 
@@ -259,7 +258,7 @@ router.delete(
 // @route   GET api/auth/check
 // @desc    Validate user
 // @access  Private
-router.get("/check", async(req, res) => {
+router.get("/check", async (req, res) => {
     // Get token from cookies
     const token = req.cookies.token;
 
@@ -271,7 +270,7 @@ router.get("/check", async(req, res) => {
 
     try {
         // Verify the token
-        const decoded = jwt.verify(token, config.get("jwtSecret"));
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         res.send("Valid");
     } catch (err) {

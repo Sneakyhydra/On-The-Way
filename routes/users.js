@@ -2,15 +2,14 @@
 const express = require("express"); // Create router
 const bcrypt = require("bcryptjs"); // Encrypt password
 const jwt = require("jsonwebtoken"); // Authorization
-const config = require("config"); // Global variables
 const { check, validationResult } = require("express-validator"); // Check and validate the inputs
-const promisePool = require("../config/db"); // Import instance of mysql pool
+const promisePool = require("../database/db"); // Import instance of mysql pool
 
 // Init router
 const router = express.Router();
 
 // Endpoints
-/** 
+/**
  * Register admin
  * Register counsellor
  * Register student
@@ -21,17 +20,17 @@ const router = express.Router();
 // @access  Public, hidden
 router.post(
     "/admin1234", [
-        check("user_email", "email is required").isEmail(), // Check the email
-        check(
-            "user_password",
-            "Please enter a password with 6 or more characters"
-        ).isLength({ min: 6 }), // Check the password
-        check("role", "Role is required").notEmpty(), // Check the role
-        check("admin_name", "Name is required").notEmpty(), // Check the name
-        check("admin_gender", "Gender is required").notEmpty(), // Check the gender
-        check("admin_phone", "Phone is required").notEmpty(), // Check the phone
-    ],
-    async(req, res) => {
+    check("user_email", "email is required").isEmail(), // Check the email
+    check(
+        "user_password",
+        "Please enter a password with 6 or more characters"
+    ).isLength({ min: 6 }), // Check the password
+    check("role", "Role is required").notEmpty(), // Check the role
+    check("admin_name", "Name is required").notEmpty(), // Check the name
+    check("admin_gender", "Gender is required").notEmpty(), // Check the gender
+    check("admin_phone", "Phone is required").notEmpty(), // Check the phone
+],
+    async (req, res) => {
         // Check for errors
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -103,7 +102,7 @@ router.post(
                 );
 
                 // Create a token
-                const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 21600, });
+                const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 21600, });
 
                 // Create an httpOnly cookie
                 res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV !== "development", maxAge: 6 * 60 * 60 * 1000 });
@@ -123,19 +122,19 @@ router.post(
 // @access  Public
 router.post(
     "/counsellor", [
-        check("user_email", "email is required").isEmail(), // Check the email
-        check(
-            "user_password",
-            "Please enter a password with 3 or more characters"
-        ).isLength({ min: 3 }), // Check the password
-        check("role", "Role is required").notEmpty(), // Check the role
-        check("coun_name", "Name is required").notEmpty(), // Check the name
-        check("coun_gender", "Gender is required").notEmpty(), // Check the gender
-        check("coun_phone", "Phone is required").notEmpty(), // Check the phone
-        check("coun_dept", "Dept is required").notEmpty(), // Check the type
-        check("coun_status", "Status not provided").notEmpty(),
-    ],
-    async(req, res) => {
+    check("user_email", "email is required").isEmail(), // Check the email
+    check(
+        "user_password",
+        "Please enter a password with 3 or more characters"
+    ).isLength({ min: 3 }), // Check the password
+    check("role", "Role is required").notEmpty(), // Check the role
+    check("coun_name", "Name is required").notEmpty(), // Check the name
+    check("coun_gender", "Gender is required").notEmpty(), // Check the gender
+    check("coun_phone", "Phone is required").notEmpty(), // Check the phone
+    check("coun_dept", "Dept is required").notEmpty(), // Check the type
+    check("coun_status", "Status not provided").notEmpty(),
+],
+    async (req, res) => {
         // Check for errors
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -220,7 +219,7 @@ router.post(
                 );
 
                 // Create a token
-                const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 21600, });
+                const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 21600, });
 
                 // Create an httpOnly cookie
                 res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV !== "development", maxAge: 6 * 60 * 60 * 1000 });
@@ -240,20 +239,20 @@ router.post(
 // @access  Public
 router.post(
     "/student", [
-        check("user_email", "email is required").isEmail(), // Check the email
-        check(
-            "user_password",
-            "Please enter a password with 3 or more characters"
-        ).isLength({ min: 3 }), // Check the password
-        check("role", "Role is required").notEmpty(), // Check the role
-        check("stud_name", "Name is required").notEmpty(), // Check the name
-        check("roll_no", "Roll no is required").notEmpty(), // Check the roll no
-        check("stud_gender", "Gender is required").notEmpty(), // Check the gender
-        check("stud_phone", "Phone is required").notEmpty(), // Check the phone
-        check("stud_dept", "Dept is required").notEmpty(), // Check the dept
-        check("stud_branch", "Branch is required").notEmpty(), // Check the branch
-    ],
-    async(req, res) => {
+    check("user_email", "email is required").isEmail(), // Check the email
+    check(
+        "user_password",
+        "Please enter a password with 3 or more characters"
+    ).isLength({ min: 3 }), // Check the password
+    check("role", "Role is required").notEmpty(), // Check the role
+    check("stud_name", "Name is required").notEmpty(), // Check the name
+    check("roll_no", "Roll no is required").notEmpty(), // Check the roll no
+    check("stud_gender", "Gender is required").notEmpty(), // Check the gender
+    check("stud_phone", "Phone is required").notEmpty(), // Check the phone
+    check("stud_dept", "Dept is required").notEmpty(), // Check the dept
+    check("stud_branch", "Branch is required").notEmpty(), // Check the branch
+],
+    async (req, res) => {
         // Check for errors
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -350,7 +349,7 @@ router.post(
                 );
 
                 // Create a token
-                const token = jwt.sign(payload, config.get("jwtSecret"), { expiresIn: 21600, });
+                const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 21600, });
 
                 // Create an httpOnly cookie
                 res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV !== "development", maxAge: 6 * 60 * 60 * 1000 });

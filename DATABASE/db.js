@@ -13,6 +13,6 @@ const pool = mysql.createPool({
 });
 
 // Get a Promise wrapped instance of that pool
-const promisePool = pool.promise();
+const db = pool.promise();
 
-module.exports = promisePool;
+module.exports = db;

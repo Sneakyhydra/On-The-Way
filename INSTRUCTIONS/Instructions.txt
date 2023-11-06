@@ -1,6 +1,6 @@
-Production build has been deployed on heroku:
+Production build has been deployed on vercel:
 
-Url: https://student-counselling.herokuapp.com/
+Url: https://on-the-way-sneakyhydra.vercel.app/
 
 Steps to run locally-
 

@@ -1,4 +1,5 @@
 {
+	"module": "es6",
 	"name": "on-the-way",
 	"version": "1.0.0",
 	"description": "Student Counselling System for IIITDMJ",

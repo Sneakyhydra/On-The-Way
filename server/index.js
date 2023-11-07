@@ -2,7 +2,6 @@
 const express = require('express'); // Create server
 const cors = require('cors'); // Cors middleware
 const cookieParser = require('cookie-parser'); // Cookies
-const path = require('path');
 require('dotenv').config();
 
 // Init app
@@ -11,11 +10,20 @@ const app = express();
 // Store port number in a variable
 const port = process.env.SERVER_PORT || 5000;
 
+var whitelist = ['http://localhost:3000', 'http://localhost:3000/'];
 // Init middleware
 app.use(express.json({ extended: false }));
 app.use(
 	cors({
-		origin: process.env.ACCESS_CONTROL_ORIGIN,
+		origin:
+			process.env.ACCESS_CONTROL_ORIGIN ||
+			function (origin, callback) {
+				if (whitelist.indexOf(origin) !== -1) {
+					callback(null, true);
+				} else {
+					callback(new Error('Not allowed by CORS'));
+				}
+			},
 		credentials: true,
 	})
 );

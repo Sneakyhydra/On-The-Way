@@ -231,7 +231,7 @@ router.post(
 						httpOnly: true,
 						secure: process.env.NODE_ENV !== 'development',
 						maxAge: 6 * 60 * 60 * 1000,
-						sameSite: 'None',
+						sameSite: process.env.NODE_ENV !== 'development' ? 'None' : 'Lax',
 					});
 
 					// Send success message to client

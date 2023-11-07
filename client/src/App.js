@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Pages
 import Home from './components/pages/Home';
-// import Dashboard from "./components/pages/Dashboard";
+import Dashboard from './components/pages/Dashboard';
 import NotFound from './components/pages/NotFound';
 
 // Auth routes
@@ -12,7 +12,7 @@ import NotFound from './components/pages/NotFound';
 // import RegisterAdmin from './components/auth/RegisterAdmin';
 
 // Routing
-// import PrivateRoute from './components/routing/PrivateRoute';
+import PrivateRoute from './components/routing/PrivateRoute';
 
 // Layout components
 import Alerts from './components/layout/Alert/Alerts';
@@ -59,7 +59,15 @@ const App = () => {
                     </div>
                   </Route> */}
 
-									{/* <PrivateRoute exact path='/dashboard' component={Dashboard} /> */}
+									<Route
+										exact
+										path='dashboard'
+										element={
+											<PrivateRoute>
+												<Dashboard />
+											</PrivateRoute>
+										}
+									/>
 
 									{/* <Route exact path='/ad123'>
                     <div

@@ -27,7 +27,6 @@ const AuthState = (props) => {
 		isAuthenticated: false,
 		user: null,
 		error: null,
-		token: false,
 	};
 
 	// Init Reducer
@@ -41,12 +40,14 @@ const AuthState = (props) => {
 
 			// Dispatch the action to reducer for USER_LOADED
 			dispatch({ type: USER_LOADED, payload: res.data });
+			localStorage.setItem('isAuthenticated', 'true');
 		} catch (err) {
 			if (err.response.status === 401) {
 				console.log('This is the desired behaviour');
 			}
 			// Dispatch the action to reducer for AUTH_ERROR
 			dispatch({ type: AUTH_ERROR });
+			localStorage.setItem('isAuthenticated', 'false');
 		}
 	};
 
@@ -72,6 +73,7 @@ const AuthState = (props) => {
 				type: REGISTER_SUCCESS,
 				payload: res.data,
 			});
+			localStorage.setItem('isAuthenticated', 'true');
 
 			// Load the user after successful registration
 			loadUser();
@@ -81,6 +83,7 @@ const AuthState = (props) => {
 				type: REGISTER_FAIL,
 				payload: err.response.data.msg,
 			});
+			localStorage.setItem('isAuthenticated', 'false');
 		}
 	};
 
@@ -106,6 +109,7 @@ const AuthState = (props) => {
 				type: REGISTER_SUCCESS,
 				payload: res.data,
 			});
+			localStorage.setItem('isAuthenticated', 'true');
 
 			// Load the user after successful registration
 			loadUser();
@@ -115,6 +119,7 @@ const AuthState = (props) => {
 				type: REGISTER_FAIL,
 				payload: err.response.data.msg,
 			});
+			localStorage.setItem('isAuthenticated', 'false');
 		}
 	};
 
@@ -141,6 +146,8 @@ const AuthState = (props) => {
 				payload: res.data,
 			});
 
+			localStorage.setItem('isAuthenticated', 'true');
+
 			// Load the user after successful registration
 			loadUser();
 		} catch (err) {
@@ -149,6 +156,7 @@ const AuthState = (props) => {
 				type: REGISTER_FAIL,
 				payload: err.response.data.msg,
 			});
+			localStorage.setItem('isAuthenticated', 'false');
 		}
 	};
 
@@ -270,6 +278,8 @@ const AuthState = (props) => {
 				payload: res.data,
 			});
 
+			localStorage.setItem('isAuthenticated', 'true');
+
 			// Load the user after successful login
 			loadUser();
 		} catch (err) {
@@ -278,6 +288,8 @@ const AuthState = (props) => {
 				type: LOGIN_FAIL,
 				payload: err.response.data.msg,
 			});
+
+			localStorage.setItem('isAuthenticated', 'false');
 		}
 	};
 
@@ -288,6 +300,7 @@ const AuthState = (props) => {
 
 			// Dispatch the action to reducer for LOGOUT
 			dispatch({ type: LOGOUT });
+			localStorage.setItem('isAuthenticated', 'false');
 		} catch (err) {
 			console.log(err);
 		}
@@ -301,11 +314,13 @@ const AuthState = (props) => {
 				dispatch({
 					type: VALID_SUCCESS,
 				});
+				localStorage.setItem('isAuthenticated', 'true');
 			}
 		} catch (err) {
 			dispatch({
 				type: VALID_FAIL,
 			});
+			localStorage.setItem('isAuthenticated', 'false');
 		}
 	};
 
@@ -324,7 +339,6 @@ const AuthState = (props) => {
 				isAuthenticated: state.isAuthenticated,
 				user: state.user,
 				error: state.error,
-				token: state.token,
 				regStudent,
 				regCounsellor,
 				login,

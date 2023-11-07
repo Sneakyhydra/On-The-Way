@@ -1,11 +1,21 @@
 // Imports
 
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import logo from '../../../images/Logo/logo.png';
 import Login from '../../auth/Login';
+import AuthContext from '../../../context/auth/authContext';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
 	const [showModal, setShowModal] = useState(false);
+	const authContext = useContext(AuthContext);
+	const { validate, isAuthenticated, logout } = authContext;
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		validate();
+		// eslint-disable-next-line
+	}, []);
 
 	const handleModalClose = () => {
 		setShowModal(false);
@@ -40,15 +50,36 @@ const Navbar = () => {
 					<span className='navbar-toggler-icon'></span>
 				</button>
 				<div className='collapse navbar-collapse' id='navbarNav'>
-					<ul className='navbar-nav ms-auto'>
-						<li className='nav-item'>
-							<button
-								className='btn btn-primary'
-								onClick={() => setShowModal(true)}
-							>
-								Login
-							</button>
-						</li>
+					<ul
+						className='navbar-nav ms-auto'
+						style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}
+					>
+						{!isAuthenticated ? (
+							<li className='nav-item'>
+								<button
+									className='btn btn-primary'
+									onClick={() => setShowModal(true)}
+								>
+									Login
+								</button>
+							</li>
+						) : (
+							<>
+								<li className='nav-item'>
+									<button
+										className='btn btn-primary'
+										onClick={() => navigate('/dashboard')}
+									>
+										Dashboard
+									</button>
+								</li>
+								<li className='nav-item'>
+									<button className='btn btn-danger' onClick={() => logout()}>
+										Logout
+									</button>
+								</li>
+							</>
+						)}
 					</ul>
 				</div>
 			</div>

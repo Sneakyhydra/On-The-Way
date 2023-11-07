@@ -240,7 +240,7 @@ router.post(
 			}
 		} catch (err) {
 			// Catch errors
-			throw err;
+			res.status(500).send({ errors: [err] });
 		}
 	}
 );

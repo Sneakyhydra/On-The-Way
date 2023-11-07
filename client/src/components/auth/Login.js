@@ -12,7 +12,7 @@ const Login = () => {
 
 	const { setAlert } = alertContext;
 
-	const { login, error, clearErrors, validate, token } = authContext;
+	const { login, error, clearErrors, validate, isAuthenticated } = authContext;
 	const [loginProgress, setLoginProgress] = useState(false);
 
 	useEffect(() => {
@@ -25,7 +25,7 @@ const Login = () => {
 	}, []);
 
 	useEffect(() => {
-		if (token) {
+		if (isAuthenticated) {
 			navigate('/dashboard');
 		}
 
@@ -36,7 +36,7 @@ const Login = () => {
 		setLoginProgress(false);
 		clearErrors();
 		// eslint-disable-next-line
-	}, [error, token]);
+	}, [error, isAuthenticated]);
 
 	const [user, setUser] = useState({
 		email: '',

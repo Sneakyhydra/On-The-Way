@@ -1,2 +1,0 @@
-REACT_APP_DEV_URL="http://localhost:5000/api"
-REACT_APP_PRO_URL='https://on-the-way-api.vercel.app/api'

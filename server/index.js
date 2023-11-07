@@ -1,9 +1,9 @@
 // Imports
-const express = require("express"); // Create server
-const cors = require("cors"); // Cors middleware
-const cookieParser = require("cookie-parser"); // Cookies
-const path = require("path");
-require('dotenv').config()
+const express = require('express'); // Create server
+const cors = require('cors'); // Cors middleware
+const cookieParser = require('cookie-parser'); // Cookies
+const path = require('path');
+require('dotenv').config();
 
 // Init app
 const app = express();
@@ -14,15 +14,21 @@ const port = process.env.SERVER_PORT || 5000;
 // Init middleware
 app.use(express.json({ extended: false }));
 app.use(cors());
+app.use((req, res, next) => {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT');
+	res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+	next();
+});
 app.use(cookieParser());
 
 // Define routes
-app.use("/api/users", require("./routes/users"));
-app.use("/api/editUsers", require("./routes/editUsers"));
-app.use("/api/auth", require("./routes/auth"));
-app.use("/api/admin", require("./routes/admin"));
-app.use("/api/counsellor", require("./routes/counsellor"));
-app.use("/api/student", require("./routes/student"));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/editUsers', require('./routes/editUsers'));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/admin', require('./routes/admin'));
+app.use('/api/counsellor', require('./routes/counsellor'));
+app.use('/api/student', require('./routes/student'));
 
 // Listen to port
 app.listen(port, () => console.log(`Listening on port ${port}`));

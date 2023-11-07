@@ -16,6 +16,7 @@ app.use(express.json({ extended: false }));
 app.use(
 	cors({
 		origin: 'https://on-the-way-sneakyhydra.vercel.app',
+		credentials: true,
 	})
 );
 app.use(cookieParser());

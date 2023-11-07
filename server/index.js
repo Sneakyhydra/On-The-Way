@@ -13,7 +13,11 @@ const port = process.env.SERVER_PORT || 5000;
 
 // Init middleware
 app.use(express.json({ extended: false }));
-app.use(cors());
+app.use(
+	cors({
+		origin: 'https://on-the-way-sneakyhydra.vercel.app/',
+	})
+);
 app.use(cookieParser());
 
 // Define routes

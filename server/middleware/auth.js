@@ -10,7 +10,7 @@ const auth = (req, res, next) => {
 		res.clearCookie('token', {
 			domain:
 				process.env.NODE_ENV !== 'development'
-					? 'on-the-way-sneakyhydra.vercel.app'
+					? 'on-the-way-api.vercel.app'
 					: 'localhost',
 			path: '/',
 			sameSite: process.env.NODE_ENV !== 'development' ? 'None' : 'Lax',
@@ -33,7 +33,7 @@ const auth = (req, res, next) => {
 		res.clearCookie('token', {
 			domain:
 				process.env.NODE_ENV !== 'development'
-					? 'on-the-way-sneakyhydra.vercel.app'
+					? 'on-the-way-api.vercel.app'
 					: 'localhost',
 			path: '/',
 			sameSite: process.env.NODE_ENV !== 'development' ? 'None' : 'Lax',

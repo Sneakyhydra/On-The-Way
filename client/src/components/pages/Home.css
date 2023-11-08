@@ -213,7 +213,7 @@
 
 .rgtbtn > .expert {
 	width: 80%;
-	height: 6vh;
+	height: 3rem;
 	border-radius: 4px;
 	background-color: #f58b40;
 	border: 0px;
@@ -225,6 +225,8 @@
 	padding: 0.75em;
 	text-align: center;
 	margin-top: 0.5em;
+	display: grid;
+	place-items: center;
 }
 
 .expert:hover {

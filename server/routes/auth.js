@@ -232,6 +232,11 @@ router.post(
 						secure: process.env.NODE_ENV !== 'development',
 						maxAge: 6 * 60 * 60 * 1000,
 						sameSite: process.env.NODE_ENV !== 'development' ? 'None' : 'Lax',
+						domain:
+							process.env.NODE_ENV !== 'development'
+								? 'on-the-way-api.vercel.app'
+								: 'localhost',
+						path: '/',
 					});
 
 					// Send success message to client
@@ -251,6 +256,7 @@ router.post(
 router.delete('/', auth, async (req, res) => {
 	// Delete the cookie
 	res.clearCookie('token', {
+		httpOnly: true,
 		secure: process.env.NODE_ENV !== 'development',
 		domain:
 			process.env.NODE_ENV !== 'development'
@@ -274,6 +280,7 @@ router.get('/check', async (req, res) => {
 	// Check if token exists
 	if (!token) {
 		res.clearCookie('token', {
+			httpOnly: true,
 			domain:
 				process.env.NODE_ENV !== 'development'
 					? 'on-the-way-api.vercel.app'

@@ -8,6 +8,7 @@ const auth = (req, res, next) => {
 	// Check if token exists
 	if (!token) {
 		res.clearCookie('token', {
+			httpOnly: true,
 			domain:
 				process.env.NODE_ENV !== 'development'
 					? 'on-the-way-api.vercel.app'
@@ -31,6 +32,7 @@ const auth = (req, res, next) => {
 		next();
 	} catch (err) {
 		res.clearCookie('token', {
+			httpOnly: true,
 			domain:
 				process.env.NODE_ENV !== 'development'
 					? 'on-the-way-api.vercel.app'

@@ -253,7 +253,7 @@ router.delete('/', auth, async (req, res) => {
 	res.clearCookie('token', {
 		domain:
 			process.env.NODE_ENV !== 'development'
-				? 'on-the-way.vercel.app'
+				? 'on-the-way-sneakyhydra.vercel.app'
 				: 'localhost',
 		path: '/',
 		sameSite: process.env.NODE_ENV !== 'development' ? 'None' : 'Lax',
@@ -275,7 +275,7 @@ router.get('/check', async (req, res) => {
 		res.clearCookie('token', {
 			domain:
 				process.env.NODE_ENV !== 'development'
-					? 'on-the-way.vercel.app'
+					? 'on-the-way-sneakyhydra.vercel.app'
 					: 'localhost',
 			path: '/',
 			sameSite: process.env.NODE_ENV !== 'development' ? 'None' : 'Lax',

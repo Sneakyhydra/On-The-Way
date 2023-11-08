@@ -3,7 +3,7 @@ const Dashboard = () => {
 	return (
 		<div>
 			<Navbar />
-			<div style={{ height: '3.5rem' }}></div>
+			<div style={{ height: '5rem' }}></div>
 			<h1>Dashboard</h1>
 		</div>
 	);

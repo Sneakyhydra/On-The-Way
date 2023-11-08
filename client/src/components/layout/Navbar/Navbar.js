@@ -52,9 +52,19 @@ const Navbar = () => {
 				width: '100%',
 				top: '0',
 				zIndex: '1000',
-				boxShadow: scrollState === 'top' ? '' : '0 0 10px #000000',
+				boxShadow:
+					window.location.pathname === '/dashboard'
+						? '0 0 10px #000000'
+						: scrollState === 'top'
+						? ''
+						: '0 0 10px #000000',
 				transition: 'all 0.5s ease',
-				backgroundColor: scrollState === 'top' ? 'transparent' : 'white',
+				backgroundColor:
+					window.location.pathname === '/dashboard'
+						? 'white'
+						: scrollState === 'top'
+						? 'transparent'
+						: 'white',
 			}}
 		>
 			<div className='container-fluid' style={{ padding: '0 2.5rem' }}>

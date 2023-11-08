@@ -267,7 +267,9 @@ router.get('/check', async (req, res) => {
 
 	// Check if token exists
 	if (!token) {
-		res.clearCookie('token');
+		res.clearCookie('token', {
+			sameSite: process.env.NODE_ENV !== 'development' ? 'None' : 'Lax',
+		});
 		res.send('No token');
 	}
 

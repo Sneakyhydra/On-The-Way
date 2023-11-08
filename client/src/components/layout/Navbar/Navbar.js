@@ -4,10 +4,11 @@ import { useState, useContext, useEffect } from 'react';
 import logo from '../../../images/Logo/logo.png';
 import Login from '../../auth/Login';
 import AuthContext from '../../../context/auth/authContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Navbar = () => {
 	const [showModal, setShowModal] = useState(false);
+	const [scrollState, setScrollState] = useState('top');
 	const authContext = useContext(AuthContext);
 	const { validate, isAuthenticated, logout } = authContext;
 	const navigate = useNavigate();
@@ -17,16 +18,49 @@ const Navbar = () => {
 		// eslint-disable-next-line
 	}, []);
 
+	useEffect(() => {
+		let listener = null;
+
+		// Set the value of scroll
+		listener = document.addEventListener('scroll', (e) => {
+			var scrolled = document.scrollingElement.scrollTop;
+			if (scrolled >= 35) {
+				if (scrollState !== 'amir') {
+					setScrollState('amir');
+				}
+			} else {
+				if (scrollState !== 'top') {
+					setScrollState('top');
+				}
+			}
+		});
+		return () => {
+			// Remove Listener after getting the value
+			document.removeEventListener('scroll', listener);
+		};
+	}, [scrollState]);
+
 	const handleModalClose = () => {
 		setShowModal(false);
 	};
 
 	return (
-		<nav className='navbar navbar-expand-lg navbar-light bg-light'>
+		<nav
+			className='navbar navbar-expand-lg navbar-light'
+			style={{
+				position: 'fixed',
+				width: '100%',
+				top: '0',
+				zIndex: '1000',
+				boxShadow: scrollState === 'top' ? '' : '0 0 10px #000000',
+				transition: 'all 0.5s ease',
+				backgroundColor: scrollState === 'top' ? 'transparent' : 'white',
+			}}
+		>
 			<div className='container-fluid' style={{ padding: '0 2.5rem' }}>
-				<a
+				<Link
 					className='navbar-brand'
-					href='#!'
+					to='/'
 					style={{ display: 'flex', gap: '1rem' }}
 				>
 					<img
@@ -37,7 +71,7 @@ const Navbar = () => {
 						className='d-inline-block align-text-center'
 					/>
 					<span style={{ paddingTop: '0.3rem' }}>On The Way</span>
-				</a>
+				</Link>
 				<button
 					className='navbar-toggler'
 					type='button'
@@ -66,12 +100,14 @@ const Navbar = () => {
 						) : (
 							<>
 								<li className='nav-item'>
-									<button
-										className='btn btn-primary'
-										onClick={() => navigate('/dashboard')}
-									>
-										Dashboard
-									</button>
+									{window.location.pathname !== '/dashboard' && (
+										<button
+											className='btn btn-primary'
+											onClick={() => navigate('/dashboard')}
+										>
+											Dashboard
+										</button>
+									)}
 								</li>
 								<li className='nav-item'>
 									<button className='btn btn-danger' onClick={() => logout()}>

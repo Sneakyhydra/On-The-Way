@@ -99,9 +99,21 @@ const Login = () => {
 							className='btn btn-primary'
 							type='submit'
 							disabled={loginProgress}
+							style={{
+								margin: '2rem auto',
+								display: 'block',
+								marginBottom: '1rem',
+							}}
 						>
 							{loginProgress ? (
-								<div>
+								<div
+									style={{
+										display: 'flex',
+										gap: '1rem',
+										alignItems: 'center',
+										justifyContent: 'center',
+									}}
+								>
 									<span
 										className='spinner-border spinner-border-sm'
 										role='status'

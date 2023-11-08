@@ -22,3 +22,12 @@
 	border-radius: 20px;
 	background-clip: content-box;
 }
+
+.btn {
+	border-radius: 20px;
+	border: none;
+	padding: 10px 20px;
+	font-size: 1.2rem;
+	font-weight: 600;
+	transition: all 0.3s ease-in-out;
+}

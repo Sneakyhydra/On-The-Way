@@ -7,13 +7,10 @@ const auth = (req, res, next) => {
 
 	// Check if token exists
 	if (!token) {
-		res.clearCookie('token', {
+		res.cookie('token', token, {
 			httpOnly: true,
-			domain:
-				process.env.NODE_ENV !== 'development'
-					? 'on-the-way-api.vercel.app'
-					: 'localhost',
-			path: '/',
+			secure: process.env.NODE_ENV !== 'development',
+			maxAge: 0,
 			sameSite: process.env.NODE_ENV !== 'development' ? 'None' : 'Lax',
 		});
 
@@ -31,13 +28,10 @@ const auth = (req, res, next) => {
 		// Go next
 		next();
 	} catch (err) {
-		res.clearCookie('token', {
+		res.cookie('token', '', {
 			httpOnly: true,
-			domain:
-				process.env.NODE_ENV !== 'development'
-					? 'on-the-way-api.vercel.app'
-					: 'localhost',
-			path: '/',
+			secure: process.env.NODE_ENV !== 'development',
+			maxAge: 0,
 			sameSite: process.env.NODE_ENV !== 'development' ? 'None' : 'Lax',
 		});
 

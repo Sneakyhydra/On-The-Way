@@ -250,7 +250,9 @@ router.post(
 // @access  Private
 router.delete('/', auth, async (req, res) => {
 	// Delete the cookie
-	res.clearCookie('token');
+	res.clearCookie('token', {
+		sameSite: process.env.NODE_ENV !== 'development' ? 'None' : 'Lax',
+	});
 
 	// Send success message to client
 	res.send('Logged out');

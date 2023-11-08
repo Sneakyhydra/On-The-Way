@@ -251,6 +251,11 @@ router.post(
 router.delete('/', auth, async (req, res) => {
 	// Delete the cookie
 	res.clearCookie('token', {
+		domain:
+			process.env.NODE_ENV !== 'development'
+				? 'on-the-way.vercel.app'
+				: 'localhost',
+		path: '/',
 		sameSite: process.env.NODE_ENV !== 'development' ? 'None' : 'Lax',
 	});
 
@@ -268,6 +273,11 @@ router.get('/check', async (req, res) => {
 	// Check if token exists
 	if (!token) {
 		res.clearCookie('token', {
+			domain:
+				process.env.NODE_ENV !== 'development'
+					? 'on-the-way.vercel.app'
+					: 'localhost',
+			path: '/',
 			sameSite: process.env.NODE_ENV !== 'development' ? 'None' : 'Lax',
 		});
 		res.send('No token');

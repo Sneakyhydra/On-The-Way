@@ -1,11 +1,7 @@
-import DisplayProfile from "../layout/Profile/Display/DisplayProfile";
+import React from 'react';
 
-const Profile = ({ tabKey }) => {
-  return (
-    <div style={{ marginTop: "5em" }}>
-      <DisplayProfile tabKey={tabKey} />
-    </div>
-  );
+const Profile = () => {
+	return <div>Profile</div>;
 };
 
 export default Profile;

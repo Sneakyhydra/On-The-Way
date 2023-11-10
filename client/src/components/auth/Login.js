@@ -2,6 +2,7 @@
 import { useState, useContext, useEffect } from 'react';
 import AlertContext from '../../context/alert/alertContext';
 import AuthContext from '../../context/auth/authContext';
+import Preloader from '../layout/Preloader/Preloader';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -101,27 +102,10 @@ const Login = () => {
 						margin: '2rem auto',
 						display: 'block',
 						marginBottom: '1rem',
+						backgroundColor: loginProgress ? 'inherit' : '',
 					}}
 				>
-					{loginProgress ? (
-						<div
-							style={{
-								display: 'flex',
-								gap: '1rem',
-								alignItems: 'center',
-								justifyContent: 'center',
-							}}
-						>
-							<span
-								className='spinner-border spinner-border-sm'
-								role='status'
-								aria-hidden='true'
-							></span>
-							<span className='sr-only'>Logging in...</span>
-						</div>
-					) : (
-						'Login'
-					)}
+					{loginProgress ? <Preloader /> : 'Login'}
 				</button>
 			</form>
 		</div>

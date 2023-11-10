@@ -1,4 +1,5 @@
 // Imports
+import { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Pages
@@ -26,6 +27,7 @@ import StudState from './context/student/StudState';
 
 // CSS
 import './App.css';
+import Preloader from './components/layout/Preloader/Preloader';
 
 const App = () => {
 	return (
@@ -58,7 +60,9 @@ const App = () => {
 										path='dashboard'
 										element={
 											<PrivateRoute>
-												<Dashboard />
+												<Suspense fallback={<Preloader />}>
+													<Dashboard />
+												</Suspense>
 											</PrivateRoute>
 										}
 									/>

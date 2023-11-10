@@ -3,6 +3,7 @@ import { useState, useContext, useEffect } from 'react';
 import AlertContext from '../../context/alert/alertContext';
 import AuthContext from '../../context/auth/authContext';
 import { useNavigate } from 'react-router-dom';
+import Preloader from '../layout/Preloader/Preloader';
 
 const RegisterStudent = () => {
 	const alertContext = useContext(AlertContext);
@@ -266,27 +267,10 @@ const RegisterStudent = () => {
 							margin: '2rem auto',
 							display: 'block',
 							marginBottom: '1rem',
+							backgroundColor: regProgress ? 'inherit' : '',
 						}}
 					>
-						{regProgress ? (
-							<div
-								style={{
-									display: 'flex',
-									gap: '1rem',
-									alignItems: 'center',
-									justifyContent: 'center',
-								}}
-							>
-								<span
-									className='spinner-border spinner-border-sm'
-									role='status'
-									aria-hidden='true'
-								></span>
-								<span className='sr-only'>Registering...</span>
-							</div>
-						) : (
-							'Register'
-						)}
+						{regProgress ? <Preloader /> : 'Register'}
 					</button>
 				</form>
 			</div>

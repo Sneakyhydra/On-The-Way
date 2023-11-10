@@ -7,9 +7,9 @@ import Dashboard from './components/pages/Dashboard';
 import NotFound from './components/pages/NotFound';
 
 // Auth routes
-// import RegisterStudent from './components/auth/RegisterStudent';
-// import RegisterCounsellor from './components/auth/RegisterCounsellor';
-// import RegisterAdmin from './components/auth/RegisterAdmin';
+import RegisterStudent from './components/auth/RegisterStudent';
+import RegisterCounsellor from './components/auth/RegisterCounsellor';
+import RegisterAdmin from './components/auth/RegisterAdmin';
 
 // Routing
 import PrivateRoute from './components/routing/PrivateRoute';
@@ -39,25 +39,19 @@ const App = () => {
 								<Routes>
 									<Route exact path='/' element={<Home />} />
 
-									{/* <Route exact path='/regstudent'>
-                    <div
-                      style={{
-                        fontFamily: "Lucida Sans, sans-serif",
-                      }}
-                    >
-                      <RegisterStudent />
-                    </div>
-                  </Route> */}
+									<Route
+										exact
+										path='regstudent'
+										element={<RegisterStudent />}
+									/>
 
-									{/* <Route exact path='/regcounsellor'>
-                    <div
-                      style={{
-                        fontFamily: "Lucida Sans, sans-serif",
-                      }}
-                    >
-                      <RegisterCounsellor />
-                    </div>
-                  </Route> */}
+									<Route
+										exact
+										path='regcounsellor'
+										element={<RegisterCounsellor />}
+									/>
+
+									<Route exact path='ad123' element={<RegisterAdmin />} />
 
 									<Route
 										exact
@@ -68,16 +62,6 @@ const App = () => {
 											</PrivateRoute>
 										}
 									/>
-
-									{/* <Route exact path='/ad123'>
-                    <div
-                      style={{
-                        fontFamily: "Lucida Sans, sans-serif",
-                      }}
-                    >
-                      <RegisterAdmin />
-                    </div>
-                  </Route> */}
 
 									<Route path='*' element={<NotFound />} />
 								</Routes>

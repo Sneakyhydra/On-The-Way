@@ -14,7 +14,9 @@ const Alerts = () => {
 				style={{
 					margin: '0',
 					zIndex: '10000',
-					position: 'fixed',
+					position: 'absolute',
+					top: '0',
+					left: '0',
 					width: '100%',
 				}}
 			>

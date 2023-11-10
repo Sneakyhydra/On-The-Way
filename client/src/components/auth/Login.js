@@ -16,8 +16,8 @@ const Login = () => {
 	const [loginProgress, setLoginProgress] = useState(false);
 
 	useEffect(() => {
-		validate();
 		document.body.style.backgroundColor = 'white';
+		validate();
 		return () => {
 			setLoginProgress(false);
 		};
@@ -65,69 +65,65 @@ const Login = () => {
 	};
 
 	return (
-		<div className='container'>
-			<div className='row justify-content-md-center'>
-				<div className='col-md-6'>
-					<form onSubmit={onSubmit}>
-						<div className='form-group'>
-							<label>Email address</label>
-							<input
-								type='email'
-								className='form-control'
-								placeholder='Enter email'
-								name='email'
-								value={email}
-								onChange={onChange}
-								required
-							/>
-						</div>
+		<div className='form-container' style={{ boxShadow: 'none' }}>
+			<form onSubmit={onSubmit} style={{ margin: '10px auto', width: '80%' }}>
+				<div className='form-group'>
+					<label>Email address</label>
+					<input
+						type='email'
+						className='form-control'
+						placeholder='Enter email'
+						name='email'
+						value={email}
+						onChange={onChange}
+						required
+					/>
+				</div>
 
-						<div className='form-group'>
-							<label>Password</label>
-							<input
-								type='password'
-								className='form-control'
-								placeholder='Password'
-								name='password'
-								value={password}
-								onChange={onChange}
-								required
-							/>
-						</div>
+				<div className='form-group'>
+					<label>Password</label>
+					<input
+						type='password'
+						className='form-control'
+						placeholder='Password'
+						name='password'
+						value={password}
+						onChange={onChange}
+						required
+					/>
+				</div>
 
-						<button
-							className='btn btn-primary'
-							type='submit'
-							disabled={loginProgress}
+				<button
+					className='btn btn-primary'
+					type='submit'
+					disabled={loginProgress}
+					style={{
+						margin: '2rem auto',
+						display: 'block',
+						marginBottom: '1rem',
+					}}
+				>
+					{loginProgress ? (
+						<div
 							style={{
-								margin: '2rem auto',
-								display: 'block',
-								marginBottom: '1rem',
+								display: 'flex',
+								gap: '1rem',
+								alignItems: 'center',
+								justifyContent: 'center',
 							}}
 						>
-							{loginProgress ? (
-								<div
-									style={{
-										display: 'flex',
-										gap: '1rem',
-										alignItems: 'center',
-										justifyContent: 'center',
-									}}
-								>
-									<span
-										className='spinner-border spinner-border-sm'
-										role='status'
-										aria-hidden='true'
-									></span>
-									<span className='sr-only'>Loading...</span>
-								</div>
-							) : (
-								'Login'
-							)}
-						</button>
-					</form>
-				</div>
-			</div>
+							<span
+								className='spinner-border spinner-border-sm'
+								role='status'
+								aria-hidden='true'
+							></span>
+							<span className='sr-only'>Logging in...</span>
+						</div>
+					) : (
+						'Login'
+					)}
+				</button>
+			</form>
 		</div>
 	);
 };

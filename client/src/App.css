@@ -23,6 +23,19 @@
 	background-clip: content-box;
 }
 
+*,
+*:before,
+*:after {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Nunito', sans-serif;
+	color: #384047;
+}
+
 .btn {
 	border-radius: 20px;
 	border: none;
@@ -30,4 +43,48 @@
 	font-size: 1.2rem;
 	font-weight: 600;
 	transition: all 0.3s ease-in-out;
+}
+
+.form-container {
+	width: 80%;
+	max-width: 600px;
+	margin: 0 auto;
+	background-color: #ffffff; /* Form background color */
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+header {
+	text-align: center;
+	margin: 20px auto;
+}
+
+header h1 {
+	color: #333; /* Header text color */
+}
+
+form {
+	display: grid;
+	grid-gap: 15px;
+}
+
+label {
+	font-weight: bold;
+}
+
+.form-group {
+	margin-bottom: 10px;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+select {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	box-sizing: border-box;
 }

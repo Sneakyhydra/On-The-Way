@@ -1,4 +1,5 @@
 // Imports
+import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import Navbar from '../layout/Navbar/Navbar';
@@ -17,6 +18,10 @@ import background2 from '../../images/HomePage/background2.png';
 import './Home.css';
 
 const Home = () => {
+	useEffect(() => {
+		document.body.style.backgroundColor = 'white';
+	}, []);
+
 	return (
 		<div>
 			<Navbar />

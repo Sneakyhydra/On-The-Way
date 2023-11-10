@@ -49,7 +49,8 @@ const AdminTabs = () => {
 				display: 'flex',
 				flexDirection: 'row',
 				gap: '0.2rem',
-				borderBottom: '5px solid #2bc592',
+				border: 'none',
+				boxShadow: '0 8px 6px -6px #2bc592',
 			}}
 		>
 			<li
@@ -270,7 +271,7 @@ const AdminTabs = () => {
 	return (
 		<div className='tabs'>
 			{tabs}
-			<div className='tab-content' style={{ marginTop: '1rem' }}>
+			<div className='tab-content' style={{ marginTop: '0rem' }}>
 				<div
 					className={`tab-pane fade ${
 						active === 'Profile' ? 'show active' : ''

@@ -4,6 +4,7 @@ import Navbar from '../layout/Navbar/Navbar';
 import Preloader from '../layout/Preloader/Preloader';
 
 import AuthContext from '../../context/auth/authContext';
+import './Dashboard.css';
 
 const AdminTabs = lazy(() => import('../../config/AdminTabs'));
 const CounTabs = lazy(() => import('../../config/CounTabs'));

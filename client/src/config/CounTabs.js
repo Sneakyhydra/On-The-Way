@@ -277,7 +277,7 @@ const CounTabs = () => {
 						active === 'Profile' ? 'show active' : ''
 					}`}
 				>
-					<Profile />
+					<Profile tabKey={active} />
 				</div>
 				<div
 					className={`tab-pane fade ${

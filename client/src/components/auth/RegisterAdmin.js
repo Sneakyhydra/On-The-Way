@@ -172,7 +172,7 @@ const RegisterAdmin = () => {
 							name='password'
 							value={password}
 							onChange={onChange}
-							minLength='3'
+							minLength='6'
 							required
 						/>
 					</div>
@@ -186,7 +186,7 @@ const RegisterAdmin = () => {
 							name='password2'
 							value={password2}
 							onChange={onChange}
-							minLength='3'
+							minLength='6'
 							required
 						/>
 					</div>

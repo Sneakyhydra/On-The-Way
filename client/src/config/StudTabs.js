@@ -264,7 +264,7 @@ const StudTabs = () => {
 						active === 'Profile' ? 'show active' : ''
 					}`}
 				>
-					<Profile />
+					<Profile tabKey={active} />
 				</div>
 				<div
 					className={`tab-pane fade ${active === 'Quiz' ? 'show active' : ''}`}

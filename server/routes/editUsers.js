@@ -409,7 +409,7 @@ router.put(
 					}
 
 					// Read CPI_sheet.xlsx
-					readXlsxFile('../CPI_sheet.xlsx').then((cpis) => {
+					readXlsxFile('./CPI_sheet.xlsx').then((cpis) => {
 						// Loop through all rows in excel sheet
 						for (let j = 1; j < cpis.length; j++) {
 							// Check if roll no is same

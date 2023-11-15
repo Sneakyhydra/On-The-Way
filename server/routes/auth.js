@@ -128,7 +128,7 @@ router.get('/', auth, async (req, res) => {
 			user.response = finalResp;
 
 			// Read CPI_sheet.xlsx
-			readXlsxFile('../CPI_sheet.xlsx').then((cpis) => {
+			readXlsxFile('./CPI_sheet.xlsx').then((cpis) => {
 				// Loop through all rows
 				for (let j = 1; j < cpis.length; j++) {
 					// Check if the roll no is same

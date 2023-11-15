@@ -40,7 +40,7 @@ router.get('/students', auth, async (req, res) => {
 			let students = [];
 
 			// Read CPI_sheet.xlsx
-			readXlsxFile('../CPI_sheet.xlsx').then((cpis) => {
+			readXlsxFile('./CPI_sheet.xlsx').then((cpis) => {
 				// Loop through all students
 				for (let i = 0; i < rows.length; i++) {
 					// Init student object

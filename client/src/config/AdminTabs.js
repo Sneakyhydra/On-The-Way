@@ -355,7 +355,7 @@ const AdminTabs = () => {
 						active === 'Students' ? 'show active' : ''
 					}`}
 				>
-					<Students />
+					<Students tabKey={active} />
 				</div>
 				<div
 					className={`tab-pane fade ${
@@ -400,8 +400,12 @@ const AdminTabs = () => {
 							</label>
 						</div>
 					</div>
-					{feedback === 'AdminCounFeed' && <AdminCounFeed />}
-					{feedback === 'AdminStudFeed' && <AdminStudFeed />}
+					{feedback === 'AdminCounFeed' && (
+						<AdminCounFeed tabKey={active} tabKeyFeed={feedback} />
+					)}
+					{feedback === 'AdminStudFeed' && (
+						<AdminStudFeed tabKey={active} tabKeyFeed={feedback} />
+					)}
 				</div>
 			</div>
 		</div>

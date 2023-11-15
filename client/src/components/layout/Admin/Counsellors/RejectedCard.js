@@ -1,63 +1,51 @@
-import { Fragment, useContext } from "react";
-import { Card, Row, Col, Icon } from "react-materialize";
-import AdminContext from "../../../../context/admin/adminContext";
-import PropTypes from "prop-types";
+import { useContext } from 'react';
+import AdminContext from '../../../../context/admin/adminContext';
 
 const RejectedCard = ({ user, setAlert }) => {
-  const { coun_name, coun_gender, coun_phone, coun_dept, coun_id } = user;
-  const adminContext = useContext(AdminContext);
+	const { coun_name, coun_gender, coun_phone, coun_dept, coun_id } = user;
+	const adminContext = useContext(AdminContext);
 
-  const { approveCoun } = adminContext;
+	const { approveCoun } = adminContext;
 
-  const approve = () => {
-    approveCoun(coun_id);
-    setAlert("Approved", "success");
-  };
+	const approve = () => {
+		approveCoun(coun_id);
+		setAlert('Approved', 'success');
+	};
 
-  return (
-    <Row style={{ margin: "0" }}>
-      <Col m={6} s={12} style={{ width: "365px" }}>
-        <Card
-          actions={[
-            <a
-              href='#!'
-              key='1'
-              className='waves-effect waves-light btn'
-              style={{
-                borderRadius: "10px",
-                minWidth: "120px",
-                width: "auto",
-                backgroundColor: "#255F85",
-                marginRight: "15px",
-              }}
-              onClick={approve}
-            >
-              <Icon>check</Icon>
-            </a>,
-          ]}
-          className='z-depth-1 grow'
-          closeIcon={<Icon>close</Icon>}
-          revealIcon={<Icon>more_vert</Icon>}
-          textClassName='white-text'
-          title={coun_name}
-        >
-          <Fragment>
-            <strong>{coun_dept}</strong>
-            <br />
-            {coun_gender}
-            <br />
-            {coun_phone}
-          </Fragment>
-        </Card>
-      </Col>
-    </Row>
-  );
-};
+	return (
+		<div
+			style={{
+				display: 'flex',
+				flexDirection: 'column',
+				boxShadow: '0 0 5px 0 rgba(0,0,0,0.3)',
+				borderRadius: '0.5rem',
+				padding: '1rem 3rem',
+				backgroundColor: 'white',
+				width: '300px',
+			}}
+		>
+			<h3>{coun_name}</h3>
+			<strong>{coun_dept}</strong>
+			<br />
+			{coun_gender}
+			<br />
+			{coun_phone}
 
-// Set proptypes
-RejectedCard.propTypes = {
-  user: PropTypes.object.isRequired,
-  setAlert: PropTypes.func.isRequired,
+			<div style={{ display: 'flex', gap: '1rem' }}>
+				<button
+					className='btn btn-primary'
+					style={{
+						margin: 'auto',
+						marginTop: '1.5rem',
+						display: 'block',
+					}}
+					onClick={approve}
+				>
+					&#10003;
+				</button>
+			</div>
+		</div>
+	);
 };
 
 export default RejectedCard;

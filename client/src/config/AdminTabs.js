@@ -282,7 +282,7 @@ const AdminTabs = () => {
 				<div
 					className={`tab-pane fade ${active === 'Quiz' ? 'show active' : ''}`}
 				>
-					<AdminQuiz />
+					<AdminQuiz tabKey={active} />
 				</div>
 				<div
 					className={`tab-pane fade ${
@@ -340,9 +340,15 @@ const AdminTabs = () => {
 							</label>
 						</div>
 					</div>
-					{counsellors === 'Pending' && <Pending />}
-					{counsellors === 'Rejected' && <Rejected />}
-					{counsellors === 'Approved' && <Approved />}
+					{counsellors === 'Pending' && (
+						<Pending tabKey={active} tabKeyCoun={counsellors} />
+					)}
+					{counsellors === 'Rejected' && (
+						<Rejected tabKey={active} tabKeyCoun={counsellors} />
+					)}
+					{counsellors === 'Approved' && (
+						<Approved tabKey={active} tabKeyCoun={counsellors} />
+					)}
 				</div>
 				<div
 					className={`tab-pane fade ${

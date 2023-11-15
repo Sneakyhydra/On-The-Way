@@ -161,7 +161,7 @@ const DisplayAdmin = () => {
 					<div className='form-group'>
 						<label>Name</label>
 						<input
-							type='username'
+							type='text'
 							className='form-control'
 							placeholder='Enter name'
 							name='username'

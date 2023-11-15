@@ -5,11 +5,11 @@ import { useContext } from 'react';
 const StudFeedCard = ({ feed }) => {
 	const adminContext = useContext(AdminContext);
 	const alertContext = useContext(AlertContext);
-	const { deleteCounFeed } = adminContext;
+	const { deleteStudFeed } = adminContext;
 	const { setAlert } = alertContext;
 
 	const deleteFeed = () => {
-		deleteCounFeed({
+		deleteStudFeed({
 			feed_id: feed.feed_id,
 		});
 		setAlert('Deleted Successfully', 'success');

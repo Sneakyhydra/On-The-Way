@@ -346,42 +346,41 @@ router.get('/students', auth, async (req, res) => {
 		if (role === 'admin') {
 			// Get all students from the DB
 			const [rows] = await promisePool.query(`SELECT * from students`);
+			const [rows2] = await promisePool.query('SELECT * from cpi_sheet');
 
 			// Init students array
 			let students = [];
 
-			// Read CPI_sheet.xlsx
-			readXlsxFile('./CPI_sheet.xlsx').then((cpis) => {
-				// Loop through all students
-				for (let i = 0; i < rows.length; i++) {
-					// Init student object
-					let student = {
-						stud_id: rows[i].stud_id,
-						stud_name: rows[i].stud_name,
-						roll_no: rows[i].roll_no,
-						stud_gender: rows[i].stud_gender,
-						stud_phone: rows[i].stud_phone,
-						stud_dept: rows[i].stud_dept,
-						stud_branch: rows[i].stud_branch,
-						cpi: null,
-					};
+			for (let i = 0; i < rows.length; i++) {
+				// Init student object
+				let student = {
+					stud_id: rows[i].stud_id,
+					stud_name: rows[i].stud_name,
+					roll_no: rows[i].roll_no,
+					stud_gender: rows[i].stud_gender,
+					stud_phone: rows[i].stud_phone,
+					stud_dept: rows[i].stud_dept,
+					stud_branch: rows[i].stud_branch,
+					cpi: null,
+				};
 
-					// Loop through all rows in excel sheet
-					for (let j = 1; j < cpis.length; j++) {
-						// Check if roll no is same
-						if (student.roll_no.toLowerCase() === cpis[j][0].toLowerCase()) {
-							// Add cpi to the student object
-							student.cpi = cpis[j][1];
-							break;
-						}
+				// Loop through all rows in excel sheet
+				for (let j = 0; j < rows2.length; j++) {
+					// Check if roll no is same
+					if (
+						student.roll_no.toLowerCase() === rows2[j].roll_no.toLowerCase()
+					) {
+						// Add cpi to the student object
+						student.cpi = rows2[j].cpi;
+						break;
 					}
-
-					// Append student object to students array
-					students.push(student);
 				}
-				// Send data to the client
-				res.json(students);
-			});
+
+				// Append student object to students array
+				students.push(student);
+			}
+			// Send data to the client
+			res.json(students);
 		} else {
 			// Unauthorized
 			res.status(401).json({ msg: 'Only admins can access this portal' });

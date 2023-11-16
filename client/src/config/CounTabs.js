@@ -12,6 +12,7 @@ const CounTabs = () => {
 	const authContext = useContext(AuthContext);
 	const [active, setActive] = useState('Profile');
 	const [isMobile, setIsMobile] = useState(false);
+	const [student, setStudent] = useState(null);
 
 	const { user } = authContext;
 
@@ -284,17 +285,21 @@ const CounTabs = () => {
 						active === 'StudentInfo' ? 'show active' : ''
 					}`}
 				>
-					<StudentInfo />
+					<StudentInfo
+						tabKey={active}
+						setTabKey={setActive}
+						setStudent={setStudent}
+					/>
 				</div>
 				<div
 					className={`tab-pane fade ${active === 'Quiz' ? 'show active' : ''}`}
 				>
-					<CounQuiz />
+					<CounQuiz tabKey={active} />
 				</div>
 				<div
 					className={`tab-pane fade ${active === 'Chat' ? 'show active' : ''}`}
 				>
-					<CounChat />
+					<CounChat tabKey={active} student={student} setStudent={setStudent} />
 				</div>
 				<div
 					className={`tab-pane fade ${

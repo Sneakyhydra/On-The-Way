@@ -76,8 +76,8 @@ const DisplayCounsellor = () => {
 			setAlert('Email not valid', 'danger');
 		} else if (phone.length !== 10) {
 			setAlert('Phone number should have 10 digits', 'danger');
-		} else if (password.length < 6) {
-			setAlert('Password should be of atleast 6 characters', 'danger');
+		} else if (password.length < 3) {
+			setAlert('Password should be of atleast 3 characters', 'danger');
 		} else {
 			// eslint-disable-next-line
 			await editCounsellor({
@@ -290,7 +290,7 @@ const DisplayCounsellor = () => {
 								value={password}
 								onChange={onChange}
 								disabled={!edit}
-								minLength='6'
+								minLength='3'
 							/>
 						</div>
 					)}

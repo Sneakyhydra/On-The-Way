@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import CounContext from '../../../context/counsellor/counContext';
 import AlertContext from '../../../context/alert/alertContext';
 import Preloader from '../../layout/Preloader/Preloader';
@@ -8,16 +8,23 @@ import CounUsers from '../../layout/Counsellor/Chat/CounUsers';
 const CounChat = ({ tabKey, student, setStudent }) => {
 	const counContext = useContext(CounContext);
 	const alertContext = useContext(AlertContext);
+	const [isMobile, setIsMobile] = useState(false);
 
-	const { loadMessages, messages, error, students, loadStudents } = counContext;
+	const { loadMessages, messages, students, loadStudents } = counContext;
 	const { setAlert } = alertContext;
 
-	// Load the user when dashboard is rendered
 	useEffect(() => {
-		if (error) {
-			setAlert(error, 'danger');
-		}
-		// eslint-disable-next-line
+		const handleResize = () => {
+			setIsMobile(window.innerWidth <= 768);
+		};
+
+		window.addEventListener('resize', handleResize);
+
+		handleResize();
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
 	}, []);
 
 	useEffect(() => {
@@ -33,14 +40,39 @@ const CounChat = ({ tabKey, student, setStudent }) => {
 	}
 
 	return (
-		<div className='chat'>
-			<CounUsers
-				setStudent={setStudent}
-				setAlert={setAlert}
-				users={students}
-				student={student}
-			/>
-			<CounMess setAlert={setAlert} messages={messages} student={student} />
+		<div className='chat' style={{ borderRadius: '0.5rem' }}>
+			{isMobile && (student === null || student === 0) && (
+				<CounUsers
+					setStudent={setStudent}
+					setAlert={setAlert}
+					users={students}
+					student={student}
+				/>
+			)}
+			{!isMobile && (
+				<CounUsers
+					setStudent={setStudent}
+					setAlert={setAlert}
+					users={students}
+					student={student}
+				/>
+			)}
+			{isMobile && student !== null && student !== 0 && (
+				<CounMess
+					setAlert={setAlert}
+					messages={messages}
+					student={student}
+					setStudent={setStudent}
+				/>
+			)}
+			{!isMobile && (
+				<CounMess
+					setAlert={setAlert}
+					messages={messages}
+					student={student}
+					setStudent={setStudent}
+				/>
+			)}
 		</div>
 	);
 };

@@ -25,26 +25,7 @@ const CounUsers = ({ users, setStudent, student }) => {
 	};
 
 	return (
-		<div
-			style={{
-				width: '25%',
-				minHeight: '100%',
-				margin: '0',
-				display: 'flex',
-				flexWrap: 'nowrap',
-				flexDirection: 'column',
-				borderRight: '2px solid #2c363f',
-				padding: '0',
-				justifyContent: 'flex-start',
-				alignItems: 'center',
-				flexGrow: 'initial',
-				backgroundColor: 'white',
-				borderTopLeftRadius: '0.4rem',
-				borderBottomLeftRadius: '0.4rem',
-				zIndex: '100',
-			}}
-			className='userArea'
-		>
+		<div className='userArea'>
 			{users.map((stud) => {
 				return (
 					<button

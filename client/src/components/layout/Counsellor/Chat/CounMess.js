@@ -2,14 +2,15 @@ import { useEffect, useState, useContext } from 'react';
 import CounContext from '../../../../context/counsellor/counContext';
 import AuthContext from '../../../../context/auth/authContext';
 
-const CounMess = ({ messages, student }) => {
+const CounMess = ({ messages, student, setStudent }) => {
 	const [messToShow, setMessToShow] = useState([]);
 	const counContext = useContext(CounContext);
 	const authContext = useContext(AuthContext);
 
-	const { sendMessage, loadMessages } = counContext;
+	const { sendMessage, loadMessages, students } = counContext;
 	const { user } = authContext;
 	const [currMess, setCurrMess] = useState('');
+	const [studentName, setStudentName] = useState('');
 
 	let temp = [];
 	useEffect(() => {
@@ -20,6 +21,13 @@ const CounMess = ({ messages, student }) => {
 				}
 			}
 		}
+
+		students.forEach((stud) => {
+			if (stud.stud_id === student) {
+				setStudentName(stud.stud_name);
+			}
+		});
+
 		setMessToShow(temp);
 		//eslint-disable-next-line
 	}, [student, messages]);
@@ -85,35 +93,69 @@ const CounMess = ({ messages, student }) => {
 	};
 
 	if (student === 0 || student === null) {
-		return '';
+		return (
+			<div className='messArea'>
+				<div
+					className='messbg'
+					style={{
+						position: 'fixed',
+						left: '0',
+						width: '100%',
+						height: '100%',
+						opacity: '0.15',
+						zIndex: '-1',
+					}}
+				></div>
+				<div className='messUser' style={{ background: 'none' }}></div>
+				<div className='messDisplay'></div>
+				<div className='messInput'></div>
+			</div>
+		);
 	}
 
 	return (
-		<div
-			style={{
-				height: '100%',
-				width: '75%',
-				paddingTop: '0.15rem',
-				display: 'flex',
-				flexDirection: 'column',
-				justifyContent: 'space-between',
-				margin: 'auto',
-			}}
-		>
+		<div className='messArea'>
 			<div
+				className='messbg'
 				style={{
-					overflowX: 'hidden',
-					padding: '1.5rem',
-					zIndex: '100',
+					position: 'fixed',
+					left: '0',
+					width: '100%',
+					height: '100%',
+					opacity: '0.15',
+					zIndex: '-1',
 				}}
-			>
+			></div>
+			<div className='messUser'>
+				<button
+					style={{
+						border: 'none',
+						padding: '1rem 1.5rem',
+						borderRadius: '50%',
+						color: 'white',
+						background: 'inherit',
+					}}
+					onClick={() => {
+						setStudent(0);
+					}}
+				>
+					{'<'}
+				</button>
+				<div
+					className='messUserName'
+					style={{ color: 'white', fontSize: '1.55rem' }}
+				>
+					{studentName}
+				</div>
+			</div>
+			<div className='messDisplay' style={{ background: 'none' }}>
 				{messToShow.length === 0
 					? 'Be the first to start the conversation!!!'
 					: ''}
 				{messToShow.map((mess) => {
 					return (
 						<div
-							key={mess.mess_id}
+							key={`mess ${mess.mess_id}`}
 							style={{
 								width: '100%',
 								display: 'flex',
@@ -150,6 +192,7 @@ const CounMess = ({ messages, student }) => {
 			</div>
 
 			<div
+				className='messInput'
 				style={{
 					display: 'flex',
 					flexDirection: 'row',
@@ -170,22 +213,22 @@ const CounMess = ({ messages, student }) => {
 					placeholder='Type something'
 					style={{ width: '80%', marginRight: '2rem', maxHeight: '75px' }}
 				/>
-				<a
+				<button
 					onClick={send}
 					className='waves-effect waves-light btn z-depth-0'
 					style={{
 						borderRadius: '10px',
 						backgroundColor: '#255F85',
+						color: 'white',
 						margin: '0',
 						width: '10%',
 						marginTop: '8px',
 						marginRight: '1.5em',
 						fontSize: '1rem',
 					}}
-					href='#!'
 				>
-					send
-				</a>
+					Send
+				</button>
 			</div>
 		</div>
 	);

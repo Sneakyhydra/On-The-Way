@@ -88,3 +88,110 @@ select {
 	border-radius: 5px;
 	box-sizing: border-box;
 }
+
+.chat {
+	display: grid;
+	grid-template-columns: 1fr 5fr;
+	grid-template-areas: 'users messages';
+	height: 80vh;
+	border-radius: 0.5rem;
+	border: #333 solid 1px;
+}
+
+@media screen and (max-width: 768px) {
+	.chat {
+		display: block;
+	}
+}
+
+.userArea {
+	grid-area: users;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	border-radius: 0.5rem;
+	height: 80vh;
+}
+
+.messArea {
+	grid-area: messages;
+
+	border-left: #333 solid 1px;
+	border-top-right-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+	height: 80vh;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 7fr 1fr;
+	grid-template-areas:
+		'messHeader'
+		'messDisplay'
+		'messInput';
+}
+
+.messbg {
+	background-image: url('./images/Chat/chat-background.jpg');
+}
+
+.chatUsers {
+	border: none;
+	background: white;
+	color: black;
+	height: 100px;
+	padding: 1rem 2rem;
+	border-bottom: #333 solid 1px;
+}
+
+.chatActive {
+	background: #2bc592;
+	color: white;
+}
+
+.messUser {
+	grid-area: messHeader;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	background-color: #2bc592;
+	opacity: 0.8;
+}
+
+.messDisplay {
+	grid-area: messDisplay;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	width: 100%;
+	padding: 1rem;
+}
+
+.messInput {
+	grid-area: messInput;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.text-right {
+	justify-content: flex-end;
+}
+
+.text-right > div {
+	margin-right: 1rem;
+}
+
+.message {
+	padding: 0.4rem 1rem;
+	background-color: white;
+	border-radius: 0.35rem;
+	word-wrap: break-word;
+	margin-right: 0;
+	margin-left: 0;
+}
+
+.message-container {
+	margin-bottom: 1rem;
+	width: 100%;
+	display: flex;
+}

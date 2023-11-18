@@ -221,7 +221,6 @@ const CounMess = ({ messages, student, setStudent }) => {
 						backgroundColor: '#255F85',
 						color: 'white',
 						margin: '0',
-						width: '10%',
 						marginTop: '8px',
 						marginRight: '1.5em',
 						fontSize: '1rem',

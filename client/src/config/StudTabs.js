@@ -9,6 +9,7 @@ import StudFeed from '../components/tabs/Student/StudFeed';
 const StudTabs = () => {
 	const [active, setActive] = useState('Profile');
 	const [isMobile, setIsMobile] = useState(false);
+	const [counsellor, setCounsellor] = useState(null);
 
 	const handleTabClick = (tabName) => {
 		setActive(tabName);
@@ -269,19 +270,27 @@ const StudTabs = () => {
 				<div
 					className={`tab-pane fade ${active === 'Quiz' ? 'show active' : ''}`}
 				>
-					<StudQuiz />
+					<StudQuiz tabKey={active} setTabKey={setActive} />
 				</div>
 				<div
 					className={`tab-pane fade ${
 						active === 'StudCoun' ? 'show active' : ''
 					}`}
 				>
-					<StudCoun />
+					<StudCoun
+						tabKey={active}
+						setTabKey={setActive}
+						setCounsellor={setCounsellor}
+					/>
 				</div>
 				<div
 					className={`tab-pane fade ${active === 'Chat' ? 'show active' : ''}`}
 				>
-					<StudChat />
+					<StudChat
+						tabKey={active}
+						counsellor={counsellor}
+						setCounsellor={setCounsellor}
+					/>
 				</div>
 				<div
 					className={`tab-pane fade ${

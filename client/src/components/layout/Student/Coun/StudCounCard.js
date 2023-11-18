@@ -1,58 +1,46 @@
-import { Fragment } from "react";
-import { Card, Row, Col, Icon } from "react-materialize";
-import PropTypes from "prop-types";
+const StudCounCard = ({ user, setTabKey, setCounsellor }) => {
+	const { coun_name, coun_gender, coun_phone, coun_dept, coun_id } = user;
 
-const StudCounCard = ({ user, setTabKey, setActive }) => {
-  const { coun_name, coun_gender, coun_phone, coun_dept, coun_id } = user;
+	const chat = () => {
+		setCounsellor(coun_id);
+		setTabKey('Chat');
+	};
 
-  const chat = () => {
-    setActive(coun_id);
-    setTabKey("studchat");
-  };
+	return (
+		<div
+			style={{
+				display: 'flex',
+				flexDirection: 'column',
+				boxShadow: '0 0 5px 0 rgba(0,0,0,0.3)',
+				borderRadius: '0.5rem',
+				padding: '1rem 3rem',
+				backgroundColor: 'white',
+				width: '300px',
+			}}
+		>
+			<h3>{coun_name}</h3>
+			<br />
+			{coun_dept}
+			<br />
+			{coun_gender}
+			<br />
+			{coun_phone}
 
-  return (
-    <Row style={{ margin: "0" }}>
-      <Col m={6} s={12} style={{ width: "365px" }}>
-        <Card
-          actions={[
-            <a
-              href='#!'
-              key='1'
-              className='waves-effect waves-light btn'
-              onClick={chat}
-              style={{
-                borderRadius: "10px",
-                minWidth: "120px",
-                width: "auto",
-                backgroundColor: "#255F85",
-                marginRight: "15px",
-              }}
-            >
-              Chat
-            </a>,
-          ]}
-          className='z-depth-1 grow'
-          closeIcon={<Icon>close</Icon>}
-          revealIcon={<Icon>more_vert</Icon>}
-          textClassName='white-text'
-          title={coun_name}
-        >
-          <Fragment>
-            <strong>{coun_dept}</strong>
-            <br />
-            {coun_gender}
-            <br />
-            {coun_phone}
-          </Fragment>
-        </Card>
-      </Col>
-    </Row>
-  );
-};
-
-// Set proptypes
-StudCounCard.propTypes = {
-  user: PropTypes.object.isRequired,
+			<div style={{ display: 'flex', gap: '1rem' }}>
+				<button
+					className='btn btn-primary'
+					style={{
+						margin: 'auto',
+						marginTop: '1.5rem',
+						display: 'block',
+					}}
+					onClick={chat}
+				>
+					Chat
+				</button>
+			</div>
+		</div>
+	);
 };
 
 export default StudCounCard;
